@@ -5,6 +5,11 @@
 <br>
 <br>
 <br>
+
+<div class="centraliza_img">
+  <img src="imagens/perfil.png" class="perfil_login">
+</div>
+
 <div class="ui form login">
     <div class="field">
       <label>Email</label>
