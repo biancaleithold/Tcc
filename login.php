@@ -1,5 +1,47 @@
 <?php
 	include("cabecalho.php");
+  require 'config.php';
+
+  if(isset($_POST['login'])) {
+    $errMsg = '';
+
+    // Get data from FORM
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if($username == '')
+      $errMsg = 'Enter username';
+    if($password == '')
+      $errMsg = 'Enter password';
+
+    if($errMsg == '') {
+      try {
+        $stmt = $connect->prepare('SELECT id, fullname, username, password FROM user WHERE username = :username');
+        $stmt->execute(array(
+          ':username' => $username
+          ));
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($data == false){
+          $errMsg = "User $username not found.";
+        }
+        else {
+          if($password == $data['password']) {
+            $_SESSION['name'] = $data['fullname'];
+            $_SESSION['username'] = $data['username'];
+            $_SESSION['password'] = $data['password'];
+            header('Location: dashboard.php');
+            exit;
+          }
+          else
+            $errMsg = 'Password not match.';
+        }
+      }
+      catch(PDOException $e) {
+        $errMsg = $e->getMessage();
+      }
+    }
+  }
 ?>
 <br>
 <br>
@@ -8,21 +50,34 @@
 
 <div class="centraliza_img">
   <img src="imagens/perfil.png" class="perfil_login">
+  <h1 style="margin-top: 3%">Login</h1>
 </div>
 
 <div class="ui form login">
+
+    <!-- Parte do Prof -->
+      <?php
+        if(isset($errMsg)){
+          echo '<div style="color:#FF0000;text-align:center;font-size:17px;">'.$errMsg.'</div>';
+        }
+      ?>
+
+
+  <form action="" method="post">
     <div class="field">
       <label>Email</label>
-      <input type="Email" placeholder="celebrate@festas.com">
+      <input type="Email" placeholder="celebrate@festas.com" name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?> ">
     </div>
     <div class="field">
       <label>Senha</label>
-      <input type="password" placeholder="***********">
+      <input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" placeholder="***********">
     </div>
+  </form>
     <a href="">Esqueci minha senha!</a>
     <br>
     <br>
-    <button class="ui button botao">
-  		Entrar
-	</button>
+    <input type="submit" name='login' value="Login" class="ui button botao">
 </div>
+
+         
+          
