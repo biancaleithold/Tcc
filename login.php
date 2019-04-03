@@ -6,31 +6,31 @@
     $errMsg = '';
 
     // Get data from FORM
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if($username == '')
-      $errMsg = 'Enter username';
+    if($email == '')
+      $errMsg = 'Enter email';
     if($password == '')
       $errMsg = 'Enter password';
 
     if($errMsg == '') {
       try {
-        $stmt = $connect->prepare('SELECT id, fullname, username, password FROM user WHERE username = :username');
+        $stmt = $connect->prepare('SELECT email, password FROM usuario WHERE email = :email');
         $stmt->execute(array(
-          ':username' => $username
+          ':email' => $email
           ));
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($data == false){
-          $errMsg = "User $username not found.";
+          $errMsg = "User $email not found.";
         }
         else {
           if($password == $data['password']) {
             $_SESSION['name'] = $data['fullname'];
-            $_SESSION['username'] = $data['username'];
+            $_SESSION['email'] = $data['email'];
             $_SESSION['password'] = $data['password'];
-            header('Location: dashboard.php');
+            header('Location: index.php');
             exit;
           }
           else
@@ -63,20 +63,20 @@
       ?>
 
 
-  <form action="" method="post">
+  <form action="login.php" method="post">
     <div class="field">
       <label>Email</label>
-      <input type="Email" placeholder="celebrate@festas.com" name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?> ">
+      <input type="Email" placeholder="celebrate@festas.com" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?> ">
     </div>
     <div class="field">
       <label>Senha</label>
       <input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" placeholder="***********">
     </div>
-  </form>
     <a href="">Esqueci minha senha!</a>
     <br>
     <br>
     <input type="submit" name='login' value="Login" class="ui button botao">
+  </form>
 </div>
 
          

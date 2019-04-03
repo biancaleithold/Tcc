@@ -1,33 +1,34 @@
 <?php
-	include("cabecalho.php");
+	
   require 'config.php';
+  include("cabecalho.php");
 
   if(isset($_POST['register'])) {
     $errMsg = '';
 
     // Get data from FROM
     $fullname = $_POST['fullname'];
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
     if($fullname == '')
       $errMsg = 'Enter your fullname';
-    if($username == '')
-      $errMsg = 'Enter username';
+    if($email == '')
+      $errMsg = 'Enter email';
     if($password == '')
       $errMsg = 'Enter password';
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO user (fullname, username, password) VALUES (:fullname, :username, :password)');
+        $stmt = $connect->prepare('INSERT INTO usuario (fullname, email, password) VALUES (:fullname, :email, :password)');
         $stmt->execute(array(
           ':fullname' => $fullname,
-          ':username' => $username,
+          ':email' => $email,
           ':password' => $password          ));
         header('Location: register.php?action=joined');
         exit;
       }
       catch(PDOException $e) {
-        echo $e->getMessage();
+        $errMsg = $e->getMessage();
       }
     }
   }
@@ -64,7 +65,7 @@
       <input type="text" name="fullname" placeholder="Celebrate Festas e Eventos" value="<?php if(isset($_POST['fullname'])) echo $_POST['fullname'] ?>" autocomplete="off" class="box"/><br /><br />
 
       <label>Email</label>
-      <input type="Email"  <input type="text" name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>" placeholder="celebrate@festas.com">
+      <input type="Email"  <input type="text" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" placeholder="celebrate@festas.com">
     </div>
 
     <div class="field">
@@ -74,8 +75,8 @@
     </div>
     <br>
     <br>
+    <input type="submit" name='register' class="ui button botao">
   </form>
-  <input type="submit" name='register' class="ui button botao">
 </div>
 
 
