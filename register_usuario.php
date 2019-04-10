@@ -10,6 +10,7 @@
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $cpf = $_POST['cpf'];
 
     if($fullname == '')
       $errMsg = 'Enter your fullname';
@@ -17,13 +18,16 @@
       $errMsg = 'Enter email';
     if($password == '')
       $errMsg = 'Enter password';
+    if($cpf == '')
+      $errMsg = 'Enter cpf';
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO usuario (fullname, email, password) VALUES (:fullname, :email, :password)');
+        $stmt = $connect->prepare('INSERT INTO usuario (fullname,  email, password, cpf) VALUES (:fullname, :email, :password, :cpf)');
         $stmt->execute(array(
           ':fullname' => $fullname,
           ':email' => $email,
-          ':password' => $password          ));
+          ':password' => $password,
+          ':cpf' => $cpf          ));
         header('Location: register.php?action=joined');
         exit;
       }
@@ -34,7 +38,7 @@
   }
 
   if(isset($_GET['action']) && $_GET['action'] == 'joined') {
-    $errMsg = 'Registration successfull. Now you can <a href="login.php">login</a>';
+    $errMsg = 'Registrado com sucesso! <br> Agora você pode logar. <br><br>';
   }
 ?>
 
@@ -52,7 +56,7 @@
       <!-- Parte do Prof -->
       <?php
         if(isset($errMsg)){
-          echo '<div style="color:#FF0000;text-align:center;font-size:17px;">'.$errMsg.'</div>';
+          echo '<div style="color:green;text-align:center;font-size:17px;">'.$errMsg.'</div>';
         }
       ?>
 
@@ -71,7 +75,10 @@
     <div class="field">
 
       <label>Senha</label>
-      <input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>"  placeholder="***********">
+      <input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>"  placeholder="***********" /><br /><br />
+
+      <label>CPF</label>
+      <input type="text" name="cpf" value="<?php if(isset($_POST['cpf'])) echo $_POST['cpf'] ?>"  placeholder="000.000.000-00">
     </div>
     <br>
     <br>

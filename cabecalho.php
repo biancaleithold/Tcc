@@ -36,16 +36,30 @@
       ?>
 
     	<a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-light-blue">Home</a>
-    	<select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">
+    	
+      <!--<select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">
   			<option value="aniversarios"><a href="#">Aniversários</a></option>
   			<option value="15anos"><a href="#">15 Anos</a></option>
-  			<option value="festa_infantil"><a href="#">Festa Infantil</a></option>
-		</select>
+  			<option value="festa_infantil"><a href="#">Festa Infantil</a></option> 
+      </select> -->
+
+      <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
+        <option value="cabecalho.php">Aniversários</option>
+        <option value="#">15 Anos</option>
+        <option value="#">Festa Infantil</a></option>
+      </select>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Casamento</a>
    		<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
-      <a href="register.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Cadastre-se</a>
+      <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
+        <option value="cabecalho.php">Cadastre-se</option>
+        <option value="register_usuario.php">Usuário Comum</option>
+        <option value="register_fornecedor.php">Fornecedor</a></option>
+      </select>
+
+
+     
     	<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>
 
   		<div class="ui inverted left icon input" style="float: right;">
