@@ -12,7 +12,7 @@
 <div class="w3-row-padding w3-padding-64 w3-container">
 	<div class="w3-content">
     	<div class="w3-twothird">
-    		<h1>Minhas Agenda</h1>
+    		<h1>Minhas Agendas</h1>
     		<h5 class="w3-padding-32" style="font-size: x-large; font-weight: normal;">Com Minha Agenda você pode conferir seus compromissos durante o progresso do seu evento, como reuniões!</h5>
     	</div>
 
