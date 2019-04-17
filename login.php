@@ -30,7 +30,9 @@
             $_SESSION['name'] = $data['fullname'];
             $_SESSION['email'] = $data['email'];
             $_SESSION['password'] = $data['password'];
-            header('Location: index.php');
+            $host  = $_SERVER['HTTP_HOST'];
+            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            echo "<script type='text/javascript'>window.top.location='http://$host$uri/index.php';</script>";
             exit;
           }
           else
@@ -78,6 +80,3 @@
     <input type="submit" name='login' value="Login" class="ui button botao">
   </form>
 </div>
-
-         
-          

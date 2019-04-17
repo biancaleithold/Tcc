@@ -8,7 +8,7 @@
 
     // Get data from FROM
     $fullname = $_POST['fullname'];
-    $cpf = $_POST['cnpj'];
+    $cnpj = $_POST['cnpj'];
     $endereco = $_POST['endereco'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
@@ -16,11 +16,11 @@
 
     if($fullname == '')
       $errMsg = 'Enter your fullname';
-    if($cpf == '')
+    if($cnpj == '')
       $errMsg = 'Enter cnpj';
-     if($cpf == '')
+     if($endereco == '')
       $errMsg = 'Enter endereco';
-     if($cpf == '')
+     if($telefone == '')
       $errMsg = 'Enter telefone';
     if($email == '')
       $errMsg = 'Enter email';
@@ -28,16 +28,16 @@
       $errMsg = 'Enter password';
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO fornecedor (fullname, cnpj, endereco, telefone, email, password, cpf) VALUES (:fullname, :cnpj, :endereco, :telefone, :email, :password,)');
+        $stmt = $connect->prepare('INSERT INTO fornecedor (fullname, cnpj, endereco, telefone, email, password) VALUES (:fullname, :cnpj, :endereco, :telefone, :email, :password)');
         $stmt->execute(array(
           ':fullname' => $fullname,
           ':cnpj' => $cnpj,
           ':endereco' => $endereco, 
           ':telefone' => $telefone,
           ':email' => $email,
-          ':password' => $password,
+          ':password' => $password
                   ));
-        header('Location: register.php?action=joined');
+        header('Location: register_fornecedor.php?action=joined');
         exit;
       }
       catch(PDOException $e) {
