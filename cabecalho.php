@@ -52,8 +52,8 @@
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
       <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
         <option value="cabecalho.php">Cadastre-se</option>
-        <option value="register_usuario.php">Usuário Comum</option>
-        <option value="register_fornecedor.php">Fornecedor</a></option>
+        <option value="register_usuario.php">Usuário</option>
+        <!--<option value="register_fornecedor.php">Fornecedor</a></option>-->
       </select>
 
 

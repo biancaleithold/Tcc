@@ -28,7 +28,14 @@
           ':email' => $email,
           ':password' => $password,
           ':cpf' => $cpf          ));
-        header('Location: register.php?action=joined');
+
+
+        //ARRUMAR!! NÃO APARECE MENSAGEM REGISTRADO COM SUCESSO!
+        //$host  = $_SERVER['HTTP_HOST'];
+            //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            //echo "<script type='text/javascript'>window.top.location='http://$host$uri/register_usuario.php';</script>";
+            //exit;
+        header('Location: register_usuario.php?action=joined');
         exit;
       }
       catch(PDOException $e) {
@@ -84,11 +91,4 @@
     <br>
     <input type="submit" name='register' class="ui button botao">
   </form>
-</div>
-
-
-         
-        
-          
-         
-       
+</div>  

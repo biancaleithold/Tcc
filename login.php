@@ -23,20 +23,22 @@
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($data == false){
-          $errMsg = "User $email not found.";
+          $errMsg = "Email $email não encontrado.";
         }
         else {
           if($password == $data['password']) {
             $_SESSION['name'] = $data['fullname'];
             $_SESSION['email'] = $data['email'];
             $_SESSION['password'] = $data['password'];
-            $host  = $_SERVER['HTTP_HOST'];
-            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            echo "<script type='text/javascript'>window.top.location='http://$host$uri/index.php';</script>";
-            exit;
+            //$host  = $_SERVER['HTTP_HOST'];
+            //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            //echo "<script type='text/javascript'>window.top.location='http://$host$uri/index.php';</script>";
+            //exit;
+             header('Location: index.php?action=joined');
+        exit;
           }
           else
-            $errMsg = 'Password not match.';
+            $errMsg = 'Senha incorreta! Tente novamente.';
         }
       }
       catch(PDOException $e) {
