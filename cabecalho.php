@@ -50,14 +50,8 @@
    		<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
-      <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
-        <option value="cabecalho.php">Cadastre-se</option>
-        <option value="register_usuario.php">Usuário</option>
-        <!--<option value="register_fornecedor.php">Fornecedor</a></option>-->
-      </select>
-
-
-     
+      <a href="register_usuario.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Cadastre-se</a>
+      
     	<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>
 
   		<div class="ui inverted left icon input" style="float: right;">
@@ -82,3 +76,4 @@
     	<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>
   	</div>
 </div>
+</body>
