@@ -1,3 +1,9 @@
+<?php
+  require 'config.php';
+?>
+
+
+
 <!DOCTYPE html>
   <html lang="en">
 	<link rel="icon" type="image/jpg" href="imagens/logo.png">
@@ -73,7 +79,13 @@
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
       <a href="register.php" class="w3-bar-item w3-button w3-padding-large">Cadastre-se</a>
-    	<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>
+			<?php 
+				if ( $_SESSION['name'] ) {
+					echo '<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>';
+				} else {
+					echo '<a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>';
+				}
+    	?>
   	</div>
 </div>
 </body>

@@ -2,7 +2,7 @@
 	include 'cabecalho.php';
 ?>
 <br><br><br>
-  <div class="ui special cards" style="margin: 3%">
+  <div class="ui special cards" style="margin: 3%; float: left;">
 
   <div class="card">
     <div class="blurring dimmable image">
@@ -25,14 +25,6 @@
     </div>
   </div>
 </div>
-<button class="ui basic button" style="margin-left: 3%">
-  <i class="icon plus"></i>
-  <a href="register_fornecedor.php" style="color: black">Cadastrar Fornecedor</a> 
-</button>
-<button class="ui basic button">
-  <i class="icon plus"></i>
-  <a href="#" style="color: black">Cadastrar Evento</a> 
-</button>
 
 <table class="ui fixed table">
   <h1 class="header">Meus Eventos</h1>
@@ -53,3 +45,15 @@
     </tr>
   </tbody>
 </table>
+  <a href="register_fornecedor.php" style="color: black">
+    <button class="ui basic button" style="float: right;  margin-right: 15%">
+      <i class="icon plus"></i>
+        Cadastrar Fornecedor
+    </button>
+  </a> 
+  <a href="#" style="color: black">
+    <button class="ui basic button" style="float: right;">
+      <i class="icon plus"></i>
+        Cadastrar Evento
+    </button>
+  </a> 

@@ -29,13 +29,14 @@
           if($password == $data['password']) {
             $_SESSION['name'] = $data['fullname'];
             $_SESSION['email'] = $data['email'];
-            $_SESSION['password'] = $data['password'];
+            $errMsg = 'Usuário autenticado com sucesso!';
+            header('Location: index.php');
+            exit;
             //$host  = $_SERVER['HTTP_HOST'];
             //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
             //echo "<script type='text/javascript'>window.top.location='http://$host$uri/index.php';</script>";
             //exit;
-             header('Location: index.php?action=joined');
-        exit;
+            
           }
           else
             $errMsg = 'Senha incorreta! Tente novamente.';
