@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require 'config.php';
   include("cabecalho.php");
 ?>
@@ -88,6 +89,9 @@ function myFunction() {
     	x.className = x.className.replace(" w3-show", "");
   	}
 }
+
 </script>
 
 </body>
+
+</html>

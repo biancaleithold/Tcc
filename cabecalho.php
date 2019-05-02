@@ -57,8 +57,15 @@
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
       <a href="register_usuario.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Cadastre-se</a>
-      
-    	<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>
+
+
+			<?php 
+				if (isset($_SESSION['email'])) {					
+					echo '<a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Logout</a>';
+				} else {
+					echo '<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>';
+				}
+    	?>
 
   		<div class="ui inverted left icon input" style="float: right;">
     		<input type="text" placeholder="Pesquisar...">
@@ -80,12 +87,11 @@
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
       <a href="register.php" class="w3-bar-item w3-button w3-padding-large">Cadastre-se</a>
 			<?php 
-				if ( $_SESSION['name'] ) {
-					echo '<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>';
-				} else {
+				if ( isset($_SESSION['email']) ) {
 					echo '<a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>';
+				} else {
+					echo '<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>';
 				}
     	?>
   	</div>
 </div>
-</body>

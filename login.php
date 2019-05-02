@@ -1,7 +1,8 @@
 <?php
-	include("cabecalho.php");
+  session_start();
   require 'config.php';
 
+  include("cabecalho.php");
   if(isset($_POST['login'])) {
     $errMsg = '';
 
@@ -27,11 +28,10 @@
         }
         else {
           if($password == $data['password']) {
-            $_SESSION['name'] = $data['fullname'];
             $_SESSION['email'] = $data['email'];
             $errMsg = 'Usuário autenticado com sucesso!';
-            header('Location: index.php');
-            exit;
+            header("Location: index.php");
+            exit();
             //$host  = $_SERVER['HTTP_HOST'];
             //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
             //echo "<script type='text/javascript'>window.top.location='http://$host$uri/index.php';</script>";
@@ -83,3 +83,7 @@
     <input type="submit" name='login' value="Login" class="ui button botao">
   </form>
 </div>
+
+
+</body>
+</html>
