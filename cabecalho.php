@@ -85,7 +85,7 @@
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Corporativo</a>
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
-      <a href="register.php" class="w3-bar-item w3-button w3-padding-large">Cadastre-se</a>
+      <a href="register_usuario.php" class="w3-bar-item w3-button w3-padding-large">Cadastre-se</a>
 			<?php 
 				if ( isset($_SESSION['email']) ) {
 					echo '<a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>';

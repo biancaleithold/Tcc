@@ -7,27 +7,36 @@
     $errMsg = '';
 
     // Get data from FROM
-    $fullname = $_POST['fullname'];
+    $nome = $_POST['nome'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $telefone = $_POST['telefone'];
+    $senha = $_POST['senha'];
+    $foto_perfil = $_POST['foto_perfil'];
     $cpf = $_POST['cpf'];
 
-    if($fullname == '')
-      $errMsg = 'Enter your fullname';
+    if($nome == '')
+      $errMsg = 'Insira seu nome';
     if($email == '')
-      $errMsg = 'Enter email';
-    if($password == '')
-      $errMsg = 'Enter password';
+      $errMsg = 'Insira seu email';
+    if($telefone == '')
+      $errMsg = 'Insira seu telefone';
+    if($senha == '')
+      $errMsg = 'Insira sua senha';
+    if($foto_perfil == '')
+      $errMsg = 'Insira sua foto_perfil';
     if($cpf == '')
-      $errMsg = 'Enter cpf';
+      $errMsg = 'Insira seu cpf';
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO usuario (fullname,  email, password, cpf) VALUES (:fullname, :email, :password, :cpf)');
+        $stmt = $connect->prepare('INSERT INTO usuario (nome,  email, telefone, senha, foto_perfil, cpf) VALUES (:nome, :email, :telefone, :senha, :foto_perfil, :cpf)');
         $stmt->execute(array(
-          ':fullname' => $fullname,
+          ':nome' => $nome,
           ':email' => $email,
-          ':password' => $password,
-          ':cpf' => $cpf          ));
+          ':telefone' => $telefone,
+          ':senha' => $senha
+          ':foto_perfil' => $foto_perfil,
+          ':cpf' => $cpf,
+        ));
 
 
         //ARRUMAR!! NÃO APARECE MENSAGEM REGISTRADO COM SUCESSO!
@@ -55,7 +64,7 @@
 <br>
 
 <div class="centraliza_img">
-  <h1 style="margin-top: 5%">Cadastro de Usuário</h1>
+  <h1 style="margin-top: 3%">Cadastro de Usuário</h1>
 </div>
 
 <div class="ui form login">
@@ -67,28 +76,28 @@
         }
       ?>
 
-
-
   <form action="" method="post">
     <div class="field">
 
-    <label>Nome Completo</label>
-      <input type="text" name="fullname" placeholder="Celebrate Festas e Eventos" value="<?php if(isset($_POST['fullname'])) echo $_POST['fullname'] ?>" autocomplete="off" class="box"/><br /><br />
+      <label>Nome Completo</label>
+      <input type="text" name="nome" placeholder="Celebrate Festas e Eventos" value="<?php if(isset($_POST['nome'])) echo $_POST['nome'] ?>" autocomplete="off" class="box"/><br /><br />
 
       <label>Email</label>
-      <input type="Email"  <input type="text" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" placeholder="celebrate@festas.com">
-    </div>
+      <input type="Email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" placeholder="celebrate@festas.com" /><br /><br>      
 
-    <div class="field">
+      <label>Telefone</label>
+      <input type="tel" name="telefone" value="<?php if(isset($_POST['telefone'])) echo $_POST['telefone'] ?>" placeholder="(00) 00000-0000" /><br /><br>
 
       <label>Senha</label>
-      <input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>"  placeholder="***********" /><br /><br />
+      <input type="password" name="senha" value="<?php if(isset($_POST['senha'])) echo $_POST['senha'] ?>" placeholder="********" /><br /><br>
+
+      <label>Foto Perfil</label>
+      <input type="file" name="imagem" value="<?php if(isset($_POST['imagem'])) echo $_POST['imagem'] ?>" /><br /><br>
 
       <label>CPF</label>
-      <input type="text" name="cpf" value="<?php if(isset($_POST['cpf'])) echo $_POST['cpf'] ?>"  placeholder="000.000.000-00">
+      <input type="text" name="cpf" value="<?php if(isset($_POST['cpf'])) echo $_POST['cpf'] ?>"  placeholder="000.000.000-00" /><br /><br>
+
     </div>
-    <br>
-    <br>
     <input type="submit" name='register' class="ui button botao">
   </form>
 </div>  

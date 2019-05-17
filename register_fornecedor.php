@@ -57,7 +57,7 @@
 <br>
 
 <div class="centraliza_img">
-  <h1 style="margin-top: 5%">Cadastro de Fornecedor</h1>
+  <h1 style="margin-top: 3%">Cadastro de Empresa</h1>
 </div>
 
 <div class="ui form login">
@@ -74,29 +74,38 @@
   <form action="" method="post">
     <div class="field">
 
-      <label>Nome Completo</label>
-      <input type="text" name="fullname" placeholder="Celebrate Festas e Eventos" value="<?php if(isset($_POST['fullname'])) echo $_POST['fullname'] ?>" autocomplete="off" class="box"/><br /><br />
-
       <label>CNPJ</label>
       <input type="text" name="cnpj" value="<?php if(isset($_POST['cnpj'])) echo $_POST['cnpj'] ?>"  placeholder="00.000.000/0000-00"/><br /><br / >
 
-      <label>Endereço</label>
-      <input type="text" name="endereco" placeholder="Rua Xxxxx, n°000" value="<?php if(isset($_POST['endereco'])) echo $_POST['endereco'] ?>" autocomplete="off" class="box"/><br /><br />
+      <label>Nome da Empresa</label>
+      <input type="text" name="nome" placeholder="Celebrate Festas e Eventos" value="<?php if(isset($_POST['nome'])) echo $_POST['nome'] ?>" autocomplete="off" class="box"/><br /><br />
 
-      <label>Telefone</label>
-      <input type="text" name="telefone" placeholder="(00)00000000" value="<?php if(isset($_POST['telefone'])) echo $_POST['telefone'] ?>" autocomplete="off" class="box"/><br /><br />
+      <label>Rua</label>
+      <input type="text" name="rua" placeholder="Juscelino Kubitschek" value="<?php if(isset($_POST['rua'])) echo $_POST['rua'] ?>"/><br /><br />
 
-      <label>Email</label>
-      <input type="Email"  <input type="text" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" placeholder="celebrate@festas.com">
+      <label>Número</label>
+      <input type="text" name="numero" placeholder="165" value="<?php if(isset($_POST['numero'])) echo $_POST['numero'] ?>"/><br /><br />
+
+      <label>Complemento</label>
+      <input type="text" name="complemento" value="<?php if(isset($_POST['complemento'])) echo $_POST['complemento'] ?>" placeholder="apartamento 4306" /><br /><br />
+
+      <div style="float: left;"></div>
+
+      <label>Bairro</label>
+      <input type="text" name="bairro" value="<?php if(isset($_POST['bairro'])) echo $_POST['bairro'] ?>" placeholder="Bucarein" /><br /><br />
+
+      <label>Cidade</label>
+      <input type="text" name="cidade" value="<?php if(isset($_POST['cidade'])) echo $_POST['cidade'] ?>" placeholder="Joinville" /><br /><br />
+
+      <label>Estado</label>
+      <input type="text" name="estado" value="<?php if(isset($_POST['estado'])) echo $_POST['estado'] ?>" placeholder="Santa Catarina" /><br /><br />
+
+      <label>Logotipo</label>
+      <input type="file" name="logo" value="<?php if(isset($_POST['logo'])) echo $_POST['logo'] ?>" /><br /><br />
+
+      <label>Descrição</label>
+      <input type="text" name="descricao" value="<?php if(isset($_POST['descricao'])) echo $_POST['descricao'] ?>" placeholder="Trabalhamos neste ramo desde 1998" /><br /><br />
     </div>
-
-    <div class="field">
-
-      <label>Senha</label>
-      <input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>"  placeholder="***********">
-
-    </div>
-    <br>
     <input type="submit" name='register' class="ui button botao">
   </form>
 </div>
