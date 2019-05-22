@@ -41,11 +41,6 @@
       ?>
     	<a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-light-blue">Home</a>
     	
-      <!--<select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">
-  			<option value="aniversarios"><a href="#">Aniversários</a></option>
-  			<option value="15anos"><a href="#">15 Anos</a></option>
-  			<option value="festa_infantil"><a href="#">Festa Infantil</a></option> 
-      </select> -->
 
       <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
         <option value="cabecalho.php">Aniversários</option>

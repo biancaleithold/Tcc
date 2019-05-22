@@ -33,7 +33,7 @@
           ':nome' => $nome,
           ':email' => $email,
           ':telefone' => $telefone,
-          ':senha' => $senha
+          ':senha' => $senha,
           ':foto_perfil' => $foto_perfil,
           ':cpf' => $cpf,
         ));
