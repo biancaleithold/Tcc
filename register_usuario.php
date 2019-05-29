@@ -23,7 +23,11 @@
     if($senha == '')
       $errMsg = 'Insira sua senha';
     if($foto_perfil == '')
+<<<<<<< HEAD
       $errMsg = 'Insira sua foto de perfil';
+=======
+      $errMsg = 'Insira sua foto_perfil';
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb
     if($cpf == '')
       $errMsg = 'Insira seu cpf';
     if($errMsg == ''){

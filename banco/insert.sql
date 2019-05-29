@@ -40,6 +40,7 @@ INSERT INTO convidados (idade, nome)VALUES
 (18, 'Kelvin Bressan'),
 (25, 'Lia Bressan');
 
+<<<<<<< HEAD
 INSERT INTO eventos (nome_evento,hora,descricao,dia,local) VALUES 
 ('Casamento', '10:05:00', 'Casamento Luana e Luan', '2019-05-22', 'Restaurante Viapiana'),
 ('Casamento', '09:15:00', 'Casamento Fabio e Fabiana', '2019-10-22', 'Restaurante Espinheiros'),
@@ -51,6 +52,19 @@ INSERT INTO eventos (nome_evento,hora,descricao,dia,local) VALUES
 ('Casamento', '14:25:00', 'Casamento Fernanda e Luciano', '2019-05-15', 'Restaurante Viapiana'),
 ('Aniversário', '15:30:00', 'Aniversario do Leandro', '2019-03-25', 'Casa do pão'),
 ('Aniversário', '16:05:00', 'Aniversário da Karen', '2019-05-03', 'Restaurante Varandão');
+=======
+INSERT INTO eventos (hora,descricao,dia,local) VALUES 
+('10:05:00', 'Casamento Luana e Luan', '2019-05-22', 'Restaurante Viapiana'),
+('09:15:00', 'Casamento Fabio e Fabiana', '2019-10-22', 'Restaurante Espinheiros'),
+('08:25:00', '15 anos Maria', '2019-08-23', 'Restaurante do Nego'),
+('07:25:00', 'Aniversário Lucas', '2019-06-22', 'Restaurante Estrela'),
+('11:35:00', 'Aniversário Cecília', '2019-10-05', 'Restaurante Kaoma'),
+('12:45:00', '1 ano do Vitor', '2019-06-26', 'Estrela Eventos'),
+('13:55:00', 'Coorporativa da Britânia ', '2019-05-22', 'Restaurante São José'),
+('14:25:00', 'Casamento Fernanda e Luciano', '2019-05-15', 'Restaurante Viapiana'),
+('15:30:00', 'Aniversario do Leandro', '2019-03-25', 'Casa do pão'),
+('16:05:00', 'Aniversário da Karen', '2019-05-03', 'Restaurante Varandão');
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb
 
 INSERT INTO servicos (desc_serv) VALUES 
 ('Decoração'),

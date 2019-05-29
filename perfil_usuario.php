@@ -32,7 +32,10 @@
     <tr>
       <th>Nome do Evento</th>
       <th>Data</th>
+<<<<<<< HEAD
       <th>Hora</th>
+=======
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb
       <th>Local</th>
       <th>Descrição</th>
     </tr>
@@ -41,24 +44,39 @@
     <tr>
       <td>Casamento Juliana</td>
       <td>20/06/2019</td>
+<<<<<<< HEAD
       <td>18:00:00</td>
+=======
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb
       <td>Restaurante Viapiana</td>
       <td>Casamento Juliana e Marcelo, bla bla...</td>
     </tr>
   </tbody>
 </table>
   <a href="register_fornecedor.php" style="color: black">
+<<<<<<< HEAD
     <button class="ui basic button" style="float: right;  margin-right: 4%">
+=======
+    <button class="ui basic button" style="float: right;  margin-right: 15%">
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb
       <i class="icon plus"></i>
         Cadastrar Fornecedor
     </button>
   </a> 
+<<<<<<< HEAD
   <a href="register_evento.php" style="color: black">
+=======
+  <a href="#" style="color: black">
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb
     <button class="ui basic button" style="float: right;">
       <i class="icon plus"></i>
         Cadastrar Evento
     </button>
+<<<<<<< HEAD
   </a> 
 
   <i class="pencil alternate icon"></i>
   <i class="trash alternate icon"></i>
+=======
+  </a> 
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb

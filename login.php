@@ -27,7 +27,11 @@
           $errMsg = "Email $email não encontrado.";
         }
         else {
+<<<<<<< HEAD
           if($password == $data['senha']) {
+=======
+          if($password == $data['password']) {
+>>>>>>> 92b00a849309fb55324a787fc5f80bb7149178fb
             $_SESSION['email'] = $data['email'];
             $errMsg = 'Usuário autenticado com sucesso!';
             header("Location: index.php");
