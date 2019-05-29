@@ -1,40 +1,45 @@
 <?php
-	include("cabecalho.php");
+  session_start();
   require 'config.php';
 
+  include("cabecalho.php");
   if(isset($_POST['login'])) {
     $errMsg = '';
 
     // Get data from FORM
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = $_POST['senha'];
 
     if($email == '')
       $errMsg = 'Enter email';
     if($password == '')
-      $errMsg = 'Enter password';
+      $errMsg = 'Enter senha';
 
     if($errMsg == '') {
       try {
-        $stmt = $connect->prepare('SELECT email, password FROM usuario WHERE email = :email');
+        $stmt = $connect->prepare('SELECT email, senha FROM usuario WHERE email = :email');
         $stmt->execute(array(
           ':email' => $email
           ));
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($data == false){
-          $errMsg = "User $email not found.";
+          $errMsg = "Email $email não encontrado.";
         }
         else {
-          if($password == $data['password']) {
-            $_SESSION['name'] = $data['fullname'];
+          if($password == $data['senha']) {
             $_SESSION['email'] = $data['email'];
-            $_SESSION['password'] = $data['password'];
-            header('Location: index.php');
-            exit;
+            $errMsg = 'Usuário autenticado com sucesso!';
+            header("Location: index.php");
+            exit();
+            //$host  = $_SERVER['HTTP_HOST'];
+            //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            //echo "<script type='text/javascript'>window.top.location='http://$host$uri/index.php';</script>";
+            //exit;
+            
           }
           else
-            $errMsg = 'Password not match.';
+            $errMsg = 'Senha incorreta! Tente novamente.';
         }
       }
       catch(PDOException $e) {
@@ -70,7 +75,7 @@
     </div>
     <div class="field">
       <label>Senha</label>
-      <input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" placeholder="***********">
+      <input type="password" name="senha" value="<?php if(isset($_POST['senha'])) echo $_POST['senha'] ?>" placeholder="***********">
     </div>
     <a href="">Esqueci minha senha!</a>
     <br>
@@ -79,5 +84,6 @@
   </form>
 </div>
 
-         
-          
+
+</body>
+</html>

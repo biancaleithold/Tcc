@@ -1,8 +1,14 @@
-<<!DOCTYPE html>
+<?php
+  require 'config.php';
+?>
+
+
+
+<!DOCTYPE html>
   <html lang="en">
 	<link rel="icon" type="image/jpg" href="imagens/logo.png">
 	<title>Celebrate | Festas e Eventos</title>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
@@ -27,26 +33,34 @@
 <div class="w3-top">
 	<div class="w3-bar w3-card w3-left-align w3-white w3-large">
     	<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-light-blue w3-large w3-black" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-
       <!-- Parte do Prof -->
       <?php
           if(isset($errMsg)){
             echo '<div style="color:#FF0000;text-align:center;font-size:18px;">'.$errMsg.'</div>';
           }
       ?>
-
     	<a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-light-blue">Home</a>
-    	<select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">
-  			<option value="aniversarios"><a href="#">Aniversários</a></option>
-  			<option value="15anos"><a href="#">15 Anos</a></option>
-  			<option value="festa_infantil"><a href="#">Festa Infantil</a></option>
-		</select>
+    	
+
+      <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
+        <option value="cabecalho.php">Aniversários</option>
+        <option value="#">15 Anos</option>
+        <option value="#">Festa Infantil</a></option>
+      </select>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Casamento</a>
    		<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
     	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
-      <a href="register.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Cadastre-se</a>
-    	<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>
+      <a href="register_usuario.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Cadastre-se</a>
+
+
+			<?php 
+				if (isset($_SESSION['email'])) {					
+					echo '<a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Logout</a>';
+				} else {
+					echo '<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>';
+				}
+    	?>
 
   		<div class="ui inverted left icon input" style="float: right;">
     		<input type="text" placeholder="Pesquisar...">
@@ -66,7 +80,13 @@
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Corporativo</a>
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
-      <a href="register.php" class="w3-bar-item w3-button w3-padding-large">Cadastre-se</a>
-    	<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>
+      <a href="register_usuario.php" class="w3-bar-item w3-button w3-padding-large">Cadastre-se</a>
+			<?php 
+				if ( isset($_SESSION['email']) ) {
+					echo '<a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>';
+				} else {
+					echo '<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>';
+				}
+    	?>
   	</div>
 </div>

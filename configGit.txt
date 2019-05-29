@@ -1,0 +1,8 @@
+git config --global user.email 'karencf1708@gmail.com'
+git config --global user.name 'Karen Cristina Fernandes'
+
+git config --global user.email 'elizabethantunes95@gmail.com'
+git config --global user.name 'Elizabeth Antunes da Silva'
+
+git config --global user.email 'biancav.leithold@gmail.com'
+git config --global user.name 'Bianca Victoria Leithold de Oliveira'
