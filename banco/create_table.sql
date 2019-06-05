@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 CREATE TABLE usuario (
 id_usuario int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 nome varchar(100),
