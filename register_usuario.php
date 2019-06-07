@@ -128,7 +128,7 @@
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $senha = $_POST['senha'];
-    $foto_perfil = $_POST['foto_perfil'];
+    $foto_perfil = $_FILES['arquivo']['name'];
     $cpf = $_POST['cpf'];
 
     if($nome == '')
@@ -155,6 +155,46 @@
           ':cpf' => $cpf
         ));
 
+    //salvando foto em determinada pasta
+    $_UP['pasta'] = 'imagens';
+
+    //extensões permitidas
+    $_UP['extensoes'] = array ('png', 'jpg', 'jpeg', 'gif');
+
+    //Renomeiar
+      $_UP['renomeia'] = false;
+
+    //Faz a verificação da extensao do arquivo
+      $extensao = strtolower(end(explode('.', $_FILES['arquivo']['name'])));
+      if(array_search($extensao, $_UP['extensoes'])=== false){    
+        echo "
+          <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Aula/upload_imagem.php'>
+          <script type=\"text/javascript\">
+            alert(\"A imagem não foi cadastrada extesão inválida.\");
+          </script>
+        ";
+      }
+
+      //Primeiro verifica se deve trocar o nome do arquivo
+        if($UP['renomeia'] == true){
+          //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
+          $nome_final = time().'.jpg';
+        }else{
+          //mantem o nome original do arquivo
+          $nome_final = $_FILES['arquivo']['name'];
+        }
+        //Verificar se é possivel mover o arquivo para a pasta escolhida
+        if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta']. $nome_final)){
+          //Upload efetuado com sucesso, exibe a mensagem
+          $query = mysqli_query($conn, "INSERT INTO usuario (foto_perfil) VALUES('$nome_final')");
+          echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Aula/upload_imagem.php'>
+          <script type=\"text/javascript\">alert(\"Imagem cadastrada com Sucesso.\");</script>";  
+        }else{
+          //Upload não efetuado com sucesso, exibe a mensagem
+          echo "
+            <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Aula/upload_imagem.php'>
+            <script type=\"text/javascript\">alert(\"Imagem não foi cadastrada com Sucesso.\");</script>";
+        }
 
         //ARRUMAR!! NÃO APARECE MENSAGEM REGISTRADO COM SUCESSO!
         //$host  = $_SERVER['HTTP_HOST'];
