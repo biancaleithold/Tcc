@@ -61,7 +61,7 @@
           ':telefone' => $telefone,
           ':email' => $email
         ));
-        header('Location: register_fornecedor.php?action=joined');
+        header('Location: register_empresa.php?action=joined');
         exit;
       }
       catch(PDOException $e) {
@@ -93,7 +93,7 @@
         }
       ?>
 
-  <form class="ui form" style="max-width:65%; margin-left: 18%">
+  <form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 2%">
   <div class="field"> 
     <div class="two fields">
       <div class="field">

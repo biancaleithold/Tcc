@@ -22,3 +22,8 @@ body{
     margin-top: 5%;
 }
 
+.descricao_empresa{
+	font-size: large; font-weight: normal;   
+	width: 89%;
+    text-align: justify;
+}
