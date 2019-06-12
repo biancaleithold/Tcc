@@ -1,6 +1,6 @@
 <?php
 	
-/*  require 'config.php';
+  /*  require 'config.php';
   include("cabecalho.php");
 
   if(isset($_POST['register'])) {
@@ -123,7 +123,96 @@
   if(isset($_POST['register'])) {
     $errMsg = '';
 
-    // Get data from FROM
+    // Recupera os dados dos campos
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $senha = $_POST['senha'];
+    $foto_perfil = $_FILES["foto_perfil"];
+    $cpf = $_POST['cpf'];  
+  
+    // Se a foto estiver sido selecionada
+    echo "<br><br><br><br><br>";
+    echo $foto_perfil;
+    echo "<br><br><br><br><br>";
+    if (!empty($foto_perfil["name"])) {
+      // Largura máxima em pixels
+      $largura = 150;
+      // Altura máxima em pixels
+      $altura = 180;
+      // Tamanho máximo do arquivo em bytes
+      $tamanho = 1000;
+ 
+      $error = array();
+ 
+      // Verifica se o arquivo é uma imagem
+      if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $foto_perfil["type"])){
+        $error[1] = "Isso não é uma imagem.";
+      } 
+  
+      // Pega as dimensões da imagem
+      $dimensoes = getimagesize($foto_perfil["tmp_name"]);
+  
+      // Verifica se a largura da imagem é maior que a largura permitida
+      if($dimensoes[0] > $largura) {
+        $error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
+      }
+ 
+      // Verifica se a altura da imagem é maior que a altura permitida
+      if($dimensoes[1] > $altura) {
+        $error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
+      }
+    
+      // Verifica se o tamanho da imagem é maior que o tamanho permitido
+      if($foto_perfil["size"] > $tamanho) {
+        $error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
+      }
+ 
+      // Se não houver nenhum erro
+      if (count($error) == 0) {
+    
+        // Pega extensão da imagem
+        preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto_perfil["name"], $ext);
+ 
+        // Gera um nome único para a imagem
+        $nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+ 
+        // Caminho de onde ficará a imagem
+        $caminho_imagem = "imagens/" . $nome_imagem;
+ 
+        // Faz o upload da imagem para seu respectivo caminho
+        move_uploaded_file($foto_perfil["tmp_name"], $caminho_imagem);
+    
+        // Insere os dados no banco
+        $comando->prepare('INSERT INTO usuario (nome, email, telefone, senha, foto_perfil, cpf) VALUES (:nome, :email, :telefone, :senha, :nome_imagem, :cpf)');
+        $comando->execute(array(
+          ':nome' => $nome,
+          ':email' => $email,
+          ':telefone' => $telefone,
+          ':senha' => $senha,
+          ':nome_imagem' => $nome_imagem,
+          ':cpf' => $cpf
+        ));
+        // $sql = mysql_query("INSERT INTO usuario VALUES ('', '".$nome."', '".$email."', '".$telefone."', '".$senha."', '".$nome_imagem."', '".$cpf."')");
+    
+        // Se os dados forem inseridos com sucesso
+        //if ($sql){
+        //  echo "Você foi cadastrado com sucesso.";
+        //}
+      }
+  
+      // Se houver mensagens de erro, exibe-as
+      if (count($error) != 0) {
+        foreach ($error as $erro) {
+          echo $erro . "<br />";
+        }
+      }
+    } else {
+      echo "<br><br><br><br><br>OIOOIOIOIOIIO<br><br><br><br><br>";
+    }
+  }
+
+/*    // Get data from FROM
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
@@ -155,64 +244,10 @@
           ':cpf' => $cpf
         ));
 
-    //salvando foto em determinada pasta
-    $_UP['pasta'] = 'imagens';
-
-    //extensões permitidas
-    $_UP['extensoes'] = array ('png', 'jpg', 'jpeg', 'gif');
-
-    //Renomeiar
-      $_UP['renomeia'] = false;
-
-    //Faz a verificação da extensao do arquivo
-      $extensao = strtolower(end(explode('.', $_FILES['arquivo']['name'])));
-      if(array_search($extensao, $_UP['extensoes'])=== false){    
-        echo "
-          <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Aula/upload_imagem.php'>
-          <script type=\"text/javascript\">
-            alert(\"A imagem não foi cadastrada extesão inválida.\");
-          </script>
-        ";
-      }
-
-      //Primeiro verifica se deve trocar o nome do arquivo
-        if($UP['renomeia'] == true){
-          //Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
-          $nome_final = time().'.jpg';
-        }else{
-          //mantem o nome original do arquivo
-          $nome_final = $_FILES['arquivo']['name'];
-        }
-        //Verificar se é possivel mover o arquivo para a pasta escolhida
-        if(move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta']. $nome_final)){
-          //Upload efetuado com sucesso, exibe a mensagem
-          $query = mysqli_query($conn, "INSERT INTO usuario (foto_perfil) VALUES('$nome_final')");
-          echo "<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Aula/upload_imagem.php'>
-          <script type=\"text/javascript\">alert(\"Imagem cadastrada com Sucesso.\");</script>";  
-        }else{
-          //Upload não efetuado com sucesso, exibe a mensagem
-          echo "
-            <META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Aula/upload_imagem.php'>
-            <script type=\"text/javascript\">alert(\"Imagem não foi cadastrada com Sucesso.\");</script>";
-        }
-
-        //ARRUMAR!! NÃO APARECE MENSAGEM REGISTRADO COM SUCESSO!
-        //$host  = $_SERVER['HTTP_HOST'];
-            //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            //echo "<script type='text/javascript'>window.top.location='http://$host$uri/register_usuario.php';</script>";
-            //exit;
-        header('Location: register_usuario.php?action=joined');
-        exit;
-      }
-      catch(PDOException $e) {
-        $errMsg = $e->getMessage();
-      }
-    }
-  }
-
   if(isset($_GET['action']) && $_GET['action'] == 'joined') {
     $errMsg = 'Registrado com sucesso! <br> Agora você pode logar. <br><br>';
   }
+*/
 ?>
 
 <br>
@@ -249,7 +284,7 @@
       <input type="password" name="senha" value="<?php if(isset($_POST['senha'])) echo $_POST['senha'] ?>" placeholder="********" /><br /><br>
 
       <label>Foto Perfil</label>
-      <input type="file" name="imagem" value="<?php if(isset($_POST['imagem'])) echo $_POST['imagem'] ?>" /><br /><br>
+      <input type="file" name="foto_perfil"><br /><br>
 
       <label>CPF</label>
       <input type="text" name="cpf" value="<?php if(isset($_POST['cpf'])) echo $_POST['cpf'] ?>"  placeholder="000.000.000-00" /><br /><br>
