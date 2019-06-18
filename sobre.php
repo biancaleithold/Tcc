@@ -17,12 +17,13 @@
 </head>
 <body>
 <center>
-<div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%; margin-top: 3%;">
+	<h1 style="font-family: Lato, sans-serif; margin-top: 3%">Celebrate Festas e Eventos</h1>
+<div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%">
   <ol class="carousel-indicators">
     <li data-target="#casamento" data-slide-to="0" class="active"></li>
     <li data-target="#aniversario" data-slide-to="1"></li>
-    <li data-target="#fomatura" data-slide-to="2"></li>
-    <li data-target="#infantil" data-slide-to="3"></li>
+    <li data-target="#infantil" data-slide-to="2"></li>
+    <li data-target="#fomatura" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" >
     <div class="carousel-item active" >
@@ -32,10 +33,10 @@
       <img class="d-block w-100" src="imagens/aniversario.jpg" alt="Second slide">
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/fomatura.png" alt="Third slide" >
+      <img class="d-block w-100" src="imagens/infantil.jpg" alt="Third slide" >
     </div>
-    <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/infantil.jpg" alt="Fourth slide" >
+     <div class="carousel-item" >
+      <img class="d-block w-100" src="imagens/fomatura.jpg" alt="Fourth slide" >
     </div>
   </div>
   <a class="carousel-control-prev" href="#sol" role="button" data-slide="prev">
