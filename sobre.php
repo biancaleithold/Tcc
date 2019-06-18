@@ -17,21 +17,25 @@
 </head>
 <body>
 <center>
-<div id="sol" class="carousel slide" data-ride="carousel" style= "width: 20%; margin-top: 10%;">
+<div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%; margin-top: 3%;">
   <ol class="carousel-indicators">
-    <li data-target="#talher" data-slide-to="0" class="active"></li>
-    <li data-target="#melancia" data-slide-to="1"></li>
-    <li data-target="#muffins" data-slide-to="2"></li>
+    <li data-target="#casamento" data-slide-to="0" class="active"></li>
+    <li data-target="#aniversario" data-slide-to="1"></li>
+    <li data-target="#fomatura" data-slide-to="2"></li>
+    <li data-target="#infantil" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" >
     <div class="carousel-item active" >
-      <img class="d-block w-100" src="imagens/maleta.png" alt="First slide" >
+      <img class="d-block w-100" src="imagens/casamento.jpg" alt="First slide" >
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/calendario.png" alt="Second slide">
+      <img class="d-block w-100" src="imagens/aniversario.jpg" alt="Second slide">
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/perfil.png" alt="Third slide" >
+      <img class="d-block w-100" src="imagens/fomatura.png" alt="Third slide" >
+    </div>
+    <div class="carousel-item" >
+      <img class="d-block w-100" src="imagens/infantil.jpg" alt="Fourth slide" >
     </div>
   </div>
   <a class="carousel-control-prev" href="#sol" role="button" data-slide="prev">
