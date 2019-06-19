@@ -27,3 +27,9 @@ body{
 	width: 89%;
     text-align: justify;
 }
+
+.sobre{
+	width: 65%;
+    text-align: center;
+    margin-top: 3%;
+}

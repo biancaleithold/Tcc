@@ -81,7 +81,7 @@
 <br>
 
 <div class="centraliza_img">
-  <h1 style="margin-top: 3%">Cadastro de Empresa</h1>
+  <h1 style="margin-top: 1.5%">Cadastro de Empresa</h1>
 </div>
 
 <!--<div class="ui form login">
@@ -141,6 +141,7 @@
       <label>Logo</label>
         <input type="file" name="logo">
       </div>
+      </div>
     </div>
   <div class="field">
     <label>Descrição</label>
@@ -155,7 +156,36 @@
       <label>E-mail</label>
         <input type="text" name="email" placeholder="celebrate.festas@gmail.com">
       </div>
+  </div>
+  <div class="ui form field">
+    <label>Qual sua especialização?</label>
+  <div class="inline fields">
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Decoração</label>
+      </div>
     </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Fotografia</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Once a day</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Twice a day</label>
+      </div>
+    </div>
+  </div>
+  </div>
     <div style="float: right;" class="ui button" tabindex="0">Cadastrar</div>
 </form>
 <!--</div>
