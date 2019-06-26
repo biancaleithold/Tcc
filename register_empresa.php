@@ -81,7 +81,7 @@
 <br>
 
 <div class="centraliza_img">
-  <h1 style="margin-top: 1.5%">Cadastro de Empresa</h1>
+  <h1 style="margin-top: 0.5%">Cadastro de Empresa</h1>
 </div>
 
 <!--<div class="ui form login">
@@ -93,7 +93,7 @@
         }
       ?>
 
-  <form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 2%">
+  <form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%">
   <div class="field"> 
     <div class="two fields">
       <div class="field">
@@ -145,7 +145,7 @@
     </div>
   <div class="field">
     <label>Descrição</label>
-    <textarea rows="2" placeholder="Estamos no mercado desde 1998!"></textarea>
+    <textarea rows="1" placeholder="Estamos no mercado desde 1998!"></textarea>
   </div>
   <div class="two fields">
       <div class="field">
@@ -163,29 +163,143 @@
     <div class="field">
       <div class="ui checkbox">
         <input type="checkbox" name="frequency">
+        <label>Animação</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Barbearia</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Brinquedos</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Buffet</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Cerimonialista</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>CIA Viagem</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Confeitaria</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Convite</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
         <label>Decoração</label>
       </div>
     </div>
+  </div>
+
+    <div class="inline fields">
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+        <label>Filmagem</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+          <label>Floricultura</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+          <label>Fotografia</label>
+        </div>
+      </div> 
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+          <label>Garçom</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+          <label>Lembranças</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+          <label>Locação de Carro</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+          <label>Locação e Compra de Trajes</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="frequency">
+          <label>Locação do Local</label>
+        </div>
+      </div>
+    </div>
+
+  <div class="inline fields">
     <div class="field">
       <div class="ui checkbox">
         <input type="checkbox" name="frequency">
-        <label>Fotografia</label>
+        <label>Música</label>
       </div>
     </div>
     <div class="field">
       <div class="ui checkbox">
         <input type="checkbox" name="frequency">
-        <label>Once a day</label>
+        <label>Recepção</label>
       </div>
     </div>
     <div class="field">
       <div class="ui checkbox">
         <input type="checkbox" name="frequency">
-        <label>Twice a day</label>
+        <label>Relojoaria</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Salão de Beleza</label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Segurança</label>
       </div>
     </div>
   </div>
-  </div>
+
     <div style="float: right;" class="ui button" tabindex="0">Cadastrar</div>
 </form>
 <!--</div>

@@ -43,13 +43,13 @@
     	
 
       <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
-        <option value="cabecalho.php">Aniversários</option>
-        <option value="#">15 Anos</option>
-        <option value="#">Festa Infantil</a></option>
+        <option value="eventos.php">Aniversários</option>
+        <option value="eventos.php">15 Anos</option>
+        <option value="eventos.php">Festa Infantil</a></option>
       </select>
-    	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Casamento</a>
-   		<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
-    	<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
+    	<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Casamento</a>
+   		<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
+    	<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
     	<a href="sobre.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
       <a href="register_usuario.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Cadastre-se</a>
 
