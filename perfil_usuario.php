@@ -1,6 +1,16 @@
 <?php
-	include 'cabecalho.php';
+  session_start();
+  include 'config.php';
+  include 'cabecalho.php';
+
+  $consulta = $connect->query('SELECT nome, email, foto_perfil FROM usuario WHERE email="'.$_SESSION['email'].'"');
+  while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $nome = $linha['nome'];
+    $email = $linha['email'];
+    $foto_perfil = $linha['foto_perfil']; 
+  }
 ?>
+
 <br><br><br>
   <div class="ui special cards" style="margin: 3%; float: left;">
 
@@ -9,12 +19,12 @@
       <div class="ui inverted dimmer">
         
       </div>
-      <img src="imagens/perfil.png">
+      <img src="imagens/<?php echo $foto_perfil;?>">
     </div>
     <div class="content">
-      <h1 class="header">Nome:</h1>
+      <h1 class="header">Nome: <?php echo $nome; ?></h1>
       <div class="meta">
-        <h4 class="date">Email:</h4>
+        <h4 class="date">Email: <?php echo $email; ?></h4>
       </div>
     </div>
     <div class="extra content">

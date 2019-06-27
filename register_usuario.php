@@ -130,18 +130,20 @@
     $senha = $_POST['senha'];
     $foto_perfil = $_FILES["foto_perfil"];
     $cpf = $_POST['cpf'];  
+    $target_dir = "imagens/";
+    $target_file = $target_dir . basename($_FILES["foto_perfil"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
   
     // Se a foto estiver sido selecionada
-    echo "<br><br><br><br><br>";
-    echo $foto_perfil;
-    echo "<br><br><br><br><br>";
     if (!empty($foto_perfil["name"])) {
       // Largura máxima em pixels
-      $largura = 150;
+      $largura = 400;
       // Altura máxima em pixels
-      $altura = 180;
+      $altura = 400;
       // Tamanho máximo do arquivo em bytes
-      $tamanho = 1000;
+      $tamanho = 1000000;
  
       $error = array();
  
@@ -170,27 +172,25 @@
  
       // Se não houver nenhum erro
       if (count($error) == 0) {
-    
         // Pega extensão da imagem
         preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto_perfil["name"], $ext);
  
-        // Gera um nome único para a imagem
-        $nome_imagem = md5(uniqid(time())) . "." . $ext[1];
- 
-        // Caminho de onde ficará a imagem
-        $caminho_imagem = "imagens/" . $nome_imagem;
- 
-        // Faz o upload da imagem para seu respectivo caminho
-        move_uploaded_file($foto_perfil["tmp_name"], $caminho_imagem);
+       // Faz o upload da imagem para seu respectivo caminho
+        if (move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], $target_file)) {
+          echo "The file ". basename( $_FILES["foto_perfil"]["name"]). " has been uploaded.";
+        } else {
+          echo "Sorry, there was an error uploading your file.";
+        }
+        // move_uploaded_file($foto_perfil["tmp_name"], $caminho_imagem);
     
         // Insere os dados no banco
-        $comando->prepare('INSERT INTO usuario (nome, email, telefone, senha, foto_perfil, cpf) VALUES (:nome, :email, :telefone, :senha, :nome_imagem, :cpf)');
+        $comando = $connect->prepare('INSERT INTO usuario (nome, email, telefone, senha, foto_perfil, cpf) VALUES (:nome, :email, :telefone, :senha, :nome_imagem, :cpf)');
         $comando->execute(array(
           ':nome' => $nome,
           ':email' => $email,
           ':telefone' => $telefone,
           ':senha' => $senha,
-          ':nome_imagem' => $nome_imagem,
+          ':nome_imagem' => $_FILES["foto_perfil"]["name"],
           ':cpf' => $cpf
         ));
         // $sql = mysql_query("INSERT INTO usuario VALUES ('', '".$nome."', '".$email."', '".$telefone."', '".$senha."', '".$nome_imagem."', '".$cpf."')");
@@ -205,6 +205,8 @@
       // Se houver mensagens de erro, exibe-as
       if (count($error) != 0) {
         foreach ($error as $erro) {
+          echo "<br><br><br><br><br>";
+          echo "outro locall";
           echo $erro . "<br />";
         }
       }
@@ -269,7 +271,7 @@
         }
       ?>
 
-  <form action="" method="post">
+  <form action="" method="post" enctype="multipart/form-data">
     <div class="field">
 
       <label>Nome Completo</label>
@@ -285,7 +287,7 @@
       <input type="password" name="senha" value="<?php if(isset($_POST['senha'])) echo $_POST['senha'] ?>" placeholder="********" /><br /><br>
 
       <label>Foto Perfil</label>
-      <input type="file" name="foto_perfil"><br /><br>
+      <input type="file" name="foto_perfil" id="foto_perfil"><br /><br>
 
       <label>CPF</label>
       <input type="text" name="cpf" value="<?php if(isset($_POST['cpf'])) echo $_POST['cpf'] ?>"  placeholder="000.000.000-00" /><br /><br>
