@@ -22,7 +22,7 @@
 </head>
 <body style="background: #f1f8f9;">
 <center>
-  <h1 style="margin-top: 5%; margin-bottom: 2%;">Casamentos</h1>
+  <h1 class="titulo_evento" style="margin-top: 5%; ">CASAMENTOS</h1>
 <div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%">
   <ol class="carousel-indicators">
     <li data-target="#casamento" data-slide-to="0" class="active"></li>
@@ -52,4 +52,8 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+</div>
+
+<div>
+  <h4 class="texto_evento">Nosso objetivo é facilitar a organização de seu evento, ajudando de maneira mais prática na realização deste sonho. Temos a meta de auxiliar o usuário usando recursos como:  uma agenda para anotar seus devidos compromissos como reuniões ou até mesmo a data do evento, o usuário também terá maior controle sobre suas despesas, pois o  sistema será capaz de lhe apresentar os valores com base nos contratos realizados e terá acesso a uma lista de convidados por evento para melhor administrar sua festa.</h4>
 </div>

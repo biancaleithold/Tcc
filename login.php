@@ -80,6 +80,9 @@
     <a href="">Esqueci minha senha!</a>
     <br>
     <br>
+    <a href="register_usuario.php">Ainda não tem cadastro? Cadastre-se!</a>
+    <br>
+    <br>
     <input type="submit" name='login' value="Login" class="ui button botao">
   </form>
 </div>

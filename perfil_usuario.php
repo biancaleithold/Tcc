@@ -19,7 +19,17 @@
       <div class="ui inverted dimmer">
         
       </div>
-      <img src="imagens/<?php echo $foto_perfil;?>">
+      <?php
+        if (!empty($foto_perfil)) {
+      ?>
+          <img src="imagens/<?php echo $foto_perfil;?>">
+      <?php
+        }else{
+      ?>
+          <img src="imagens/perfil.png">
+      <?php
+        }
+      ?>
     </div>
     <div class="content">
       <h1 class="header">Nome: <?php echo $nome; ?></h1>
@@ -71,6 +81,8 @@
     </button>
   </a> 
 
-  <i class="pencil alternate icon"></i>
+  <i class="pencil alternate icon">
+    
+  </i>
   <i class="trash alternate icon"></i>
   </a> 

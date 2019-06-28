@@ -39,7 +39,7 @@
             echo '<div style="color:#FF0000;text-align:center;font-size:18px;">'.$errMsg.'</div>';
           }
       ?>
-    	<a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-light-blue">Home</a>
+    	<a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-light-blue">  <i class="home alternate icon"></i></a>
     	
 
       <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
@@ -51,11 +51,11 @@
    		<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
     	<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
     	<a href="sobre.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
-      <a href="register_usuario.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Cadastre-se</a>
 
 
 			<?php 
-				if (isset($_SESSION['email'])) {					
+				if (isset($_SESSION['email'])) {	
+          echo '<a href="perfil_usuario.php" class="w3-bar-item w3-button w3-padding-large">Meu Perfil</a>';				
 					echo '<a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Logout</a>';
 				} else {
 					echo '<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>';
@@ -80,9 +80,9 @@
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Corporativo</a>
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
     	<a href="sobre.php" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
-      <a href="register_usuario.php" class="w3-bar-item w3-button w3-padding-large">Cadastre-se</a>
 			<?php 
 				if ( isset($_SESSION['email']) ) {
+          echo '<a href="perfil_usuario.php" class="w3-bar-item w3-button w3-padding-large">Meu Perfil</a>';
 					echo '<a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>';
 				} else {
 					echo '<a href="login.php" class="w3-bar-item w3-button w3-padding-large">Login</a>';
