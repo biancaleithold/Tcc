@@ -54,6 +54,21 @@
   </a>
 </div>
 
+<div class="ui vertical menu">
+  <div class="ui left pointing dropdown link item">
+    <i class="dropdown icon"></i>
+    Messages
+    <div class="menu">
+      <div class="item">Inbox</div>
+      <div class="item">Starred</div>
+      <div class="item">Sent Mail</div>
+      <div class="item">Drafts (143)</div>
+      <div class="divider"></div>
+      <div class="item">Spam (1009)</div>
+      <div class="item">Trash</div>
+    </div>
+  </div>
+</div>
 <div>
   <h4 class="texto_evento">Nosso objetivo é facilitar a organização de seu evento, ajudando de maneira mais prática na realização deste sonho. Temos a meta de auxiliar o usuário usando recursos como:  uma agenda para anotar seus devidos compromissos como reuniões ou até mesmo a data do evento, o usuário também terá maior controle sobre suas despesas, pois o  sistema será capaz de lhe apresentar os valores com base nos contratos realizados e terá acesso a uma lista de convidados por evento para melhor administrar sua festa.</h4>
 </div>
