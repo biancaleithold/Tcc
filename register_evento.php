@@ -1,5 +1,5 @@
 <?php
-	
+  
   require 'config.php';
   include("cabecalho.php");
 
@@ -9,29 +9,29 @@
     // Get data from FROM
     $nome_evento = $_POST['nome_evento'];
     $hora = $_POST['hora'];
-    $descricao_evento = $_POST['descricao_evento'];
-    $data = $_POST['data'];
-    $local_evento = $_POST['local_evento'];
+    $descricao = $_POST['descricao'];
+    $dia = $_POST['dia'];
+    $local = $_POST['local'];
 
     if($nome_evento == '')
       $errMsg = 'Insira o nome do evento';
     if($hora == '')
       $errMsg = 'Insira seu hora';
-    if($descricao_evento == '')
+    if($descricao == '')
       $errMsg = 'Insira a descricao de seu evento';
-    if($data == '')
+    if($dia == '')
       $errMsg = 'Insira a data do evento';
-    if($local_evento == '')
+    if($local == '')
       $errMsg = 'Insira o local do evento';
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO usuario (nome_evento,  hora, descricao_evento, data, local_evento) VALUES (:nome_evento, :hora, :descricao_evento, :data, :local_evento)');
+        $stmt = $connect->prepare('INSERT INTO eventos (nome_evento,  hora, descricao, dia, local) VALUES (:nome_evento, :hora, :descricao, :dia, :local)');
         $stmt->execute(array(
           ':nome_evento' => $nome_evento,
           ':hora' => $hora,
-          ':descricao_evento' => $descricao_evento,
-          ':data' => $data,
-          ':local_evento' => $local_evento
+          ':descricao' => $descricao,
+          ':dia' => $dia,
+          ':local' => $local
         ));
 
 
@@ -81,13 +81,13 @@
       <input type="time" name="hora" value="<?php if(isset($_POST['hora'])) echo $_POST['hora'] ?>" class="box"/><br /><br />
 
       <label>Descrição</label>
-      <textarea rows="3" name="descricao_evento" value="<?php if(isset($_POST['descricao_evento'])) echo $_POST['descricao_evento'] ?>" placeholder="Aniversário Joana e Cleber com o tema Halloween!"></textarea><br /><br>      
+      <textarea rows="3" name="descricao" value="<?php if(isset($_POST['descricao'])) echo $_POST['descricao'] ?>" placeholder="Aniversário Joana e Cleber com o tema Halloween!"></textarea><br /><br>      
 
       <label>Data</label>
-      <input type="date" name="data" value="<?php if(isset($_POST['data'])) echo $_POST['data'] ?>"/><br /><br>
+      <input type="date" name="dia" value="<?php if(isset($_POST['dia'])) echo $_POST['dia'] ?>"/><br /><br>
 
       <label>Local</label>
-      <input type="text" name="local_evento" value="<?php if(isset($_POST['local_evento'])) echo $_POST['local_evento'] ?>" placeholder="Toffanos" /><br /><br>
+      <input type="text" name="local" value="<?php if(isset($_POST['local'])) echo $_POST['local'] ?>" placeholder="Toffanos" /><br /><br>
 
     </div>
     <input type="submit" name='register' class="ui button botao">
