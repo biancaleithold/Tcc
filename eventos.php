@@ -54,27 +54,14 @@
   </a>
 </div>
 <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
+  <button class="dropbtn">O que você procura?</button>
   <div class="dropdown-content">
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
+    <a href="#">Barbearia</a>
+    <a href="#">Buffet</a>
+    <a href="#">Cerimonialista</a>
+    <a href="#">Cia de Viagem</a>
   </div>
 </div>
-<!--<div class="ui vertical menu" style="float: left;width: 18%; margin-left: 20%; margin-top: 2%">
-  <div class="ui left pointing dropdown link item">
-    <i class="dropdown icon"></i>
-    O que você procura?
-    <div class="menu">
-      <div class="item">Inbox</div>
-      <div class="item">Starred</div>
-      <div class="item">Sent Mail</div>
-      <div class="item">Drafts (143)</div>
-      <div class="item">Spam (1009)</div>
-      <div class="item">Trash</div>
-    </div>
-  </div>
-</div>-->
 <div>
-  <h4 class="texto_evento" style="margin-top: 2%;">Nosso objetivo é facilitar a organização de seu evento, ajudando de maneira mais prática na realização deste sonho. Temos a meta de auxiliar o usuário usando recursos como:  uma agenda para anotar seus devidos compromissos como reuniões ou até mesmo a data do evento, o usuário também terá maior controle sobre suas despesas, pois o  sistema será capaz de lhe apresentar os valores com base nos contratos realizados e terá acesso a uma lista de convidados por evento para melhor administrar sua festa.</h4>
+  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;">Nosso objetivo é facilitar a organização de seu evento, ajudando de maneira mais prática na realização deste sonho. Temos a meta de auxiliar o usuário usando recursos como:  uma agenda para anotar seus devidos compromissos como reuniões ou até mesmo a data do evento, o usuário também terá maior controle sobre suas despesas, pois o  sistema será capaz de lhe apresentar os valores com base nos contratos realizados e terá acesso a uma lista de convidados por evento para melhor administrar sua festa.</h4>
 </div>

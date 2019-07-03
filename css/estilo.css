@@ -43,24 +43,27 @@ body{
 
 .texto_evento{
 	float: right;
-    text-align: justify;
-    width: 33%;
-    margin-right: 20%;
-    font-size: 18px;
- }
+  text-align: justify;
+  width: 33%;
+  margin-right: 20%;
+  font-size: 18px;
+}
 
 .dropbtn {
   background-color:#4c8aaf4f;
-  color: white;
+  color: black;
   padding: 16px;
   font-size: 16px;
   border: none;
   cursor: pointer;
+  margin-top: 18.5%;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
+  float: left;
+  margin-left: 25%;
 }
 
 .dropdown-content {
@@ -79,7 +82,9 @@ body{
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #4c8aaf4f}
+.dropdown-content a:hover {
+  background-color: #4c8aaf4f
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -87,4 +92,4 @@ body{
 
 .dropdown:hover .dropbtn {
   background-color: #4c8aaf4f;
-}
+}s
