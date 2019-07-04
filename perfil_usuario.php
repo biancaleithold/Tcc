@@ -52,15 +52,13 @@
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != '' ) {
   
-echo "FAZER COMO FORM PARA ALTERAÇÃO";
-
-  $stmt = $connect->prepare("SELECT * FROM eventos WHERE id_evento=:id");
+  $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos WHERE id_evento=:id");
   $stmt->execute(array(
     ':id' => $_REQUEST['id'],
   )); 
 ?>
   <table class="ui fixed table">
-  <h1 class="header">Meus Eventos</h1>
+  <h1 class="header">Alterar Meus Dados</h1>
   <tr>
         <th>Nome do Evento</th>
         <th>Data</th>
@@ -68,13 +66,23 @@ echo "FAZER COMO FORM PARA ALTERAÇÃO";
         <th>Local</th>
         <th>Descriçao</th>
     </tr>
+
    
 <?php
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 echo "FAZER COMO FORM PARA ALTERAÇÃO";
                 echo "<tr>";
-                echo "<td>".$rs->nome_evento."</td><td>".$rs->dia."</td><td>".$rs->hora."</td><td>".$rs->local."</td><td>".$rs->descricao."</td><td><center><a href=\"?act=save&id=".$rs->id_evento."\">[Salvar]</a>"
-                           ."</center></td>";
+                    echo "<td>".$rs->nome_evento."</td>
+
+                    <td>".$rs->dia."</td>
+                    <td>".$rs->hora."</td>
+                    <td>".$rs->local."</td>
+                    <td>".$rs->descricao."</td>
+                    <td>
+                      <center>
+                        <a href=\"?act=save&id=".$rs->id_evento."\">[Salvar]</a>".
+                      "</center>
+                    </td>";
                 echo "</tr>";
             }
 
@@ -90,7 +98,10 @@ echo "FAZER COMO FORM PARA ALTERAÇÃO";
 
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] != '' ) {
-  echo "FAZER UPDATE";
+  $stmt = $connect->prepare("UPDATE eventos SET nome_evento=:nome_evento, dia=:dia, hora=:hora, local=:local, descricao=:descricao  WHERE id_evento=:id");
+  $stmt->execute(array(
+    ':id' => $_REQUEST['id'],
+  )); 
 }
 
 ?>
@@ -111,7 +122,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
     <?php
     try {
  
-    $stmt = $connect->prepare("SELECT nome_evento,dia,hora,local,descricao FROM eventos");
+    $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos");
  
         if ($stmt->execute()) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
