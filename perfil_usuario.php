@@ -70,19 +70,18 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
    
 <?php
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-echo "FAZER COMO FORM PARA ALTERAÇÃO";
-                echo "<tr>";
-                    echo "<td>".$rs->nome_evento."</td>
 
-                    <td>".$rs->dia."</td>
-                    <td>".$rs->hora."</td>
-                    <td>".$rs->local."</td>
-                    <td>".$rs->descricao."</td>
+                echo "<tr>";?>
+                <form>
+                    <td><input type="text" name="nome_evento" value="<?php echo $rs->nome_evento ?>"/></td>
+                    <td><input type="date" name="dia" value="<?php echo $rs->dia ?>"/></td>
+                    <td><input type="time" name="hora" value="<?php echo $rs->hora ?>"/></td>
+                    <td><input type="text" name="local" value="<?php echo $rs->local ?>"/></td>
+                    <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
                     <td>
                       <center>
-                        <a href=\"?act=save&id=".$rs->id_evento."\">[Salvar]</a>".
-                      "</center>
-                    </td>";
+                      <?php
+                      echo "<a href=\"?act=save&id=".$rs->id_evento."\">[Salvar]</a></center></td>"; 
                 echo "</tr>";
             }
 
@@ -129,7 +128,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
                 echo "<tr>";
                 echo "<td>".$rs->nome_evento."</td><td>".$rs->dia."</td><td>".$rs->hora."</td><td>".$rs->local."</td><td>".$rs->descricao."</td><td><center><a href=\"?act=upd&id=".$rs->id_evento."\">[Alterar]</a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"\">[Excluir]</a></center></td>";
+                           ."<a href=\"?act=del&id=".$rs->id_evento."\">[Excluir]</a></center></td>";
                 echo "</tr>";
             }
         } else {
@@ -142,6 +141,22 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 </table>
 <!-- FIM BLOCO MOSTRA DADOS TABELA -->
 
+
+<!--BLOCO EXCLUIR DADOS -->
+
+<?php
+  if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
+    try {
+        $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id");
+        $stmt->  $stmt->execute(array(
+    ':id' => $_REQUEST['id'],
+  ));
+  }catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+}
+  } 
+?>
+<!-- FIM DO BLOCO EXCLUIR DADOS -->
 
 
 
