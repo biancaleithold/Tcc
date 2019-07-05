@@ -1,8 +1,6 @@
 <?php
-  
   require 'config.php';
   include("cabecalho.php");
-
   if(isset($_POST['register'])) {
     $errMsg = '';
 
@@ -158,7 +156,7 @@
       </div>
   </div>
 
-  <!---  <div class="ui form field">
+ <!--- <div class="ui form field">
     <label>Qual sua especialização?</label>
 
 <select class="ui fluid search dropdown" multiple="">
@@ -217,7 +215,7 @@
 </select>
 </div>--->
 
-  <div class="ui form field">
+    <div class="ui form field">
     <label>Qual sua especialização?</label>
 
   <div class="inline fields">

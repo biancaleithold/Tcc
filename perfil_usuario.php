@@ -72,16 +72,18 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 
                 echo "<tr>";?>
-                <form>
+                <form method="POST" action="?act=save">
+                    <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
                     <td><input type="text" name="nome_evento" value="<?php echo $rs->nome_evento ?>"/></td>
                     <td><input type="date" name="dia" value="<?php echo $rs->dia ?>"/></td>
                     <td><input type="time" name="hora" value="<?php echo $rs->hora ?>"/></td>
                     <td><input type="text" name="local" value="<?php echo $rs->local ?>"/></td>
                     <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
-                    <td>
+                    <td><input type="submit" name="save" value="Salvar" /></td>
+                    <!-- <td> -->
                       <center>
                       <?php
-                      echo "<a href=\"?act=save&id=".$rs->id_evento."\">[Salvar]</a></center></td>"; 
+                      // echo "<a href=\"?act=save&id=".$rs->id_evento."\">[Salvar]</a></center></td>"; 
                 echo "</tr>";
             }
 
@@ -92,14 +94,42 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
 <!--- FIM BLOCO DE ALTERAR  -->
 
 
+<!--BLOCO EXCLUIR DADOS -->
+
+<?php
+  if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
+    try {
+        $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id");
+        $stmt->execute(array(
+          ':id' => $_REQUEST['id'],
+        ));
+    }catch (PDOException $erro) {
+      echo "Erro: ".$erro->getMessage();
+    }
+  } 
+?>
+<!-- FIM DO BLOCO EXCLUIR DADOS -->
+
+
 
 <!--- BLOCO DE SALVAR  -->
 
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] != '' ) {
-  $stmt = $connect->prepare("UPDATE eventos SET nome_evento=:nome_evento, dia=:dia, hora=:hora, local=:local, descricao=:descricao  WHERE id_evento=:id");
-  $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
+    $nome_evento = $_POST['nome_evento'];
+    $hora = $_POST['hora'];
+    $descricao = $_POST['descricao'];
+    $dia = $_POST['dia'];
+    $local = $_POST['local'];
+
+    $stmt = $connect->prepare("UPDATE eventos SET nome_evento=:nome_evento, dia=:dia, hora=:hora, local=:local, descricao=:descricao  WHERE id_evento=:id");
+    $stmt->execute(array(
+      ':id' => $_REQUEST['id'],
+      ':nome_evento' => $nome_evento,
+      ':hora' => $hora,
+      ':descricao' => $descricao,
+      ':local' => $local,
+      ':dia' => $dia
   )); 
 }
 
@@ -142,21 +172,6 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 <!-- FIM BLOCO MOSTRA DADOS TABELA -->
 
 
-<!--BLOCO EXCLUIR DADOS -->
-
-<?php
-  if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
-    try {
-        $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id");
-        $stmt->  $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
-  ));
-  }catch (PDOException $erro) {
-    echo "Erro: ".$erro->getMessage();
-}
-  } 
-?>
-<!-- FIM DO BLOCO EXCLUIR DADOS -->
 
 
 
