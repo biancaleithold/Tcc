@@ -69,13 +69,13 @@
     <a href="#">Floricultura</a>
     <a href="#">Fotografia</a>
     <a href="#">Garçom</a>
+    <a href="#">Joalheria</a>
     <a href="#">Lembranças</a>
     <a href="#">Locação de Carro</a>
     <a href="#">Locação e Compra de Trajes</a>
     <a href="#">Locação do Local</a>
     <a href="#">Música</a>
     <a href="#">Recepção</a>
-    <a href="#">Relojoaria</a>
     <a href="#">Salão de Beleza</a>
     <a href="#">Segurança</a>
 

@@ -196,14 +196,13 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
     </tr>
   </tbody>
 </table>-->
-  <a href="register_fornecedor.php" style="color: black">     
+  <a href="register_empresa.php" style="color: black">     
     <button class="ui basic button" style="float: right;  margin-right: 15%">
       <i class="icon plus"></i>
-        Cadastrar Fornecedor
+        Cadastrar Empresa
     </button>
   </a> 
   <a href="register_evento.php" style="color: black">
-  <a href="#" style="color: black">
     <button class="ui basic button" style="float: right;">
       <i class="icon plus"></i>
         Cadastrar Evento

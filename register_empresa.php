@@ -91,7 +91,7 @@
         }
       ?>
 
-  <form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%">
+  <form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%" action="">
   <div class="field"> 
     <div class="two fields">
       <div class="field">
@@ -159,7 +159,7 @@
  <!--- <div class="ui form field">
     <label>Qual sua especialização?</label>
 
-<select class="ui fluid search dropdown" multiple="">
+<select class="ui fluid search dropdown" name="especializacao[]" multiple>
   <option value="">Barbearia</option>
   <option value="AL">Alabama</option>
   <option value="AK">Alaska</option>
@@ -300,6 +300,12 @@
           <label>Garçom</label>
         </div>
       </div>
+         <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" name="frequency">
+        <label>Joalheria</label>
+      </div>
+    </div>
       <div class="field">
         <div class="ui checkbox">
           <input type="checkbox" name="frequency">
@@ -337,12 +343,6 @@
       <div class="ui checkbox">
         <input type="checkbox" name="frequency">
         <label>Recepção</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Relojoaria</label>
       </div>
     </div>
     <div class="field">
