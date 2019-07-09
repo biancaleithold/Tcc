@@ -78,6 +78,7 @@
 <br>
 <br>
 
+
 <div class="centraliza_img">
   <h1 style="margin-top: 0.5%">Cadastro de Empresa</h1>
 </div>
@@ -156,66 +157,33 @@
       </div>
   </div>
 
- <!--- <div class="ui form field">
+ <div class="field">
     <label>Qual sua especialização?</label>
 
-<select class="ui fluid search dropdown" name="especializacao[]" multiple>
-  <option value="">Barbearia</option>
-  <option value="AL">Alabama</option>
-  <option value="AK">Alaska</option>
-  <option value="AZ">Arizona</option>
-  <option value="AR">Arkansas</option>
-  <option value="CA">California</option>
-  <option value="CO">Colorado</option>
-  <option value="CT">Connecticut</option>
-  <option value="DE">Delaware</option>
-  <option value="DC">District Of Columbia</option>
-  <option value="FL">Florida</option>
-  <option value="GA">Georgia</option>
-  <option value="HI">Hawaii</option>
-  <option value="ID">Idaho</option>
-  <option value="IL">Illinois</option>
-  <option value="IN">Indiana</option>
-  <option value="IA">Iowa</option>
-  <option value="KS">Kansas</option>
-  <option value="KY">Kentucky</option>
-  <option value="LA">Louisiana</option>
-  <option value="ME">Maine</option>
-  <option value="MD">Maryland</option>
-  <option value="MA">Massachusetts</option>
-  <option value="MI">Michigan</option>
-  <option value="MN">Minnesota</option>
-  <option value="MS">Mississippi</option>
-  <option value="MO">Missouri</option>
-  <option value="MT">Montana</option>
-  <option value="NE">Nebraska</option>
-  <option value="NV">Nevada</option>
-  <option value="NH">New Hampshire</option>
-  <option value="NJ">New Jersey</option>
-  <option value="NM">New Mexico</option>
-  <option value="NY">New York</option>
-  <option value="NC">North Carolina</option>
-  <option value="ND">North Dakota</option>
-  <option value="OH">Ohio</option>
-  <option value="OK">Oklahoma</option>
-  <option value="OR">Oregon</option>
-  <option value="PA">Pennsylvania</option>
-  <option value="RI">Rhode Island</option>
-  <option value="SC">South Carolina</option>
-  <option value="SD">South Dakota</option>
-  <option value="TN">Tennessee</option>
-  <option value="TX">Texas</option>
-  <option value="UT">Utah</option>
-  <option value="VT">Vermont</option>
-  <option value="VA">Virginia</option>
-  <option value="WA">Washington</option>
-  <option value="WV">West Virginia</option>
-  <option value="WI">Wisconsin</option>
-  <option value="WY">Wyoming</option>
-</select>
-</div>--->
+      <select name="skills" multiple="" class="ui fluid dropdown">
+        <option value="">Skills</option>
+        <option value="angular">Angular</option>
+        <option value="css">CSS</option>
+        <option value="design">Graphic Design</option>
+        <option value="ember">Ember</option>
+        <option value="html">HTML</option>
+        <option value="ia">Information Architecture</option>
+        <option value="javascript">Javascript</option>
+        <option value="mech">Mechanical Engineering</option>
+        <option value="meteor">Meteor</option>
+        <option value="node">NodeJS</option>
+        <option value="plumbing">Plumbing</option>
+        <option value="python">Python</option>
+        <option value="rails">Rails</option>
+        <option value="react">React</option>
+        <option value="repair">Kitchen Repair</option>
+        <option value="ruby">Ruby</option>
+        <option value="ui">UI Design</option>
+        <option value="ux">User Experience</option>
+    </select>
+ </div>
 
-    <div class="ui form field">
+<!--    <div class="ui form field">
     <label>Qual sua especialização?</label>
 
   <div class="inline fields">
@@ -357,8 +325,12 @@
         <label>Segurança</label>
       </div>
     </div>
-  </div>
+  </div>-->
 
     <div style="float: right;" class="ui button" tabindex="0">Cadastrar</div>
 </form>
-<!--</div>
+</div>
+
+
+</body>
+</html>

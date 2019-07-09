@@ -3,7 +3,6 @@
 ?>
 
 
-
 <!DOCTYPE html>
   <html lang="en">
 	<link rel="icon" type="image/jpg" href="imagens/logo.png">
@@ -14,14 +13,20 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="semantic/dist/semantic.min.js"></script>
+
 	<script type="text/javascript" src="Semantic-UI-CSS-master/package.js"></script>
 	<script type="text/javascript" src="Semantic-UI-CSS-master/semantic.js"></script>
 	<script type="text/javascript" src="Semantic-UI-CSS-master/semantic.min.js"></script>
 	<script type="text/javascript" src="Semantic-UI-CSS-master/package.json"></script>
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.css">
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
-	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/estilo.css">
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+  </script>
+
+
 	<style>
 		body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -29,6 +34,9 @@
 	</style>
 
 <body>
+
+
+
 <!-- Navbar -->
 <div class="w3-top">
 	<div class="w3-bar w3-card w3-left-align w3-white w3-large">

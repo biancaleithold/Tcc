@@ -1,0 +1,51 @@
+body{
+	background: #f1f8f9;
+}
+
+.login{
+	width: 20%;
+	margin-left: 40%;
+	margin-right: 40%;
+	margin-top: 4%;
+}
+
+.botao{
+	float: right;
+}
+
+.centraliza_img{
+	text-align: center;
+}
+
+.perfil_login{
+	width: 11%;
+    margin-top: 4%;
+}
+
+.descricao_empresa{
+	font-size: large; font-weight: normal;   
+	width: 89%;
+    text-align: justify;
+}
+
+.sobre{
+	width: 65%;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.titulo_evento{
+	margin-top: 5%; 
+	margin-bottom: 2%; 
+	font-size: 50px;
+	font-family: cursive;
+}
+
+.texto_evento{
+	float: right;
+  text-align: justify;
+  width: 33%;
+  margin-right: 20%;
+  font-size: 18px;
+}
+
