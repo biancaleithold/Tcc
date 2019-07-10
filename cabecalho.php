@@ -13,19 +13,10 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<script type="text/javascript" src="Semantic-UI-CSS-master/package.js"></script>
-	<script type="text/javascript" src="Semantic-UI-CSS-master/semantic.js"></script>
-	<script type="text/javascript" src="Semantic-UI-CSS-master/semantic.min.js"></script>
-	<script type="text/javascript" src="Semantic-UI-CSS-master/package.json"></script>
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.css">
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/estilo.css">
-
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
-  </script>
-
 
 	<style>
 		body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -62,7 +53,7 @@
 
 			<?php 
 				if (isset($_SESSION['email'])) {	
-          echo '<a href="perfil_usuario.php" class="w3-bar-item w3-button w3-padding-large">Meu Perfil</a>';				
+          echo '<a href="perfil_usuario.php" class="w3-bar-item w3-button w3-padding-large w3-hover-light-blue">Meu Perfil</a>';				
 					echo '<a href="logout.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Logout</a>';
 				} else {
 					echo '<a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Login</a>';

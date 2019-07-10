@@ -157,180 +157,28 @@
       </div>
   </div>
 
- <div class="field">
-    <label>Qual sua especialização?</label>
+<div class="ui form">
 
-      <select name="skills" multiple="" class="ui fluid dropdown">
-        <option value="">Skills</option>
-        <option value="angular">Angular</option>
-        <option value="css">CSS</option>
-        <option value="design">Graphic Design</option>
-        <option value="ember">Ember</option>
-        <option value="html">HTML</option>
-        <option value="ia">Information Architecture</option>
-        <option value="javascript">Javascript</option>
-        <option value="mech">Mechanical Engineering</option>
-        <option value="meteor">Meteor</option>
-        <option value="node">NodeJS</option>
-        <option value="plumbing">Plumbing</option>
-        <option value="python">Python</option>
-        <option value="rails">Rails</option>
-        <option value="react">React</option>
-        <option value="repair">Kitchen Repair</option>
-        <option value="ruby">Ruby</option>
-        <option value="ui">UI Design</option>
-        <option value="ux">User Experience</option>
+  <div class="inline field">
+    <label>Especialização</label>
+    <?php
+      $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
+    ?>
+    <select name="skills" multiple="" class="label ui selection fluid dropdown">
+      <?php 
+      if ($stmt->execute()) {
+        while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+          echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao)."</option>";
+        }
+      }
+    ?>
     </select>
- </div>
-
-<!--    <div class="ui form field">
-    <label>Qual sua especialização?</label>
-
-  <div class="inline fields">
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Animação</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Barbearia</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Brinquedos</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Buffet</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Cerimonialista</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>CIA Viagem</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Confeitaria</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Convite</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Decoração</label>
-      </div>
-    </div>
   </div>
-
-    <div class="inline fields">
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-        <label>Filmagem</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-          <label>Floricultura</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-          <label>Fotografia</label>
-        </div>
-      </div> 
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-          <label>Garçom</label>
-        </div>
-      </div>
-         <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Joalheria</label>
-      </div>
-    </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-          <label>Lembranças</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-          <label>Locação de Carro</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-          <label>Locação e Compra de Trajes</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" name="frequency">
-          <label>Locação do Local</label>
-        </div>
-      </div>
-    </div>
-
-  <div class="inline fields">
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Música</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Recepção</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Salão de Beleza</label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="ui checkbox">
-        <input type="checkbox" name="frequency">
-        <label>Segurança</label>
-      </div>
-    </div>
-  </div>-->
 
     <div style="float: right;" class="ui button" tabindex="0">Cadastrar</div>
 </form>
 </div>
 
-
-</body>
-</html>
+<?php
+include 'rodape.php';
+?>

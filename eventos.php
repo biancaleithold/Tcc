@@ -84,3 +84,7 @@
 <div>
   <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;">Nosso objetivo é facilitar a organização de seu evento, ajudando de maneira mais prática na realização deste sonho. Temos a meta de auxiliar o usuário usando recursos como:  uma agenda para anotar seus devidos compromissos como reuniões ou até mesmo a data do evento, o usuário também terá maior controle sobre suas despesas, pois o  sistema será capaz de lhe apresentar os valores com base nos contratos realizados e terá acesso a uma lista de convidados por evento para melhor administrar sua festa.</h4>
 </div>
+
+<?php
+include 'rodape.php';
+?>

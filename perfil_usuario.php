@@ -3,8 +3,9 @@
   include 'config.php';
   include 'cabecalho.php';
 
-  $consulta = $connect->query('SELECT nome, email, foto_perfil FROM usuario WHERE email="'.$_SESSION['email'].'"');
+  $consulta = $connect->query('SELECT id_usuario, nome, email, foto_perfil FROM usuario WHERE email="'.$_SESSION['email'].'"');
   while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $id_usuario = $linha['id_usuario']; 
     $nome = $linha['nome'];
     $email = $linha['email'];
     $foto_perfil = $linha['foto_perfil']; 
@@ -57,7 +58,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
     ':id' => $_REQUEST['id'],
   )); 
 ?>
-  <table class="ui fixed table">
+  <table class="ui fixed table" style="width: 71%">
   <h1 class="header">Alterar Meus Dados</h1>
   <tr>
         <th>Nome do Evento</th>
@@ -139,7 +140,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 
 
 <!-- BLOCO MOSTRA DADOS TABELA -->
-<table class="ui fixed table">
+<table class="ui fixed table" style="width: 71%;">
   <h1 class="header">Meus Eventos</h1>
     <tr>
         <th>Nome do Evento</th>
@@ -148,17 +149,19 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
         <th>Local</th>
         <th>Descriçao</th>
     </tr>
+
     <?php
     try {
  
-    $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos");
+    $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos WHERE id_usuario = :id");
  
-        if ($stmt->execute()) {
+        if ($stmt->execute(array(
+          ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".$rs->nome_evento."</td><td>".$rs->dia."</td><td>".$rs->hora."</td><td>".$rs->local."</td><td>".$rs->descricao."</td><td><center><a href=\"?act=upd&id=".$rs->id_evento."\">[Alterar]</a>"
+                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".$rs->dia."</td><td>".$rs->hora."</td><td>".utf8_encode($rs->local)."</td><td>".utf8_encode($rs->descricao)."</td><td><center><a href=\"?act=upd&id=".$rs->id_evento."\"><i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?act=del&id=".$rs->id_evento."\">[Excluir]</a></center></td>";
+                           ."<a href=\"?act=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";
             }
         } else {
@@ -171,46 +174,19 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 </table>
 <!-- FIM BLOCO MOSTRA DADOS TABELA -->
 
-
-
-
-
-<!--<table class="ui fixed table">
-  <h1 class="header">Meus Eventos</h1>
-  <thead>
-    <tr>
-      <th>Nome do Evento</th>
-      <th>Data</th>
-      <th>Hora</th>
-      <th>Local</th>
-      <th>Descrição</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Casamento Juliana</td>
-      <td>20/06/2019</td>
-      <td>18:00:00</td>
-      <td>Restaurante Viapiana</td>
-      <td>Casamento Juliana e Marcelo, bla bla...</td>
-    </tr>
-  </tbody>
-</table>-->
-  <a href="register_empresa.php" style="color: black">     
-    <button class="ui basic button" style="float: right;  margin-right: 15%">
+  <a href="register_empresa.php">     
+    <button class="ui blue basic button" style="float: right;  margin-right: 4%">
       <i class="icon plus"></i>
         Cadastrar Empresa
     </button>
   </a> 
-  <a href="register_evento.php" style="color: black">
-    <button class="ui basic button" style="float: right;">
+  <a href="register_evento.php">
+    <button class="ui blue basic button" style="float: right;">
       <i class="icon plus"></i>
         Cadastrar Evento
     </button>
   </a> 
 
-  <i class="pencil alternate icon">
-    
-  </i>
-  <i class="trash alternate icon"></i>
-  </a> 
+<?php
+include 'rodape.php';
+?>

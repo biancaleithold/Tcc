@@ -77,5 +77,7 @@
       <h5>Karen Fernandes</h5>
     </div>
   </a>
-</body>
-</html>
+
+<?php
+include 'rodape.php';
+?>
