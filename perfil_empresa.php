@@ -1,5 +1,25 @@
 <?php
-	include 'cabecalho.php';
+  session_start();
+  include 'config.php';
+  include 'cabecalho.php';
+  
+  $consulta = $connect->query('SELECT id_empresa, cnpj, nome, rua, numero, complemento, bairro, cidade, estado, foto_perfil, descricao, telefone, email_empresa FROM empresa, usuario WHERE empresa.id_usuario = usuario.id_usuario AND usuario.id_usuario = 1"');
+  while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $id_empresa = $linha['id_empresa'];
+    $cnpj = $linha['cnpj']; 
+    $nome = $linha['nome'];
+    $nome = $linha['nome'];
+    $rua = $linha['rua'];
+    $numero = $linha['numero'];
+    $complemento = $linha['complemento'];
+    $bairro = $linha['bairro'];
+    $cidade = $linha['cidade'];
+    $estado = $linha['estado']; 
+    $foto_perfil = $linha['foto_perfil'];
+    $descricao = $linha['descricao']; 
+    $telefone = $linha['telefone']; 
+    $email_empresa = $linha['email_empresa'];
+  }
 ?>
 <br><br><br>
   <div class="ui special cards" style="margin: 3%; float: left;">
@@ -12,18 +32,18 @@
       <img src="imagens/perfil.png">
     </div>
     <div class="content">
-      <h1 class="header">Nome:</h1>
+      <h1 class="header">Nome: <?php echo $nome; ?></h1>
       <div class="meta">
-        <h4 class="date">Email:</h4>
+        <h4 class="date">Email: <?php echo $email_empresa; ?></h4>
       </div>
       <div class="meta">
-        <h4 class="date">CNPJ:</h4>
+        <h4 class="date">CNPJ: <?php echo $cnpj; ?></h4>
       </div>
       <div class="meta">
-        <h4 class="date">Telefone:</h4>
+        <h4 class="date">Telefone: <?php echo $telefone; ?></h4>
       </div>
       <div class="meta">
-        <h4 class="date">Endereço:</h4>
+        <h4 class="date">Endereço: <?php echo "$rua".-"$numero"."$complemento"."$bairro"."$cidade"."$estado"; ?></h4>
       </div>
     </div>
     <div class="extra content">

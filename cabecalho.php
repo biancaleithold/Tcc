@@ -79,7 +79,7 @@
     	<a href="#" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
     	<a href="sobre.php" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
 			<?php 
-				if ( isset($_SESSION['email']) ) {
+				if ( isset($_SESSION['id_usuario']) ) {
           echo '<a href="perfil_usuario.php" class="w3-bar-item w3-button w3-padding-large">Meu Perfil</a>';
 					echo '<a href="logout.php" class="w3-bar-item w3-button w3-padding-large">Logout</a>';
 				} else {

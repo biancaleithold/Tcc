@@ -13,38 +13,67 @@
     $bairro = $_POST['bairro'];
     $cidade = $_POST['cidade'];
     $estado = $_POST['estado'];
-    $logo = $_POST['logo'];
+    $logo = $_FILES['logo'];
     $descricao = $_POST['descricao'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
+    $target_dir = "imagens/";
+    $target_file = $target_dir . basename($_FILES["logo"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-    if($cnpj == '')
-      $errMsg = 'Insira seu cnpj';
-    if($nome == '')
-      $errMsg = 'Insira seu nome';
-     if($rua == '')
-      $errMsg = 'Insira sua rua';
-     if($numero == '')
-      $errMsg = 'Insira o número do estabelecimento';
-    if($complemento == '')
-      $errMsg = 'Insira o complemento';
-    if($bairro == '')
-      $errMsg = 'Insira o bairro';
-    if($cidade == '')
-      $errMsg = 'Insira a cidade';
-    if($estado == '')
-      $errMsg = 'Insira o estado';
-    if($logo == '')
-      $errMsg = 'Insira sua logomarca';
-    if($descricao == '')
-      $errMsg = 'Insira a descricao';
-    if($telefone == '')
-      $errMsg = 'Insira seu telefone';
-    if($email == '')
-      $errMsg = 'Insira seu email';
-    if($errMsg == ''){
-      try {
-        $stmt = $connect->prepare('INSERT INTO fornecedor (cnpj, nome, rua, numero, complemento, bairro, cidade, estado, logo, descricao, telefone, email) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email)');
+  
+    // Se a foto estiver sido selecionada
+    if (!empty($logo["name"])) {
+      // Largura máxima em pixels
+      $largura = 40000;
+      // Altura máxima em pixels
+      $altura = 40000;
+      // Tamanho máximo do arquivo em bytes
+      $tamanho = 1000000;
+ 
+      $error = array();
+      
+
+      // Verifica se o arquivo é uma imagem
+      if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $logo["type"])){
+        $error[1] = "Isso não é uma imagem.";
+      } 
+  
+      // Pega as dimensões da imagem
+      $dimensoes = getimagesize($logo["tmp_name"]);
+  
+      // Verifica se a largura da imagem é maior que a largura permitida
+      if($dimensoes[0] > $largura) {
+        $error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
+      }
+ 
+      // Verifica se a altura da imagem é maior que a altura permitida
+      if($dimensoes[1] > $altura) {
+        $error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
+      }
+    
+      // Verifica se o tamanho da imagem é maior que o tamanho permitido
+      if($logo["size"] > $tamanho) {
+        $error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
+      }
+ 
+      // Se não houver nenhum erro
+      if (count($error) == 0) {
+        // Pega extensão da imagem
+        preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $logo["name"], $ext);
+ 
+       // Faz o upload da imagem para seu respectivo caminho
+        if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
+          echo "The file ". basename( $_FILES["logo"]["name"]). " has been uploaded.";
+        } else {
+          echo "Sorry, there was an error uploading your file.";
+        }
+        // move_uploaded_file($logo["tmp_name"], $caminho_imagem);
+      }
+    }
+        // Insere os dados no banco
+        $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, estado, logo, descricao, telefone, email, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email, :id_usuario)');
         $stmt->execute(array(
           ':cnpj' => $cnpj,
           ':nome' => $nome,
@@ -57,17 +86,12 @@
           ':logo' => $logo,
           ':descricao' => $descricao,
           ':telefone' => $telefone,
-          ':email' => $email
+          ':email' => $email,
+          ':id_usuario' => $_SESSION['id_usuario']
         ));
         header('Location: register_empresa.php?action=joined');
         exit;
-      }
-      catch(PDOException $e) {
-        $errMsg = $e->getMessage();
-      }
-    }
   }
-
   if(isset($_GET['action']) && $_GET['action'] == 'joined') {
     $errMsg = 'Registrado com sucesso!<br><br>';
   }
@@ -92,7 +116,7 @@
         }
       ?>
 
-  <form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%" action="">
+<form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%" action="" enctype="multipart/form-data" method="post">
   <div class="field"> 
     <div class="two fields">
       <div class="field">
@@ -157,25 +181,24 @@
       </div>
   </div>
 
-<div class="ui form">
-
-  <div class="inline field">
-    <label>Especialização</label>
-    <?php
-      $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
-    ?>
-    <select name="skills" multiple="" class="label ui selection fluid dropdown">
-      <?php 
-      if ($stmt->execute()) {
-        while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-          echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao)."</option>";
+    <div class="inline field">
+      <label>Especialização</label>
+      <?php
+        $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
+      ?>
+      <select name="skills" multiple="" class="label ui selection fluid dropdown">
+        <?php 
+        if ($stmt->execute()) {
+          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+            echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao)."</option>";
+          }
         }
-      }
-    ?>
-    </select>
-  </div>
+        ?>
+      </select>
+    </div>
 
-    <div style="float: right;" class="ui button" tabindex="0">Cadastrar</div>
+    <input type="submit" name='register' value="Cadastrar" class="ui button" style="float:right;">
+
 </form>
 </div>
 
