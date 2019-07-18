@@ -43,8 +43,11 @@
       <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
         <option value="eventos.php">Aniversários</option>
         <option value="eventos.php">15 Anos</option>
-        <option value="eventos.php">Festa Infantil</a></option>
+        <option value="eventos.php">Festa Infantil</option>
       </select>
+
+
+   
     	<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Casamento</a>
    		<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
     	<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
@@ -69,14 +72,14 @@
   <!-- Navbar on small screens -->
 	<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
     	<a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
-    	<select class="w3-bar-item w3-button w3-padding-large">
-    		<option value="aniversarios"><a href="#">Aniversários</a></option>
-  			<option value="15anos"><a href="#">15 Anos</a></option>
-  			<option value="festa_infantil"><a href="#">Festa Infantil</a></option>
-    	</select>
-    	<a href="#" class="w3-bar-item w3-button w3-padding-large">Casamentos</a>
-    	<a href="#" class="w3-bar-item w3-button w3-padding-large">Corporativo</a>
-    	<a href="#" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
+    	<select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
+        <option value="eventos.php">Aniversários</option>
+        <option value="eventos.php">15 Anos</option>
+        <option value="eventos.php">Festa Infantil</option>
+      </select>
+    	<a href="eventos.php" class="w3-bar-item w3-button w3-padding-large">Casamentos</a>
+    	<a href="eventos.php" class="w3-bar-item w3-button w3-padding-large">Corporativo</a>
+    	<a href="eventos.php" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
     	<a href="sobre.php" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
 			<?php 
 				if ( isset($_SESSION['id_usuario']) ) {

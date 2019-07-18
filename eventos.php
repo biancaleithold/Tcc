@@ -3,6 +3,13 @@
   require 'config.php';
   include("cabecalho.php");
 
+  $stmt = $connect->query('SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria=":id"');
+  while ($rs = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $id_categoria = $rs['id_categoria']; 
+    $nome = $rs['nome'];
+    $descricao = $rs['descricao'];
+  }
+
 ?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -22,13 +29,31 @@
 </head>
 <body style="background: #f1f8f9;">
 <center>
-  <h1 class="titulo_evento" style="margin-top: 5%; ">CASAMENTOS</h1>
+
+<?php
+try {
+ 
+    $stmt = $connect->prepare("SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria=:id");
+
+    if ($stmt->execute(array(
+          ':id' => $id_categoria))) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                echo "<h1 class='titulo_evento' style='margin-top:5%;'>".utf8_encode($rs->nome);
+              }
+            }
+          }catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+}
+?>
+
+
+  <!--<h1 class="titulo_evento" style="margin-top: 5%; ">CASAMENTOS</h1>-->
 <div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%">
   <ol class="carousel-indicators">
-    <li data-target="#casamento" data-slide-to="0" class="active"></li>
-    <li data-target="#aniversario" data-slide-to="1"></li>
-    <li data-target="#infantil" data-slide-to="2"></li>
-    <li data-target="#fomatura" data-slide-to="3"></li>
+    <li data-target="#casamento1" data-slide-to="0" class="active"></li>
+    <li data-target="#casamento2" data-slide-to="1"></li>
+    <li data-target="#casamento3" data-slide-to="2"></li>
+    <li data-target="#casamento4" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" >
     <div class="carousel-item active" >
@@ -53,37 +78,53 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-<div class="dropdown">
-  <button class="dropbtn">O que você procura?</button>
-  <div class="dropdown-content">
-    <a href="#">Animação</a>
-    <a href="#">Barbearia</a>
-    <a href="#">Brinquedos</a>
-    <a href="#">Buffet</a>
-    <a href="#">Cerimonialista</a>
-    <a href="#">CIA Viagem</a>
-    <a href="#">Confeitaria</a>
-    <a href="#">Convite</a>
-    <a href="#">Decoração</a>
-    <a href="#">Filmagem</a>
-    <a href="#">Floricultura</a>
-    <a href="#">Fotografia</a>
-    <a href="#">Garçom</a>
-    <a href="#">Joalheria</a>
-    <a href="#">Lembranças</a>
-    <a href="#">Locação de Carro</a>
-    <a href="#">Locação e Compra de Trajes</a>
-    <a href="#">Locação do Local</a>
-    <a href="#">Música</a>
-    <a href="#">Recepção</a>
-    <a href="#">Salão de Beleza</a>
-    <a href="#">Segurança</a>
+<select class="ui search dropdown" style="float: left;margin-left: 20%;margin-top: 2%;">
+    <option value="">O que você procura?</option>
+    <option value="animacao">Animação</option>
+    <option value="barbearia">Barbearia</option>
+    <option value="brinquedos">Brinquedos</option>
+    <option value="buffet">Buffet</option>
+    <option value="cerimonialista">Cerimonialista</option>
+    <option value="cia">CIA Viagem</option>
+    <option value="confeitaria">Confeitaria</option>
+    <option value="convite">Convite</option>
+    <option value="decoracao">Decoração</option>
+    <option value="filmagem">Filmagem</option>
+    <option value="floricultura">Floricultura</option>
+    <option value="fotografia">Fotografia</option>
+    <option value="garcom">Garçom</option>
+    <option value="joalheria">Joalheria</option>
+    <option value="lembrancas">Lembranças</option>
+    <option value="carro">Locação de Carro</option>
+    <option value="trajes">Locação e Compra de Trajes</option>
+    <option value="local">Locação do Local</option>
+    <option value="musica">Música</option>
+    <option value="recepcao">Recepção</option>
+    <option value="salao">Salão de Beleza</option>
+    <option value="seguranca">Segurança</option>
+ </select>
 
-  </div>
-</div>
-<div>
+
+<?php
+try {
+ 
+    $stmt = $connect->prepare("SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria=:id");
+
+    if ($stmt->execute(array(
+          ':id' => $id_categoria))) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {           
+                echo "<div><h4 class='texto_evento' style='margin-top:2%; margin-bottom10%'>".utf8_encode($rs->descricao)."</h4></div>";
+              }
+            }
+          }catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+}
+?>
+
+<!--<div>
   <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;">Nosso objetivo é facilitar a organização de seu evento, ajudando de maneira mais prática na realização deste sonho. Temos a meta de auxiliar o usuário usando recursos como:  uma agenda para anotar seus devidos compromissos como reuniões ou até mesmo a data do evento, o usuário também terá maior controle sobre suas despesas, pois o  sistema será capaz de lhe apresentar os valores com base nos contratos realizados e terá acesso a uma lista de convidados por evento para melhor administrar sua festa.</h4>
-</div>
+</div>-->
+
 
 <?php
 include 'rodape.php';

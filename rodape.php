@@ -24,9 +24,21 @@ $('.no.label.ui.dropdown')
 $('.ui.button').on('click', function () {
   $('.ui.dropdown')
     .dropdown('restore defaults')
-})
+});
 
 </script>
+
+<script type="text/javascript">
+$('ui.search.dropdown')
+  .dropdown();
+
+$('.no.ui.search.dropdown')
+  .dropdown({
+  useLabels: false
+});
+
+</script>
+
 
 <script>
 // Used to toggle the menu on small screens when clicking on the menu button

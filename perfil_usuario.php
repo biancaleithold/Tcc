@@ -48,7 +48,8 @@
 </div>
 
 
-<!--- BLOCO DE ALTERAR  -->
+
+<!--- BLOCO DE ALTERAR Empresa  -->
 
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != '' ) {
@@ -66,9 +67,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
         <th>Hora</th>
         <th>Local</th>
         <th>Descriçao</th>
-    </tr>
-
-   
+    </tr>   
 <?php
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 
@@ -80,23 +79,20 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
                     <td><input type="time" name="hora" value="<?php echo $rs->hora ?>"/></td>
                     <td><input type="text" name="local" value="<?php echo $rs->local ?>"/></td>
                     <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
-                    <td><input type="submit" name="save" value="Salvar" /></td>
-                    <!-- <td> -->
-                      <center>
+                    <td><input type="submit" name="save" value="Salvar" /></td><center>
                       <?php
-                      // echo "<a href=\"?act=save&id=".$rs->id_evento."\">[Salvar]</a></center></td>"; 
                 echo "</tr>";
             }
-
 }
-
 ?>
 </table>
-<!--- FIM BLOCO DE ALTERAR  -->
+<!--- FIM BLOCO DE ALTERAR Empresa -->
 
 
-<!--BLOCO EXCLUIR DADOS -->
 
+
+
+<!--BLOCO EXCLUIR DADOS Empresa -->
 <?php
   if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
     try {
@@ -109,12 +105,12 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
     }
   } 
 ?>
-<!-- FIM DO BLOCO EXCLUIR DADOS -->
+<!-- FIM DO BLOCO EXCLUIR DADOS Empresa -->
 
 
 
-<!--- BLOCO DE SALVAR  -->
 
+<!--- BLOCO DE SALVAR Empresa -->
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] != '' ) {
     $nome_evento = $_POST['nome_evento'];
@@ -133,13 +129,13 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
       ':dia' => $dia
   )); 
 }
-
 ?>
-<!--- FIM BLOCO DE SALVAR  -->
+<!--- FIM BLOCO DE SALVAR  Empresa-->
 
 
 
-<!-- BLOCO MOSTRA DADOS TABELA -->
+
+<!-- BLOCO MOSTRA DADOS TABELA Empresa-->
 <table class="ui fixed table" style="width: 71%;">
   <h1 class="header">Meus Eventos</h1>
     <tr>
@@ -172,9 +168,9 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 }
 ?>
 </table>
-<!-- FIM BLOCO MOSTRA DADOS TABELA -->
+<!-- FIM BLOCO MOSTRA DADOS TABELA Empresa -->
 
-  <a href="register_empresa.php">     
+ <a href="register_empresa.php">     
     <button class="ui blue basic button" style="float: right;  margin-right: 4%">
       <i class="icon plus"></i>
         Cadastrar Empresa
@@ -186,6 +182,139 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
         Cadastrar Evento
     </button>
   </a> 
+
+
+<br><br>
+
+
+
+<!--- BLOCO DE ALTERAR Agenda  -->
+<?php 
+if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id'] != '' ) {
+  
+  $stmt = $connect->prepare("SELECT id_tarefa,titulo,data,horario,descricao,situacao FROM tarefas WHERE id_tarefa = :id");
+  $stmt->execute(array(
+    ':id' => $_REQUEST['id'],
+  )); 
+?>
+  <table class="ui fixed table" style="width: 71%">
+  <h1 class="header">Alterar Meus Dados</h1>
+  <tr>
+        <th>Título</th>
+        <th>Data</th>
+        <th>Horario</th>
+        <th>Descrição</th>
+        <th>Situação</th>
+    </tr>
+<?php
+   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+
+                echo "<tr>";?>
+                <form method="POST" action="?action=save">
+                    <input type="hidden" name="id" value="<?php echo $rs->id_tarefa ?>"/>
+                    <td><input type="text" name="titulo" value="<?php echo $rs->titulo ?>"/></td>
+                    <td><input type="date" name="data" value="<?php echo $rs->data ?>"/></td>
+                    <td><input type="time" name="horario" value="<?php echo $rs->horario ?>"/></td>
+                    <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
+                    <td><input type="text" name="situacao" value="<?php echo $rs->situacao ?>"/></td>
+                    <td><input type="submit" name="save" value="Salvar" /></td><center>
+                      <?php          
+                echo "</tr>";
+            }
+}
+?>
+</table>
+<!--- FIM BLOCO DE ALTERAR Agenda -->
+
+
+
+
+<!--BLOCO EXCLUIR DADOS Agenda -->
+<?php
+  if (isset($_REQUEST["action"]) && $_REQUEST["action"] == "del" && $_REQUEST['id'] != '') {
+    try {
+        $stmt = $connect->prepare("DELETE FROM tarefas WHERE id_tarefa=:id");
+        $stmt->execute(array(
+          ':id' => $_REQUEST['id'],
+        ));
+    }catch (PDOException $erro) {
+      echo "Erro: ".$erro->getMessage();
+    }
+  } 
+?>
+<!-- FIM DO BLOCO EXCLUIR DADOS Agenda -->
+
+
+
+
+<!--- BLOCO DE SALVAR Agenda -->
+
+<?php 
+if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['id'] != '' ) {
+    $titulo = $_POST['titulo'];
+    $descricao = $_POST['descricao'];
+    $horario = $_POST['horario'];
+    $data = $_POST['data'];
+    $situacao = $_POST['situacao'];
+
+    $stmt = $connect->prepare("UPDATE tarefas SET titulo=:titulo, data=:data, horario=:horario, descricao=:descricao, situacao=:situacao WHERE id_tarefa=:id");
+    $stmt->execute(array(
+      ':id' => $_REQUEST['id'],
+      ':titulo' => $titulo,
+      ':data' => $data,
+      ':horario' => $horario,
+      ':descricao' => $descricao,
+      ':situacao' => $situacao
+  )); 
+}
+?>
+<!--- FIM BLOCO DE SALVAR  Agenda-->
+
+
+
+
+<!-- INICIO BLOCO MOSTRA DADOS TABELA Agenda-->
+<table class="ui fixed table" style="width: 71%;">
+  <h1 class="header">Minha Agenda</h1>
+    <tr>
+        <th>Título</th>
+        <th>Data</th>
+        <th>Horario</th>
+        <th>Descrição</th>
+        <th>Situação</th>
+    </tr>
+
+    <?php
+    try {
+ 
+    $stmt = $connect->prepare("SELECT id_tarefa,titulo,data,horario,descricao,situacao FROM tarefas WHERE id_usuario = :id");
+ 
+        if ($stmt->execute(array(
+          ':id' => $id_usuario))) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                echo "<tr>";
+                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td>".utf8_encode($rs->situacao)."</td><td><center><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?action=del&id=".$rs->id_tarefa."\"><i class='trash alternate icon'></i></a></center></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "Erro: Não foi possível recuperar os dados do banco de dados";
+        }
+} catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+}
+?>
+</table>
+<!-- FIM BLOCO MOSTRA DADOS TABELA Agenda -->
+
+ <a href="register_tarefa.php">     
+    <button class="ui blue basic button" style="float: right;  margin-right: 4%">
+      <i class="icon plus"></i>
+        Cadastrar Tarefa
+    </button>
+  </a> 
+
 
 <?php
 include 'rodape.php';
