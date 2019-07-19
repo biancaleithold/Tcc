@@ -44,13 +44,18 @@
         Editar Perfil
       </a>
     </div>
+    <a href="register_empresa.php">     
+      <button class="ui blue basic button" style="float: left;  margin-left: 4%">
+        <i class="icon plus"></i>
+          Cadastrar Empresa
+      </button>
+    </a> 
   </div>
 </div>
 
 
 
-<!--- BLOCO DE ALTERAR Empresa  -->
-
+<!--- BLOCO DE ALTERAR Eventos  -->
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != '' ) {
   
@@ -86,13 +91,13 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
 }
 ?>
 </table>
-<!--- FIM BLOCO DE ALTERAR Empresa -->
+<!--- FIM BLOCO DE ALTERAR Eventos -->
 
 
 
 
 
-<!--BLOCO EXCLUIR DADOS Empresa -->
+<!--BLOCO EXCLUIR DADOS Eventos -->
 <?php
   if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
     try {
@@ -105,12 +110,12 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
     }
   } 
 ?>
-<!-- FIM DO BLOCO EXCLUIR DADOS Empresa -->
+<!-- FIM DO BLOCO EXCLUIR DADOS Eventos -->
 
 
 
 
-<!--- BLOCO DE SALVAR Empresa -->
+<!--- BLOCO DE SALVAR Eventos -->
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] != '' ) {
     $nome_evento = $_POST['nome_evento'];
@@ -130,12 +135,12 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
   )); 
 }
 ?>
-<!--- FIM BLOCO DE SALVAR  Empresa-->
+<!--- FIM BLOCO DE SALVAR  Eventos-->
 
 
 
 
-<!-- BLOCO MOSTRA DADOS TABELA Empresa-->
+<!-- BLOCO MOSTRA DADOS TABELA Eventos-->
 <table class="ui fixed table" style="width: 71%;">
   <h1 class="header">Meus Eventos</h1>
     <tr>
@@ -144,6 +149,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
         <th>Hora</th>
         <th>Local</th>
         <th>Descriçao</th>
+        <th>Convidados</th>
     </tr>
 
     <?php
@@ -155,7 +161,11 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".$rs->dia."</td><td>".$rs->hora."</td><td>".utf8_encode($rs->local)."</td><td>".utf8_encode($rs->descricao)."</td><td><center><a href=\"?act=upd&id=".$rs->id_evento."\"><i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".$rs->dia."</td><td>".$rs->hora."</td><td>".utf8_encode($rs->local)."</td><td>".utf8_encode($rs->descricao)."</td><td><center>
+                <a href=\"?act=conv&id=".$rs->id_evento."\"><i class='eye alternate icon'></i></a>"
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
+                    "<a href=\"?act=upd&id=".$rs->id_evento."\"><i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?act=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";
@@ -168,14 +178,49 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 }
 ?>
 </table>
-<!-- FIM BLOCO MOSTRA DADOS TABELA Empresa -->
+<!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
 
- <a href="register_empresa.php">     
-    <button class="ui blue basic button" style="float: right;  margin-right: 4%">
-      <i class="icon plus"></i>
-        Cadastrar Empresa
-    </button>
-  </a> 
+
+
+
+<!--INICIO BLOCO MOSTRA DADOS Convidados -->
+
+<?php 
+if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'conv'  && $_REQUEST['id'] != '' ) {?>
+  
+  <table class="ui fixed table" style="width: 71%;">
+  <h1 class="header">Convidados</h1>
+    <tr>
+        <th>Nome</th>
+        <th>Idade</th>
+    </tr>
+
+<?php
+    try {
+ 
+    $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_evento = :id");
+ 
+        if ($stmt->execute(array(
+          ':id' => $id_evento))) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                echo "<tr>";
+                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."<a href=\"?act=upd&id=".$rs->id_convidado."\"><i class='pencil alternate icon'></i></a>"
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?act=del&id=".$rs->id_convidado."\"><i class='trash alternate icon'></i></a></center></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "Erro: Não foi possível recuperar os dados do banco de dados";
+        }
+} catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+}
+}
+?>
+<!--FIM BLOCO MOSTRA DADOS Convidados -->
+
+
+ 
   <a href="register_evento.php">
     <button class="ui blue basic button" style="float: right;">
       <i class="icon plus"></i>
@@ -309,7 +354,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 <!-- FIM BLOCO MOSTRA DADOS TABELA Agenda -->
 
  <a href="register_tarefa.php">     
-    <button class="ui blue basic button" style="float: right;  margin-right: 4%">
+    <button class="ui blue basic button" style="float: right">
       <i class="icon plus"></i>
         Cadastrar Tarefa
     </button>
