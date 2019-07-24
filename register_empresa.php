@@ -89,7 +89,7 @@
           ':email' => $email,
           ':id_usuario' => $_SESSION['id_usuario']
         ));
-        header('Location: register_empresa.php?action=joined');
+        header('Location: perfil_usuario.php?action=joined');
         exit;
   }
   if(isset($_GET['action']) && $_GET['action'] == 'joined') {

@@ -65,7 +65,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
   )); 
 ?>
   <table class="ui fixed table" style="width: 71%">
-  <h1 class="header">Alterar Meus Dados</h1>
+  <h2 class="header">Alterar Meus Dados</h2>
   <tr>
         <th>Nome do Evento</th>
         <th>Data</th>
@@ -181,6 +181,99 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 <!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
 
 
+<!--BLOCO EXCLUIR DADOS Convidados -->
+<?php
+  if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id'] != '') {
+    try {
+        $stmt = $connect->prepare("DELETE FROM convidados WHERE id_convidado=:id");
+        $stmt->execute(array(
+          ':id' => $_REQUEST['id'],
+        ));
+    }catch (PDOException $erro) {
+      echo "Erro: ".$erro->getMessage();
+    }
+  } 
+?>
+<!-- FIM DO BLOCO EXCLUIR DADOS Convidados -->
+
+
+<!--INICIO BLOCO ALTERAR E SALVAR Convidados -->
+<?php 
+if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
+  
+  $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_convidado=:id");
+  $stmt->execute(array(
+    ':id' => $_REQUEST['id'],
+  )); 
+
+   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+
+                echo "<tr>";
+                echo "<td>";?>
+                <br><br><br>
+                <h2>Alterar meus dados</h2>
+                <form method="POST" action="?acao=save">
+                    <input type="hidden" name="id" value="<?php echo $rs->id_convidado ?>"/>
+                    <td><input type="text" name="nome" value="<?php echo $rs->nome ?>"/></td>
+                    <td><input type="text" name="idade" value="<?php echo $rs->idade ?>"/></td>
+                    <td><input type="submit" name="save" value="Salvar" /></td><center>
+                      <?php
+                echo "</td>";
+                echo "</tr>";
+            }
+}
+?>
+
+<?php 
+if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {
+    $nome = $_POST['nome'];
+    $idade = $_POST['idade'];
+
+    $stmt = $connect->prepare("UPDATE convidados SET nome=:nome, idade=:idade WHERE id_convidado=:id");
+    $stmt->execute(array(
+      ':id' => $_REQUEST['id'],
+      ':nome' => $nome,
+      ':idade' => $idade
+  )); 
+}
+?>
+<!--FIM BLOCO ALTERAR E SALVAR Convidados -->
+
+
+
+
+
+<!-- INICIO BLOCO INSERE Convidados - ARRUMAR PARA INSERIR JA NA LISTA DO PROPRIO EVENTO!!!
+<?php
+//if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'ins'  && $_REQUEST['id'] != '' ) {
+            
+                //echo "<tr>";
+                //echo "<td>";?>
+                <br><br><br>
+                <h2>Adicionar Convidado</h2>
+                <form method="POST" action="?acao=ins">
+                    <td><label>Nome do Convidado</label><input type="text" name="nome"/></td>
+                    <td><label>Idade</label><input type="text" name="idade"/></td>
+                    <td><input type="submit" name="ins" value="Adicionar" /></td><center>
+                      <?php
+                //echo "</td>";
+                //echo "</tr>";
+           // }
+
+      //try{
+  //$stmt = $connect->prepare('INSERT INTO  convidados (idade, nome) VALUES (:idade , :nome)');
+  //$stmt->execute(array(
+    //':idade' => $_POST[$idade],
+    //':nome' => $_POST[$nome]
+  //)); 
+  //}catch (PDOException $erro) {
+    //echo "Erro: ".$erro->getMessage();
+//}
+
+?>
+FIM BLOCO INSERE Convidados -->
+
+
 
 
 <!--INICIO BLOCO MOSTRA DADOS Convidados -->
@@ -194,19 +287,20 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'conv'  && $_REQUEST['id'] !=
         <th>Nome</th>
         <th>Idade</th>
     </tr>
-
+    <a href='register_convidado.php'><i class='plus alternate icon'></i>
 <?php
     try {
  
     $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_evento = :id");
  
         if ($stmt->execute(array(
-          ':id' => $id_evento))) {
+          ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."<a href=\"?act=upd&id=".$rs->id_convidado."\"><i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."<a href=\"?acao=upd&id=".$rs->id_convidado."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?act=del&id=".$rs->id_convidado."\"><i class='trash alternate icon'></i></a></center></td>";
+                           ."<a href=\"?acao=del&id=".$rs->id_convidado."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."</a></center></td>";
                 echo "</tr>";
             }
         } else {
@@ -243,7 +337,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
   )); 
 ?>
   <table class="ui fixed table" style="width: 71%">
-  <h1 class="header">Alterar Meus Dados</h1>
+  <h2 class="header">Alterar Meus Dados</h2>
   <tr>
         <th>Título</th>
         <th>Data</th>

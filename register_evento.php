@@ -40,7 +40,7 @@
             //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
             //echo "<script type='text/javascript'>window.top.location='http://$host$uri/register_usuario.php';</script>";
             //exit;
-        header('Location: register_evento.php?action=joined');
+        header('Location: perfil_usuario.php?action=joined');
         exit;
       }
       catch(PDOException $e) {

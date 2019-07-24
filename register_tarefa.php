@@ -34,7 +34,7 @@
           ':situacao' => $situacao
         ));
 
-        header('Location: register_tarefa.php?action=joined');
+        header('Location: perfil_usuario.php?action=joined');
         exit;
       }
       catch(PDOException $e) {
