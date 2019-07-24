@@ -6,4 +6,5 @@ Para acessar nosso arquivo:
 
 2° Executar o arquivo do banco que está no git. banco.sql.
 
-obs: login não está redirecionando.
+
+
