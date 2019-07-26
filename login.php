@@ -30,7 +30,7 @@
           if($password == $data['senha']) {
             $_SESSION['email'] = $data['email'];
             $errMsg = 'Usuário autenticado com sucesso!';
-            header("Location: index.php");
+            header("Location: perfil_usuario.php");
             exit();
             //$host  = $_SERVER['HTTP_HOST'];
             //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
