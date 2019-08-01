@@ -46,14 +46,9 @@
         Editar Perfil
       </a>
       <br><br>
-      <?php
-     echo  "<a href=?agir=apaga&id=".$id_usuario.">";
-      ?>
-        <i class="trash icon"></i>
-       Excluir Conta
-      </a>
+        <button class="ui basic button test"><i class="trash icon"></i>Excluir Conta</button>
     </div>
-    <a href="register_empresa.php">     
+    <a href="register_empresa.php" >     
       <button class="ui blue basic button" style="float: left;  margin-left: 4%">
         <i class="icon plus"></i>
           Cadastrar Empresa
@@ -62,6 +57,28 @@
   </div>
 </div>
 
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Excluir Conta
+  </div>
+  <div class="image content">
+    <div class="image">
+      <img src="imagens/<?php echo $foto_perfil;?>">
+    </div>
+    <div class="description">
+     <?php echo $nome; ?>, Tem Certeza que deseja excluir sua conta? Isso apagará todos os seus dados.
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui cancel button">Cancelar</div>
+     <?php
+     echo  "<a href=?agir=apaga&id=".$id_usuario.">";
+      ?>
+    <div class="ui button">Excluir</div>
+    </a>
+  </div>
+</div>
 
 <!--BLOCO EXCLUIR DADOS Usuário -->
 <?php
@@ -74,8 +91,7 @@
     }catch (PDOException $erro) {
       echo "Erro: ".$erro->getMessage();
     }
-
-    //header("Location:register_usuario.php");
+    exit();
   } 
 ?>
 <!-- FIM DO BLOCO EXCLUIR DADOS Usuário -->
@@ -313,7 +329,8 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'conv'  && $_REQUEST['id'] !=
         <th>Nome</th>
         <th>Idade</th>
     </tr>
-    <a href='register_convidado.php'><i class='plus alternate icon'></i>
+    <a href='register_convidado.php'><i class='plus alternate icon'></i></a>
+    
 <?php
     try {
  

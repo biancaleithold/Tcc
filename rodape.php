@@ -39,6 +39,10 @@ $('.no.ui.search.dropdown')
 
 </script>
 
+<script type="text/javascript">
+  $('.ui.modal')
+  .modal('attach events', '.test.button','show');
+</script>
 
 <script>
 // Used to toggle the menu on small screens when clicking on the menu button

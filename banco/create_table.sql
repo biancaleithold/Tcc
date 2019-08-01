@@ -95,16 +95,16 @@ id_categoria int,
 id_empresa int
 );
 
-ALTER TABLE tarefas ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario);
+ALTER TABLE tarefas ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE ON UPDATE CASCADE; 
 ALTER TABLE emp_serv ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa);
 ALTER TABLE emp_serv ADD FOREIGN KEY(id_serv) REFERENCES servicos (id_serv);
 ALTER TABLE emp_categ ADD FOREIGN KEY(id_categoria) REFERENCES categoria_evento (id_categoria);
 ALTER TABLE emp_categ ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa);
 ALTER TABLE contrato ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa);
-ALTER TABLE convidados ADD FOREIGN KEY(id_evento) REFERENCES eventos (id_evento);
+ALTER TABLE convidados ADD FOREIGN KEY(id_evento) REFERENCES eventos (id_evento) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE empresa ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario);
 ALTER TABLE especializacao ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa);
-ALTER TABLE eventos ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario);
+ALTER TABLE eventos ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE contrato ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario);
 ALTER TABLE contrato ADD FOREIGN KEY(id_evento) REFERENCES eventos (id_evento);
 ALTER TABLE serv_contrato ADD FOREIGN KEY(id_serv) REFERENCES servicos (id_serv);
