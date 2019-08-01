@@ -84,5 +84,34 @@ INSERT INTO categoria_evento (nome, descricao) VALUES
 ('Aniversário Infantil','crianças adoram bla bla'),
 ('Aniversários','cada ano melhor bla bla');
 
+INSERT INTO estados (sigla) VALUES 
+('AC'),
+('AL'),
+('AP'),
+('AM'),
+('BA'),
+('CE'),
+('DF'),
+('ES'),
+('GO'),
+('MA'),
+('MT'),
+('MS'),
+('MG'),
+('PA'),
+('PB'),
+('PR'),
+('PE'),
+('PI'),
+('RJ'),
+('RN'),
+('RS'),
+('RO'),
+('RR'),
+('SC'),
+('SP'),
+('SE'),
+('TO');
+
 
 

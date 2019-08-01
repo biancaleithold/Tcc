@@ -88,9 +88,16 @@
         $stmt->execute(array(
           ':id' => $_REQUEST['id'],
         ));
+      
     }catch (PDOException $erro) {
       echo "Erro: ".$erro->getMessage();
     }
+
+  require 'config.php';
+  unset($_SESSION['name']);
+  unset($_SESSION['email']);
+  session_destroy();
+  header('Location: register_usuario.php');
     exit();
   } 
 ?>

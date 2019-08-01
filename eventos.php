@@ -78,31 +78,21 @@ try {
     <span class="sr-only">Next</span>
   </a>
 </div>
-<select class="ui search dropdown" style="float: left;margin-left: 20%;margin-top: 2%;">
-    <option value="">O que você procura?</option>
-    <option value="animacao">Animação</option>
-    <option value="barbearia">Barbearia</option>
-    <option value="brinquedos">Brinquedos</option>
-    <option value="buffet">Buffet</option>
-    <option value="cerimonialista">Cerimonialista</option>
-    <option value="cia">CIA Viagem</option>
-    <option value="confeitaria">Confeitaria</option>
-    <option value="convite">Convite</option>
-    <option value="decoracao">Decoração</option>
-    <option value="filmagem">Filmagem</option>
-    <option value="floricultura">Floricultura</option>
-    <option value="fotografia">Fotografia</option>
-    <option value="garcom">Garçom</option>
-    <option value="joalheria">Joalheria</option>
-    <option value="lembrancas">Lembranças</option>
-    <option value="carro">Locação de Carro</option>
-    <option value="trajes">Locação e Compra de Trajes</option>
-    <option value="local">Locação do Local</option>
-    <option value="musica">Música</option>
-    <option value="recepcao">Recepção</option>
-    <option value="salao">Salão de Beleza</option>
-    <option value="seguranca">Segurança</option>
- </select>
+<div class="inline field" style="width: 23%;float: left;margin-left: 20%;margin-top: 2%">
+      <label>O que você procura?</label>
+<?php
+        $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
+      ?>
+      <select name="skills" class="label ui selection fluid dropdown">
+        <?php 
+        if ($stmt->execute()) {
+          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+            echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao)."</option>";
+          }
+        }
+        ?>
+      </select>
+</div>
 
 
 <?php

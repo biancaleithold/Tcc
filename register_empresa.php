@@ -156,10 +156,21 @@
     </div>
   </div>
   <div class="two fields">
-      <div class="field">
-        <label>Estado</label>
-        <input type="text" name="estado" placeholder="SC">
-      </div>
+      <div class="inline field">
+      <label>Estado</label>
+      <?php
+        $stmt = $connect->prepare("SELECT id_estado, sigla FROM estados");      
+      ?>
+      <select name="skills" class="label ui selection fluid dropdown">
+        <?php 
+        if ($stmt->execute()) {
+          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+            echo "<option value=\"".$rs->id_estado."\">".utf8_encode($rs->sigla)."</option>";
+          }
+        }
+        ?>
+      </select>
+    </div>
       <div class="field">
       <label>Logo</label>
         <input type="file" name="logo">
