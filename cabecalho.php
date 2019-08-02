@@ -64,10 +64,20 @@
     	?>
 
   		<div class="ui inverted left icon input" style="float: right;">
-    		<input type="text" placeholder="Pesquisar...">
+    		<input type="text" name="pesquisar" placeholder="Pesquisar...">
     		<i class="search icon"></i>
   		</div>
   	</div>
+    <?php
+    $servidor = "localhost";
+    $usuario = "aluno";
+    $senha = "aluno"
+    $dbname = "";
+
+    $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
+
+    $pesquisar = $_POST["pesquisar "]
+    ?>
 
   <!-- Navbar on small screens -->
 	<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
