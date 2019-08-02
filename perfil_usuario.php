@@ -64,10 +64,10 @@
   </div>
   <div class="image content">
     <div class="image">
-      <img src="imagens/<?php echo $foto_perfil;?>">
+      <img style="width: 45%;margin-left: 27%;" src="imagens/<?php echo $foto_perfil;?>">
     </div>
-    <div class="description">
-     <?php echo $nome; ?>, Tem Certeza que deseja excluir sua conta? Isso apagará todos os seus dados.
+    <div class="description"  style="width: 100%;margin-top: 9%;">
+     <?php echo $nome; ?>, Tem Certeza que deseja excluir sua conta? <br> Isso apagará todos os seus dados.
     </div>
   </div>
   <div class="actions">
