@@ -68,7 +68,7 @@ hora time,
 descricao varchar(200),
 dia date,
 local varchar(50),
-saldo descimal,
+valor_max_pagar decimal,
 id_usuario varchar(50)
 );
 
@@ -83,8 +83,8 @@ id_especializacao int
 );
 
 CREATE TABLE despesa (
-valor_empresa decimal,
-resto decimal,
+valor_pago decimal,
+despesa decimal,
 id_evento int,
 id_empresa int
 );

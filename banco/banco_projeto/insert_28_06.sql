@@ -12,48 +12,48 @@ INSERT INTO usuario (nome, email, telefone, senha, cpf) VALUES
 
 INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descricao, telefone, email_empresa) VALUES 
 ('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)34665989', 'jujuba@gmail.com'),
-('57.208.376/0001-03', 'Restaurante Fernandes', 'Jo√£o Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com'),
-('88.183.280/0001-61', 'Sal√£o de Beleza Serena', 'Araras', '96', 'casa', 'S√£o Marcos', 'Joinville', 'Real√ßando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com'),
-('11.820.025/0001-58', 'Barbearia Gomes', 'Ant√¥nio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excel√™ncia, qualidade e profissionalismo √© nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com'),
-('85.270.164/0001-91', 'Confeitaria Del√≠cias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iriri√∫', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
-('47.367.062/0001-08', 'Joalheria Univesal', 'Jo√£o Pedro', '894', 'casa', 'Porto Grande', 'Araquari',  'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
-('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'H√° mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
-('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Sagua√ßu', 'Joinville', 'Especializada em vestu√°rio para homens.', '(47)34664958', 'expressiva_homem@gmail.com');
+('57.208.376/0001-03', 'Restaurante Fernandes', 'Jo„o Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com'),
+('88.183.280/0001-61', 'Sal„o de Beleza Serena', 'Araras', '96', 'casa', 'S„o Marcos', 'Joinville', 'RealÁando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com'),
+('11.820.025/0001-58', 'Barbearia Gomes', 'AntÙnio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'ExcelÍncia, qualidade e profissionalismo È nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com'),
+('85.270.164/0001-91', 'Confeitaria DelÌcias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iriri˙', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
+('47.367.062/0001-08', 'Joalheria Univesal', 'Jo„o Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
+('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'H· mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
+('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'SaguaÁu', 'Joinville', 'Especializada em vestu·rio para homens.', '(47)34664958', 'expressiva_homem@gmail.com');
 
 INSERT INTO tarefas (data, horario, descricao, situacao, titulo) VALUES 
-('2019-01-01', '10:10:00', 'Reuniao decora√ß√£o', 0, 'Reuni√£o'),
-('2019-02-04', '09:20:00', 'Reuniao com banda', 0, 'Reuni√£o'),
+('2019-01-01', '10:10:00', 'Reuniao decoraÁ„o', 0, 'Reuni„o'),
+('2019-02-04', '09:20:00', 'Reuniao com banda', 0, 'Reuni„o'),
 ('2019-03-03', '08:30:00', 'Teste de penteado', 0, 'Teste'),
-('2019-04-02', '13:20:00', 'Degusta√ß√£o buffet', 0, 'Degusta√ß√£o'),
+('2019-04-02', '13:20:00', 'DegustaÁ„o buffet', 0, 'DegustaÁ„o'),
 ('2019-01-15', '10:10:00', 'Prova do vestido', 0, 'Prova'),
-('2019-06-20', '17:15:00', 'Reuniao com cerimonialista', 0, 'Reuni√£o');
+('2019-06-20', '17:15:00', 'Reuniao com cerimonialista', 0, 'Reuni„o');
 
 INSERT INTO convidados (idade, nome) VALUES
-(15, 'Mariana Gon√ßalves'),
+(15, 'Mariana GonÁalves'),
 (17, 'Leandro Bressan'),
 (21, 'Beatriz Souza'),
 (45, 'Geovana Oliveira'),
 (12, 'Lorenzo Emanuel Bressan'),
 (65, 'Heitor Bressan'),
 (44, 'Luana Fagundes'),
-(20, 'Gilceia Mendon√ßa'),
+(20, 'Gilceia MendonÁa'),
 (18, 'Kelvin Bressan'),
 (25, 'Lia Bressan');
 
-INSERT INTO eventos (nome_evento, hora, descricao, dia, local) VALUES 
-('Casamento', '10:05:00', 'Casamento Luana e Luan', '2019-05-22', 'Restaurante Viapiana'),
-('Casamento', '09:15:00', 'Casamento Fabio e Fabiana', '2019-10-22', 'Restaurante Espinheiros'),
-('Anivers√°rio 15 anos', '08:25:00', '15 anos Maria', '2019-08-23', 'Restaurante do Nego'),
-('Anivers√°rio', '07:25:00', 'Anivers√°rio Lucas', '2019-06-22', 'Restaurante Estrela'),
-('Anivers√°rio', '11:35:00', 'Anivers√°rio Cec√≠lia', '2019-10-05', 'Restaurante Kaoma'),
-('Anivers√°rio', '12:45:00', '1 ano do Vitor', '2019-06-26', 'Estrela Eventos'),
-('Festa coorporativa', '13:55:00', 'Coorporativa da Brit√¢nia ', '2019-05-22', 'Restaurante S√£o Jos√©'),
-('Casamento', '14:25:00', 'Casamento Fernanda e Luciano', '2019-05-15', 'Restaurante Viapiana'),
-('Anivers√°rio', '15:30:00', 'Aniversario do Leandro', '2019-03-25', 'Casa do p√£o'),
-('Anivers√°rio', '16:05:00', 'Anivers√°rio da Karen', '2019-05-03', 'Restaurante Varand√£o');
+INSERT INTO eventos (nome_evento, hora, descricao, dia, local, valor_max_pagar) VALUES 
+('Casamento', '10:05:00', 'Casamento Luana e Luan', '2019-05-22', 'Restaurante Viapiana', '20000.00'),
+('Casamento', '09:15:00', 'Casamento Fabio e Fabiana', '2019-10-22', 'Restaurante Espinheiros', '50000.00'),
+('Anivers·rio 15 anos', '08:25:00', '15 anos Maria', '2019-08-23', 'Restaurante do Nego', '10000.00'),
+('Anivers·rio', '07:25:00', 'Anivers·rio Lucas', '2019-06-22', 'Restaurante Estrela', '5000.00'),
+('Anivers·rio', '11:35:00', 'Anivers·rio CecÌlia', '2019-10-05', 'Restaurante Kaoma', '8000.00'),
+('Anivers·rio', '12:45:00', '1 ano do Vitor', '2019-06-26', 'Estrela Eventos', '2000.00'),
+('Festa coorporativa', '13:55:00', 'Coorporativa da Brit‚nia ', '2019-05-22', 'Restaurante S„o JosÈ', '60000.00'),
+('Casamento', '14:25:00', 'Casamento Fernanda e Luciano', '2019-05-15', 'Restaurante Viapiana', '40000.00'),
+('Anivers·rio', '15:30:00', 'Aniversario do Leandro', '2019-03-25', 'Casa do p„o', '3000.00'),
+('Anivers·rio', '16:05:00', 'Anivers·rio da Karen', '2019-05-03', 'Restaurante Varand„o', '4000.00');
 
 INSERT INTO especializacao (descricao) VALUES 
-('Anima√ß√£o'),
+('AnimaÁ„o'),
 ('Barbearia'),
 ('Brinquedos'),
 ('Buffet'),
@@ -61,28 +61,28 @@ INSERT INTO especializacao (descricao) VALUES
 ('Cia Viagem'),
 ('Confeitaria'),
 ('Convite'),
-('Decora√ß√£o'),
+('DecoraÁ„o'),
 ('Filmagem'),
 ('Floricultura'),
 ('Fotografia'),
-('Gar√ßom'),
-('Lembran√ßas'),
-('Loca√ß√£o de Carro'),
-('Loca√ß√£o e Compra de Trajes'),
-('Loca√ß√£o do Local'),
-('M√∫sica'),
-('Recep√ß√£o'),
+('GarÁom'),
+('LembranÁas'),
+('LocaÁ„o de Carro'),
+('LocaÁ„o e Compra de Trajes'),
+('LocaÁ„o do Local'),
+('M˙sica'),
+('RecepÁ„o'),
 ('Joalheria'),
-('Sal√£o de Beleza'),
-('Seguran√ßa');
+('Sal„o de Beleza'),
+('SeguranÁa');
 
 INSERT INTO categoria_evento (nome, descricao) VALUES
 ('15 anos','festa debutante bla bla'),
 ('Casamento','momento especial do casal bla bla'),
 ('Coorporativo','empresas merecem celebrar bla bla'),
 ('Formatura','finalmente acabou bla bla'),
-('Anivers√°rio Infantil','crian√ßas adoram bla bla'),
-('Anivers√°rios','cada ano melhor bla bla');
+('Anivers·rio Infantil','crianÁas adoram bla bla'),
+('Anivers·rios','cada ano melhor bla bla');
 
 INSERT INTO estados (sigla) VALUES 
 ('AC'),
@@ -112,3 +112,6 @@ INSERT INTO estados (sigla) VALUES
 ('SP'),
 ('SE'),
 ('TO');
+
+
+

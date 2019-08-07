@@ -12,6 +12,7 @@
     $descricao = $_POST['descricao'];
     $dia = $_POST['dia'];
     $local = $_POST['local'];
+    $valor_max_pagar = $_POST['valor_max_pagar'];
 
     if($nome_evento == '')
       $errMsg = 'Insira o nome do evento';
@@ -23,15 +24,18 @@
       $errMsg = 'Insira a data do evento';
     if($local == '')
       $errMsg = 'Insira o local do evento';
+    if($valor_max_pagar == '')
+      $errMsg = 'Insira o valor máximo que deseja gastar no evento';
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO eventos (nome_evento,  hora, descricao, dia, local) VALUES (:nome_evento, :hora, :descricao, :dia, :local)');
+        $stmt = $connect->prepare('INSERT INTO eventos (nome_evento,  hora, descricao, dia, local) VALUES (:nome_evento, :hora, :descricao, :dia, :local, :valor_max_pagar)');
         $stmt->execute(array(
           ':nome_evento' => $nome_evento,
           ':hora' => $hora,
           ':descricao' => $descricao,
           ':dia' => $dia,
-          ':local' => $local
+          ':local' => $local,
+          ':valor_max_pagar' => $valor_max_pagar
         ));
 
 
@@ -88,6 +92,9 @@
 
       <label>Local</label>
       <input type="text" name="local" value="<?php if(isset($_POST['local'])) echo $_POST['local'] ?>" placeholder="Toffanos" /><br /><br>
+
+      <label>Valor Máximo que Deseja Gastar</label>
+      <input type="text" name="valor_max_pagar" value="<?php if(isset($_POST['valor_max_pagar'])) echo $_POST['valor_max_pagar'] ?>" placeholder="R$3000,00" /><br /><br>
 
     </div>
     <input type="submit" name='register' class="ui button botao">
