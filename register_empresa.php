@@ -16,7 +16,7 @@
     $logo = $_FILES['logo'];
     $descricao = $_POST['descricao'];
     $telefone = $_POST['telefone'];
-    $email = $_POST['email'];
+    $email_empresa = $_POST['email_empresa'];
     $target_dir = "imagens/";
     $target_file = $target_dir . basename($_FILES["logo"]["name"]);
     $uploadOk = 1;
@@ -73,7 +73,7 @@
       }
     }
         // Insere os dados no banco
-        $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, estado, logo, descricao, telefone, email, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email, :id_usuario)');
+        $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, logo, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
         $stmt->execute(array(
           ':cnpj' => $cnpj,
           ':nome' => $nome,
@@ -82,14 +82,13 @@
           ':complemento' => $complemento,
           ':bairro' => $bairro,
           ':cidade' => $cidade,
-          ':estado' => $estado,
           ':logo' => $logo,
           ':descricao' => $descricao,
           ':telefone' => $telefone,
-          ':email' => $email,
-          ':id_usuario' => $_SESSION['id_usuario']
+          ':email_empresa' => $email_empresa,
+          ':id_usuario' => $_SESSION['id_usuario'] 
         ));
-        header('Location: perfil_usuario.php?action=joined');
+        //header('Location: perfil_usuario.php?action=joined');
         exit;
   }
   if(isset($_GET['action']) && $_GET['action'] == 'joined') {
@@ -161,7 +160,7 @@
       <?php
         $stmt = $connect->prepare("SELECT id_estado, sigla FROM estados");      
       ?>
-      <select name="skills" class="label ui selection fluid dropdown">
+      <select name="estado" class="label ui selection fluid dropdown">
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
@@ -188,7 +187,7 @@
       </div>
       <div class="field">
       <label>E-mail</label>
-        <input type="text" name="email" placeholder="celebrate.festas@gmail.com">
+        <input type="text" name="email_empresa" placeholder="celebrate.festas@gmail.com">
       </div>
   </div>
 
@@ -197,7 +196,7 @@
       <?php
         $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
       ?>
-      <select name="skills" multiple="" class="label ui selection fluid dropdown">
+      <select name="especializacao" multiple="" class="label ui selection fluid dropdown">
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                

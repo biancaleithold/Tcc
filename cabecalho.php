@@ -69,14 +69,15 @@
   		</div>
   	</div>
     <?php
-    $servidor = "localhost";
-    $usuario = "aluno";
-    $senha = "aluno"
-    $dbname = "";
+    
+    //$servidor = "localhost";
+   // $usuario = "aluno";
+   // $senha = "aluno";
+    //$dbname = "";
 
-    $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
+   // $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
 
-    $pesquisar = $_POST["pesquisar "]
+    //$pesquisar = $_POST["pesquisar "]
     ?>
 
   <!-- Navbar on small screens -->
