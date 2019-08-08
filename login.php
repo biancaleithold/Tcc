@@ -17,7 +17,7 @@
 
     if($errMsg == '') {
       try {
-        $stmt = $connect->prepare('SELECT email, senha FROM usuario WHERE email = :email');
+        $stmt = $connect->prepare('SELECT id_usuario, email, senha FROM usuario WHERE email = :email');
         $stmt->execute(array(
           ':email' => $email
           ));
@@ -29,6 +29,7 @@
         else {
           if($password == $data['senha']) {
             $_SESSION['email'] = $data['email'];
+            $_SESSION['id_usuario'] = $data['id_usuario'];
             $errMsg = 'Usuário autenticado com sucesso!';
             header("Location: perfil_usuario.php");
             exit();
