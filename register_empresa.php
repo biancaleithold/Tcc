@@ -17,86 +17,100 @@
     $descricao = $_POST['descricao'];
     $telefone = $_POST['telefone'];
     $email_empresa = $_POST['email_empresa'];
-    $especializacao = $_POST['especializacao'];
+    $especializacoes = $_POST['especializacao'];
     $target_dir = "imagens/";
     $target_file = $target_dir . basename($_FILES["logo"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    $id_usuario = $_SESSION['id_usuario'];
-
-    echo '<br><br><br><br>';
-    var_dump($especializacao);
-  
-    // // Se a foto estiver sido selecionada
-    // if (!empty($logo["name"])) {
-    //   // Largura máxima em pixels
-    //   $largura = 40000;
-    //   // Altura máxima em pixels
-    //   $altura = 40000;
-    //   // Tamanho máximo do arquivo em bytes
-    //   $tamanho = 1000000;
+    $id_usuario = $_SESSION['id_usuario'];  
  
-    //   $error = array();
+    
+  //   foreach ($especializacoes as $especializacao) { 
+  //     echo '<br><br><br><br><br><br><br><br>';
+  //     echo "especializacao " . $especializacao ."<br>";  
+  //   }  
+
+  // echo '<br><br><br><br>';
+  // var_dump($especializacoes);
+  
+    // Se a foto estiver sido selecionada
+    if (!empty($logo["name"])) {
+      // Largura máxima em pixels
+      $largura = 40000;
+      // Altura máxima em pixels
+      $altura = 40000;
+      // Tamanho máximo do arquivo em bytes
+      $tamanho = 1000000;
+ 
+      $error = array();
       
 
-    //   // Verifica se o arquivo é uma imagem
-    //   if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $logo["type"])){
-    //     $error[1] = "Isso não é uma imagem.";
-    //   } 
+      // Verifica se o arquivo é uma imagem
+      if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $logo["type"])){
+        $error[1] = "Isso não é uma imagem.";
+      } 
   
-    //   // Pega as dimensões da imagem
-    //   $dimensoes = getimagesize($logo["tmp_name"]);
+      // Pega as dimensões da imagem
+      $dimensoes = getimagesize($logo["tmp_name"]);
   
-    //   // Verifica se a largura da imagem é maior que a largura permitida
-    //   if($dimensoes[0] > $largura) {
-    //     $error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
-    //   }
+      // Verifica se a largura da imagem é maior que a largura permitida
+      if($dimensoes[0] > $largura) {
+        $error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
+      }
  
-    //   // Verifica se a altura da imagem é maior que a altura permitida
-    //   if($dimensoes[1] > $altura) {
-    //     $error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
-    //   }
+      // Verifica se a altura da imagem é maior que a altura permitida
+      if($dimensoes[1] > $altura) {
+        $error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
+      }
     
-    //   // Verifica se o tamanho da imagem é maior que o tamanho permitido
-    //   if($logo["size"] > $tamanho) {
-    //     $error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
-    //   }
+      // Verifica se o tamanho da imagem é maior que o tamanho permitido
+      if($logo["size"] > $tamanho) {
+        $error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
+      }
  
-    //   // Se não houver nenhum erro
-    //   if (count($error) == 0) {
-    //     // Pega extensão da imagem
-    //     preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $logo["name"], $ext);
+      // Se não houver nenhum erro
+      if (count($error) == 0) {
+        // Pega extensão da imagem
+        preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $logo["name"], $ext);
  
-    //    // Faz o upload da imagem para seu respectivo caminho
-    //     if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-    //       echo "The file ". basename( $_FILES["logo"]["name"]). " has been uploaded.";
-    //     } else {
-    //       echo "Sorry, there was an error uploading your file.";
-    //     }
-    //     // move_uploaded_file($logo["tmp_name"], $caminho_imagem);
-    //   }
-    // }
+       // Faz o upload da imagem para seu respectivo caminho
+        if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
+          echo "The file ". basename( $_FILES["logo"]["name"]). " has been uploaded.";
+        } else {
+          echo "Sorry, there was an error uploading your file.";
+        }
+        // move_uploaded_file($logo["tmp_name"], $caminho_imagem);
+      }
+    }
 
     
-    //     // Insere os dados no banco
-    //     $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, id_estado, foto_perfil, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
-    //     $stmt->execute(array(
-    //       ':cnpj' => $cnpj,
-    //       ':nome' => $nome,
-    //       ':rua' => $rua, 
-    //       ':numero' => $numero,
-    //       ':complemento' => $complemento,
-    //       ':bairro' => $bairro,
-    //       ':cidade' => $cidade,
-    //       ':estado' => $estado,
-    //       ':logo' => $_FILES["logo"]["name"],
-    //       ':descricao' => $descricao,
-    //       ':telefone' => $telefone,
-    //       ':email_empresa' => $email_empresa,
-    //       ':id_usuario' => $_SESSION['id_usuario'] 
-    //     ));
-    //     header('Location: perfil_usuario.php?action=joined');
-    //     exit;
+        // Insere os dados no banco
+        $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, id_estado, foto_perfil, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
+        $stmt->execute(array(
+          ':cnpj' => $cnpj,
+          ':nome' => $nome,
+          ':rua' => $rua, 
+          ':numero' => $numero,
+          ':complemento' => $complemento,
+          ':bairro' => $bairro,
+          ':cidade' => $cidade,
+          ':estado' => $estado,
+          ':logo' => $_FILES["logo"]["name"],
+          ':descricao' => $descricao,
+          ':telefone' => $telefone,
+          ':email_empresa' => $email_empresa,
+          ':id_usuario' => $_SESSION['id_usuario'] 
+        ));
+      
+           $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id_especializacao, :id_empresa)');
+        $stmt->execute(array(
+          ':id_especializacao' => $especializacoes,
+          ':id_empresa' => 
+         
+        ));
+        header('Location: perfil_usuario.php?action=joined');
+        exit;
+      
   }
   if(isset($_GET['action']) && $_GET['action'] == 'joined') {
     $errMsg = 'Registrado com sucesso!<br><br>';
@@ -122,7 +136,7 @@
         }
       ?>
 
-<form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%" action="" enctype="multipart/form-data" method="post">
+<form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%" action="register_empresa.php" enctype="multipart/form-data" method="post">
   <div class="field"> 
     <div class="two fields">
       <div class="field">
@@ -203,7 +217,8 @@
       <?php
         $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
       ?>
-      <select name="especializacao" multiple="" class="label ui selection fluid dropdown">
+      <select name='especializacao[]' multiple>
+      <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
