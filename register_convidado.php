@@ -43,7 +43,7 @@ if(isset($_POST['register'])) {
   }
 ?>
 
-<br>
+<br>mysqli_connect
 <br>
 <br>
 <br>

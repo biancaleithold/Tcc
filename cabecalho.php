@@ -64,21 +64,14 @@
     	?>
 
   		<div class="ui inverted left icon input" style="float: right;">
+        <form method="POST" action="" >
     		<input type="text" name="pesquisar" placeholder="Pesquisar...">
     		<i class="search icon"></i>
   		</div>
+      </form>
   	</div>
-    <?php
-    
-    //$servidor = "localhost";
-   // $usuario = "aluno";
-   // $senha = "aluno";
-    //$dbname = "";
 
-   // $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
-
-    //$pesquisar = $_POST["pesquisar "]
-    ?>
+   
 
   <!-- Navbar on small screens -->
 	<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
@@ -102,6 +95,26 @@
     	?>
   	</div>
 </div>
+
+<div>
+  <br><br><br>
+     <?php
+      if(isset($_POST['pesquisar'])) {
+        echo "OI";
+        echo $_POST['pesquisar'];
+
+        //$resul_info = "SELECT * FROM categoria_evento WHERE nome LIKE '%$pesquisar%' ";
+        $pesquisa = $connect->prepare('SELECT * FROM categoria_evento WHERE nome LIKE :pesquisar');
+        $pesquisa->execute(array(
+          ':pesquisar' => '%'.$_POST['pesquisar'].'%'
+        ));
+        $resultado_pesquisa = $pesquisa->fetch(PDO::FETCH_ASSOC);
+        var_dump($resultado_pesquisa);
+      }
+    ?>
+
+</div>
+
 
 <!--
 <!DOCTYPE html>
