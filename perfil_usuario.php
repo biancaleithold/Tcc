@@ -142,10 +142,6 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
 </table>
 <!--- FIM BLOCO DE ALTERAR Eventos -->
 
-
-
-
-
 <!--BLOCO EXCLUIR DADOS Eventos -->
 <?php
   if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
@@ -160,7 +156,6 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
   } 
 ?>
 <!-- FIM DO BLOCO EXCLUIR DADOS Eventos -->
-
 
 
 
@@ -194,24 +189,20 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
   <h1 class="header">Meus Eventos</h1>
     <tr>
         <th>Nome do Evento</th>
-        <th>Data</th>
-        <th>Hora</th>
-        <th>Local</th>
         <th>Descriçao</th>
-        <th>Convidados</th>
     </tr>
 
     <?php
     try {
  
-    $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos WHERE id_usuario = :id");
+    $stmt = $connect->prepare("SELECT id_evento,nome_evento,descricao FROM eventos WHERE id_usuario = :id");
  
         if ($stmt->execute(array(
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".$rs->dia."</td><td>".$rs->hora."</td><td>".utf8_encode($rs->local)."</td><td>".utf8_encode($rs->descricao)."</td><td><center>
-                <a href=\"?act=conv&id=".$rs->id_evento."\"><i class='eye alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td><center>
+                <a href=\"perfil_evento.php\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
                     "<a href=\"?act=upd&id=".$rs->id_evento."\"><i class='pencil alternate icon'></i></a>"
@@ -228,142 +219,6 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 ?>
 </table>
 <!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
-
-
-<!--BLOCO EXCLUIR DADOS Convidados -->
-<?php
-  if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id'] != '') {
-    try {
-        $stmt = $connect->prepare("DELETE FROM convidados WHERE id_convidado=:id");
-        $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
-        ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-  } 
-?>
-<!-- FIM DO BLOCO EXCLUIR DADOS Convidados -->
-
-
-<!--INICIO BLOCO ALTERAR E SALVAR Convidados -->
-<?php 
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
-  
-  $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_convidado=:id");
-  $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
-  )); 
-
-   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-
-                echo "<tr>";
-                echo "<td>";?>
-                <br><br><br>
-                <h2>Alterar meus dados</h2>
-                <form method="POST" action="?acao=save">
-                    <input type="hidden" name="id" value="<?php echo $rs->id_convidado ?>"/>
-                    <td><input type="text" name="nome" value="<?php echo $rs->nome ?>"/></td>
-                    <td><input type="text" name="idade" value="<?php echo $rs->idade ?>"/></td>
-                    <td><input type="submit" name="save" value="Salvar" /></td><center>
-                      <?php
-                echo "</td>";
-                echo "</tr>";
-            }
-}
-?>
-
-<?php 
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {
-    $nome = $_POST['nome'];
-    $idade = $_POST['idade'];
-
-    $stmt = $connect->prepare("UPDATE convidados SET nome=:nome, idade=:idade WHERE id_convidado=:id");
-    $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
-      ':nome' => $nome,
-      ':idade' => $idade
-  )); 
-}
-?>
-<!--FIM BLOCO ALTERAR E SALVAR Convidados -->
-
-
-
-
-
-<!-- INICIO BLOCO INSERE Convidados - ARRUMAR PARA INSERIR JA NA LISTA DO PROPRIO EVENTO!!!
-<?php
-//if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'ins'  && $_REQUEST['id'] != '' ) {
-            
-                //echo "<tr>";
-                //echo "<td>";?>
-                <br><br><br>
-                <h2>Adicionar Convidado</h2>
-                <form method="POST" action="?acao=ins">
-                    <td><label>Nome do Convidado</label><input type="text" name="nome"/></td>
-                    <td><label>Idade</label><input type="text" name="idade"/></td>
-                    <td><input type="submit" name="ins" value="Adicionar" /></td><center>
-                      <?php
-                //echo "</td>";
-                //echo "</tr>";
-           // }
-
-      //try{
-  //$stmt = $connect->prepare('INSERT INTO  convidados (idade, nome) VALUES (:idade , :nome)');
-  //$stmt->execute(array(
-    //':idade' => $_POST[$idade],
-    //':nome' => $_POST[$nome]
-  //)); 
-  //}catch (PDOException $erro) {
-    //echo "Erro: ".$erro->getMessage();
-//}
-
-?>
-FIM BLOCO INSERE Convidados -->
-
-
-
-
-<!--INICIO BLOCO MOSTRA DADOS Convidados -->
-
-<?php 
-if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'conv'  && $_REQUEST['id'] != '' ) {?>
-  
-  <table class="ui fixed table" style="width: 71%;">
-  <h1 class="header">Convidados</h1>
-    <tr>
-        <th>Nome</th>
-        <th>Idade</th>
-    </tr>
-    <a href='register_convidado.php'><i class='plus alternate icon'></i></a>
-    
-<?php
-    try {
- 
-    $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_evento = :id");
- 
-        if ($stmt->execute(array(
-          ':id' => $_REQUEST['id']))) {
-            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-                echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."<a href=\"?acao=upd&id=".$rs->id_convidado."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acao=del&id=".$rs->id_convidado."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."</a></center></td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "Erro: Não foi possível recuperar os dados do banco de dados";
-        }
-} catch (PDOException $erro) {
-    echo "Erro: ".$erro->getMessage();
-}
-}
-?>
-<!--FIM BLOCO MOSTRA DADOS Convidados -->
-
-
  
   <a href="register_evento.php">
     <button class="ui blue basic button" style="float: right;">

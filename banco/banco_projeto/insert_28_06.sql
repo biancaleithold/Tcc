@@ -113,5 +113,6 @@ INSERT INTO estados (sigla) VALUES
 ('SE'),
 ('TO');
 
-
+INSERT INTO despesa (valor_pago, despesa) VALUES
+('500.00','19500.00'); 
 
