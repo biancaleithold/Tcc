@@ -22,7 +22,8 @@
     $target_file = $target_dir . basename($_FILES["logo"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    $id_usuario = $_SESSION['id_usuario'];  
+    $id_usuario = $_SESSION['id_usuario'];
+      
  
     
   //   foreach ($especializacoes as $especializacao) { 
@@ -102,12 +103,25 @@
           ':id_usuario' => $_SESSION['id_usuario'] 
         ));
       
-           $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id_especializacao, :id_empresa)');
-        $stmt->execute(array(
-          ':id_especializacao' => $especializacoes,
-          ':id_empresa' => 
+        // PEGA O ID DA EMPRESA RECÉM CADASTRADA
+        //$sql = "SELECT LAST_INSERT_ID()";
+        //$consulta = $connect->query($sql) or die ("PROBLEMAS COM A CONSULTA; ".mysql_error());
+        //while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+        //echo '<br><br><br><br><br><br><br><br>';
+        //echo $sql[0];
+  //}
+
+        //$sql = "SELECT LAST_INSERT_ID()"; 
+        //$con = mysql_query($sql) or die ("PROBLEMAS COM A CONSULTA; ".mysql_error()); 
+        //$retorna_id = mysql_fetch_row($con); 
+        //echo $retorna_id[0];
+
+        //$stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id_especializacao, :id_empresa)');
+        //$stmt->execute(array(
+          //':id_especializacao' => $especializacoes,
+          //':id_empresa' =>
          
-        ));
+        //));
         header('Location: perfil_usuario.php?action=joined');
         exit;
       
@@ -181,7 +195,8 @@
       <?php
         $stmt = $connect->prepare("SELECT id_estado, sigla FROM estados");      
       ?>
-      <select name="estado" class="label ui selection fluid dropdown">
+      <!--<select name="estado" class="label ui selection fluid dropdown">-->
+      <select name="estado">
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                

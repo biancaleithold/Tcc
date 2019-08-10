@@ -69,7 +69,7 @@ descricao varchar(200),
 dia date,
 local varchar(50),
 valor_max_pagar decimal,
-id_usuario varchar(50)
+id_usuario int
 );
 
 CREATE TABLE emp_categ (
