@@ -38,7 +38,8 @@ INSERT INTO convidados (idade, nome) VALUES
 (44, 'Luana Fagundes'),
 (20, 'Gilceia Mendonça'),
 (18, 'Kelvin Bressan'),
-(25, 'Lia Bressan');
+(25, 'Lia Bressan'),
+(18, 'Bianca Victória Leithold de Oliveira');
 
 INSERT INTO eventos (nome_evento, hora, descricao, dia, local, valor_max_pagar) VALUES 
 ('Casamento', '10:05:00', 'Casamento Luana e Luan', '2019-05-22', 'Restaurante Viapiana', '20000.00'),

@@ -113,7 +113,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
     ':id' => $_REQUEST['id'],
   )); 
 ?>
-  <table class="ui fixed table" style="width: 71%">
+  <table class="ui fixed table" style="width: 60%">
   <h2 class="header">Alterar Meus Dados</h2>
   <tr>
         <th>Nome do Evento</th>
@@ -185,7 +185,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 
 
 <!-- BLOCO MOSTRA DADOS TABELA Eventos-->
-<table class="ui fixed table" style="width: 71%;">
+<table class="ui fixed table" style="width: 60%;">
   <h1 class="header">Meus Eventos</h1>
     <tr>
         <th>Nome do Evento</th>
@@ -203,9 +203,8 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td><center>
                 <a href=\"perfil_evento.php\"><i class='eye alternate icon'></i></a>"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
-                    "<a href=\"?act=upd&id=".$rs->id_evento."\"><i class='pencil alternate icon'></i></a>"
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?act=upd&id=".$rs->id_evento."\"><i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?act=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";
@@ -241,7 +240,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
     ':id' => $_REQUEST['id'],
   )); 
 ?>
-  <table class="ui fixed table" style="width: 71%">
+  <table class="ui fixed table" style="width: 60  %">
   <h2 class="header">Alterar Meus Dados</h2>
   <tr>
         <th>Título</th>
@@ -318,7 +317,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
 <!-- INICIO BLOCO MOSTRA DADOS TABELA Agenda-->
-<table class="ui fixed table" style="width: 71%;">
+<table class="ui fixed table" style="width: 60%;">
   <h1 class="header">Minha Agenda</h1>
     <tr>
         <th>Título</th>
