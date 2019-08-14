@@ -67,7 +67,7 @@ if(isset($_POST['register'])) {
       <input type="text" name="nome" value="<?php if(isset($_POST['nome'])) echo $_POST['nome'] ?>" placeholder="Mariana Fernandes" /><br /><br>
 
       <label>Idade</label>
-      <input type="text" name="idade" value="<?php if(isset($_POST['idade'])) echo $_POST['idade'] ?>" placeholder="Toffanos" /><br /><br>
+      <input type="text" name="idade" value="<?php if(isset($_POST['idade'])) echo $_POST['idade'] ?>" placeholder="25" /><br /><br>
 
     </div>
     <input type="submit" name='register' class="ui button botao">
