@@ -101,7 +101,7 @@
      <?php
       if(isset($_POST['pesquisar'])) {
         echo "OI";
-        echo $_POST['pesquisar'];
+        // echo $_POST['pesquisar'];
 
         //$resul_info = "SELECT * FROM categoria_evento WHERE nome LIKE '%$pesquisar%' ";
         $pesquisa = $connect->prepare('SELECT * FROM categoria_evento WHERE nome LIKE :pesquisar');
@@ -110,6 +110,11 @@
         ));
         $resultado_pesquisa = $pesquisa->fetch(PDO::FETCH_ASSOC);
         var_dump($resultado_pesquisa);
+        echo "<br><br>oioioi";
+        foreach ($resultado_pesquisa as $key => $item) {
+          echo $key  . " --- ";
+          echo $item . "<br>";  
+        }
       }
     ?>
 
