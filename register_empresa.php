@@ -102,26 +102,20 @@
           ':email_empresa' => $email_empresa,
           ':id_usuario' => $_SESSION['id_usuario'] 
         ));
-      
-        // PEGA O ID DA EMPRESA RECÉM CADASTRADA
-        //$sql = "SELECT LAST_INSERT_ID()";
-        //$consulta = $connect->query($sql) or die ("PROBLEMAS COM A CONSULTA; ".mysql_error());
-        //while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-        //echo '<br><br><br><br><br><br><br><br>';
-        //echo $sql[0];
-  //}
 
-        //$sql = "SELECT LAST_INSERT_ID()"; 
-        //$con = mysql_query($sql) or die ("PROBLEMAS COM A CONSULTA; ".mysql_error()); 
-        //$retorna_id = mysql_fetch_row($con); 
-        //echo $retorna_id[0];
+       
+        $id_empresa = $connect->lastInsertId();
 
-        //$stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id_especializacao, :id_empresa)');
-        //$stmt->execute(array(
-          //':id_especializacao' => $especializacoes,
-          //':id_empresa' =>
-         
-        //));
+            foreach ($especializacoes as $especializacao) { 
+              
+              $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id_empresa,:id_especializacao)');
+              $stmt->execute(array(
+                ':id_empresa' => $id_empresa,
+                ':id_especializacao' => $especializacao
+                 ));
+            }  
+
+       
         header('Location: perfil_usuario.php?action=joined');
         exit;
       
