@@ -68,9 +68,10 @@
     	?>
 
   		<div class="ui inverted left icon input" style="float: right;">
-        <form method="POST" action="" >
-    		<input type="text" name="pesquisar" placeholder="Pesquisar...">
+        <form method="POST" action="pesquisar.php" >
+    		<input type="text" name="pesquisar" placeholder="Pesquisar..." >
     		<i class="search icon"></i>
+        
   		</div>
       </form>
   	</div>
@@ -102,26 +103,7 @@
 
 <div>
   <br><br><br>
-     <?php
-      if(isset($_POST['pesquisar'])) {
-        echo "OI";
-        // echo $_POST['pesquisar'];
-
-        //$resul_info = "SELECT * FROM categoria_evento WHERE nome LIKE '%$pesquisar%' ";
-        $pesquisa = $connect->prepare('SELECT * FROM categoria_evento WHERE nome LIKE :pesquisar');
-        $pesquisa->execute(array(
-          ':pesquisar' => '%'.$_POST['pesquisar'].'%'
-        ));
-        $resultado_pesquisa = $pesquisa->fetch(PDO::FETCH_ASSOC);
-        var_dump($resultado_pesquisa);
-        echo "<br><br>oioioi";
-        foreach ($resultado_pesquisa as $key => $item) {
-          echo $key  . " --- ";
-          echo $item . "<br>";  
-        }
-      }
-    ?>
-
+    
 </div>
 
 
