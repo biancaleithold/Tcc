@@ -31,12 +31,14 @@ include "cabecalho.php";
 <?php
 try {
  
-    $stmt = $connect->prepare("SELECT id_evento,nome_evento,descricao FROM eventos WHERE id_usuario = :id");
+    $stmt = $connect->prepare("SELECT id_evento,nome_evento, hora, dia, local, descricao, valor_max_pagar FROM eventos WHERE id_evento = :id");
  
         if ($stmt->execute(array(
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<h1 style=\"font-size: -webkit-xxx-large;\"><center>".utf8_encode($rs->nome_evento)."</center></h1>" ;
+                echo "<h2 class=\"header\" style=\"margin-left: 2%;\">Dados do Evento</h2>";
+                echo "<p style=\"margin-left: 3%;\">Nome do Evento: ".utf8_encode($rs->nome_evento)." - Hora: ".utf8_encode($rs->hora)." - Data: ".utf8_encode($rs->dia)." - Local: ".utf8_encode($rs->local)." - Descrição: ".utf8_encode($rs->descricao)." - Valor da Festa: R$".utf8_encode($rs->valor_max_pagar)."</p>";
             }
         }
 } catch (PDOException $erro) {
@@ -44,12 +46,6 @@ try {
 }
 
 ?>
-
-
-<header style="float: left; width: 50%">
-  <h2 style="margin-left: 2%;">Dados do Evento</h2>
-</header>
-
 
 <!--BLOCO EXCLUIR DADOS Convidados -->
 <?php
@@ -93,7 +89,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                         <input type="text" name="idade" value="<?php echo $rs->idade ?>"/>
                       </div>
                       <div class="field">
-                        <input type="submit" name="save" value="Salvar" class="ui button"/>
+                        <input type="submit" name="save" value="Salvar" class="ui blue button"/>
                       </div>
                     </div>
                   </div>
@@ -159,7 +155,6 @@ FIM BLOCO INSERE Convidados -->
 
 <!--INICIO BLOCO MOSTRA DADOS Convidados -->
 
-<header style="float: right;">
   <table class="ui fixed table" style="width: 42%; margin-left: 3%;">
   <h2 class="header" style="margin-bottom: 2%; margin-left: 2%;">Convidados</h2>
     <tr>
@@ -197,7 +192,6 @@ FIM BLOCO INSERE Convidados -->
         Adicionar Convidado
     </button>
   </a>
-</header>
 <!--FIM BLOCO MOSTRA DADOS Convidados -->
 
 <!--- BLOCO DE ALTERAR Eventos  -->
