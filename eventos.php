@@ -3,23 +3,19 @@
   require 'config.php';
   include("cabecalho.php");
 
-  $stmt = $connect->query('SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria=":id"');
-  while ($rs = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $id_categoria = $rs['id_categoria']; 
-    $nome = $rs['nome'];
-    $descricao = $rs['descricao'];
+  $stmt = $connect->query('SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria="6"');
+  while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $id_categoria = $linha['id_categoria']; 
+    $nome = $linha['nome'];
+    $descricao = $linha['descricao'];
   }
 
 ?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script><-->
-
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
@@ -30,24 +26,8 @@
 <body style="background: #f1f8f9;">
 <center>
 
-<?php
-try {
- 
-    $stmt = $connect->prepare("SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria=:id");
+  <h1 class="titulo_evento" style="margin-top: 2%; "><?php echo utf8_encode($nome);?></h1>
 
-    if ($stmt->execute(array(
-          ':id' => $id_categoria))) {
-            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-                echo "<h1 class='titulo_evento' style='margin-top:5%;'>".utf8_encode($rs->nome);
-              }
-            }
-          }catch (PDOException $erro) {
-    echo "Erro: ".$erro->getMessage();
-}
-?>
-
-
-  <!--<h1 class="titulo_evento" style="margin-top: 5%; ">CASAMENTOS</h1>-->
 <div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%">
   <ol class="carousel-indicators">
     <li data-target="#casamento1" data-slide-to="0" class="active"></li>
@@ -81,39 +61,23 @@ try {
 <div class="inline field" style="width: 23%;float: left;margin-left: 20%;margin-top: 2%">
       <label>O que você procura?</label>
 <?php
-        $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
+          $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
       ?>
-      <select name="skills" class="label ui selection fluid dropdown">
+      <!-- <select name="especializacao[]" class="label ui selection fluid dropdown"> -->
+      <select name="especializacao">
         <?php 
         if ($stmt->execute()) {
-          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-            echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao)."</option>";
+          while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
+            echo "<option value=\"".$linha->id_especializacao."\">".utf8_encode($linha->descricao)."</option>";
           }
         }
         ?>
       </select>
 </div>
 
-
-<?php
-try {
- 
-    $stmt = $connect->prepare("SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria=:id");
-
-    if ($stmt->execute(array(
-          ':id' => $id_categoria))) {
-            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {           
-                echo "<div><h4 class='texto_evento' style='margin-top:2%; margin-bottom10%'>".utf8_encode($rs->descricao)."</h4></div>";
-              }
-            }
-          }catch (PDOException $erro) {
-    echo "Erro: ".$erro->getMessage();
-}
-?>
-
-<!--<div>
-  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;">Nosso objetivo é facilitar a organização de seu evento, ajudando de maneira mais prática na realização deste sonho. Temos a meta de auxiliar o usuário usando recursos como:  uma agenda para anotar seus devidos compromissos como reuniões ou até mesmo a data do evento, o usuário também terá maior controle sobre suas despesas, pois o  sistema será capaz de lhe apresentar os valores com base nos contratos realizados e terá acesso a uma lista de convidados por evento para melhor administrar sua festa.</h4>
-</div>-->
+<div>
+  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($descricao);?></h4>
+</div>
 
 
 <?php
