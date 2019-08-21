@@ -27,6 +27,30 @@ include "cabecalho.php";
     $nome = $linha['nome'];
   }
 ?>
+
+<?php
+try {
+ 
+    $stmt = $connect->prepare("SELECT id_evento,nome_evento,descricao FROM eventos WHERE id_usuario = :id");
+ 
+        if ($stmt->execute(array(
+          ':id' => $id_usuario))) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                echo "<h1 style=\"font-size: -webkit-xxx-large;\"><center>".utf8_encode($rs->nome_evento)."</center></h1>" ;
+            }
+        }
+} catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+}
+
+?>
+
+
+<header style="float: left; width: 50%">
+  <h2 style="margin-left: 2%;">Dados do Evento</h2>
+</header>
+
+
 <!--BLOCO EXCLUIR DADOS Convidados -->
 <?php
   if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id'] != '') {
@@ -55,21 +79,21 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 
                 echo "<tr>";
-                echo "<td>";?>
+                echo "<td>";?> 
                 <br><br><br>
-                <h2>Alterar Dados Convidado</h2>
-                <form method="POST" action="?acao=save" style="width: 54%">
+                <h2 style="margin-left: 2%;">Alterar Dados Convidado</h2>
+                <form method="POST" action="?acao=save" style="width: 54%; margin-left: 3%;">
                   <div class="ui form">
                     <div class="two fields">
                       <input type="hidden" name="id" value="<?php echo $rs->id_convidado ?>"/>
                       <div class="field">
-                        <td><input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/></td><br>
+                        <input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/><br>
                       </div>
                       <div class="field">
-                        <td><input type="text" name="idade" value="<?php echo $rs->idade ?>"/></td>
+                        <input type="text" name="idade" value="<?php echo $rs->idade ?>"/>
                       </div>
                       <div class="field">
-                        <td><input type="submit" name="save" value="Salvar" class="ui button"/></td>
+                        <input type="submit" name="save" value="Salvar" class="ui button"/>
                       </div>
                     </div>
                   </div>
@@ -135,9 +159,9 @@ FIM BLOCO INSERE Convidados -->
 
 <!--INICIO BLOCO MOSTRA DADOS Convidados -->
 
-  
-  <table class="ui fixed table" style="width: 42%;">
-  <h1 class="header" style="margin-bottom: 2%;">Convidados</h1>
+<header style="float: right;">
+  <table class="ui fixed table" style="width: 42%; margin-left: 3%;">
+  <h2 class="header" style="margin-bottom: 2%; margin-left: 2%;">Convidados</h2>
     <tr>
         <th style="width: 75%;">Nome</th>
         <th>Idade</th>
@@ -168,9 +192,72 @@ FIM BLOCO INSERE Convidados -->
   </table>
 
   <a href="register_convidado.php">
-    <button class="ui blue basic button" style="margin-left: 29.3%">
+    <button class="ui blue basic button" style="margin-left: 32.3%">
       <i class="icon plus"></i>
         Adicionar Convidado
     </button>
   </a>
+</header>
 <!--FIM BLOCO MOSTRA DADOS Convidados -->
+
+<!--- BLOCO DE ALTERAR Eventos  -->
+<?php 
+if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != '' ) {
+  
+  $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos WHERE id_evento=:id");
+  $stmt->execute(array(
+    ':id' => $_REQUEST['id'],
+  )); 
+?>
+  <table class="ui fixed table" style="width: 60%">
+  <h2 class="header">Alterar Meus Dados</h2>
+  <tr>
+        <th>Nome do Evento</th>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Local</th>
+        <th>Descriçao</th>
+    </tr>   
+<?php
+   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+
+                echo "<tr>";?>
+                <form method="POST" action="?act=save">
+                    <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
+                    <td><input type="text" name="nome_evento" value="<?php echo $rs->nome_evento ?>"/></td>
+                    <td><input type="date" name="dia" value="<?php echo $rs->dia ?>"/></td>
+                    <td><input type="time" name="hora" value="<?php echo $rs->hora ?>"/></td>
+                    <td><input type="text" name="local" value="<?php echo $rs->local ?>"/></td>
+                    <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
+                    <td><input type="submit" name="save" value="Salvar" /></td><center>
+                      <?php
+                echo "</tr>";
+            }
+}
+?>
+</table>
+<!--- FIM BLOCO DE ALTERAR Eventos -->
+
+<!--- BLOCO DE SALVAR Eventos -->
+<?php 
+if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] != '' ) {
+    $nome_evento = $_POST['nome_evento'];
+    $hora = $_POST['hora'];
+    $descricao = $_POST['descricao'];
+    $dia = $_POST['dia'];
+    $local = $_POST['local'];
+
+    $stmt = $connect->prepare("UPDATE eventos SET nome_evento=:nome_evento, dia=:dia, hora=:hora, local=:local, descricao=:descricao  WHERE id_evento=:id");
+    $stmt->execute(array(
+      ':id' => $_REQUEST['id'],
+      ':nome_evento' => $nome_evento,
+      ':hora' => $hora,
+      ':descricao' => $descricao,
+      ':local' => $local,
+      ':dia' => $dia
+  )); 
+}
+?>
+<!--- FIM BLOCO DE SALVAR  Eventos-->
+
+
