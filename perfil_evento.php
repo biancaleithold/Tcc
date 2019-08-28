@@ -28,6 +28,18 @@ include "cabecalho.php";
   }
 ?>
 
+<!--INICIO BLOCO DADOS EVENTO -->
+
+<table class="ui fixed table" style="width: 94%; margin-left: 3%;">
+    <tr>
+        <th>Nome Evento</th>
+        <th>Hora</th>
+        <th>Data</th>
+        <th>Local</th>
+        <th>Descrição</th>
+        <th>Valor da Festa</th>
+    </tr> 
+
 <?php
 try {
  
@@ -38,7 +50,9 @@ try {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<h1 style=\"font-size: -webkit-xxx-large;\"><center>".utf8_encode($rs->nome_evento)."</center></h1>" ;
                 echo "<h2 class=\"header\" style=\"margin-left: 2%;\">Dados do Evento</h2>";
-                echo "<p style=\"margin-left: 3%;\">Nome do Evento: ".utf8_encode($rs->nome_evento)." - Hora: ".utf8_encode($rs->hora)." - Data: ".utf8_encode($rs->dia)." - Local: ".utf8_encode($rs->local)." - Descrição: ".utf8_encode($rs->descricao)." - Valor da Festa: R$".utf8_encode($rs->valor_max_pagar)."</p>";
+                echo "<tr>";
+                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->hora)."</td><td>".utf8_encode($rs->dia)."</td><td>".utf8_encode($rs->local)."</td><td>".utf8_encode($rs->descricao)."</td><td>".utf8_encode($rs->valor_max_pagar)."<a href=\"?act=upd&id=".$rs->id_evento."\" style=\"float: right;\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a></td>";
+                echo "</tr>";
             }
         }
 } catch (PDOException $erro) {
@@ -46,6 +60,60 @@ try {
 }
 
 ?>
+</table>
+<!-- FIM BLOCO DADOS EVENTO -->
+
+<!--- BLOCO DE ALTERAR Eventos  -->
+<?php 
+if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != '' ) {
+  
+  $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao,valor_max_pagar FROM eventos WHERE id_evento=:id");
+  $stmt->execute(array(
+    ':id' => $_REQUEST['id'],
+  )); 
+?>
+  
+  <h2 class="header" style="width: 100%; margin-left: 2%;">Alterar Dados do Evento</h2>  
+<?php
+   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+?>
+                <form method="POST" action="?acao=save" style="width: 101%; margin-left: 3%;">
+                  <div class="ui form">
+                    <div class="two fields">
+                      <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
+                      <div class="field">
+                        <input type="text" name="nome_evento" value="<?php echo $rs->nome_evento ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="time" name="hora" value="<?php echo $rs->hora ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="date" name="dia" value="<?php echo $rs->dia ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="text" name="local" value="<?php echo $rs->local ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="text" name="descricao" value="<?php echo $rs->valor_max_pagar ?>"/>
+                      </div>
+                      <div>
+                        <input type="button" name="save" value="Cancelar" class="ui inverted red button"/>
+                      </div>
+                      <div class="field">
+                        <input type="submit" name="save" value="Salvar" class="ui inverted green button"/>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+<?php
+            }
+  }
+?>
+<!--- FIM BLOCO DE ALTERAR Eventos -->
+
 
 <!--BLOCO EXCLUIR DADOS Convidados -->
 <?php
@@ -78,18 +146,21 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                 echo "<td>";?> 
                 <br><br><br>
                 <h2 style="margin-left: 2%;">Alterar Dados Convidado</h2>
-                <form method="POST" action="?acao=save" style="width: 54%; margin-left: 3%;">
+                <form method="POST" action="?acao=save" style="width: 45.2%; margin-left: 3%;">
                   <div class="ui form">
-                    <div class="two fields">
+                    <div class="fields">
                       <input type="hidden" name="id" value="<?php echo $rs->id_convidado ?>"/>
-                      <div class="field">
+                      <div class="twelve wide field">
                         <input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/><br>
                       </div>
-                      <div class="field">
+                      <div class="three wide field">
                         <input type="text" name="idade" value="<?php echo $rs->idade ?>"/>
                       </div>
+                      <div>
+                        <input type="button" name="save" value="Cancelar" class="ui inverted red button"/>
+                      </div>
                       <div class="field">
-                        <input type="submit" name="save" value="Salvar" class="ui blue button"/>
+                        <input type="submit" name="save" value="Salvar" class="ui inverted green button"/>
                       </div>
                     </div>
                   </div>
@@ -155,7 +226,7 @@ FIM BLOCO INSERE Convidados -->
 
 <!--INICIO BLOCO MOSTRA DADOS Convidados -->
 
-  <table class="ui fixed table" style="width: 42%; margin-left: 3%;">
+  <table class="ui fixed table" style="width: 45%; margin-left: 3%;">
   <h2 class="header" style="margin-bottom: 2%; margin-left: 2%;">Convidados</h2>
     <tr>
         <th style="width: 75%;">Nome</th>
@@ -187,52 +258,14 @@ FIM BLOCO INSERE Convidados -->
   </table>
 
   <a href="register_convidado.php">
-    <button class="ui blue basic button" style="margin-left: 32.3%">
+    <button class="ui blue basic button" style="margin-left: 35%">
       <i class="icon plus"></i>
         Adicionar Convidado
     </button>
   </a>
 <!--FIM BLOCO MOSTRA DADOS Convidados -->
 
-<!--- BLOCO DE ALTERAR Eventos  -->
-<?php 
-if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != '' ) {
-  
-  $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos WHERE id_evento=:id");
-  $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
-  )); 
-?>
-  <table class="ui fixed table" style="width: 60%">
-  <h2 class="header">Alterar Meus Dados</h2>
-  <tr>
-        <th>Nome do Evento</th>
-        <th>Data</th>
-        <th>Hora</th>
-        <th>Local</th>
-        <th>Descriçao</th>
-    </tr>   
-<?php
-   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-
-                echo "<tr>";?>
-                <form method="POST" action="?act=save">
-                    <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
-                    <td><input type="text" name="nome_evento" value="<?php echo $rs->nome_evento ?>"/></td>
-                    <td><input type="date" name="dia" value="<?php echo $rs->dia ?>"/></td>
-                    <td><input type="time" name="hora" value="<?php echo $rs->hora ?>"/></td>
-                    <td><input type="text" name="local" value="<?php echo $rs->local ?>"/></td>
-                    <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
-                    <td><input type="submit" name="save" value="Salvar" /></td><center>
-                      <?php
-                echo "</tr>";
-            }
-}
-?>
-</table>
-<!--- FIM BLOCO DE ALTERAR Eventos -->
-
-<!--- BLOCO DE SALVAR Eventos -->
+<!-- BLOCO DE SALVAR Eventos -->
 <?php 
 if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] != '' ) {
     $nome_evento = $_POST['nome_evento'];
@@ -240,18 +273,20 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
     $descricao = $_POST['descricao'];
     $dia = $_POST['dia'];
     $local = $_POST['local'];
+    $valor_max_pagar = $_POST['valor_max_pagar'];
 
-    $stmt = $connect->prepare("UPDATE eventos SET nome_evento=:nome_evento, dia=:dia, hora=:hora, local=:local, descricao=:descricao  WHERE id_evento=:id");
+    $stmt = $connect->prepare("UPDATE eventos SET nome_evento=:nome_evento, dia=:dia, hora=:hora, local=:local, descricao=:descricao, valor_max_pagar=:valor_max_pagar  WHERE id_evento=:id");
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
       ':nome_evento' => $nome_evento,
       ':hora' => $hora,
       ':descricao' => $descricao,
       ':local' => $local,
-      ':dia' => $dia
+      ':dia' => $dia,
+      ':valor_max_pagar' => $valor_max_pagar
   )); 
 }
+
+include "rodape.php";
 ?>
-<!--- FIM BLOCO DE SALVAR  Eventos-->
-
-
+<!-- FIM DE SALVAR Eventos -->

@@ -197,8 +197,11 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
                       <div class="field">
                         <input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/>
                       </div>
+                      <div>
+                        <input type="button" name="save" value="Cancelar" class="ui inverted red button"/>
+                      </div>
                       <div class="field">
-                        <input type="submit" name="save" value="Salvar" class="ui blue button" /></td>
+                        <input type="submit" name="save" value="Salvar" class="ui inverted green button" />
                       </div>
                     </div>
                   </div>
