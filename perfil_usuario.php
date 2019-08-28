@@ -104,43 +104,6 @@
 <!-- FIM DO BLOCO EXCLUIR DADOS Usuário -->
 
 
-<!--- BLOCO DE ALTERAR Eventos  -->
-<?php 
-if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != '' ) {
-  
-  $stmt = $connect->prepare("SELECT id_evento,nome_evento,dia,hora,local,descricao FROM eventos WHERE id_evento=:id");
-  $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
-  )); 
-?>
-  <table class="ui fixed table" style="width: 60%">
-  <h2 class="header">Alterar Meus Dados</h2>
-  <tr>
-        <th>Nome do Evento</th>
-        <th>Data</th>
-        <th>Hora</th>
-        <th>Local</th>
-        <th>Descriçao</th>
-    </tr>   
-<?php
-   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-
-                echo "<tr>";?>
-                <form method="POST" action="?act=save">
-                    <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
-                    <td><input type="text" name="nome_evento" value="<?php echo $rs->nome_evento ?>"/></td>
-                    <td><input type="date" name="dia" value="<?php echo $rs->dia ?>"/></td>
-                    <td><input type="time" name="hora" value="<?php echo $rs->hora ?>"/></td>
-                    <td><input type="text" name="local" value="<?php echo $rs->local ?>"/></td>
-                    <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
-                    <td><input type="submit" name="save" value="Salvar" /></td><center>
-                      <?php
-                echo "</tr>";
-            }
-}
-?>
-</table>
-<!--- FIM BLOCO DE ALTERAR Eventos -->
 
 <!--BLOCO EXCLUIR DADOS Eventos -->
 <?php
@@ -156,31 +119,6 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
   } 
 ?>
 <!-- FIM DO BLOCO EXCLUIR DADOS Eventos -->
-
-
-
-<!--- BLOCO DE SALVAR Eventos -->
-<?php 
-if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] != '' ) {
-    $nome_evento = $_POST['nome_evento'];
-    $hora = $_POST['hora'];
-    $descricao = $_POST['descricao'];
-    $dia = $_POST['dia'];
-    $local = $_POST['local'];
-
-    $stmt = $connect->prepare("UPDATE eventos SET nome_evento=:nome_evento, dia=:dia, hora=:hora, local=:local, descricao=:descricao  WHERE id_evento=:id");
-    $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
-      ':nome_evento' => $nome_evento,
-      ':hora' => $hora,
-      ':descricao' => $descricao,
-      ':local' => $local,
-      ':dia' => $dia
-  )); 
-}
-?>
-<!--- FIM BLOCO DE SALVAR  Eventos-->
-
 
 
 
@@ -201,10 +139,8 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td><center>
+                echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_evento.php\"><i class='eye alternate icon'></i></a>"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?act=upd&id=".$rs->id_evento."\"><i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?act=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";
@@ -220,7 +156,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'save'  && $_REQUEST['id'] !=
 <!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
  
   <a href="register_evento.php">
-    <button class="ui blue basic button" style="float: right;">
+    <button class="ui blue basic button" style="float: right; margin-right: 3%;">
       <i class="icon plus"></i>
         Cadastrar Evento
     </button>
@@ -240,33 +176,38 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
     ':id' => $_REQUEST['id'],
   )); 
 ?>
-  <table class="ui fixed table" style="width: 60  %">
-  <h2 class="header">Alterar Meus Dados</h2>
-  <tr>
-        <th>Título</th>
-        <th>Data</th>
-        <th>Horario</th>
-        <th>Descrição</th>
-        <th>Situação</th>
-    </tr>
+  <h2 class="header">Alterar Dados da Agenda</h2>
 <?php
-   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+  while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 
-                echo "<tr>";?>
-                <form method="POST" action="?action=save">
-                    <input type="hidden" name="id" value="<?php echo $rs->id_tarefa ?>"/>
-                    <td><input type="text" name="titulo" value="<?php echo $rs->titulo ?>"/></td>
-                    <td><input type="date" name="data" value="<?php echo $rs->data ?>"/></td>
-                    <td><input type="time" name="horario" value="<?php echo $rs->horario ?>"/></td>
-                    <td><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td>
-                    <td><input type="text" name="situacao" value="<?php echo $rs->situacao ?>"/></td>
-                    <td><input type="submit" name="save" value="Salvar" /></td><center>
-                      <?php          
-                echo "</tr>";
-            }
+?>
+                <form method="POST" action="?action=save" style="width: 93.8%">
+                  <div class="ui form">
+                    <div class="two fields">
+                      <input type="hidden" name="id" value="<?php echo $rs->id_tarefa ?>"/>
+                      <div class="field">
+                        <input type="text" name="titulo" value="<?php echo utf8_encode($rs->titulo) ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="date" name="data" value="<?php echo $rs->data ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="time" name="horario" value="<?php echo $rs->horario ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/>
+                      </div>
+                      <div class="field">
+                        <input type="submit" name="save" value="Salvar" class="ui button" /></td>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+<?php
+  }
 }
 ?>
-</table>
+                      
 <!--- FIM BLOCO DE ALTERAR Agenda -->
 
 
@@ -336,9 +277,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td>".utf8_encode($rs->situacao)."</td><td><center><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td>".utf8_encode($rs->situacao)."</td><td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?action=del&id=".$rs->id_tarefa."\"><i class='trash alternate icon'></i></a></center></td>";
+                           ."<a href=\"?action=del&id=".$rs->id_tarefa."\"><i class='trash alternate icon'></i></a></td>";
                 echo "</tr>";
             }
         } else {
@@ -353,7 +294,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
  <a href="register_tarefa.php">     
-    <button class="ui blue basic button" style="float: right">
+    <button class="ui blue basic button" style="float: right; margin-right: 3%;">
       <i class="icon plus"></i>
         Cadastrar Tarefa
     </button>
