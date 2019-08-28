@@ -3,11 +3,12 @@
   require 'config.php';
   include("cabecalho.php");
 
-  $stmt = $connect->query('SELECT id_categoria, nome, descricao FROM categoria_evento WHERE id_categoria="6"');
+  $stmt = $connect->query('SELECT id_categoria, nome, descricao, foto FROM categoria_evento WHERE id_categoria="4"');
   while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $id_categoria = $linha['id_categoria']; 
     $nome = $linha['nome'];
     $descricao = $linha['descricao'];
+    $foto = $linha['foto'];
   }
 
 ?>
@@ -30,23 +31,37 @@
 
 <div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%">
   <ol class="carousel-indicators">
-    <li data-target="#casamento1" data-slide-to="0" class="active"></li>
-    <li data-target="#casamento2" data-slide-to="1"></li>
-    <li data-target="#casamento3" data-slide-to="2"></li>
-    <li data-target="#casamento4" data-slide-to="3"></li>
+
+<?php 
+      // foreach ($foto as $value) {
+      //   $partes_fotos[] = explode(',',$foto);
+      //   echo '<br><br><br><br><br><br><br>';
+      //   echo $partes_fotos;
+      // }
+
+///// SE NAO DER CERTO COM O FOREACH, DAR UM CAMPO PARA CADA FOTO!
+
+
+      $fotos = explode('.', $foto); 
+?>
+
+    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="0" class="active"></li>
+    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="1"></li>
+    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="2"></li>
+    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" >
     <div class="carousel-item active" >
-      <img class="d-block w-100" src="imagens/casamento1.jpg" alt="First slide" >
+      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[0]; ?>" alt="First slide" >
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/casamento2.jpg" alt="Second slide">
+      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[1]; ?>" alt="Second slide">
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/casamento3.jpg" alt="Third slide" >
+      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[2]; ?>" alt="Third slide" >
     </div>
      <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/casamento4.jpg" alt="Fourth slide" >
+      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[3]; ?>" alt="Fourth slide" >
     </div>
   </div>
   <a class="carousel-control-prev" href="#sol" role="button" data-slide="prev">
@@ -58,6 +73,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 <div class="inline field" style="width: 23%;float: left;margin-left: 20%;margin-top: 2%">
       <label>O que você procura?</label>
 <?php
