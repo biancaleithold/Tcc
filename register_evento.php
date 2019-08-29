@@ -13,6 +13,7 @@
     $dia = $_POST['dia'];
     $local = $_POST['local'];
     $valor_max_pagar = $_POST['valor_max_pagar'];
+    $id_usuario = $_SESSION['id_usuario'];
 
     if($nome_evento == '')
       $errMsg = 'Insira o nome do evento';
@@ -28,14 +29,15 @@
       $errMsg = 'Insira o valor máximo que deseja gastar no evento';
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO eventos (nome_evento,  hora, descricao, dia, local) VALUES (:nome_evento, :hora, :descricao, :dia, :local, :valor_max_pagar)');
+        $stmt = $connect->prepare('INSERT INTO eventos (nome_evento,  hora, descricao, dia, local, valor_max_pagar, id_usuario) VALUES (:nome_evento, :hora, :descricao, :dia, :local, :valor_max_pagar, :id_usuario)');
         $stmt->execute(array(
           ':nome_evento' => $nome_evento,
           ':hora' => $hora,
           ':descricao' => $descricao,
           ':dia' => $dia,
           ':local' => $local,
-          ':valor_max_pagar' => $valor_max_pagar
+          ':valor_max_pagar' => $valor_max_pagar,
+          ':id_usuario' => $_SESSION['id_usuario']
         ));
 
 

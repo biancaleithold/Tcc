@@ -140,7 +140,7 @@
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
-                <a href=\"perfil_evento.php\"><i class='eye alternate icon'></i></a>"
+                <a href=\"perfil_evento.php?ver=view&id=".$rs->id_evento."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?act=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";
@@ -214,26 +214,6 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
 <!--- FIM BLOCO DE ALTERAR Agenda -->
 
 
-
-
-<!--BLOCO EXCLUIR DADOS Agenda -->
-<?php
-  if (isset($_REQUEST["action"]) && $_REQUEST["action"] == "del" && $_REQUEST['id'] != '') {
-    try {
-        $stmt = $connect->prepare("DELETE FROM tarefas WHERE id_tarefa=:id");
-        $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
-        ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-  } 
-?>
-<!-- FIM DO BLOCO EXCLUIR DADOS Agenda -->
-
-
-
-
 <!--- BLOCO DE SALVAR Agenda -->
 
 <?php 
@@ -256,6 +236,23 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 }
 ?>
 <!--- FIM BLOCO DE SALVAR  Agenda-->
+
+
+<!--BLOCO EXCLUIR DADOS Agenda -->
+<?php
+  if (isset($_REQUEST["action"]) && $_REQUEST["action"] == "del" && $_REQUEST['id'] != '') {
+    try {
+        $stmt = $connect->prepare("DELETE FROM tarefas WHERE id_tarefa=:id");
+        $stmt->execute(array(
+          ':id' => $_REQUEST['id'],
+        ));
+    }catch (PDOException $erro) {
+      echo "Erro: ".$erro->getMessage();
+    }
+  } 
+?>
+<!-- FIM DO BLOCO EXCLUIR DADOS Agenda -->
+
 
 
 

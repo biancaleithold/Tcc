@@ -17,10 +17,11 @@ if(isset($_POST['register'])) {
     
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO convidados (idade, nome) VALUES (:idade, :nome)');
+        $stmt = $connect->prepare('INSERT INTO convidados (idade, nome, id_evento) VALUES (:idade, :nome, :id_evento)');
         $stmt->execute(array(
           ':idade' => $idade,
-          ':nome' => $nome
+          ':nome' => $nome,
+          ':id_evento' => $_REQUEST['id']
         ));
 
 
@@ -29,7 +30,7 @@ if(isset($_POST['register'])) {
             //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
             //echo "<script type='text/javascript'>window.top.location='http://$host$uri/register_usuario.php';</script>";
             //exit;
-        header('Location: perfil_usuario.php?action=joined');
+        header('Location: perfil_usuario.php');
         exit;
       }
       catch(PDOException $e) {
