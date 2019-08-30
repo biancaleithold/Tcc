@@ -3,12 +3,15 @@
   require 'config.php';
   include("cabecalho.php");
 
-  $stmt = $connect->query('SELECT id_categoria, nome, descricao, foto FROM categoria_evento WHERE id_categoria="4"');
+  $stmt = $connect->query('SELECT id_categoria, nome, descricao, foto1, foto2, foto3, foto4 FROM categoria_evento WHERE id_categoria="'.$_REQUEST['id'].'"');
   while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $id_categoria = $linha['id_categoria']; 
     $nome = $linha['nome'];
     $descricao = $linha['descricao'];
-    $foto = $linha['foto'];
+    $foto1 = $linha['foto1'];
+    $foto2 = $linha['foto2'];
+    $foto3 = $linha['foto3'];
+    $foto4 = $linha['foto4'];
   }
 
 ?>
@@ -39,29 +42,31 @@
       //   echo $partes_fotos;
       // }
 
-///// SE NAO DER CERTO COM O FOREACH, DAR UM CAMPO PARA CADA FOTO!
+/// SE NAO DER CERTO COM O FOREACH, DAR UM CAMPO PARA CADA FOTO!
 
-
-      $fotos = explode('.', $foto); 
+      $fotos1 = explode('.', $foto1);
+      $fotos2 = explode('.', $foto2);
+      $fotos3 = explode('.', $foto3);
+      $fotos4 = explode('.', $foto4); 
 ?>
 
-    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="0" class="active"></li>
-    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="1"></li>
-    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="2"></li>
-    <li data-target="#<?php echo $fotos[0]; ?>" data-slide-to="3"></li>
+    <li data-target="#<?php echo $fotos1[0]; ?>" data-slide-to="0" class="active"></li>
+    <li data-target="#<?php echo $fotos2[0]; ?>" data-slide-to="1"></li>
+    <li data-target="#<?php echo $fotos3[0]; ?>" data-slide-to="2"></li>
+    <li data-target="#<?php echo $fotos4[0]; ?>" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" >
     <div class="carousel-item active" >
-      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[0]; ?>" alt="First slide" >
+      <img class="d-block w-100" src="imagens/<?php echo $foto1; ?>" alt="First slide" >
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[1]; ?>" alt="Second slide">
+      <img class="d-block w-100" src="imagens/<?php echo $foto2; ?>" alt="Second slide">
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[2]; ?>" alt="Third slide" >
+      <img class="d-block w-100" src="imagens/<?php echo $foto3; ?>" alt="Third slide" >
     </div>
      <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/<?php echo $partes_fotos[3]; ?>" alt="Fourth slide" >
+      <img class="d-block w-100" src="imagens/<?php echo $foto4; ?>" alt="Fourth slide" >
     </div>
   </div>
   <a class="carousel-control-prev" href="#sol" role="button" data-slide="prev">

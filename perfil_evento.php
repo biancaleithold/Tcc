@@ -171,8 +171,8 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'salvar'  && $_REQUEST['id'] 
 }
 ?>
   </table>
-
-  <a href="register_convidado.php">
+  <?php
+  echo "<a href=?acao=insere&id=".$_REQUEST['id'].">";?>
     <button class="ui blue basic button" style="margin-left: 35%">
       <i class="icon plus"></i>
         Adicionar Convidado
@@ -256,37 +256,51 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] 
 <!-- FIM DO BLOCO EXCLUIR DADOS Convidados -->
 
 
-<!-- INICIO BLOCO INSERE Convidados - ARRUMAR PARA INSERIR JA NA LISTA DO PROPRIO EVENTO!!! -->
+<!-- INICIO BLOCO INSERE Convidados -->
 <?php
-//if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'] != '' ) {
-            
-                //echo "<tr>";
-                //echo "<td>";?>
-                <!-- // <br><br><br>
-                // <h2>Adicionar Convidado</h2>
-                // <form method="POST" action="?acao=insere">
-                //     <td><label>Nome do Convidado</label><input type="text" name="nome"/></td>
-                //     <td><label>Idade</label><input type="text" name="idade"/></td>
-                //     <td><input type="submit" name="insere" value="Adicionar" /></td><center> -->
-                <?php 
-                //echo "</td>";
-                //echo "</tr>";
-           // }
+if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'] != '' ) {
 
-      //try{
-  //$stmt = $connect->prepare('INSERT INTO  convidados (idade, nome, id_evento) VALUES (:idade , :nome, :id_evento)');
-  //$stmt->execute(array(
-    //':idade' => $_POST[$idade],
-    //':nome' => $_POST[$nome],
-    //':id_evento' => $_REQUEST['id']
-  //)); 
-  //}catch (PDOException $erro) {
-    //echo "Erro: ".$erro->getMessage();
-//}
+  if(!isset($_POST['nome_ins'])) {
+            
+                echo "<tr>";
+                echo "<td>";?>
+                 <br><br><br>
+                 <h2 style="margin-left: 2%;">Adicionar Convidado</h2>
+                 <form method="POST" action="?acao=insere" style="width: 45.2%; margin-left: 3%;">
+                    <div class="ui form">
+                      <div class="fields">
+                        <input type="hidden" name="id" value="<?php echo $_REQUEST['id'] ?>"/>
+                          <div class="twelve wide field">
+                              <td><label>Nome do Convidado</label><input type="text" name="nome_ins"/></td>
+                          </div>
+                          <div class="three wide field">
+                              <td><label>Idade</label><input type="text" name="idade_ins"/></td>
+                          </div>
+                          <div>
+                              <input type="submit" name="insere" value="Adicionar" class="ui inverted green button" />
+                          </div>
+                      </div>
+                    </div>
+                <?php 
+                echo "</td>";
+                echo "</tr>";
+  } else {
+    
+      try{
+            $stmt = $connect->prepare('INSERT INTO  convidados (idade, nome, id_evento) VALUES (:idade , :nome, :id_evento)');
+            $stmt->execute(array(
+              ':idade' => $_REQUEST['idade_ins'],
+              ':nome' => $_REQUEST['nome_ins'],
+              ':id_evento' => $_REQUEST['id']
+            )); 
+          }catch (PDOException $erro) {
+              echo "Erro: ".$erro->getMessage();
+          }
+        }
+  }
 
 ?>
 <!--FIM BLOCO INSERE Convidados -->
-
 
 <?php
 include "rodape.php";

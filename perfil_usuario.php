@@ -48,12 +48,6 @@
       <br><br>
         <button class="ui basic button test"><i class="trash icon"></i>Excluir Conta</button>
     </div>
-    <a href="register_empresa.php" >     
-      <button class="ui blue basic button" style="float: left;  margin-left: 4%">
-        <i class="icon plus"></i>
-          Cadastrar Empresa
-      </button>
-    </a> 
   </div>
 </div>
 
@@ -209,13 +203,11 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
 <?php
   }
 }
-?>
-                      
+?>                    
 <!--- FIM BLOCO DE ALTERAR Agenda -->
 
 
 <!--- BLOCO DE SALVAR Agenda -->
-
 <?php 
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['id'] != '' ) {
     $titulo = $_POST['titulo'];
@@ -300,9 +292,67 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
     </button>
   </a> 
 
+<br><br>
 
 
-  <!--INICIO BLOCO ALTERAR E SALVAR Usuario -->
+<!-- INICIO BLOCO MOSTRA DADOS TABELA Empresas -->
+  <table class="ui fixed table" style="width: 60%;">
+  <h1 class="header">Minhas Empresas</h1>
+    <tr>
+        <th>Nome da Empresa</th>
+        <th>Descriçao</th>
+    </tr>
+
+    <?php
+    try {
+ 
+    $stmt = $connect->prepare("SELECT id_empresa, nome, descricao FROM empresa WHERE id_usuario = :id");
+ 
+        if ($stmt->execute(array(
+          ':id' => $id_usuario))) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                echo "<tr>";
+                echo "<td>".utf8_encode($rs->nome)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
+                <a href=\"perfil_empresa.php?ver=view&id=".$rs->id_empresa."\"><i class='eye alternate icon'></i></a>"
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?apaga=del&id=".$rs->id_empresa."\"><i class='trash alternate icon'></i></a></center></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "Erro: Não foi possível recuperar os dados do banco de dados";
+        }
+} catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+}
+?>
+</table>
+<!-- FIM BLOCO MOSTRA DADOS TABELA Empresas -->
+
+<a href="register_empresa.php" >     
+      <button class="ui blue basic button" style="float: right;  margin-right: 3%">
+        <i class="icon plus"></i>
+          Cadastrar Empresa
+      </button>
+</a> 
+
+
+<!--BLOCO EXCLUIR DADOS Empresas -->
+<?php
+  if (isset($_REQUEST["apaga"]) && $_REQUEST["apaga"] == "del" && $_REQUEST['id'] != '') {
+    try {
+        $stmt = $connect->prepare("DELETE FROM empresa WHERE id_empresa=:id");
+        $stmt->execute(array(
+          ':id' => $_REQUEST['id'],
+        ));
+    }catch (PDOException $erro) {
+      echo "Erro: ".$erro->getMessage();
+    }
+  } 
+?>
+<!-- FIM DO BLOCO EXCLUIR DADOS Empresas -->
+
+
+<!--INICIO BLOCO ALTERAR E SALVAR Usuario -->
 <?php 
 if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'atualiza'  && $_REQUEST['id'] != '' ) {
   

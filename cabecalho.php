@@ -44,17 +44,18 @@
       ?>
     	<a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-light-blue">  <i class="home alternate icon"></i></a>
     
+
       <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
-        <option value="eventos.php">Aniversários</option>
-        <option value="eventos.php">15 Anos</option>
-        <option value="eventos.php">Festa Infantil</option>
+        <option value="eventos.php?acao=aniversario&id=6">Aniversários</option>
+        <option value="eventos.php?acao=debutante&id=1">15 Anos</option>
+        <option value="eventos.php?acao=infantil&id=5">Infantil</option>
       </select>
 
 
    
-    	<a href="eventos.php"  class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Casamento</a>
-   		<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
-    	<a href="eventos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
+    	<a href="eventos.php?acao=casamento&id=2" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Casamento</a>
+   		<a href="eventos.php?acao=corporativo&id=3" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Corporativo</a>
+    	<a href="eventos.php?acao=formatura&id=4" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Formatura</a>
     	<a href="sobre.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue">Sobre Nós</a>
 
 
@@ -82,13 +83,13 @@
 	<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
     	<a href="index.php" class="w3-bar-item w3-button w3-padding-large">Home</a>
     	<select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
-        <option value="eventos.php">Aniversários</option>
-        <option value="eventos.php">15 Anos</option>
-        <option value="eventos.php">Festa Infantil</option>
+        <option value="eventos.php?acao=aniversario&id=6">Aniversários</option>
+        <option value="eventos.php?acao=debutante&id=1">15 Anos</option>
+        <option value="eventos.php?acao=infantil&id=5">Festa Infantil</option>
       </select>
-    	<a href="eventos.php" class="w3-bar-item w3-button w3-padding-large">Casamentos</a>
-    	<a href="eventos.php" class="w3-bar-item w3-button w3-padding-large">Corporativo</a>
-    	<a href="eventos.php" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
+    	<a href="eventos.php?acao=casamento&id=2" class="w3-bar-item w3-button w3-padding-large">Casamentos</a>
+    	<a href="eventos.php?acao=corporativo&id=3" class="w3-bar-item w3-button w3-padding-large">Corporativo</a>
+    	<a href="eventos.php?acao=formatura&id=4" class="w3-bar-item w3-button w3-padding-large">Formatura</a>
     	<a href="sobre.php" class="w3-bar-item w3-button w3-padding-large">Sobre Nós</a>
 			<?php 
 				if ( isset($_SESSION['id_usuario']) ) {
