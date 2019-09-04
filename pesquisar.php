@@ -24,7 +24,7 @@
        
         foreach ($resultado_pesquisa as $key => $item) {?>
           
-         <table class="ui orange table" style="width:20%; float:left;">
+         <table class="ui orange table" style="width:30%; float:none; margin-left: 33%;">
             <thead>
                 <tr>
                     <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
@@ -57,7 +57,7 @@
        
         foreach ($resultado_pesquisa as $key => $item) {?>
           
-         <table class="ui orange table" style="width:20%; float:left;">
+         <table class="ui orange table" style="width:30%; float:none;">
             <thead>
                 <tr>
                     <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
@@ -91,18 +91,21 @@
        
         foreach ($resultado_pesquisa as $key => $item) {?>
           
-         <table class="ui orange table" style="width:20%; float:left;">
+         <table class="ui orange table">
             <thead>
+          <section style="width:30%; float:left; margin-left: 10%;">
                 <tr>
-                    <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
+                    <th ><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
                 </tr>
-                
+                </section>
             </thead>
             <tbody>
+            <section style="width:30%; float:right; margin-left: 10%;">
                 <tr>
                      <td><?php echo utf8_encode($item); ?></td>
                      
                 </tr>
+                 </section>
             </tbody>
 
         </table>
@@ -124,7 +127,7 @@
        
         foreach ($resultado_pesquisa as $key => $item) {?>
           
-         <table class="ui orange table" style="width:20%; float:left;">
+         <table class="ui orange table" style="width:30%; float:none;  margin-left: 20%;">
             <thead>
                 <tr>
                     <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
@@ -158,7 +161,7 @@
        
         foreach ($resultado_pesquisa as $key => $item) {?>
           
-         <table class="ui orange table" style="width:20%; float:left;">
+         <table class="ui orange table" style="width:30%; float:none; margin-left: 20%;">
             <thead>
                 <tr>
                     <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
@@ -191,7 +194,7 @@
        
         foreach ($resultado_pesquisa as $key => $item) {?>
           
-         <table class="ui orange table" style="width:20%; float:left;">
+         <table class="ui orange table" style="width:30%; float:none; margin-left: 20%;">
             <thead>
                 <tr>
                     <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
