@@ -26,6 +26,18 @@ include "cabecalho.php";
     $idade = $linha['idade'];
     $nome = $linha['nome'];
   }
+
+  $consulta = $connect->query('SELECT id_empresa, nome FROM empresa');
+  while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $id_empresa = $linha['id_empresa']; 
+    $nome_empresa = $linha['nome'];
+  }
+
+  $consulta = $connect->query('SELECT valor_pago, despesa FROM despesa');
+  while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $valor_pago = $linha['valor_pago']; 
+    $despesa = $linha['despesa'];
+  }
 ?>
 
 <!--INICIO BLOCO DADOS EVENTO -->
@@ -310,9 +322,9 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
 
 <!--INICIO BLOCO ALTERAR E SALVAR DESPESA -->
 <?php 
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
+if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'] != '' ) {
   
-  $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_convidado=:id");
+  $stmt = $connect->prepare("SELECT valor_pago, despesa FROM despesa WHERE id_evento=:id");
   $stmt->execute(array(
     ':id' => $_REQUEST['id'],
   )); 
@@ -322,15 +334,15 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                 echo "<tr>";
                 echo "<td>";?> 
                 <h2>Alterar Dados Convidado</h2>
-                <form method="POST" action="?acao=save" style="width: 90%; margin-left: 2%;">
+                <form method="POST" action="?acaoo=save" style="width: 90%; margin-left: 2%;">
                   <div class="ui form">
                     <div class="fields">
-                      <input type="hidden" name="id" value="<?php echo $rs->id_convidado ?>"/>
+                      <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
                       <div class="twelve wide field">
-                        <input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/><br>
+                        <input type="select" name="nome_empresa" value="<?php echo utf8_encode($rs->nome) ?>"/><br>
                       </div>
                       <div class="three wide field">
-                        <input type="text" name="idade" value="<?php echo $rs->idade ?>"/>
+                        <input type="text" name="valor_pago" value="<?php echo $rs->valor_pago ?>"/>
                       </div>
                       <div>
                         <input type="button" name="save" value="Cancelar" class="ui inverted red button"/>
@@ -349,15 +361,15 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
 ?>
 
 <?php 
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {
+if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'] != '' ) {
     $nome = $_POST['nome'];
-    $idade = $_POST['idade'];
+    $valor_pago = $_POST['valor_pago'];
 
-    $stmt = $connect->prepare("UPDATE convidados SET nome=:nome, idade=:idade WHERE id_convidado=:id");
+    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_evento=:id");
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
       ':nome' => $nome,
-      ':idade' => $idade
+      ':valor_pago' => $valor_pago
   )); 
 }
 ?>
@@ -378,15 +390,16 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] 
 
     try {
  
-    $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_evento = :id");
+    $stmt = $connect->prepare("SELECT valor_pago, despesa FROM despesa WHERE id_evento = :id AND id_empresa = :id_empresa");
+    $stmt = $connect->prepare("SELECT id_empresa, nome FROM empresa WHERE id_empresa = :id");
  
         if ($stmt->execute(array(
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."<a href=\"?acao=upd&id=".$rs->id_convidado."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->valor_pago."<a href=\"?acao=upd&id=".$rs->id_evento."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acao=del&id=".$rs->id_convidado."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?acao=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
             }
@@ -400,7 +413,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] 
   <td style="font-size: 150%;"><b>Saldo Atual</b></td>
   </table>
   <?php
-  echo "<a href=?acao=insere&id=".$_REQUEST['id'].">";?>
+  echo "<a href=?acaoo=insere&id=".$_REQUEST['id'].">";?>
     <button class="ui blue basic button" style="float: right; margin-right: 6.5%;">
       <i class="icon plus"></i>
         Adicionar Despesa
