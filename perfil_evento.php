@@ -389,17 +389,18 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
 <?php
 
     try {
- 
+    
+    $stmt = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id_evento");
+    $stmt = $connect->prepare("SELECT nome FROM empresa WHERE id_empresa = :id_empresa");
     $stmt = $connect->prepare("SELECT valor_pago, despesa FROM despesa WHERE id_evento = :id AND id_empresa = :id_empresa");
-    $stmt = $connect->prepare("SELECT id_empresa, nome FROM empresa WHERE id_empresa = :id");
  
         if ($stmt->execute(array(
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->valor_pago."<a href=\"?acao=upd&id=".$rs->id_evento."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->valor_pago."<a href=\"?acaoo=upd&id=".$rs->id_evento."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acao=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?acaoo=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
             }
@@ -411,6 +412,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
 }
 ?>
   <td style="font-size: 150%;"><b>Saldo Atual</b></td>
+  <td style="font-size: 150%;"><b><?php $rs->despesa ?></b></td>
   </table>
   <?php
   echo "<a href=?acaoo=insere&id=".$_REQUEST['id'].">";?>
