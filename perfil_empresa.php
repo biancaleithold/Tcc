@@ -55,7 +55,9 @@
       </div><br>
     </div>
     <div class="extra content">  
-       <button class="ui basic button test"><i class="edit icon"></i>Editar Perfil</button>
+       <button class="ui basic button test"><i class="edit icon"></i> <?php
+     //echo  "<a href=?acao=upd&id=".$id_empresa.">";
+    ?>Editar Perfil<!--</a>--></button>
     </div>
   </div>
 </div>
@@ -71,7 +73,7 @@
 
 
 <?php
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
+//if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
   
   $stmt = $connect->prepare("SELECT id_empresa, cnpj, nome, rua, complemento, bairro, cidade, foto_perfil, descricao, telefone, email_empresa FROM empresa WHERE id_empresa=:id");
   $stmt->execute(array(
@@ -102,13 +104,13 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                                       <td><label>Descricao</label><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td><br>
                                       <td><label>Telefone</label><input type="text" name="telefone" value="<?php echo $rs->telefone ?>"/></td><br>
                                       <td><label>Email</label><input type="email" name="email_empresa" value="<?php echo $rs->email_empresa ?>"/></td><br>        
-                                      <td><input type="submit" name="salva" value="Salvar" /></td></form>
+                                     
                     <div class="actions">
                       <div class="ui cancel button">Cancelar</div>
                       <?php
                       echo  "<a href=?acao=upd&id=".$id_empresa.">";
                         ?>
-                      <div class="ui button">Salvar</div>
+                      <td><input type="submit" name="salva" value="Salvar" class="ui button" /></td></form>
                       </a>
                     </div>
                   </div>
@@ -116,7 +118,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
               <?php
              
             }
-}
+//}
 ?>
 
 

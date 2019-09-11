@@ -1,9 +1,9 @@
-<script
+<!-- <script
   src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
- </script>
+ </script> -->
 
 <script  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  src="js/jquery.min.js">
 </script>
 
 <script type="text/javascript" src="Semantic-UI-CSS-master/package.js"></script>
