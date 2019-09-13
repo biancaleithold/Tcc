@@ -48,7 +48,10 @@ CREATE TABLE categoria_evento (
 id_categoria int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
 nome varchar(50),
 descricao varchar(200),
-foto varchar(100)
+foto1 varchar(100),
+foto2 varchar(100),
+foto3 varchar(100),
+foto4 varchar(100)
 );
 
 CREATE TABLE tarefas (

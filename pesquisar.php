@@ -27,13 +27,13 @@
          <table class="ui orange table" style="width:30%; float:none;">
             <thead>
                 <tr>
-                    <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
+                    <th><?php echo utf8_encode($key);?></th>
                 </tr>
                 
             </thead>
             <tbody>
                 <tr>
-                     <td><?php echo utf8_encode($item);?></td>
+                <td> <a href="eventos.php"><?php echo utf8_encode($item); ?></a></td>
                      
                 </tr>
             </tbody>
@@ -60,13 +60,13 @@
          <table class="ui orange table" style="width:30%; float:none;">
             <thead>
                 <tr>
-                    <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
+                    <th><?php echo utf8_encode($key);?></th>
                 </tr>
                 
             </thead>
             <tbody>
                 <tr>
-                     <td><?php echo utf8_encode($item); ?></td>
+                <td> <a href="eventos.php"><?php echo utf8_encode($item); ?></a></td>
                      
                 </tr>
             </tbody>
@@ -95,7 +95,7 @@
             <thead>
     
                 <tr>
-                    <th ><?php echo utf8_encode($key);?> <a href="eventos.php">Nome</a></th>
+                    <th ><?php echo utf8_encode($key);?> </th>
                    
                 </tr>
               
@@ -103,7 +103,7 @@
   
             <tbody>
                 <tr>
-                     <td><?php echo utf8_encode($item); ?> <a href="eventos.php"></a></td>
+                     <td> <a href="eventos.php"><?php echo utf8_encode($item); ?></a></td>
                     
                 </tr>
                
@@ -131,13 +131,13 @@
          <table class="ui orange table" style="width:30%; float:left;  margin-left: 10%;">
             <thead>
                 <tr>
-                    <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
+                    <th><?php echo utf8_encode($key);?></th>
                 </tr>
                 
             </thead>
             <tbody>
                 <tr>
-                     <td><?php echo utf8_encode($item); ?></td>
+                <td> <a href="eventos.php"><?php echo utf8_encode($item); ?></a></td>
                      
                 </tr>
             </tbody>
@@ -165,13 +165,13 @@
          <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
             <thead>
                 <tr>
-                    <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
+                    <th><?php echo utf8_encode($key);?></th>
                 </tr>
                 
             </thead>
             <tbody>
                 <tr>
-                     <td><?php echo utf8_encode($item); ?></td>
+                <td> <a href="eventos.php"><?php echo utf8_encode($item); ?></a></td>
                      
                 </tr>
             </tbody>
@@ -198,13 +198,13 @@
          <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
             <thead>
                 <tr>
-                    <th><?php echo utf8_encode($key);?><a href="eventos.php"></a></th>
+                    <th><?php echo utf8_encode($key);?></th>
                 </tr>
                 
             </thead>
             <tbody>
                 <tr>
-                     <td><?php echo utf8_encode($item); ?></td>
+                <td> <a href="eventos.php"><?php echo utf8_encode($item); ?></a></td>
                      
                 </tr>
             </tbody>

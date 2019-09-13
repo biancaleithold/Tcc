@@ -3,7 +3,7 @@
   require 'config.php';
   include("cabecalho.php");
 
-  $stmt = $connect->query('SELECT id_categoria, nome, descricao, foto1, foto2, foto3, foto4 FROM categoria_evento WHERE id_categoria="'.$_REQUEST['id'].'"');
+  $stmt = $connect->query('SELECT id_categoria, nome, descricao, foto1, foto2, foto3, foto4 FROM categoria_evento WHERE id_categoria="'.$_GET['id'].'"');
   while ($linha = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $id_categoria = $linha['id_categoria']; 
     $nome = $linha['nome'];
