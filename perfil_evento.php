@@ -391,8 +391,8 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
     try {
     
     $stmt = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id_evento");
-    $stmt = $connect->prepare("SELECT nome FROM empresa WHERE id_empresa = :id_empresa");
-    $stmt = $connect->prepare("SELECT valor_pago, despesa FROM despesa WHERE id_evento = :id AND id_empresa = :id_empresa");
+    $stmt = $connect->prepare("SELECT nome FROM empresa WHERE id_empresa = :id_empresa");  
+    $stmt = $connect->prepare("SELECT valor_pago, despesa FROM despesa WHERE id_evento = :id");
  
         if ($stmt->execute(array(
           ':id' => $_REQUEST['id']))) {
@@ -403,6 +403,10 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
                            ."<a href=\"?acaoo=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
+                $despesa = $rs->valor_max_pagar - $rs->valor_pago;
+                echo "<td style=\"font-size: 150%;\"><b> Saldo Atual</b></td>";
+                echo "<td style=\"font-size: 150%;\"><b>" .$despesa. "</b></td>";
+              echo "</table>";
             }
         } else {
             echo "Erro: Não foi possível recuperar os dados do banco de dados";
@@ -411,9 +415,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
     echo "Erro: ".$erro->getMessage();
 }
 ?>
-  <td style="font-size: 150%;"><b>Saldo Atual</b></td>
-  <td style="font-size: 150%;"><b><?php $rs->despesa ?></b></td>
-  </table>
+  
   <?php
   echo "<a href=?acaoo=insere&id=".$_REQUEST['id'].">";?>
     <button class="ui blue basic button" style="float: right; margin-right: 6.5%;">
