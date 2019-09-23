@@ -53,7 +53,7 @@ INSERT INTO eventos (nome_evento, hora, descricao, dia, local, valor_max_pagar) 
 ('Aniversário', '15:30:00', 'Aniversario do Leandro', '2019-03-25', 'Casa do pão', '3000.00'),
 ('Aniversário', '16:05:00', 'Aniversário da Karen', '2019-05-03', 'Restaurante Varandão', '4000.00');
 
-INSERT INTO especializacao (descricao) VALUES 
+INSERT INTO especializacao (descricao_esp) VALUES 
 ('Animação'),
 ('Barbearia'),
 ('Brinquedos'),
@@ -85,34 +85,34 @@ INSERT INTO categoria_evento (nome, descricao) VALUES
 ('Aniversário Infantil','crianças adoram bla bla'),
 ('Aniversários','cada ano melhor bla bla');
 
-INSERT INTO estados (sigla) VALUES 
-('AC'),
-('AL'),
-('AP'),
-('AM'),
-('BA'),
-('CE'),
-('DF'),
-('ES'),
-('GO'),
-('MA'),
-('MT'),
-('MS'),
-('MG'),
-('PA'),
-('PB'),
-('PR'),
-('PE'),
-('PI'),
-('RJ'),
-('RN'),
-('RS'),
-('RO'),
-('RR'),
-('SC'),
-('SP'),
-('SE'),
-('TO');
+INSERT INTO estados (sigla,descricao_est) VALUES 
+('AC','Acre'),
+('AL','Alagoas'),
+('AP','Amapá'),
+('AM','Amazonas'),
+('BA','Bahia'),
+('CE','Ceará'),
+('DF','Distrito Federal'),
+('ES','Espírito Santo'),
+('GO','Goiás'),
+('MA','Maranhão'),
+('MT','Mato Grosso'),
+('MS','Mato Grosso do Sul'),
+('MG','Minas Gerais'),
+('PA','Pará'),
+('PB','Paraíba'),
+('PR','Paraná'),
+('PE','Pernambuco'),
+('PI','Piauí'),
+('RJ','Rio de Janeiro'),
+('RN','Rio Grande do Norte'),
+('RS','Rio Grande do Sul'),
+('RO','Rondônia'),
+('RR','Roraima'),
+('SC','Santa Catarina'),
+('SP','São Paulo'),
+('SE','Sergipe'),
+('TO','Tocantins');
 
 INSERT INTO despesa (valor_pago, despesa) VALUES
 ('500.00','19500.00'); 

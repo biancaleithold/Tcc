@@ -79,28 +79,57 @@
   </a>
 </div>
 
+<form action="" method="post" name="busca_esp">
 <div class="inline field" style="width: 23%;float: left;margin-left: 20%;margin-top: 2%">
       <label>O que você procura?</label>
 <?php
-          $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
+          $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
       ?>
       <!-- <select name="especializacao[]" class="label ui selection fluid dropdown"> -->
       <select name="especializacao">
         <?php 
         if ($stmt->execute()) {
           while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
-            echo "<option value=\"".$linha->id_especializacao."\">".utf8_encode($linha->descricao)."</option>";
+            echo "<option value=\"".$linha->id_especializacao."\">".utf8_encode($linha->descricao_esp)."</option>";
           }
         }
         ?>
       </select>
+      <input type="submit" name="envia">
 </div>
+</form>
+
+
+<?php 
+  $especializacao = $_POST['especializacao'];
+  
+  $consulta = $connect->query('SELECT id_empresa, id_especializacao FROM emp_esp WHERE id_especializacao="'.$especializacao.'"');
+    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $id_empresa = $linha['id_empresa']; 
+    $id_especializacao = $linha['id_especializacao']; 
+    
+    }
+  
+ 
+
+ $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa FROM empresa WHERE id_empresa="'.$id_empresa.'"');
+  while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $nome_empresa = $linha['nome'];
+    $foto_perfil = $linha['foto_perfil'];
+    $telefone = $linha['telefone']; 
+    $email_empresa = $linha['email_empresa'];
+
+  }
+?>
 
 <div>
   <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($descricao);?></h4>
 </div>
 
-
+<div>
+  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($nome_empresa)."<br>".$telefone."<br>".$email_empresa;?></h4>
+</div>
+  
 <?php
 include 'rodape.php';
 ?>

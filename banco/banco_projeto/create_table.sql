@@ -16,8 +16,8 @@ id_evento int
 );
 
 CREATE TABLE estados (
-id_estado int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
-sigla varchar(2)
+sigla varchar(2) PRIMARY KEY,
+descricao_est varchar(50)
 );
 
 CREATE TABLE empresa (
@@ -33,14 +33,14 @@ foto_perfil varchar(100),
 descricao varchar(100),
 telefone varchar(100),
 email_empresa varchar(100),
-id_estado int,
+sigla varchar(2),
 id_usuario int
 );
 
 
 CREATE TABLE especializacao (
 id_especializacao int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
-descricao varchar(200),
+descricao_esp varchar(200),
 id_empresa int
 );
 
@@ -96,7 +96,7 @@ ALTER TABLE tarefas ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) 
 ALTER TABLE emp_categ ADD FOREIGN KEY(id_categoria) REFERENCES categoria_evento (id_categoria) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE emp_categ ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE convidados ADD FOREIGN KEY(id_evento) REFERENCES eventos (id_evento) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE empresa ADD FOREIGN KEY(id_estado) REFERENCES estados (id_estado) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE empresa ADD FOREIGN KEY(sigla) REFERENCES estados (sigla) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE empresa ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE especializacao ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE eventos ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE ON UPDATE CASCADE;

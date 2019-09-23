@@ -86,7 +86,7 @@
 
     
         // Insere os dados no banco
-        $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, id_estado, foto_perfil, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
+        $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, sigla, foto_perfil, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
         $stmt->execute(array(
           ':cnpj' => $cnpj,
           ':nome' => $nome,
@@ -187,14 +187,14 @@
       <div class="inline field">
       <label>Estado</label>
       <?php
-        $stmt = $connect->prepare("SELECT id_estado, sigla FROM estados");      
+        $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
       ?>
       <!--<select name="estado" class="label ui selection fluid dropdown">-->
       <select name="estado">
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-            echo "<option value=\"".$rs->id_estado."\">".utf8_encode($rs->sigla)."</option>";
+            echo "<option value=\"".$rs->sigla."\">".utf8_encode($rs->sigla)."</option>";
           }
         }
         ?>
@@ -224,14 +224,14 @@
     <div class="inline field">
       <label>Especialização</label>
       <?php
-        $stmt = $connect->prepare("SELECT id_especializacao, descricao FROM especializacao");      
+        $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
       ?>
       <select name='especializacao[]' multiple>
       <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-            echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao)."</option>";
+            echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
           }
         }
         ?>
