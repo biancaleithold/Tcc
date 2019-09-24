@@ -159,13 +159,14 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
   $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_convidado=:id");
   $stmt->execute(array(
     ':id' => $_REQUEST['id'],
-  )); 
-
+  ));
+?>  
+   <h2 style="margin-left: 4%;">Alterar Dados Convidado</h2>  
+<?php
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 
-                echo "<tr>";
-                echo "<td>";?> 
-                <h2 style="margin-left: 4%;">Alterar Dados Convidado</h2>
+                ?> 
+               
                 <form method="POST" action="?acao=save" style="width: 90%; margin-left: 6%;">
                   <div class="ui form">
                     <div class="fields">
@@ -186,8 +187,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                   </div>
                 </form>
                       <?php
-                echo "</td>";
-                echo "</tr>";
+              
             }
 }
 ?>
@@ -475,7 +475,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
   } else {
     
       try{
-            $stmt = $connect->prepare('INSERT INTO  convidados (idade, nome, id_evento) VALUES (:idade , :nome, :id_evento)');
+            $stmt = $connect->prepare('INSERT INTO  convi."</td><td>"dos (idade, nome, id_evento) VALUES (:idade , :nome, :id_evento)');
             $stmt->execute(array(
               ':idade' => $_REQUEST['idade_ins'],
               ':nome' => $_REQUEST['nome_ins'],
@@ -493,5 +493,5 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
 
 
 <?php
-include "rodape.php";
+//include "rodape.php";
 ?>
