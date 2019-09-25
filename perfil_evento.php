@@ -33,10 +33,9 @@ include "cabecalho.php";
     $nome_empresa = $linha['nome'];
   }
 
-  $consulta = $connect->query('SELECT valor_pago, despesa FROM despesa');
+  $consulta = $connect->query('SELECT valor_pago FROM despesa');
   while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
     $valor_pago = $linha['valor_pago']; 
-    $despesa = $linha['despesa'];
   }
 ?>
 
@@ -324,7 +323,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
 <?php 
 if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'] != '' ) {
   
-  $stmt = $connect->prepare("SELECT valor_pago, despesa FROM despesa WHERE id_evento=:id");
+  $stmt = $connect->prepare("SELECT valor_pago FROM despesa WHERE id_evento=:id");
   $stmt->execute(array(
     ':id' => $_REQUEST['id'],
   )); 
@@ -390,9 +389,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
 
     try {
     
-    $stmt = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id_evento");
-    $stmt = $connect->prepare("SELECT nome FROM empresa WHERE id_empresa = :id_empresa");  
-    $stmt = $connect->prepare("SELECT valor_pago, despesa FROM despesa WHERE id_evento = :id");
+    $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and eventos.id_evento = :id");
  
         if ($stmt->execute(array(
           ':id' => $_REQUEST['id']))) {

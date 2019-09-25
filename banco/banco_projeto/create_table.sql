@@ -87,7 +87,6 @@ id_especializacao int
 
 CREATE TABLE despesa (
 valor_pago decimal,
-despesa decimal,
 id_evento int,
 id_empresa int
 );
