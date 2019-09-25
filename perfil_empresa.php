@@ -141,22 +141,23 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                                       
                                       </td><br>
 
-                                      <!-- <td><label>Especialização</label>
+                                      <td><label>Especialização</label>
                                       
-                                      <select name="lista_especializacao">
-                                        <option value="" <?=($id_especializacao == '')?'selected':''?> >Selecione</option>
+                                      <select multiple name="lista_especializacao[]">
+                                        <option value="" >Selecione</option>
                                         <?php
 
-                                          // $consulta = $connect->query('SELECT id_especializacao, descricao_esp FROM especializacao');
-                                          // while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                                          //   $id = $linha['id_especializacao'];
-                                          //   $descricao_esp = $linha['descricao_esp']; ?>
-                                            <option value=<?php //echo "$id"?> <?=($id_especializacao == $id)?'selected':''?> ><?php echo $descricao_esp; ?></option>
-                                          <?php //} 
+                                           $consulta = $connect->query('SELECT id_especializacao, descricao_esp FROM especializacao');
+                                           while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                             $id = $linha['id_especializacao'];
+                                             $descricao_esp = $linha['descricao_esp']; ?>
+                                            <option value=<?php echo "$id"?> <?=($descricao_esp == $id)?'selected':''?> ><?php echo $descricao_esp; ?></option>
+                                          <?php 
+                                        } 
                                         ?>
                                       </select>
                                       
-                                      </td><br> -->
+                                      </td><br>
 
                                       <td><label>Foto de Perfil</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/></td><br>
                                       <td><label>Descrição</label><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td><br>
@@ -190,7 +191,6 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
     $bairro = $_POST['bairro'];
     $cidade = $_POST['nome'];
     $sigla = $_POST['lista_estados'];
-    //$id_especializacao = $_POST['lista_especializacao'];
     $foto_perfil = $_POST['foto_perfil'];
     $descricao = $_POST['descricao'];
     $telefone = $_POST['telefone'];
@@ -207,7 +207,6 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
       ':bairro' => $bairro,
       ':cidade' => $cidade,
       ':lista_estados' => $sigla,
-      //':lista_especializacao' => $id_especializacao,
       ':foto_perfil' => $foto_perfil,
       ':descricao' => $descricao,
       ':telefone' => $telefone,
@@ -215,11 +214,16 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
       ));
 
 
-    // if(isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva') {
-    //   //ARRUMAR - NÃO APARECE A MENSAGEM!!!
-    //    echo "Registrado com sucesso! Por favor, realize o login novamente para continuar!";
-    //     header('Location: perfil_empresa.php');
-    //   }
+    //ARRUMAR A ALTERAÇÂO DAS ESPECIALIZAÇÕES
+    $lista_especializacao = $_POST['lista_especializacao'];
+
+foreach ($lista_especializacao as $especializacao) { 
+    $stmt = $connect->prepare("UPDATE emp_esp SET id_especializacao=:id_especializa WHERE id_empresa=:id");
+    $stmt->execute(array(
+      ':id' => $_REQUEST['id'],
+      ':id_especializa' => $especializacao
+    ));
+  }
 }
 ?>
 <!--FIM BLOCO SALVAR Empresa -->
