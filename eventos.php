@@ -105,21 +105,27 @@
   
   $consulta = $connect->query('SELECT id_empresa, id_especializacao FROM emp_esp WHERE id_especializacao="'.$especializacao.'"');
     while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    $id_empresa = $linha['id_empresa']; 
+    $id_empresa[] = $linha['id_empresa']; 
     $id_especializacao = $linha['id_especializacao']; 
     
     }
   
- 
+    foreach ($id_empresa as $value) {
+      try{
+      $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa FROM empresa WHERE id_empresa="'.$value.'"');
+      if ($consulta->execute(array(':id_empresa' => $id_empresa))) {
+        while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+          $nome_empresa = $linha['nome'];
+          $foto_perfil = $linha['foto_perfil'];
+          $telefone = $linha['telefone']; 
+          $email_empresa = $linha['email_empresa'];
 
- $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa FROM empresa WHERE id_empresa="'.$id_empresa.'"');
-  while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    $nome_empresa = $linha['nome'];
-    $foto_perfil = $linha['foto_perfil'];
-    $telefone = $linha['telefone']; 
-    $email_empresa = $linha['email_empresa'];
-
+        }
+      }
+    }catch (PDOException $erro) {
+      echo "Erro: ".$erro->getMessage();
   }
+     }
 ?>
 
 <div>
@@ -127,7 +133,7 @@
 </div>
 
 <div>
-  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($nome_empresa)."<br>".$telefone."<br>".$email_empresa;?></h4>
+  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($linha->nome_empresa)."<br>".$linha->telefone."<br>".$linha->email_empresa;?></h4>
 </div>
   
 <?php

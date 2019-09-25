@@ -55,21 +55,32 @@
         <h4 class="date">Endereço: <?php echo "Rua "."$rua".", n°"."$numero"." -  "."$bairro".". ".$cidade." - "."$sigla"."( ".$descricao_est." )<br>Complemento: "."$complemento"."."; ?></h4>
       </div><br>
 <?php
-      try{
-       $consulta = $connect->prepare('SELECT id_especializacao, descricao_esp, id_empresa FROM especializacao WHERE id_empresa=:id_empresa');
-          if ($consulta->execute(array(':id_empresa' => $id_empresa))) {?>
-            <div class="meta"><h4 class="date"> Trabalhamos com</h4></div>
-            <?php
-            while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
-              <div class="meta">
-              <h4 class="date">  <?php echo $linha->descricao_esp ?></h4>
-            </div>
-          <?php
-            }
-          }
-  }catch (PDOException $erro) {
-    echo "Erro: ".$erro->getMessage();
-}
+       $consultando = $connect->query('SELECT id_especializacao, id_empresa FROM emp_esp WHERE id_empresa ="'.$id_empresa.'"');
+       while ($linha = $consultando->fetch(PDO::FETCH_ASSOC)) {
+         $id_esp[] = $linha['id_especializacao'];
+         $id_empresa = $linha['id_empresa']; 
+       }?>      
+       
+       <div class="meta"><h4 class="date"> Trabalhamos com</h4></div> 
+      <?php foreach ($id_esp as $value) {
+        try{
+          $consulta = $connect->prepare('SELECT id_especializacao, descricao_esp FROM especializacao WHERE id_especializacao="'.$value.'"');
+             if ($consulta->execute(array(':id_esp' => $id_esp))) {?>
+               
+               <?php
+               while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
+                 <div class="meta">
+                 <h4 class="date">  <?php echo $linha->descricao_esp ?></h4>
+               </div>
+             <?php
+               }
+             }
+     }catch (PDOException $erro) {
+       echo "Erro: ".$erro->getMessage();
+   }
+      }
+
+      
 ?>     
 
 <?php
