@@ -9,7 +9,12 @@
     $nome = $rs['nome'];
     $descricao = $rs['descricao'];
   }
-
+  $stmt = $connect->query('SELECT id_empresa, nome, descricao FROM empresa WHERE id_empresa=":id"');
+  while ($rs = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $id_categoria = $rs['id_empresa']; 
+    $nome = $rs['nome'];
+    $descricao = $rs['descricao'];
+  }
 ?>
 
 <?php
@@ -33,7 +38,7 @@
             </thead>
             <tbody>
                 <tr>
-                <td> <a href="eventos.php"><?php echo utf8_encode($item); ?></a></td>
+                <td> <a href="eventos.php?acao=&id=id_empresa"><?php echo utf8_encode($item); ?></a></td>
                      
                 </tr>
             </tbody>
