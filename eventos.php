@@ -100,42 +100,46 @@
 </form>
 
 
+<div>
+  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($descricao);?></h4>
+</div>
+
 <?php 
   $especializacao = $_POST['especializacao'];
   
   $consulta = $connect->query('SELECT id_empresa, id_especializacao FROM emp_esp WHERE id_especializacao="'.$especializacao.'"');
     while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    $id_empresa[] = $linha['id_empresa']; 
+    $id_emp[] = $linha['id_empresa']; 
     $id_especializacao = $linha['id_especializacao']; 
     
     }
   
-    foreach ($id_empresa as $value) {
-      try{
-      $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa FROM empresa WHERE id_empresa="'.$value.'"');
-      if ($consulta->execute(array(':id_empresa' => $id_empresa))) {
-        while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-          $nome_empresa = $linha['nome'];
-          $foto_perfil = $linha['foto_perfil'];
-          $telefone = $linha['telefone']; 
-          $email_empresa = $linha['email_empresa'];
+    foreach ($id_emp as $value) {
+          try{
+            $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
+              if ($consulta->execute(array(':id_empresa' => $value))) {
+                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
+                  
+                  <div style="margin-top: 5%;float: left;">
+                        <div class="ui move reveal" style="margin-left: 10%;">
+                              <div class="visible content">
+                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui small image">
+                              </div>
+                              <div class="hidden content">
+                                 <h4 style="background-color: #90bdce91;"><a href="" style="text-decoration: none;color: inherit; "><?php echo utf8_encode($linha->nome)."<br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?></a>
+                                 </h4> 
+                              </div>                      
+                        </div>
+                  </div>     
+                  
+            <?php
 
-        }
-      }
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-  }
-     }
-?>
+                }
+              }
+          }catch (PDOException $erro) {
+            echo "Erro: ".$erro->getMessage();
+          }
+    }
 
-<div>
-  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($descricao);?></h4>
-</div>
-
-<div>
-  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($linha->nome_empresa)."<br>".$linha->telefone."<br>".$linha->email_empresa;?></h4>
-</div>
-  
-<?php
 include 'rodape.php';
 ?>

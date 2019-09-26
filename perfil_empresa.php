@@ -65,9 +65,7 @@
       <?php foreach ($id_esp as $value) {
         try{
           $consulta = $connect->prepare('SELECT id_especializacao, descricao_esp FROM especializacao WHERE id_especializacao="'.$value.'"');
-             if ($consulta->execute(array(':id_esp' => $id_esp))) {?>
-               
-               <?php
+             if ($consulta->execute(array(':id_especializacao' => $value))) {        
                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
                  <div class="meta">
                  <h4 class="date">  <?php echo $linha->descricao_esp ?></h4>
@@ -225,11 +223,22 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
       ));
 
 
+
+         try {
+            $stmt = $connect->prepare("DELETE FROM emp_esp WHERE id_empresa=:id");
+            $stmt->execute(array(
+              ':id' => $_REQUEST['id'],
+            ));
+          
+        }catch (PDOException $erro) {
+          echo "Erro: ".$erro->getMessage();
+        }
+        
     //ARRUMAR A ALTERAÇÂO DAS ESPECIALIZAÇÕES
     $lista_especializacao = $_POST['lista_especializacao'];
 
-foreach ($lista_especializacao as $especializacao) { 
-    $stmt = $connect->prepare("UPDATE emp_esp SET id_especializacao=:id_especializa WHERE id_empresa=:id");
+foreach ($lista_especializacao as $especializacao) {
+    $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id,:id_especializa)');
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
       ':id_especializa' => $especializacao
