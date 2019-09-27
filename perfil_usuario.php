@@ -230,24 +230,6 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 <!--- FIM BLOCO DE SALVAR  Agenda-->
 
 
-<!--BLOCO EXCLUIR DADOS Agenda -->
-<?php
-  if (isset($_REQUEST["action"]) && $_REQUEST["action"] == "del" && $_REQUEST['id'] != '') {
-    try {
-        $stmt = $connect->prepare("DELETE FROM tarefas WHERE id_tarefa=:id");
-        $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
-        ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-  } 
-?>
-<!-- FIM DO BLOCO EXCLUIR DADOS Agenda -->
-
-
-
-
 
 <!-- INICIO BLOCO MOSTRA DADOS TABELA Agenda-->
 <table class="ui fixed table" style="width: 60%;">
@@ -257,7 +239,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
         <th>Data</th>
         <th>Horario</th>
         <th>Descrição</th>
-        <th>Situação</th>
+        <th>Concluído</th>
     </tr>
 
     <?php
@@ -269,9 +251,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td>".utf8_encode($rs->situacao)."</td><td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?action=del&id=".$rs->id_tarefa."\"><i class='trash alternate icon'></i></a></td>";
+                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td><form method='post' id='concluir'><input id=check type='checkbox' onclick=\"excluir()\" value=".utf8_encode($rs->situacao)."></td></form><td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                           //."<a href=\"?action=del&id=".$rs->id_tarefa."\"><i class='trash alternate icon'></i></a></td>";
                 echo "</tr>";
             }
         } else {
@@ -314,8 +296,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_empresa.php?ver=view&id=".$rs->id_empresa."\"><i class='eye alternate icon'></i></a>"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?apaga=del&id=".$rs->id_empresa."\"><i class='trash alternate icon'></i></a></center></td>";
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                           //."<a href=\"?apaga=del&id=".$rs->id_empresa."\"><i class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";
             }
         } else {
@@ -410,7 +392,43 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR Usuario -->
 
+<script>
+  //MUDAR O CAMPO SITUACAO NA TABELA TAREFA PARA TINYINT(1)!!
+  function excluir() {
+    if (window.confirm('Deseja mesmo confirmar a conclusão da tarefa? Isso é irreversível!') ){
+      window.confirm('Excluido');
+          // try {
+          //     $stmt = $connect->prepare("SELECT situacao FROM tarefas");
+          //     $stmt->execute(array(
+          //       ':id' => $_REQUEST['id'],
+          //     ));
+          // }catch (PDOException $erro) {
+          //   echo "Erro: ".$erro->getMessage();
+          // } 
+    } else {
+      document.getElementById('check').checked = false;
+    }
+  };
+</script>
 
 <?php
 include 'rodape.php';
 ?>
+
+
+<!--BLOCO EXCLUIR DADOS Agenda -->
+<?php
+  // if (isset($_REQUEST["action"]) && $_REQUEST["action"] == "del" && $_REQUEST['id'] != '') {
+  //   try {
+  //       $stmt = $connect->prepare("DELETE FROM tarefas WHERE id_tarefa=:id");
+  //       $stmt->execute(array(
+  //         ':id' => $_REQUEST['id'],
+  //       ));
+  //   }catch (PDOException $erro) {
+  //     echo "Erro: ".$erro->getMessage();
+  //   }
+  // } 
+?>
+<!-- FIM DO BLOCO EXCLUIR DADOS Agenda -->
+
+<!--https://www.portugal-a-programar.pt/forums/topic/60927-resolvido-manipular-checkbox-em-php-sem-o-submit/-->
