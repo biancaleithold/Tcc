@@ -114,6 +114,5 @@ INSERT INTO estados (sigla,descricao_est) VALUES
 ('SE','Sergipe'),
 ('TO','Tocantins');
 
-INSERT INTO despesa (valor_pago, despesa) VALUES 
-('500.00','19500.00'); 
-
+INSERT INTO despesa (valor_pago) VALUES 
+('500.00');

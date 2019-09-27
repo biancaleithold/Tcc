@@ -323,7 +323,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
 <?php 
 if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'] != '' ) {
   
-  $stmt = $connect->prepare("SELECT valor_pago FROM despesa WHERE id_evento=:id");
+  $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago, despesa.id_despesa, empresa.id_empresa FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and despesa.id_despesa = :id");
   $stmt->execute(array(
     ':id' => $_REQUEST['id'],
   )); 
@@ -332,13 +332,22 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
 
                 echo "<tr>";
                 echo "<td>";?> 
-                <h2>Alterar Dados Convidado</h2>
-                <form method="POST" action="?acaoo=save" style="width: 90%; margin-left: 2%;">
+                <h2>Alterar Dados Despesa</h2>
+                <form method="POST" action="?acaoo=save" style="width: 150%; margin-left: 2%;">            
                   <div class="ui form">
                     <div class="fields">
                       <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
-                      <div class="twelve wide field">
-                        <input type="select" name="nome_empresa" value="<?php echo utf8_encode($rs->nome) ?>"/><br>
+                      <div class="three wide field">                        
+                        <select name="id_empresa">
+                          <?php 
+                            $conexao = $connect->prepare("SELECT id_empresa, nome FROM empresa");
+                              if ($conexao->execute()) {
+                                while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
+                                  echo "<option value=\"".$linhas->id_empresa."\">".utf8_encode($linhas->nome)."</option>";
+                                }
+                              }
+                          ?>
+                        </select>
                       </div>
                       <div class="three wide field">
                         <input type="text" name="valor_pago" value="<?php echo $rs->valor_pago ?>"/>
@@ -361,13 +370,13 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
 
 <?php 
 if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'] != '' ) {
-    $nome = $_POST['nome'];
+    $id_empresa = $_POST['id_empresa'];
     $valor_pago = $_POST['valor_pago'];
 
-    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_evento=:id");
+    $stmt = $connect->prepare("UPDATE despesa SET id_despesa=:id_despesa, id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_evento=:id");
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
-      ':nome' => $nome,
+      ':id_empresa' => $id_empresa,
       ':valor_pago' => $valor_pago
   )); 
 }
@@ -389,13 +398,13 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
 
     try {
     
-    $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and eventos.id_evento = :id");
+    $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago, despesa.id_despesa FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and despesa.id_evento = :id");
  
         if ($stmt->execute(array(
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->valor_pago."<a href=\"?acaoo=upd&id=".$rs->id_evento."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->valor_pago."<a href=\"?acaoo=updt&id=".$rs->id_despesa."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?acaoo=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
@@ -490,5 +499,5 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
 
 
 <?php
-//include "rodape.php";
+include "rodape.php";
 ?>
