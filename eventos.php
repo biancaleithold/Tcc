@@ -126,8 +126,11 @@
                                 <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui small image">
                               </div>
                               <div class="hidden content">
-                                 <h4 style="background-color: #90bdce91;"><a href="" style="text-decoration: none;color: inherit; "><?php echo utf8_encode($linha->nome)."<br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?></a>
+                               <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
+                                 <h4 style="background-color: #90bdce91;">
+                                 <?php echo utf8_encode($linha->nome)."<br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?>        
                                  </h4> 
+                                  <?php echo '</a>';?>
                               </div>                      
                         </div>
                   </div>     

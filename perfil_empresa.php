@@ -81,19 +81,23 @@
       
 ?>     
 
-<?php
-  //if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "") { ?>
     </div>
     <div class="extra content">  
-       <button class="ui basic button test"><i class="edit icon"></i> <?php
-     echo  "<a href=?acao=upd&id=".$id_empresa.">";
-    ?>Editar Perfil</a></button>
+<?php
+    $consulta = $connect->query('SELECT id_usuario FROM empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
+    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+        $id_user = $linha['id_usuario'];
+    }
+
+    if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+           <button class="ui basic button test"><i class="edit icon"></i> 
+        <?php echo  "<a href=?acao=upd&id=".$id_empresa.">"; ?>Editar Perfil</a></button>
+  <?php
+    }
+  ?>
     </div>
   </div>
 </div>
-<?php
-//}
-?>
 
 <h1 class="header">Sobre Nós</h1>
 <br><br>
@@ -234,7 +238,7 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
           echo "Erro: ".$erro->getMessage();
         }
         
-    //ARRUMAR A ALTERAÇÂO DAS ESPECIALIZAÇÕES
+    
     $lista_especializacao = $_POST['lista_especializacao'];
 
 foreach ($lista_especializacao as $especializacao) {

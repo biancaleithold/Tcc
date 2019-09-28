@@ -78,9 +78,7 @@
       <label>Senha</label>
       <input type="password" name="senha" value="<?php if(isset($_POST['senha'])) echo $_POST['senha'] ?>" placeholder="***********">
     </div>
-    <a href="">Esqueci minha senha!</a>
-    <br>
-    <br>
+   
     <a href="register_usuario.php">Ainda não tem cadastro? Cadastre-se!</a>
     <br>
     <br>
