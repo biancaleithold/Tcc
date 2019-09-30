@@ -105,6 +105,8 @@
   <?php echo $descricao; ?>
 </h5>
 
+<br><br>
+<h2 class="header">Confira eventos já realizados!</h2>
 
 
 
