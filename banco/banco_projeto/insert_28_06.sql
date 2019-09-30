@@ -77,11 +77,11 @@ INSERT INTO especializacao (descricao_esp) VALUES
 ('Salão de Beleza'),
 ('Segurança');
 
-INSERT INTO categoria_evento (nome, descricao) VALUES
+INSERT INTO categoria_evento (nome, descricao, foto1, foto2, foto3, foto4) VALUES
 ('15 anos','festa debutante bla bla'),
-('Casamento','momento especial do casal bla bla'),
+('Casamento','momento especial do casal bla bla', 'casamento1.jpg', 'casamento2.jpg', 'casamento3.jpg', 'casamento4.jpg'),
 ('Coorporativo','empresas merecem celebrar bla bla'),
-('Formatura','finalmente acabou bla bla'),
+('Formatura','finalmente acabou bla bla', 'formatura1.jpg', 'formatura2.jpg', 'formatura3.jpg', 'formatura4.jpg'),
 ('Aniversário Infantil','crianças adoram bla bla'),
 ('Aniversários','cada ano melhor bla bla');
 
