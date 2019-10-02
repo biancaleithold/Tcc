@@ -39,7 +39,7 @@ id_usuario int
 
 CREATE TABLE galeria_empresa (
 id_foto int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
-descricao_ foto varchar(200),
+descricao_foto varchar(200),
 id_empresa int
 );
 

@@ -22,6 +22,10 @@
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/estilo.css">
 
+  <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
 	<style>
 		body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		.w3-bar,h1,button {font-family: "Montserrat", sans-serif}

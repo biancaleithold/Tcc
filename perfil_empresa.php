@@ -108,15 +108,113 @@
 <br><br>
 <h2 class="header">Confira eventos já realizados!</h2>
 
+<?php 
+   $consulta = $connect->query('SELECT descricao_foto, id_empresa FROM galeria_empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
+   while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+     $id_foto = $linha['id_foto']; 
+     $descricao_foto = $linha['descricao_foto'];?>
 
-<div class="extra content">
-      <br><br>
-        <button class="ui basic button test"><i class="plus icon"></i>
-        <?php echo  "<a href=?galeria=cadastra&id=".$id_foto.">";?>Adicionar Fotos</a></button>
+
+     <div class="ui small images">
+        <img src="/imagens/galeria/<?php echo $linha->descricao_foto; ?>">
+      </div>
+
+<?php
+   }
+?>
+      
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<div class="container">
+	<div class="row">
+		<div class="row">
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                   data-target="#image-gallery">
+                    <img class="img-thumbnail"
+                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                         alt="Another alt text">
+                </a>
+            </div>
     </div>
-    </div>
-</div>
-<?php if (isset($_REQUEST['galeria']) && $_REQUEST['galeria'] == 'cadastrar'  && $_REQUEST['id'] != '' ) { }?>
+
+
+        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="image-gallery-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="image-gallery-image" class="img-responsive col-md-12" src="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                        </button>
+
+                        <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div> -->
+
+
+<!-- ARRUMAR O BR MODELO!!! -->
+<form method="post" action="">
+   <label>Adicionar Fotos em Minha Galeria</label><br><br>
+   <input type="file" multiple name="descricao_foto[]"><br><br>
+
+   <input type="submit" name="envia">
+</form>
+
+
+
+<?php
+$descricoes_fotos  = $_POST['descricao_foto'];
+
+ if (isset($_POST['envia'])) {
+   
+  try {
+    foreach ($descricoes_fotos as $descricao) { 
+      $stmt = $connect->prepare("INSERT INTO galeria_empresa (descricao_foto, id_empresa) VALUES (:descricao_foto, :id)");
+      $stmt->execute(array(
+        ':descricao_foto' => $descricao,
+        ':id' => $_REQUEST['id']     
+      )); 
+    }
+  } catch (PDOException $e) {
+    $errMsg = $e->getMessage();
+  }
+  
+  $diretorio = "imagens/galeria/";
+  
+  if(!is_dir($diretorio)){ 
+    echo "Pasta $diretorio nao existe";
+  }else{
+    $arquivo = isset($_FILES['descricao_foto']) ? $_FILES['descricao_foto'] : FALSE;
+    for ($controle = 0; $controle < count($arquivo['name']); $controle++){
+      
+      $destino = $diretorio."/".$arquivo['name'][$controle];
+      if(move_uploaded_file($arquivo['tmp_name'][$controle], $destino)){
+        echo "Upload realizado com sucesso<br>"; 
+      }else{
+        echo "Erro ao realizar upload";
+      }
+      
+    }
+  }
+ }
+  ?>
+
 <!--https://bootsnipp.com/snippets/P2gor-->
 
 

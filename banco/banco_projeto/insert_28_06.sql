@@ -78,12 +78,12 @@ INSERT INTO especializacao (descricao_esp) VALUES
 ('Segurança');
 
 INSERT INTO categoria_evento (nome, descricao, foto1, foto2, foto3, foto4) VALUES
-('15 anos','festa debutante bla bla', '.jpg', '15anos1.jpg', '15anos2.jpg','15anos3.jpg', '15anos4.jpg'),
+('15 anos','festa debutante bla bla','15anos1.jpg', '15anos2.jpg','15anos3.jpg', '15anos4.jpg'),
 ('Casamento','momento especial do casal bla bla', 'casamento1.jpg', 'casamento2.jpg', 'casamento3.jpg', 'casamento4.jpg'),
 ('Coorporativo','empresas merecem celebrar bla bla', 'corporativa1.png', 'corporativa2.jpg', 'corporativa3.jpg', 'corporativa4.jpg'),
 ('Formatura','finalmente acabou bla bla', 'formatura1.jpg', 'formatura2.jpg', 'formatura3.jpg', 'formatura4.jpg'),
 ('Aniversário Infantil','crianças adoram bla bla', 'infantil3.jpg', 'infantil2.jpg', 'infantil1.jpg', 'infantil4.jpg'),
-('Aniversários','cada ano melhor bla bla');
+('Aniversários','cada ano melhor bla bla','aniversario1.jpg','aniversario2.jpg','aniversario3.jpg','aniversario4.jpg');
 
 INSERT INTO estados (sigla,descricao_est) VALUES 
 ('AC','Acre'),
