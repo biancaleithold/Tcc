@@ -58,7 +58,17 @@
   </div>
   <div class="image content">
     <div class="image">
-      <img style="width: 45%;margin-left: 27%;" src="imagens/<?php echo $foto_perfil;?>">
+    <?php
+        if (!empty($foto_perfil)) {
+      ?>
+          <img style="width: 45%;margin-left: 27%;" src="imagens/<?php echo $foto_perfil;?>">
+      <?php
+        }else{
+      ?>
+          <img style="width: 45%;margin-left: 27%;" src="imagens/perfil.png">
+      <?php
+        }
+      ?>
     </div>
     <div class="description"  style="width: 100%;margin-top: 9%;">
      <?php echo $nome; ?>, Tem Certeza que deseja excluir sua conta? <br> Isso apagará todos os seus dados.

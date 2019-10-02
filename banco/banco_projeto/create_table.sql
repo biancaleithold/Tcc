@@ -37,6 +37,11 @@ sigla varchar(2),
 id_usuario int
 );
 
+CREATE TABLE galeria_empresa (
+id_foto int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
+descricao_ foto varchar(200),
+id_empresa int
+);
 
 CREATE TABLE especializacao (
 id_especializacao int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
@@ -98,6 +103,7 @@ ALTER TABLE emp_categ ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa
 ALTER TABLE convidados ADD FOREIGN KEY(id_evento) REFERENCES eventos (id_evento) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE empresa ADD FOREIGN KEY(sigla) REFERENCES estados (sigla) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE empresa ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE galeria_empresa ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE especializacao ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE eventos ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE emp_esp ADD FOREIGN KEY(id_empresa) REFERENCES empresa (id_empresa) ON DELETE CASCADE ON UPDATE CASCADE;

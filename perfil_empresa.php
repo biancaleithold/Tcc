@@ -109,6 +109,16 @@
 <h2 class="header">Confira eventos já realizados!</h2>
 
 
+<div class="extra content">
+      <br><br>
+        <button class="ui basic button test"><i class="plus icon"></i>
+        <?php echo  "<a href=?galeria=cadastra&id=".$id_foto.">";?>Adicionar Fotos</a></button>
+    </div>
+    </div>
+</div>
+<?php if (isset($_REQUEST['galeria']) && $_REQUEST['galeria'] == 'cadastrar'  && $_REQUEST['id'] != '' ) { }?>
+<!--https://bootsnipp.com/snippets/P2gor-->
+
 
 
 <?php
