@@ -86,6 +86,7 @@ id_especializacao int
 );
 
 CREATE TABLE despesa (
+id_despesa int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
 valor_pago decimal,
 id_evento int,
 id_empresa int

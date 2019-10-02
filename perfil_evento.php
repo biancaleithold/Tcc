@@ -333,10 +333,10 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
                 echo "<tr>";
                 echo "<td>";?> 
                 <h2>Alterar Dados Despesa</h2>
-                <form method="POST" action="?acaoo=save" style="width: 150%; margin-left: 2%;">            
+                <form method="POST" action="?acaoo=salvando" style="width: 150%; margin-left: 2%;">            
                   <div class="ui form">
                     <div class="fields">
-                      <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
+                      <input type="hidden" name="id" value="<?php echo $rs->id_despesa ?>"/>
                       <div class="three wide field">                        
                         <select name="id_empresa">
                           <?php 
@@ -353,10 +353,10 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
                         <input type="text" name="valor_pago" value="<?php echo $rs->valor_pago ?>"/>
                       </div>
                       <div>
-                        <input type="button" name="save" value="Cancelar" class="ui inverted red button"/>
+                        <input type="button" name="cancel" value="Cancelar" class="ui inverted red button"/>
                       </div>
                       <div class="field">
-                        <input type="submit" name="save" value="Salvar" class="ui inverted green button"/>
+                        <input type="submit" name="salvando" value="Salvar" class="ui inverted green button"/>
                       </div>
                     </div>
                   </div>
@@ -369,11 +369,11 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
 ?>
 
 <?php 
-if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'] != '' ) {
+if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST['id'] != '' ) {
     $id_empresa = $_POST['id_empresa'];
     $valor_pago = $_POST['valor_pago'];
 
-    $stmt = $connect->prepare("UPDATE despesa SET id_despesa=:id_despesa, id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_evento=:id");
+    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_despesa=:id");
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
       ':id_empresa' => $id_empresa,
@@ -406,14 +406,14 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->valor_pago."<a href=\"?acaoo=updt&id=".$rs->id_despesa."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acaoo=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?acaooo=delet&id=".$rs->id_despesa."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
+            }
                 $despesa = $rs->valor_max_pagar - $rs->valor_pago;
                 echo "<td style=\"font-size: 150%;\"><b> Saldo Atual</b></td>";
                 echo "<td style=\"font-size: 150%;\"><b>" .$despesa. "</b></td>";
               echo "</table>";
-            }
         } else {
             echo "Erro: Não foi possível recuperar os dados do banco de dados";
         }
@@ -435,9 +435,9 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
 
 <!--BLOCO EXCLUIR DADOS DESPESAS -->
 <?php
-  if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id'] != '') {
+  if (isset($_REQUEST["acaooo"]) && $_REQUEST["acaooo"] == "delet" && $_REQUEST['id'] != '') {
     try {
-        $stmt = $connect->prepare("DELETE FROM convidados WHERE id_convidado=:id");
+        $stmt = $connect->prepare("DELETE FROM despesa WHERE id_despesa=:id");
         $stmt->execute(array(
           ':id' => $_REQUEST['id'],
         ));
@@ -454,7 +454,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'save'  && $_REQUEST['id'
 <?php
 if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'] != '' ) {
 
-  if(!isset($_POST['nome_ins'])) {
+  if(!isset($_POST['valor_pago'])) {
             
                 echo "<tr>";
                 echo "<td>";?>
@@ -465,10 +465,20 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
                       <div class="fields">
                         <input type="hidden" name="id" value="<?php echo $_REQUEST['id'] ?>"/>
                           <div class="twelve wide field">
-                              <td><label>Nome do Convidado</label><input type="text" name="nome_ins"/></td>
+                            <label>Empresa</label>
+                            <select name="id_empresa">
+                              <?php 
+                                $conexao = $connect->prepare("SELECT id_empresa, nome FROM empresa");
+                                  if ($conexao->execute()) {
+                                    while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
+                                      echo "<option value=\"".$linhas->id_empresa."\">".utf8_encode($linhas->nome)."</option>";
+                                    }
+                                  }
+                              ?>
+                            </select>
                           </div>
                           <div class="three wide field">
-                              <td><label>Idade</label><input type="text" name="idade_ins"/></td>
+                              <td><label>Valor do Contrato</label><input type="text" name="valor_pago"/></td>
                           </div>
                           <div>
                               <input type="submit" name="insere" value="Adicionar" class="ui inverted green button" />
@@ -481,10 +491,10 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
   } else {
     
       try{
-            $stmt = $connect->prepare('INSERT INTO  convi."</td><td>"dos (idade, nome, id_evento) VALUES (:idade , :nome, :id_evento)');
+            $stmt = $connect->prepare('INSERT INTO  despesa (valor_pago, id_empresa, id_evento) VALUES (:valor_pago, :id_empresa, :id_evento)');
             $stmt->execute(array(
               ':idade' => $_REQUEST['idade_ins'],
-              ':nome' => $_REQUEST['nome_ins'],
+              ':id_empresa' => $_REQUEST['nome_ins'],
               ':id_evento' => $_REQUEST['id']
             )); 
           }catch (PDOException $erro) {
