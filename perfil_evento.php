@@ -35,7 +35,7 @@ include "cabecalho.php";
 
   $consulta = $connect->query('SELECT valor_pago FROM despesa');
   while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    $valor_pago = $linha['valor_pago']; 
+    $valor_pago[] = $linha['valor_pago'];
   }
 ?>
 
@@ -399,21 +399,34 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
     try {
     
     $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago, despesa.id_despesa FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and despesa.id_evento = :id");
- 
+    
         if ($stmt->execute(array(
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->valor_pago."<a href=\"?acaoo=updt&id=".$rs->id_despesa."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome)."</td><td>R$ ".$rs->valor_pago."<a href=\"?acaoo=updt&id=".$rs->id_despesa."\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?acaooo=delet&id=".$rs->id_despesa."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
+                $valores_pagos[] = $rs->valor_pago;
+                $despesa = $rs->valor_max_pagar - array_sum($valores_pagos);
             }
-                $despesa = $rs->valor_max_pagar - $rs->valor_pago;
+              if (empty($despesa)) {
+                $stmt = $connect->prepare("SELECT id_evento, valor_max_pagar FROM eventos WHERE eventos.id_evento = :id");
+
+                if ($stmt->execute(array(':id' => $_REQUEST['id']))) {
+                  while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    echo "<td style=\"font-size: 150%;\"><b> Saldo Atual</b></td>";
+                    echo "<td style=\"font-size: 150%;\"><b>R$ " .$rs->valor_max_pagar. "</b></td>";
+                    echo "</table>";
+                  }
+                }                
+              }else{
                 echo "<td style=\"font-size: 150%;\"><b> Saldo Atual</b></td>";
-                echo "<td style=\"font-size: 150%;\"><b>" .$despesa. "</b></td>";
-              echo "</table>";
+                echo "<td style=\"font-size: 150%;\"><b>R$ " .$despesa. "</b></td>";
+                echo "</table>";
+              }
         } else {
             echo "Erro: Não foi possível recuperar os dados do banco de dados";
         }
