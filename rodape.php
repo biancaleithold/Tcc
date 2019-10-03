@@ -57,6 +57,9 @@ function myFunction() {
 
 </script>
 
+
+
+
 <!-- <script>
 let modalId = $('#image-gallery');
 

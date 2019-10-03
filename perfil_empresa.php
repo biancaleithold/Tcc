@@ -105,27 +105,53 @@
   <?php echo $descricao; ?>
 </h5>
 
+<?php
+  if(isset($_POST['submit']) ){
+    $arr = filter( $_POST['excluir'] );
+
+    $sql = $connect->prepare('DELETE FROM galeria_empresa WHERE id_foto IN('.implode( ',', $arr ).')');
+    $sql->execute(array(
+          $arr = filter( $_POST['excluir'] )
+        ));
+  }
+  function filter( $dados ){
+    $arr = Array();
+    foreach( $dados AS $dado ) $arr[] = (int)$dado;
+    return $arr;
+  }
+?>
+
 <br><br>
-<h2 class="header">Confira eventos já realizados!</h2>
+<h2 class="header">Confira fotos de eventos já realizados!</h2>
+ <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+<h4 class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</h4>
+<?php } ?>
 
 <?php 
-   $consulta = $connect->query('SELECT descricao_foto, id_empresa FROM galeria_empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
+   $consulta = $connect->query('SELECT id_foto,descricao_foto, id_empresa FROM galeria_empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
      $id_foto = $linha['id_foto']; 
      $descricao_foto = $linha['descricao_foto'];?>
 
+          <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+              <form method="post" action="" style="float: inherit;">
+                <input style="float: left; margin-left: 0.5%" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
+           <div class="ui small images" style="float: left;margin-left: 0.5%">
+                <img src="imagens/galeria/<?php echo $descricao_foto; ?>">
+           </div>
+            
 
-     <div class="ui small images">
-        <img src="/imagens/galeria/<?php echo $linha->descricao_foto; ?>">
-      </div>
+<?php } ?>
 
-<?php
-   }
-?>
-      
+               <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+                 <label>Excluir Fotos Selecionadas</label>
+                <input type="submit" name="submit" value="Excluir">
+              </form> <?php } ?>
+
+     
 
 
-<!------ Include the above in your HEAD tag ---------->
+<!-- Include the above in your HEAD tag -->
 
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <div class="container">
@@ -169,32 +195,20 @@
 
 
 <!-- ARRUMAR O BR MODELO!!! -->
-<form method="post" action="">
-   <label>Adicionar Fotos em Minha Galeria</label><br><br>
-   <input type="file" multiple name="descricao_foto[]"><br><br>
-
-   <input type="submit" name="envia">
+<?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+<div style="float: right;margin-top: 15%;">
+<form enctype="multipart/form-data" method="post" action="">
+   <h3><strong>Adicionar Fotos em Minha Galeria</strong></h3>
+   <input type="file" multiple name="descricao_foto[]" class="ui inverted button"><br>
+   <input type="submit" name="envia" class="ui inverted green button" style="float: right;margin-right: 24%">
 </form>
+</div>
 
-
+<?php } ?>
 
 <?php
-$descricoes_fotos  = $_POST['descricao_foto'];
-
  if (isset($_POST['envia'])) {
    
-  try {
-    foreach ($descricoes_fotos as $descricao) { 
-      $stmt = $connect->prepare("INSERT INTO galeria_empresa (descricao_foto, id_empresa) VALUES (:descricao_foto, :id)");
-      $stmt->execute(array(
-        ':descricao_foto' => $descricao,
-        ':id' => $_REQUEST['id']     
-      )); 
-    }
-  } catch (PDOException $e) {
-    $errMsg = $e->getMessage();
-  }
-  
   $diretorio = "imagens/galeria/";
   
   if(!is_dir($diretorio)){ 
@@ -206,11 +220,23 @@ $descricoes_fotos  = $_POST['descricao_foto'];
       $destino = $diretorio."/".$arquivo['name'][$controle];
       if(move_uploaded_file($arquivo['tmp_name'][$controle], $destino)){
         echo "Upload realizado com sucesso<br>"; 
+        $descricoes_fotos[]  = $arquivo['name'][$controle];
       }else{
         echo "Erro ao realizar upload";
-      }
-      
+      }   
     }
+  }
+
+  try {
+    foreach ($descricoes_fotos as $descricao) { 
+      $stmt = $connect->prepare("INSERT INTO galeria_empresa (descricao_foto, id_empresa) VALUES (:descricao_foto, :id)");
+      $stmt->execute(array(
+        ':descricao_foto' => $descricao,
+        ':id' => $_REQUEST['id']     
+      )); 
+    }
+  } catch (PDOException $e) {
+    $errMsg = $e->getMessage();
   }
  }
   ?>
