@@ -134,21 +134,29 @@
      $id_foto = $linha['id_foto']; 
      $descricao_foto = $linha['descricao_foto'];?>
 
-          <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-              <form method="post" action="" style="float: inherit;">
-                <input style="float: left; margin-left: 0.5%" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
-           <div class="ui small images" style="float: left;margin-left: 0.5%">
-                <img src="imagens/galeria/<?php echo $descricao_foto; ?>">
-           </div>
+<?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+              
+                
+        <div class="container" style="float:left;margin: 0.5%;">
+            <form method="post" action="">
+                    <input style="float: left;" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
+          <img id="<?php echo $count_img ?>" src="imagens/galeria/<?php echo $descricao_foto; ?>" width="300" height="200" onclick="clique(this)">
+        
+                    <div id="janelaModal" class="modalVisual">
+                          <span class="fechar">x</span>
+                          <img class="modalConteudo" id="imgModal">
+                          <div id="txtImg"></div>
+                    </div>
+              
+        </div>
             
-
 <?php 
 $count_img++;
   } ?>
 
                <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-                 <label>Excluir Fotos Selecionadas</label>
-                <input type="submit" name="submit" value="Excluir">
+                <div class="arruma_galeria"><label>Excluir Fotos Selecionadas</label>
+                <input type="submit" name="submit" value="Excluir"></div>
               </form> <?php } ?>
 
      
@@ -199,7 +207,7 @@ $count_img++;
 
 <!-- ARRUMAR O BR MODELO!!! -->
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-<div style="float: right;margin-top: 15%;">
+<div style="float: right;margin-top: 5%;">
 <form enctype="multipart/form-data" method="post" action="">
    <h3><strong>Adicionar Fotos em Minha Galeria</strong></h3>
    <input type="file" multiple name="descricao_foto[]" class="ui inverted button"><br>
