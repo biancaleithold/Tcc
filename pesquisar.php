@@ -79,79 +79,7 @@
       }
     ?>
 
-  <?php
-    if(isset($_POST['pesquisar'])) {
-       
-       $pesquisa = $connect->prepare('SELECT id_evento, nome_evento, descricao FROM eventos  WHERE nome_evento LIKE :pesquisar');
-       $pesquisa->execute(array(
-         ':pesquisar' => '%'.$_POST['pesquisar'].'%'
-       ));
-        $resultado_pesquisa = $pesquisa->fetchAll();
-        ?>
-          
-         <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;" >
-            <thead>
-    
-                <tr>
-                <th>Eventos</th>
-                   
-                </tr>
-              
-            </thead>
-            <?php
-        foreach ($resultado_pesquisa as $key => $item ) {
-        ?>
-            <tbody>
-                <tr>
-                     <td> <?php echo '<a href="eventos.php?id='.$item['id_evento'].'">'.utf8_encode($item['nome_evento']); ?></a></td>
-                    
-                </tr>
-               
-            </tbody>
 
-            <?php 
-        
-      } ?>
-      </table>
-
-      <?php
-    }
-  ?>
-    <?php
-    if(isset($_POST['pesquisar'])) {
-       
-       $pesquisa = $connect->prepare('SELECT id_evento, descricao, nome_evento FROM eventos  WHERE descricao LIKE :pesquisar');
-       $pesquisa->execute(array(
-         ':pesquisar' => '%'.$_POST['pesquisar'].'%'
-       ));
-        $resultado_pesquisa = $pesquisa->fetchAll();
-        ?>
-
-         <table class="ui orange table" style="width:30%; float:left;  margin-left: 10%;">
-            <thead>
-                <tr>
-                     <th>Descrição Eventos</th>
-                </tr>
-                
-            </thead>
-            <?php
-        foreach ($resultado_pesquisa as $key => $item ) {
-        ?>
-            <tbody>
-                <tr>
-                <td> <?php echo '<a href="eventos.php?id='.$item['id_evento'].'">'.utf8_encode($item['descricao']); ?></a></td>
-                     
-                </tr>
-            </tbody>
-
-        </table>
-
-         <?php 
-        
-        }
-      }
-    ?>
-    
     <?php
       if(isset($_POST['pesquisar'])) {
    

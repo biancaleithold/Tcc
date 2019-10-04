@@ -51,6 +51,7 @@
 
       <select class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-light-blue" onchange="location = this.value;">
         <option value="eventos.php?acao=aniversario&id=6">Aniversários</option>
+        <option value="eventos.php?acao=aniversario&id=6">Aniversários</option>
         <option value="eventos.php?acao=debutante&id=1">15 Anos</option>
         <option value="eventos.php?acao=infantil&id=5">Infantil</option>
       </select>
