@@ -88,7 +88,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
 <?php
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 ?>
-                <form method="POST" action="?act=salvar" style="width: 100%; margin-left: 3%;">
+                <form method="POST" action="?act=salvar" style="width: 93.5%; margin-left: 3%;">
                   <div class="ui form">
                     <div class="two fields">
                       <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
@@ -110,12 +110,11 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
                       <div class="field">
                         <label>Valor Máximo da Festa</label><input type="text" name="valor_max_pagar" value="<?php echo $rs->valor_max_pagar ?>"/>
                       </div>
-                      <div class="field" style="margin-top: 1.5%">
-                        <input type="button" value="Cancelar" class="ui inverted red button"/>
-                      </div>
-                      <div class="field" style="margin-top: 1.5%">
-                        <input type="submit" name="salvar" value="Salvar" class="ui inverted green button"/>
-                      </div>
+                      
+                      <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
+                                            
+                      <input type="submit" name="salvar" value="Salvar" class="ui inverted green button" style="margin-top: 1.5%"/>
+                      
                     </div>
                   </div>
                 </form>
@@ -145,6 +144,13 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'salvar'  && $_REQUEST['id'] 
       ':dia' => $dia,
       ':valor_max_pagar' => $valor_max_pagar
   ));
+    
+  $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
+    if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
+      while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
+      }
+    }   
 }
 ?>
 <!--FIM BLOCO DE SALVAR Eventos-->
@@ -176,12 +182,11 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                       <div class="three wide field">
                         <label>Idade</label><input type="text" name="idade" value="<?php echo $rs->idade ?>"/>
                       </div>
-                      <div class="field">
-                        <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 22%" />
-                      </div>
-                      <div class="field">
-                        <input type="submit" name="save" value="Salvar" class="ui inverted green button" style="margin-top: 25.5%"/>
-                      </div>
+                      
+                      <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                      
+                      
+                      <input type="submit" name="save" value="Salvar" class="ui inverted green button" style="margin-top: 3%"/>
+                      
                     </div>
                   </div>
                 </form>
@@ -193,6 +198,14 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
 
 <?php 
 if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {
+  
+    $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
+    if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
+      while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
+      }
+    }
+
     $nome = $_POST['nome'];
     $idade = $_POST['idade'];
 
@@ -202,6 +215,8 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] 
       ':nome' => $nome,
       ':idade' => $idade
   )); 
+    
+     
 }
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR Convidados -->
@@ -290,12 +305,11 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
                           <div class="three wide field">
                               <label>Idade</label><input type="text" name="idade_ins"/>
                           </div>
-                          <div class="field">
-                            <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 22.5%"/>
-                          </div>
-                          <div class="field">
-                              <input type="submit" name="insere" value="Adicionar" class="ui inverted green button" style="margin-top: 22%" />
-                          </div>
+
+                          <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%"/>
+
+                          <input type="submit" name="insere" value="Adicionar" class="ui inverted green button" style="margin-top: 3%" />
+                          
                       </div>
                     </div>
                 <?php 
@@ -313,6 +327,13 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
           }catch (PDOException $erro) {
               echo "Erro: ".$erro->getMessage();
           }
+          
+          $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
+          if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
+            while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
+            echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
+            }
+          } 
         }
   }
 
@@ -357,12 +378,11 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
                       <div class="three wide field">
                         <label>Valor do Contrato</label><input type="text" name="valor_pago" value="<?php echo $rs->valor_pago ?>"/>
                       </div>
-                      <div class="field">
-                        <input type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 22%" />
-                      </div>
-                      <div class="field">
-                        <input type="submit" name="salvando" value="Salvar" class="ui inverted green button" style="margin-top: 22.5%"/>
-                      </div>
+                      
+                      <input type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%" />
+                      
+                      <input type="submit" name="salvando" value="Salvar" class="ui inverted green button" style="margin-top: 1.5%"/>
+                      
                     </div>
                   </div>
                 </form>
@@ -375,6 +395,13 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
 
 <?php 
 if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST['id'] != '' ) {
+  $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
+    if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
+      while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
+      }
+    } 
+
     $id_empresa = $_POST['id_empresa'];
     $valor_pago = $_POST['valor_pago'];
 
@@ -383,7 +410,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
       ':id' => $_REQUEST['id'],
       ':id_empresa' => $id_empresa,
       ':valor_pago' => $valor_pago
-  )); 
+  ));  
 }
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR DESPESAS -->
@@ -480,7 +507,7 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
                 echo "<td>";?>
                  <br><br><br>
                  <h2 style="margin-left: 2%;">Adicionar Despesa</h2>
-                 <form method="POST" action="?acaodespesa=inseredespesa" style="width: 90%; margin-left: 3%;">
+                 <form method="POST" action="" style="width: 90%; margin-left: 3%;">
                     <div class="ui form">
                       <div class="fields">
                         <input type="hidden" name="id" value="<?php echo $_REQUEST['id'] ?>"/>
@@ -500,15 +527,14 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
                           <div class="five wide field">
                               <td><label>Valor do Contrato</label><input type="text" name="valor_pago"/></td>
                           </div>
-                          <div class="field">
-                            <input type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 22%" />
-                          </div>
-                          <div class="field">
-                              <input type="submit" name="inseredespesa" value="Adicionar" class="ui inverted green button" style="margin-top: 22%;" />
-                          </div>
+
+                          <input type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                          
+                             
+                          <input type="submit" name="inseredespesa" value="Adicionar" class="ui inverted green button" style="margin-top: 3%;" />
+
                       </div>
                     </div>
-                <?php 
+                <?php                 
                 echo "</td>";
                 echo "</tr>";
   } else {
@@ -522,6 +548,12 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
             )); 
           }catch (PDOException $erro) {
               echo "Erro: ".$erro->getMessage();
+          }
+          $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
+          if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
+            while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
+            echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
+            }
           }
         }
   }
