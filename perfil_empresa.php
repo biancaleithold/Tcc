@@ -41,7 +41,7 @@
       <img src="imagens/perfil.png">
     </div>
     <div class="content">
-      <h1 class="header">Nome: <?php echo $nome; ?></h1>
+      <h1 class="header">Nome: <?php echo utf8_encode($nome); ?></h1>
       <div class="meta">
         <h4 class="date">Email: <?php echo $email_empresa; ?></h4>
       </div><br>
@@ -52,7 +52,7 @@
         <h4 class="date">Telefone: <?php echo $telefone; ?></h4>
       </div><br>
       <div class="meta">
-        <h4 class="date">Endereço: <?php echo "Rua "."$rua".", n°"."$numero"." -  "."$bairro".". ".$cidade." - "."$sigla"."( ".$descricao_est." )<br>Complemento: "."$complemento"."."; ?></h4>
+        <h4 class="date">Endereço: <?php echo "Rua ".utf8_encode($rua).", n°"."$numero"." -  ".utf8_encode($bairro).". ".utf8_encode($cidade)." - "."$sigla"."( ".utf8_encode($descricao_est)." )<br>Complemento: "."$complemento"."."; ?></h4>
       </div><br>
 <?php
        $consultando = $connect->query('SELECT id_especializacao, id_empresa FROM emp_esp WHERE id_empresa ="'.$id_empresa.'"');
@@ -68,7 +68,7 @@
              if ($consulta->execute(array(':id_especializacao' => $value))) {        
                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
                  <div class="meta">
-                 <h4 class="date">  <?php echo $linha->descricao_esp ?></h4>
+                 <h4 class="date">  <?php echo utf8_encode($linha->descricao_esp) ?></h4>
                </div>
              <?php
                }
@@ -129,6 +129,7 @@
 
 <?php 
    $consulta = $connect->query('SELECT id_foto,descricao_foto, id_empresa FROM galeria_empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
+   $count_img = 0;
    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
      $id_foto = $linha['id_foto']; 
      $descricao_foto = $linha['descricao_foto'];?>
@@ -141,7 +142,9 @@
            </div>
             
 
-<?php } ?>
+<?php 
+$count_img++;
+  } ?>
 
                <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
                  <label>Excluir Fotos Selecionadas</label>

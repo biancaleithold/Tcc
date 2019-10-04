@@ -33,7 +33,7 @@
       ?>
     </div>
     <div class="content">
-      <h1 class="header">Nome: <?php echo $nome; ?></h1>
+      <h1 class="header">Nome: <?php echo utf8_encode($nome); ?></h1>
       <div class="meta">
         <h4 class="date">Email: <?php echo $email; ?></h4>
       </div>
@@ -71,7 +71,7 @@
       ?>
     </div>
     <div class="description"  style="width: 100%;margin-top: 9%;">
-     <?php echo $nome; ?>, Tem Certeza que deseja excluir sua conta? <br> Isso apagará todos os seus dados.
+     <?php echo utf8_encode($nome); ?>, Tem Certeza que deseja excluir sua conta? <br> Isso apagará todos os seus dados.
     </div>
   </div>
   <div class="actions">
