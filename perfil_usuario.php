@@ -306,8 +306,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_empresa.php?ver=view&id=".$rs->id_empresa."\"><i class='eye alternate icon'></i></a>"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-                           //."<a href=\"?apaga=del&id=".$rs->id_empresa."\"><i class='trash alternate icon'></i></a></center></td>";
+                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?apaga=del&id=".$rs->id_empresa."\"><i class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";
             }
         } else {

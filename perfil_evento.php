@@ -93,7 +93,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
                     <div class="two fields">
                       <input type="hidden" name="id" value="<?php echo $rs->id_evento ?>"/>
                       <div class="field">
-                        <label>Nome Evento</label><input type="text" name="nome_evento" value="<?php echo $rs->nome_evento ?>"/>
+                        <label>Nome Evento</label><input type="text" name="nome_evento" value="<?php echo utf8_encode($rs->nome_evento) ?>"/>
                       </div>
                       <div class="field">
                         <label>Hora</label><input type="time" name="hora" value="<?php echo $rs->hora ?>"/>
@@ -102,16 +102,16 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
                         <label>Data</label><input type="date" name="dia" value="<?php echo $rs->dia ?>"/>
                       </div>
                       <div class="field">
-                        <label>Local</label><input type="text" name="local" value="<?php echo $rs->local ?>"/>
+                        <label>Local</label><input type="text" name="local" value="<?php echo utf8_encode($rs->local) ?>"/>
                       </div>
                       <div class="field">
-                        <label>Descrição</label><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/>
+                        <label>Descrição</label><input type="text" name="descricao" value="<?php echo utf8_encode($rs->descricao) ?>"/>
                       </div>
                       <div class="field">
                         <label>Valor Máximo da Festa</label><input type="text" name="valor_max_pagar" value="<?php echo $rs->valor_max_pagar ?>"/>
                       </div>
                       
-                      <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
+                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
                                             
                       <input type="submit" name="salvar" value="Salvar" class="ui inverted green button" style="margin-top: 1.5%"/>
                       
@@ -183,7 +183,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                         <label>Idade</label><input type="text" name="idade" value="<?php echo $rs->idade ?>"/>
                       </div>
                       
-                      <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                      
+                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                      
                       
                       <input type="submit" name="save" value="Salvar" class="ui inverted green button" style="margin-top: 3%"/>
                       
@@ -199,12 +199,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
 <?php 
 if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {
   
-    $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
-    if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
-      while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
-      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
-      }
-    }
+    
 
     $nome = $_POST['nome'];
     $idade = $_POST['idade'];
@@ -306,7 +301,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
                               <label>Idade</label><input type="text" name="idade_ins"/>
                           </div>
 
-                          <input type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%"/>
+                          <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%"/>
 
                           <input type="submit" name="insere" value="Adicionar" class="ui inverted green button" style="margin-top: 3%" />
                           
@@ -327,14 +322,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
           }catch (PDOException $erro) {
               echo "Erro: ".$erro->getMessage();
           }
-          
-          $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
-          if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
-            while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
-            echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
-            }
-          } 
-        }
+          }
   }
 
 ?>
@@ -379,8 +367,8 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
                         <label>Valor do Contrato</label><input type="text" name="valor_pago" value="<?php echo $rs->valor_pago ?>"/>
                       </div>
                       
-                      <input type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%" />
-                      
+                      <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%" />
+                                                                
                       <input type="submit" name="salvando" value="Salvar" class="ui inverted green button" style="margin-top: 1.5%"/>
                       
                     </div>
@@ -390,17 +378,12 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
                 echo "</td>";
                 echo "</tr>";
             }
+
 }
 ?>
 
 <?php 
-if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST['id'] != '' ) {
-  $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
-    if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
-      while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
-      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
-      }
-    } 
+if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST['id'] != '' ) { 
 
     $id_empresa = $_POST['id_empresa'];
     $valor_pago = $_POST['valor_pago'];
@@ -410,7 +393,9 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
       ':id' => $_REQUEST['id'],
       ':id_empresa' => $id_empresa,
       ':valor_pago' => $valor_pago
-  ));  
+  ));              
+                    
+      
 }
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR DESPESAS -->
@@ -528,7 +513,7 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
                               <td><label>Valor do Contrato</label><input type="text" name="valor_pago"/></td>
                           </div>
 
-                          <input type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                          
+                          <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                          
                              
                           <input type="submit" name="inseredespesa" value="Adicionar" class="ui inverted green button" style="margin-top: 3%;" />
 
@@ -549,12 +534,7 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
           }catch (PDOException $erro) {
               echo "Erro: ".$erro->getMessage();
           }
-          $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
-          if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
-            while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
-            echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
-            }
-          }
+          
         }
   }
 
