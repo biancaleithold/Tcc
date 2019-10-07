@@ -32,16 +32,16 @@
   </ol>
   <div class="carousel-inner" >
     <div class="carousel-item active" >
-      <img class="d-block w-100" src="imagens/casamento.jpg" alt="First slide" >
+      <img class="d-block w-100" src="imagens/casamento_sobre_nos.jpg" alt="First slide" >
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/aniversario.jpg" alt="Second slide">
+      <img class="d-block w-100" src="imagens/infantil_sobre_nos.jpg" alt="Second slide">
     </div>
     <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/infantil.jpg" alt="Third slide" >
+      <img class="d-block w-100" src="imagens/corporativa_sobre_nos.jpg" alt="Third slide" >
     </div>
      <div class="carousel-item" >
-      <img class="d-block w-100" src="imagens/fomatura.jpg" alt="Fourth slide" >
+      <img class="d-block w-100" src="imagens/formatura_sobre_nos.jpg" alt="Fourth slide" >
     </div>
   </div>
   <a class="carousel-control-prev" href="#sol" role="button" data-slide="prev">
