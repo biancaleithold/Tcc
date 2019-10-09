@@ -52,7 +52,7 @@ id_empresa int
 CREATE TABLE categoria_evento (
 id_categoria int NOT NULL  AUTO_INCREMENT PRIMARY KEY,
 nome varchar(50),
-descricao varchar(200),
+descricao longtext(),
 foto1 varchar(100),
 foto2 varchar(100),
 foto3 varchar(100),

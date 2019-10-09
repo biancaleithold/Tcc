@@ -127,7 +127,7 @@
 
 
 <!-- BLOCO MOSTRA DADOS TABELA Eventos-->
-<table class="ui fixed table" style="width: 60%;">
+<table class="ui fixed table" style="width: 60%;float:right; margin-right:14%">
   <h1 class="header">Meus Eventos</h1>
     <tr>
         <th>Nome do Evento</th>
@@ -160,7 +160,7 @@
 <!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
  
   <a href="register_evento.php">
-    <button class="ui blue basic button" style="float: right; margin-right: 3%;">
+    <button class="ui blue basic button" style="float: right; margin-right: 14%;">
       <i class="icon plus"></i>
         Cadastrar Evento
     </button>
@@ -202,7 +202,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
                         <input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/>
                       </div>
                       <div>
-                        <input type="button" name="save" value="Cancelar" class="ui inverted red button"/>
+                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
                       </div>
                       <div class="field">
                         <input type="submit" name="save" value="Salvar" class="ui inverted green button" />
@@ -242,7 +242,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
 <!-- INICIO BLOCO MOSTRA DADOS TABELA Agenda-->
-<table class="ui fixed table" style="width: 60%;">
+<table class="ui fixed table" style="width: 60%; float:right; margin-right:14%">
   <h1 class="header">Minha Agenda</h1>
     <tr>
         <th>Título</th>
@@ -278,7 +278,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
  <a href="register_tarefa.php">     
-    <button class="ui blue basic button" style="float: right; margin-right: 3%;">
+    <button class="ui blue basic button" style="float: right; margin-right: 16%;">
       <i class="icon plus"></i>
         Cadastrar Tarefa
     </button>
@@ -288,8 +288,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
 <!-- INICIO BLOCO MOSTRA DADOS TABELA Empresas -->
-  <table class="ui fixed table" style="width: 60%;">
-  <h1 class="header">Minhas Empresas</h1>
+  <table class="ui fixed table" style="width: 60%;float:right; margin-right:14%">
+  <h1 class="header" style="margin-left:26%">Minhas Empresas</h1>
     <tr>
         <th>Nome da Empresa</th>
         <th>Descriçao</th>
@@ -321,7 +321,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 <!-- FIM BLOCO MOSTRA DADOS TABELA Empresas -->
 
 <a href="register_empresa.php" >     
-      <button class="ui blue basic button" style="float: right;  margin-right: 3%">
+      <button class="ui blue basic button" style="float: right;  margin-right: 15%">
         <i class="icon plus"></i>
           Cadastrar Empresa
       </button>

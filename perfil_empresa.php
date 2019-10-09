@@ -38,7 +38,17 @@
       <div class="ui inverted dimmer">
         
       </div>
-      <img src="imagens/perfil.png">
+      <?php
+        if (!empty($foto_perfil)) {
+      ?>
+          <img  src="imagens/<?php echo $foto_perfil;?>">
+      <?php
+        }else{
+      ?>
+          <img  src="imagens/perfil.png">
+      <?php
+        }
+      ?>
     </div>
     <div class="content">
       <h1 class="header">Nome: <?php echo utf8_encode($nome); ?></h1>
@@ -205,7 +215,6 @@ $count_img++;
 </div> -->
 
 
-<!-- ARRUMAR O BR MODELO!!! -->
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
 <div style="float: right;margin-top: 5%;">
 <form enctype="multipart/form-data" method="post" action="">

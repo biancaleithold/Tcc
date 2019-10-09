@@ -11,7 +11,7 @@
     $data = $_POST['data'];
     $horario = $_POST['horario'];
     $descricao= $_POST['descricao'];
-    $situacao = $_POST['situacao'];
+    $id_usuario = $_SESSION['id_usuario'];
 
     if($titulo == '')
       $errMsg = 'Insira o titulo da tarefa';
@@ -21,17 +21,16 @@
       $errMsg = 'Insira o horario';
     if($descricao == '')
       $errMsg = 'Insira a descricao do evento';
-    if($situacao == '')
-      $errMsg = 'Insira o situacao do evento';
+  
     if($errMsg == ''){
       try {
-        $stmt = $connect->prepare('INSERT INTO tarefas (titulo,  data, horario, descricao, situacao) VALUES (:titulo, :data, :horario, :descricao, :situacao)');
+        $stmt = $connect->prepare('INSERT INTO tarefas (titulo,  data, horario, descricao, id_usuario) VALUES (:titulo, :data, :horario, :descricao, :id_usuario)');
         $stmt->execute(array(
           ':titulo' => $titulo,
           ':data' => $data,
           ':horario' => $horario,
           ':descricao' => $descricao,
-          ':situacao' => $situacao
+          ':id_usuario' => $id_usuario
         ));
 
         header('Location: perfil_usuario.php?action=joined');
@@ -79,9 +78,6 @@
 
       <label>Descrição</label>
       <textarea rows="3" name="descricao" value="<?php if(isset($_POST['descricao'])) echo $_POST['descricao'] ?>" placeholder="Prova do vestido!"></textarea><br /><br>
-
-      <label>Situacao</label>
-      <input type="number" min="0" max="1" name="situacao" value="<?php if(isset($_POST['situacao'])) echo $_POST['situacao'] ?>" /><br /><br>
 
     </div>
     <input type="submit" name='register' class="ui button botao">

@@ -106,7 +106,8 @@ body{
 
 .arruma_galeria{
   float: left;
-  margin: 2%;
+  margin-left: 27%;
+  margin-top: 3%;
 }
 
 img{
