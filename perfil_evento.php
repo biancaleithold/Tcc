@@ -336,9 +336,9 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
 <?php 
 if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'] != '' ) {
   
-  $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago, despesa.id_despesa, empresa.id_empresa FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and despesa.id_despesa = :id");
+  $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago, despesa.id_despesa, empresa.id_empresa FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and despesa.id_despesa = :id_despesa");
   $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
+    ':id_despesa' => $_REQUEST['id_despesa'],
   )); 
 
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
@@ -388,9 +388,9 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
     $id_empresa = $_POST['id_empresa'];
     $valor_pago = $_POST['valor_pago'];
 
-    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_despesa=:id");
+    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_despesa=:id_despesa");
     $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
+      ':id_despesa' => $_REQUEST['id_despesa'],
       ':id_empresa' => $id_empresa,
       ':valor_pago' => $valor_pago
   ));              
@@ -422,13 +422,17 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>R$ ".$rs->valor_pago."</td><td style=\"float: right;\"><a href=\"?acaoo=updt&id=".$rs->id_despesa."\">"."<i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                echo "<td>".utf8_encode($rs->nome)."</td><td>R$ ".$rs->valor_pago."</td><td style=\"float: right;\"><a href=\"?acaoo=updt&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\">"."<i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?acaooo=delet&id=".$rs->id_despesa."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
                 $valores_pagos[] = $rs->valor_pago;
                 $despesa = $rs->valor_max_pagar - array_sum($valores_pagos);
+                $total = array_sum($valores_pagos);
             }
+              echo "<tr><td style=\"font-size: 130%;\"><b>Total</b></td>";
+              echo "<td style=\"font-size: 130%; float: right;\"><b>R$ ".$total."</b></td></tr>";
+
               if (empty($despesa)) {
                 $stmt = $connect->prepare("SELECT id_evento, valor_max_pagar FROM eventos WHERE eventos.id_evento = :id");
 

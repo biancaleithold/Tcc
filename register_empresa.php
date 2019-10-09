@@ -88,18 +88,18 @@
         // Insere os dados no banco
         $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, sigla, foto_perfil, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
         $stmt->execute(array(
-          ':cnpj' => $cnpj,
-          ':nome' => $nome,
-          ':rua' => $rua, 
-          ':numero' => $numero,
-          ':complemento' => $complemento,
-          ':bairro' => $bairro,
-          ':cidade' => $cidade,
-          ':estado' => $estado,
-          ':logo' => $_FILES["logo"]["name"],
-          ':descricao' => $descricao,
-          ':telefone' => $telefone,
-          ':email_empresa' => $email_empresa,
+          ':cnpj' => utf8_encode($cnpj),
+          ':nome' => utf8_encode($nome),
+          ':rua' => utf8_encode($rua), 
+          ':numero' => utf8_encode($numero),
+          ':complemento' => utf8_encode($complemento),
+          ':bairro' => utf8_encode($bairro),
+          ':cidade' => utf8_encode($cidade),
+          ':estado' => utf8_encode($estado),
+          ':logo' => utf8_encode($_FILES["logo"]["name"]),
+          ':descricao' => utf8_encode($descricao),
+          ':telefone' => utf8_encode($telefone),
+          ':email_empresa' => utf8_encode($email_empresa),
           ':id_usuario' => $_SESSION['id_usuario'] 
         ));
 
