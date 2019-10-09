@@ -12,49 +12,49 @@ INSERT INTO usuario (nome, email, telefone, senha, cpf) VALUES
 
 INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descricao, telefone, email_empresa) VALUES 
 ('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)34665989', 'jujuba@gmail.com'),
-('57.208.376/0001-03', 'Restaurante Fernandes', 'João Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com'),
-('88.183.280/0001-61', 'Salão de Beleza Serena', 'Araras', '96', 'casa', 'São Marcos', 'Joinville', 'Realçando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com'),
-('11.820.025/0001-58', 'Barbearia Gomes', 'Antônio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelência, qualidade e profissionalismo é nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com'),
-('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
-('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
-('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
-('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)34664958', 'expressiva_homem@gmail.com');
+('57.208.376/0001-03', 'Restaurante Fernandes', 'Joï¿½o Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com'),
+('88.183.280/0001-61', 'Salï¿½o de Beleza Serena', 'Araras', '96', 'casa', 'Sï¿½o Marcos', 'Joinville', 'Realï¿½ando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com'),
+('11.820.025/0001-58', 'Barbearia Gomes', 'Antï¿½nio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelï¿½ncia, qualidade e profissionalismo ï¿½ nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com'),
+('85.270.164/0001-91', 'Confeitaria Delï¿½cias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririï¿½', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
+('47.367.062/0001-08', 'Joalheria Univesal', 'Joï¿½o Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
+('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Hï¿½ mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
+('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaï¿½u', 'Joinville', 'Especializada em vestuï¿½rio para homens.', '(47)34664958', 'expressiva_homem@gmail.com');
 
 INSERT INTO tarefas (data, horario, descricao, situacao, titulo) VALUES 
-('2019-01-01', '10:10:00', 'Reuniao decoração', 0, 'Reunião'),
-('2019-02-04', '09:20:00', 'Reuniao com banda', 0, 'Reunião'),
+('2019-01-01', '10:10:00', 'Reuniao decoraï¿½ï¿½o', 0, 'Reuniï¿½o'),
+('2019-02-04', '09:20:00', 'Reuniao com banda', 0, 'Reuniï¿½o'),
 ('2019-03-03', '08:30:00', 'Teste de penteado', 0, 'Teste'),
-('2019-04-02', '13:20:00', 'Degustação buffet', 0, 'Degustação'),
+('2019-04-02', '13:20:00', 'Degustaï¿½ï¿½o buffet', 0, 'Degustaï¿½ï¿½o'),
 ('2019-01-15', '10:10:00', 'Prova do vestido', 0, 'Prova'),
-('2019-06-20', '17:15:00', 'Reuniao com cerimonialista', 0, 'Reunião');
+('2019-06-20', '17:15:00', 'Reuniao com cerimonialista', 0, 'Reuniï¿½o');
 
 INSERT INTO convidados (idade, nome) VALUES
-(15, 'Mariana Gonçalves'),
+(15, 'Mariana Gonï¿½alves'),
 (17, 'Leandro Bressan'),
 (21, 'Beatriz Souza'),
 (45, 'Geovana Oliveira'),
 (12, 'Lorenzo Emanuel Bressan'),
 (65, 'Heitor Bressan'),
 (44, 'Luana Fagundes'),
-(20, 'Gilceia Mendonça'),
+(20, 'Gilceia Mendonï¿½a'),
 (18, 'Kelvin Bressan'),
 (25, 'Lia Bressan'),
-(18, 'Bianca Victória Leithold de Oliveira');
+(18, 'Bianca Victï¿½ria Leithold de Oliveira');
 
 INSERT INTO eventos (nome_evento, hora, descricao, dia, local, valor_max_pagar) VALUES 
 ('Casamento', '10:05:00', 'Casamento Luana e Luan', '2019-05-22', 'Restaurante Viapiana', '20000.00'),
 ('Casamento', '09:15:00', 'Casamento Fabio e Fabiana', '2019-10-22', 'Restaurante Espinheiros', '50000.00'),
-('Aniversário 15 anos', '08:25:00', '15 anos Maria', '2019-08-23', 'Restaurante do Nego', '10000.00'),
-('Aniversário', '07:25:00', 'Aniversário Lucas', '2019-06-22', 'Restaurante Estrela', '5000.00'),
-('Aniversário', '11:35:00', 'Aniversário Cecília', '2019-10-05', 'Restaurante Kaoma', '8000.00'),
-('Aniversário', '12:45:00', '1 ano do Vitor', '2019-06-26', 'Estrela Eventos', '2000.00'),
-('Festa coorporativa', '13:55:00', 'Coorporativa da Britânia ', '2019-05-22', 'Restaurante São José', '60000.00'),
+('Aniversï¿½rio 15 anos', '08:25:00', '15 anos Maria', '2019-08-23', 'Restaurante do Nego', '10000.00'),
+('Aniversï¿½rio', '07:25:00', 'Aniversï¿½rio Lucas', '2019-06-22', 'Restaurante Estrela', '5000.00'),
+('Aniversï¿½rio', '11:35:00', 'Aniversï¿½rio Cecï¿½lia', '2019-10-05', 'Restaurante Kaoma', '8000.00'),
+('Aniversï¿½rio', '12:45:00', '1 ano do Vitor', '2019-06-26', 'Estrela Eventos', '2000.00'),
+('Festa coorporativa', '13:55:00', 'Coorporativa da Britï¿½nia ', '2019-05-22', 'Restaurante Sï¿½o Josï¿½', '60000.00'),
 ('Casamento', '14:25:00', 'Casamento Fernanda e Luciano', '2019-05-15', 'Restaurante Viapiana', '40000.00'),
-('Aniversário', '15:30:00', 'Aniversario do Leandro', '2019-03-25', 'Casa do pão', '3000.00'),
-('Aniversário', '16:05:00', 'Aniversário da Karen', '2019-05-03', 'Restaurante Varandão', '4000.00');
+('Aniversï¿½rio', '15:30:00', 'Aniversario do Leandro', '2019-03-25', 'Casa do pï¿½o', '3000.00'),
+('Aniversï¿½rio', '16:05:00', 'Aniversï¿½rio da Karen', '2019-05-03', 'Restaurante Varandï¿½o', '4000.00');
 
 INSERT INTO especializacao (descricao_esp) VALUES 
-('Animação'),
+('Animaï¿½ï¿½o'),
 ('Barbearia'),
 ('Brinquedos'),
 ('Buffet'),
@@ -62,55 +62,79 @@ INSERT INTO especializacao (descricao_esp) VALUES
 ('Cia Viagem'),
 ('Confeitaria'),
 ('Convite'),
-('Decoração'),
+('Decoraï¿½ï¿½o'),
 ('Filmagem'),
 ('Floricultura'),
 ('Fotografia'),
-('Garçom'),
-('Lembranças'),
-('Locação de Carro'),
-('Locação e Compra de Trajes'),
-('Locação do Local'),
-('Música'),
-('Recepção'),
+('Garï¿½om'),
+('Lembranï¿½as'),
+('Locaï¿½ï¿½o de Carro'),
+('Locaï¿½ï¿½o e Compra de Trajes'),
+('Locaï¿½ï¿½o do Local'),
+('Mï¿½sica'),
+('Recepï¿½ï¿½o'),
 ('Joalheria'),
-('Salão de Beleza'),
-('Segurança');
+('Salï¿½o de Beleza'),
+('Seguranï¿½a');
 
 INSERT INTO categoria_evento (nome, descricao, foto1, foto2, foto3, foto4) VALUES
-('15 anos','Na primavera de cada aniversário que comemoramos, existem datas que são bem mais especiais que outras. E você hoje esta vivendo uma das mais bonitas e marcantes, os esperados e desejados 15 anos. Que felicidade poder estar ao seu lado para ver todo o brilho que emana no seu sorriso lindo. Este é o aniversário que marcará a transição da infância para a sua adolescência, uma fase diferente e cheia de mistérios a serem desvendados, e muitas aventuras a serem vividas. A descoberta de sua própria identidade, uma maneira diferente de enxergar a vida e o mundo. O amadurecimento tem um toque especial e cheio de encanto, e acredito que fazer 15 anos carrega em si um caráter mágico, pois é um período onde florescem as responsabilidades. Viva com sabedoria e muita dignidade os seus 15 anos, pois será o começo da procura de sua felicidade. Parabéns pelos seus lindos 15 anos!','15anos1.jpg', '15anos2.jpg','15anos3.jpg', '15anos4.jpg'),
-('Casamento','O casamento é um de um laço de amor. Um laço que deve ser leve como um abraço, não apertado como um nó, mas firme o suficiente para não se desfazer com o vento. O casamento deve ser feito de amor, de respeito e admiração. Deve sobreviver ao fim da paixão, a tormentas e qualquer tipo de tentação. Num casamento deve haver diálogo, não discussão. O importante não é saber quem tem razão, mas encontrar um consenso. Num casamento, as duas partes devem aprender a ceder. Se apenas um cede, sem nada em troca receber, a frustração se instala e a amargura pode começar a crescer. As mágoas e tristezas que surgem não devem ser guardadas, devem virar palavras, que sejam escritas ou faladas.', 'casamento1.jpg', 'casamento2.jpg', 'casamento3.jpg', 'casamento4.jpg'),
-('Coorporativo','O fim de um ano, a comemoração de uma data especial ou a celebração de projeto é de muita alegria, é o momento para agradecer, aos familiares e aos colegas de trabalhos, então nada melhor que montar um evento para comemorar os desafios que superaram com a ajuda daqueles que nunca te deixaram sozinho, que sempre estiveram ao seu lado, independente do dia e do tempo, celebrar após um dever cumprido te da forças para continuar em frente nos próximos anos, venha montar seu evento conosco, celebrar com os amigos e familiares é a melhor forma de se divertir.  ', 'corporativa1.jpg', 'corporativa2.jpg', 'corporativa3.jpg', 'corporativa4.jpg'),
-('Formatura','O sucesso é daqueles que batalham, e com toda certeza você é um dos merecedores desse sucesso. Que a alegria da formatura hoje, fique para sempre em você, para que a felicidade também contagie aqueles que da sua profissão se beneficiarem. Pessoas grandes são aquelas que lutam por ideais, e hoje nesta formatura você prova ser parte dessas pessoas. A sua conquista vai impulsionar outras buscas e abrir novos horizontes, sempre apontando para um futuro muito luminoso. Por acreditar que este dia chegaria, você se esforçou e buscou a cada dia o seu sonho. Merecidamente venceu, e hoje os aplausos são todos para você!O que você alcançou hoje é uma pequena parte do que você ainda pode conquistar com o seu talento. O talento, a força de vontade e a persistência trouxeram você até aqui. Esperamos que esta vitória seja o início de muitas outras conquistas. Parabéns pela formatura!', 'formatura1.jpg', 'formatura2.jpg', 'formatura3.jpg', 'formatura4.jpg'),
-('Aniversário Infantil','Você é muito especial e a cada ano que passa só me surpreende e me encanta com o seu jeitinho de ser. Feliz aniversário! Que o dia de hoje seja inesquecível, cheio de brincadeiras e muitos presentes! Ser criança é viver em um mundo onde só há diversão, alegria e muito amor e o meu maior desejo para sua vida é que ela seja sempre feliz, que nunca faltem sorrisos, amigos, aventuras e sonhos realizados!Que você nunca perca a sua alegria de viver e que Deus te abençoe sempre. Que você cresça e se torne cada vez mais uma pessoa de bem, inteligente, dedicado, que sempre fala a verdade e faz questão de ajudar as pessoas. Que Jesus e seus anjos te protejam, te acompanhem e te iluminem sempre. Parabéns!', 'infantil3.jpg', 'infantil2.jpg', 'infantil1.jpg', 'infantil4.jpg'),
-('Aniversários','Hoje é dia de grandes sorrisos, de fazer um pequeno balanço do que passou, de inspirar sonhos e desejos para o futuro, e principalmente de receber carinho e homenagens muito merecidas. Os meus votos são enviados à distância, mas nem por isso são menos sinceros ou sentidos. Feliz aniversário!E você sabe como é especial para mim, muito especial, e de como eu gostaria de estar hoje do seu lado, de lhe dar este abraço e este beijo que há muito vivem querendo fugir de mim até você. Mas a vida é mesmo assim, e nem sempre o que queremos se torna realidade. Mas espero que seus desejos se realizem, que a você a vida faça a vontade, pois pessoas especiais como você, merecem o que de melhor existe. Sorria muito hoje, pois seu sorriso aquece corações como mais nada neste mundo consegue. E seja muito feliz, não só hoje, mas sempre e para sempre!','aniversario1.jpg','aniversario2.jpg','aniversario3.jpg','aniversario4.jpg');
+('15 anos','Na primavera de cada aniversï¿½rio que comemoramos, existem datas que sï¿½o bem mais especiais que outras. E vocï¿½ hoje esta vivendo uma das mais bonitas e marcantes, os esperados e desejados 15 anos.
+
+Que felicidade poder estar ao seu lado para ver todo o brilho que emana no seu sorriso lindo. Este ï¿½ o aniversï¿½rio que marcarï¿½ a transiï¿½ï¿½o da infï¿½ncia para a sua adolescï¿½ncia, uma fase diferente e cheia de mistï¿½rios a serem desvendados, e muitas aventuras a serem vividas.
+
+A descoberta de sua prï¿½pria identidade, uma maneira diferente de enxergar a vida e o mundo. O amadurecimento tem um toque especial e cheio de encanto, e acredito que fazer 15 anos carrega em si um carï¿½ter mï¿½gico, pois ï¿½ um perï¿½odo onde florescem as responsabilidades.
+
+Viva com sabedoria e muita dignidade os seus 15 anos, pois serï¿½ o comeï¿½o da procura de sua felicidade. Parabï¿½ns pelos seus lindos 15 anos!','15anos1.jpg', '15anos2.jpg','15anos3.jpg', '15anos4.jpg'),
+('Casamento','O casamento ï¿½ um de um laï¿½o de amor. Um laï¿½o que deve ser leve como um abraï¿½o, nï¿½o apertado como um nï¿½, mas firme o suficiente para nï¿½o se desfazer com o vento. O casamento deve ser feito de amor, de respeito e admiraï¿½ï¿½o. Deve sobreviver ao fim da paixï¿½o, a tormentas e qualquer tipo de tentaï¿½ï¿½o. Num casamento deve haver diï¿½logo, nï¿½o discussï¿½o. O importante nï¿½o ï¿½ saber quem tem razï¿½o, mas encontrar um consenso. Num casamento, as duas partes devem aprender a ceder. Se apenas um cede, sem nada em troca receber, a frustraï¿½ï¿½o se instala e a amargura pode comeï¿½ar a crescer. As mï¿½goas e tristezas que surgem nï¿½o devem ser guardadas, devem virar palavras, que sejam escritas ou faladas.', 'casamento1.jpg', 'casamento2.jpg', 'casamento3.jpg', 'casamento4.jpg'),
+('Coorporativo','empresas merecem celebrar bla bla', 'corporativa1.png', 'corporativa2.jpg', 'corporativa3.jpg', 'corporativa4.jpg'),
+('Formatura','O sucesso ï¿½ daqueles que batalham, e com toda certeza vocï¿½ ï¿½ um dos merecedores desse sucesso. Que a alegria da formatura hoje, fique para sempre em vocï¿½, para que a felicidade tambï¿½m contagie aqueles que da sua profissï¿½o se beneficiarem.
+
+Pessoas grandes sï¿½o aquelas que lutam por ideais, e hoje nesta formatura vocï¿½ prova ser parte dessas pessoas. A sua conquista vai impulsionar outras buscas e abrir novos horizontes, sempre apontando para um futuro muito luminoso. 
+
+Por acreditar que este dia chegaria, vocï¿½ se esforï¿½ou e buscou a cada dia o seu sonho. Merecidamente venceu, e hoje os aplausos sï¿½o todos para vocï¿½! 
+
+O que vocï¿½ alcanï¿½ou hoje ï¿½ uma pequena parte do que vocï¿½ ainda pode conquistar com o seu talento.
+
+O talento, a forï¿½a de vontade e a persistï¿½ncia trouxeram vocï¿½ atï¿½ aqui. Esperamos que esta vitï¿½ria seja o inï¿½cio de muitas outras conquistas. Parabï¿½ns pela formatura!', 'formatura1.jpg', 'formatura2.jpg', 'formatura3.jpg', 'formatura4.jpg'),
+('Aniversï¿½rio Infantil','Vocï¿½ ï¿½ muito especial e a cada ano que passa sï¿½ me surpreende e me encanta com o seu jeitinho de ser. Feliz aniversï¿½rio! Que o dia de hoje seja inesquecï¿½vel, cheio de brincadeiras e muitos presentes! Ser crianï¿½a ï¿½ viver em um mundo onde sï¿½ hï¿½ diversï¿½o, alegria e muito amor e o meu maior desejo para sua vida ï¿½ que ela seja sempre feliz, que nunca faltem sorrisos, amigos, aventuras e sonhos realizados!
+
+Que vocï¿½ nunca perca a sua alegria de viver e que Deus te abenï¿½oe sempre. Que vocï¿½ cresï¿½a e se torne cada vez mais uma pessoa de bem, inteligente, dedicado, que sempre fala a verdade e faz questï¿½o de ajudar as pessoas. Que Jesus e seus anjos te protejam, te acompanhem e te iluminem sempre. Parabï¿½ns!
+
+', 'infantil3.jpg', 'infantil2.jpg', 'infantil1.jpg', 'infantil4.jpg'),
+('Aniversï¿½rios','Hoje ï¿½ dia de grandes sorrisos, de fazer um pequeno balanï¿½o do que passou, de inspirar sonhos e desejos para o futuro, e principalmente de receber carinho e homenagens muito merecidas. Os meus votos sï¿½o enviados ï¿½ distï¿½ncia, mas nem por isso sï¿½o menos sinceros ou sentidos. Feliz aniversï¿½rio!
+
+E vocï¿½ sabe como ï¿½ especial para mim, muito especial, e de como eu gostaria de estar hoje do seu lado, de lhe dar este abraï¿½o e este beijo que hï¿½ muito vivem querendo fugir de mim atï¿½ vocï¿½. 
+
+Mas a vida ï¿½ mesmo assim, e nem sempre o que queremos se torna realidade. Mas espero que seus desejos se realizem, que a vocï¿½ a vida faï¿½a a vontade, pois pessoas especiais como vocï¿½, merecem o que de melhor existe.
+
+Sorria muito hoje, pois seu sorriso aquece coraï¿½ï¿½es como mais nada neste mundo consegue. E seja muito feliz, nï¿½o sï¿½ hoje, mas sempre e para sempre!','aniversario1.jpg','aniversario2.jpg','aniversario3.jpg','aniversario4.jpg');
 
 INSERT INTO estados (sigla,descricao_est) VALUES 
 ('AC','Acre'),
 ('AL','Alagoas'),
-('AP','Amapá'),
+('AP','Amapï¿½'),
 ('AM','Amazonas'),
 ('BA','Bahia'),
-('CE','Ceará'),
+('CE','Cearï¿½'),
 ('DF','Distrito Federal'),
-('ES','Espírito Santo'),
-('GO','Goiás'),
-('MA','Maranhão'),
+('ES','Espï¿½rito Santo'),
+('GO','Goiï¿½s'),
+('MA','Maranhï¿½o'),
 ('MT','Mato Grosso'),
 ('MS','Mato Grosso do Sul'),
 ('MG','Minas Gerais'),
-('PA','Pará'),
-('PB','Paraíba'),
-('PR','Paraná'),
+('PA','Parï¿½'),
+('PB','Paraï¿½ba'),
+('PR','Paranï¿½'),
 ('PE','Pernambuco'),
-('PI','Piauí'),
+('PI','Piauï¿½'),
 ('RJ','Rio de Janeiro'),
 ('RN','Rio Grande do Norte'),
 ('RS','Rio Grande do Sul'),
-('RO','Rondônia'),
+('RO','Rondï¿½nia'),
 ('RR','Roraima'),
 ('SC','Santa Catarina'),
-('SP','São Paulo'),
+('SP','Sï¿½o Paulo'),
 ('SE','Sergipe'),
 ('TO','Tocantins');
 
