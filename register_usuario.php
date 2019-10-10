@@ -78,12 +78,9 @@
           ':nome_imagem' => $_FILES["foto_perfil"]["name"],
           ':cpf' => $cpf
         ));
-        header('Location: login.php?action=joined');
+        echo "<script type=\"text/javascript\">alert('Registrado com sucesso! Agora você pode realizar o login');</script>";
+        header("Refresh: 0; url=login.php?action=joined");
         exit;
-      }
-  
-      if(isset($_GET['action']) && $_GET['action'] == 'joined') {
-        $errMsg = 'Registrado com sucesso!<br><br>';
       }
       
 

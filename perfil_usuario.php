@@ -39,12 +39,13 @@
       </div>
     </div>
     <div class="extra content">
-    <?php
+       <?php
      echo  "<a href=?agir=atualiza&id=".$id_usuario.">";
       ?>
         <i class="edit icon"></i>
         Editar Perfil
-      </a>
+      </a> 
+     
       <br><br>
         <button class="ui basic button test"><i class="trash icon"></i>Excluir Conta</button>
     </div>
@@ -112,6 +113,8 @@
 <!--BLOCO EXCLUIR DADOS Eventos -->
 <?php
   if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
+
+            
     try {
         $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id");
         $stmt->execute(array(
@@ -146,9 +149,10 @@
                 echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_evento.php?ver=view&id=".$rs->id_evento."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?act=del&id=".$rs->id_evento."\"><i class='trash alternate icon'></i></a></center></td>";
-                echo "</tr>";
-            }
+                           ."<a href=?act=del&id=".$rs->id_evento."><i class='trash alternate icon'></i></a></center></td>";
+                echo "</tr>";?>
+              
+  <?php }
         } else {
             echo "Erro: Não foi possível recuperar os dados do banco de dados";
         }
@@ -157,6 +161,7 @@
 }
 ?>
 </table>
+
 <!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
  
   <a href="register_evento.php">
@@ -235,6 +240,13 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
       ':descricao' => $descricao,
       ':situacao' => $situacao
   )); 
+
+     if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'save') {
+
+       echo "<script type=\"text/javascript\">alert('Alterado com sucesso!');</script>";
+        header("Refresh: 0");
+        exit();
+      }
 }
 ?>
 <!--- FIM BLOCO DE SALVAR  Agenda-->
@@ -307,9 +319,10 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_empresa.php?ver=view&id=".$rs->id_empresa."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?apaga=del&id=".$rs->id_empresa."\"><i class='trash alternate icon'></i></a></center></td>";
-                echo "</tr>";
-            }
+                           ."<a href=?apaga=del&id=".$rs->id_empresa."><i class='trash alternate icon'></i></a></center></td>";
+                echo "</tr>";?>
+
+     <?php  }
         } else {
             echo "Erro: Não foi possível recuperar os dados do banco de dados";
         }
@@ -357,6 +370,7 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'atualiza'  && $_REQUEST['i
 
               ?>
       
+              
                 <form class="ui form" method="POST" action="?agir=salva" style="width: 22%;margin-left: 4%;">
                 <h3>Alterar meus dados</h3>
                     <input type="hidden" name="id" value="<?php echo $rs->id_usuario ?>"/>
@@ -366,7 +380,13 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'atualiza'  && $_REQUEST['i
                     <td><label>Senha</label><input type="password" name="senha" value="<?php echo $rs->senha ?>"/></td><br>
                     <td><label>Foto de Perfil</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/></td><br>
                     <td><label>CPF</label><input type="text" name="cpf" value="<?php echo $rs->cpf ?>"/></td><br>
-                    <td><input type="submit" name="salva" value="Salvar" /></td></form>
+
+                    <div class="actions">
+                      <div onClick="window.history.back();" class="ui cancel button">Cancelar</div>
+                      <td><input type="submit" name="salva" value="Salvar" class="ui button" /></td></form>
+                      </a>
+                    </div>
+                  </div>
               <?php
              
             }
@@ -394,9 +414,15 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
       ));
 
     if(isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva') {
-      //ARRUMAR - NÃO APARECE A MENSAGEM!!!
-       echo "Registrado com sucesso! Por favor, realize o login novamente para continuar!";
-        header('Location: login.php');
+        session_start();
+        require 'config.php';
+        unset($_SESSION['name']);
+        unset($_SESSION['email']);
+        session_destroy();
+
+       echo "<script type=\"text/javascript\">alert('Alterado com sucesso! Por favor, realize o login novamente para continuar!');</script>";
+        header("Refresh: 0; url=login.php");
+        exit();
       }
 }
 ?>
