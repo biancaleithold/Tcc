@@ -36,14 +36,7 @@
   <ol class="carousel-indicators">
 
 <?php 
-      // foreach ($foto as $value) {
-      //   $partes_fotos[] = explode(',',$foto);
-      //   echo '<br><br><br><br><br><br><br>';
-      //   echo $partes_fotos;
-      // }
-
-/// SE NAO DER CERTO COM O FOREACH, DAR UM CAMPO PARA CADA FOTO!
-
+      
       $fotos1 = explode('.', $foto1);
       $fotos2 = explode('.', $foto2);
       $fotos3 = explode('.', $foto3);
@@ -123,13 +116,13 @@
                   <div style="margin-top: 5%;float: left;">
                         <div class="ui move reveal" style="margin-left: 10%;">
                               <div class="visible content">
-                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui small image">
+                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
                               </div>
                               <div class="hidden content">
                                <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
-                                 <h4 style="background-color: #90bdce91;">
-                                 <?php echo utf8_encode($linha->nome)."<br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?>        
-                                 </h4> 
+                                 <p style="background-color: #90bdce91;height: 151px;font-size: large">
+                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?>        
+                                 </p> 
                                   <?php echo '</a>';?>
                               </div>                      
                         </div>

@@ -109,26 +109,6 @@
 <!-- FIM DO BLOCO EXCLUIR DADOS Usuário -->
 
 
-
-<!--BLOCO EXCLUIR DADOS Eventos -->
-<?php
-  if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
-
-            
-    try {
-        $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id");
-        $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
-        ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-  } 
-?>
-<!-- FIM DO BLOCO EXCLUIR DADOS Eventos -->
-
-
-
 <!-- BLOCO MOSTRA DADOS TABELA Eventos-->
 <table class="ui fixed table" style="width: 60%;float:right; margin-right:14%">
   <h1 class="header">Meus Eventos</h1>
@@ -149,7 +129,7 @@
                 echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_evento.php?ver=view&id=".$rs->id_evento."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=?act=del&id=".$rs->id_evento."><i class='trash alternate icon'></i></a></center></td>";
+                           ."<a href=\"perfil_usuario.php?act=del&id=".$rs->id_evento."\"><i onclick='delEvento()' class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";?>
               
   <?php }
@@ -164,6 +144,33 @@
 
 <!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
  
+<!--BLOCO EXCLUIR DADOS Eventos -->
+<script>
+function delEvento()
+{
+var x;
+var escolha=confirm("Tem Certeza que deseja excluir o evento? Isso é irreversível");
+if (escolha==true)
+  { 
+    
+   <?php
+  if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
+    try {
+        $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id");
+        $stmt->execute(array(
+          ':id' => $_REQUEST['id'],
+        ));
+    }catch (PDOException $erro) {
+      echo "Erro: ".$erro->getMessage();
+    }
+  } 
+?>window.confirm('Excluído com sucesso!');
+  }
+}
+</script>
+<!-- FIM DO BLOCO EXCLUIR DADOS Eventos -->
+
+
   <a href="register_evento.php">
     <button class="ui blue basic button" style="float: right; margin-right: 14%;">
       <i class="icon plus"></i>
@@ -319,7 +326,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_empresa.php?ver=view&id=".$rs->id_empresa."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=?apaga=del&id=".$rs->id_empresa."><i class='trash alternate icon'></i></a></center></td>";
+                           ."<a href=?apaga=del&id=".$rs->id_empresa."><i onclick='delEmpresa()' class='trash alternate icon'></i></a></center></td>";
                 echo "</tr>";?>
 
      <?php  }
@@ -333,16 +340,15 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 </table>
 <!-- FIM BLOCO MOSTRA DADOS TABELA Empresas -->
 
-<a href="register_empresa.php" >     
-      <button class="ui blue basic button" style="float: right;  margin-right: 15%">
-        <i class="icon plus"></i>
-          Cadastrar Empresa
-      </button>
-</a> 
-
-
-<!--BLOCO EXCLUIR DADOS Empresas -->
-<?php
+<!--BLOCO EXCLUIR DADOS Empresa -->
+<script>
+function delEmpresa()
+{
+var opcao=confirm("Tem Certeza que deseja excluir a empresa? Isso é irreversível");
+if (opcao==true)
+  { 
+    
+   <?php
   if (isset($_REQUEST["apaga"]) && $_REQUEST["apaga"] == "del" && $_REQUEST['id'] != '') {
     try {
         $stmt = $connect->prepare("DELETE FROM empresa WHERE id_empresa=:id");
@@ -353,8 +359,20 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
       echo "Erro: ".$erro->getMessage();
     }
   } 
-?>
-<!-- FIM DO BLOCO EXCLUIR DADOS Empresas -->
+?>window.confirm('Excluído com sucesso!');
+  }
+}
+</script>
+<!-- FIM DO BLOCO EXCLUIR DADOS Empresa -->
+
+
+
+<a href="register_empresa.php" >     
+      <button class="ui blue basic button" style="float: right;  margin-right: 15%">
+        <i class="icon plus"></i>
+          Cadastrar Empresa
+      </button>
+</a> 
 
 
 <!--INICIO BLOCO ALTERAR E SALVAR Usuario -->
