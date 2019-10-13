@@ -130,7 +130,7 @@
 
 
 <!-- BLOCO MOSTRA DADOS TABELA Eventos-->
-<table class="ui fixed table" style="width: 60%;float:right; margin-right:14%">
+<table class="ui fixed table" style="width: 68%;float:right; margin-right:4%">
   <h1 class="header">Meus Eventos</h1>
     <tr>
         <th>Nome do Evento</th>
@@ -165,7 +165,7 @@
 <!-- FIM BLOCO MOSTRA DADOS TABELA Eventos -->
  
   <a href="register_evento.php">
-    <button class="ui blue basic button" style="float: right; margin-right: 14%;">
+    <button class="ui blue basic button" style="float: right; margin-right: 4%; margin-left: 30%">
       <i class="icon plus"></i>
         Cadastrar Evento
     </button>
@@ -254,14 +254,14 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
 <!-- INICIO BLOCO MOSTRA DADOS TABELA Agenda-->
-<table class="ui fixed table" style="width: 60%; float:right; margin-right:14%">
-  <h1 class="header">Minha Agenda</h1>
+<table class="ui fixed table" style="width: 68%; float:right; margin-right:4%">
+  <h1 class="header" style="margin-top: 8%">Minha Agenda</h1>
     <tr>
         <th>Título</th>
         <th>Data</th>
         <th>Horario</th>
         <th>Descrição</th>
-        <th>Concluído</th>
+        <th style="float: right;">Concluído</th>
     </tr>
 
     <?php
@@ -273,7 +273,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td><form method='post' id='concluir'><input id=check type='checkbox' onclick=\"excluir()\" value=".utf8_encode($rs->situacao)."></td></form><td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td><form method='post' id='concluir'><input  style=\"float: right;\" id=check type='checkbox' onclick=\"excluir()\" value=".utf8_encode($rs->situacao)."></td></form><td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                            //."<a href=\"?action=del&id=".$rs->id_tarefa."\"><i class='trash alternate icon'></i></a></td>";
                 echo "</tr>";
@@ -290,7 +290,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
  <a href="register_tarefa.php">     
-    <button class="ui blue basic button" style="float: right; margin-right: 16%;">
+    <button class="ui blue basic button" style="float: right; margin-right: 4%; margin-left: 30%">
       <i class="icon plus"></i>
         Cadastrar Tarefa
     </button>
@@ -300,8 +300,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 
 <!-- INICIO BLOCO MOSTRA DADOS TABELA Empresas -->
-  <table class="ui fixed table" style="width: 60%;float:right; margin-right:14%">
-  <h1 class="header" style="margin-left:26%">Minhas Empresas</h1>
+  <table class="ui fixed table" style="width: 68%;float:right; margin-right:4%">
+  <h1 class="header" style="margin-left:26%; margin-top: 8%">Minhas Empresas</h1>
     <tr>
         <th>Nome da Empresa</th>
         <th>Descriçao</th>
@@ -334,7 +334,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 <!-- FIM BLOCO MOSTRA DADOS TABELA Empresas -->
 
 <a href="register_empresa.php" >     
-      <button class="ui blue basic button" style="float: right;  margin-right: 15%">
+      <button class="ui blue basic button" style="float: right;  margin-right: 4%; margin-left: 30%">
         <i class="icon plus"></i>
           Cadastrar Empresa
       </button>

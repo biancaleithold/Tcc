@@ -61,7 +61,7 @@
 <div style="margin-top: 4%; margin-left: 19%" class="ui four cards">
   <a class="red card">
     <div class="image">
-      <img src="imagens/bianca">
+      <img src="imagens/bianca.jpg">
       <h5>Bianca Leithold</h5>
     </div>
   </a>

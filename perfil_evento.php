@@ -161,9 +161,9 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'salvar'  && $_REQUEST['id'] 
 <?php 
 if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
   
-  $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_convidado=:id");
+  $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_convidado=:id_convidado");
   $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
+    ':id_convidado' => $_REQUEST['id_convidado'],
   ));
 ?>  
    <h2 style="margin-left: 4%;">Alterar Dados Convidado</h2>  
@@ -197,9 +197,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
 ?>
 
 <?php 
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {
-  
-    
+if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {  
 
     $nome = $_POST['nome'];
     $idade = $_POST['idade'];
@@ -209,8 +207,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] 
       ':id' => $_REQUEST['id'],
       ':nome' => $nome,
       ':idade' => $idade
-  )); 
-    
+  ));   
      
 }
 ?>
@@ -238,12 +235,27 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] 
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."</td><td style=\"float: right;\"><a href=\"?acao=upd&id=".$rs->id_convidado."\">"."<i class='pencil alternate icon'></i></a>"
+                echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."</td><td style=\"float: right;\"><a href=\"?acao=upd&id=".$_REQUEST['id']."&id_convidado=".$rs->id_convidado."\">"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?acao=del&id=".$rs->id_convidado."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
+
+                $qtd_convidado[] = $rs->id_convidado;
+                $quantidade_convidado = count($qtd_convidado);
             }
+              if (empty($qtd_convidado)) {
+                
+                echo "<tr><td style=\"font-size: 150%;\"><b>Quantidade de Convidados</b></td><td></td>";
+                echo "<td style=\"font-size: 150%; float: right;\"><b>0</b></td></tr>";
+                echo "</table>";
+
+              }else{
+                echo "<tr><td style=\"font-size: 150%;\"><b>Quantidade de Convidados</b></td><td></td>";
+                echo "<td style=\"font-size: 150%; float: right;\"><b>".$quantidade_convidado."</b></td></tr>";
+                echo "</table>";
+              }
+            
         } else {
             echo "Erro: Não foi possível recuperar os dados do banco de dados";
         }
@@ -378,7 +390,6 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
                 echo "</td>";
                 echo "</tr>";
             }
-
 }
 ?>
 
@@ -388,14 +399,21 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
     $id_empresa = $_POST['id_empresa'];
     $valor_pago = $_POST['valor_pago'];
 
-    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_despesa=:id_despesa");
+    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_despesa=:id");
     $stmt->execute(array(
-      ':id_despesa' => $_REQUEST['id_despesa'],
+      ':id' => $_REQUEST['id'],
       ':id_empresa' => $id_empresa,
       ':valor_pago' => $valor_pago
-  ));              
-                    
-      
+  ));
+  
+ /* $stmt = $connect->prepare("SELECT eventos.id_evento FROM eventos WHERE eventos.id_evento = :id_evento");
+  $stmt->execute(array(
+    ':id_evento' => $_REQUEST['id_evento'],
+  )); 
+
+  while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                  
+    echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$rs->id_evento.'">'); 
+  } */
 }
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR DESPESAS -->
@@ -422,22 +440,21 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td>R$ ".$rs->valor_pago."</td><td style=\"float: right;\"><a href=\"?acaoo=updt&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\">"."<i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                echo "<td>".utf8_encode($rs->nome)."</td><td style=\"float: right;\">R$ ".$rs->valor_pago."</td><td style=\"padding-left: 13%;\"><a href=\"?acaoo=updt&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\">"."<i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."<a href=\"?acaooo=delet&id=".$rs->id_despesa."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."</a></center></td>";
+                           ."</a></td>";
                 echo "</tr>";
                 $valores_pagos[] = $rs->valor_pago;
                 $despesa = $rs->valor_max_pagar - array_sum($valores_pagos);
                 $total = array_sum($valores_pagos);
             }
-              echo "<tr><td style=\"font-size: 130%;\"><b>Total</b></td>";
-              echo "<td style=\"font-size: 130%; float: right;\"><b>R$ ".$total."</b></td></tr>";
-
-              if (empty($despesa)) {
+              if (empty($despesa) && empty($total)) {
                 $stmt = $connect->prepare("SELECT id_evento, valor_max_pagar FROM eventos WHERE eventos.id_evento = :id");
 
                 if ($stmt->execute(array(':id' => $_REQUEST['id']))) {
                   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    echo "<tr><td style=\"font-size: 130%;\"><b>Total</b></td>";
+                    echo "<td style=\"font-size: 130%; float: right;\"><b>R$ 0,00</b></td></tr>";
                     echo "<td style=\"font-size: 150%;\"><b> Saldo Atual</b></td>";
                     echo "<td></td>";
                     echo "<td style=\"font-size: 150%; float: right;\"><b>R$ " .$rs->valor_max_pagar. "</b></td>";
@@ -445,6 +462,8 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
                   }
                 }                
               }else{
+                echo "<tr><td style=\"font-size: 130%;\"><b>Total</b></td>";
+                echo "<td style=\"font-size: 130%; float: right;\"><b>R$ ".$total."</b></td></tr>";
                 echo "<td style=\"font-size: 150%;\"><b> Saldo Atual</b></td>";
                 echo "<td></td>";
                 echo "<td style=\"font-size: 150%; float: right;\"><b>R$ " .$despesa. "</b></td>";
