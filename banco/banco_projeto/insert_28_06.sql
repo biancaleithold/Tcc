@@ -18,7 +18,8 @@ INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descr
 ('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
 ('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
 ('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
-('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)34664958', 'expressiva_homem@gmail.com');
+('70.617.469/0001-50', 'Confeitaria Carême', ' Joana Madalena', '12', 'casa', 'Iririú', 'Joinville', 'A Confeitaria Sonhos foi inaugurada no dia 28 de agosto de 1984, desde então vem sendo a Confeitaria prediléta dos habitantes de Joinville e região, fornecendo 200 tipos de sabores de bolos, salgados e doces típicos da região, 50 tipos de pães e um dos cafés mais saborosos de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', '(47)34441125', 'confeitaria_sonhos@gmail.com'),
+('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)33445588', 'expressiva@gmail.com');
 
 INSERT INTO tarefas (data, horario, descricao, titulo) VALUES 
 ('2019-01-01', '10:10:00', 'Reunião decoração', 'Reunião'),
@@ -123,3 +124,7 @@ INSERT INTO estados (sigla,descricao_est) VALUES
 
 INSERT INTO despesa (valor_pago) VALUES 
 ('500.00');
+
+INSERT INTO galeria_empresa (foto1, foto2, foto3, foto4, foto4, foto5, foto6) VALUES 
+('confeitaria1.jpg','confeitaria2.jpg','confeitaria3.jpg','confeitaria4.jpg','confeitaria5.jpg','confeitaria6.jpg');
+
