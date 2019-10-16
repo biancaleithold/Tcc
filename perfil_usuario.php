@@ -280,9 +280,11 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
           ':id' => $id_usuario))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->titulo)."</td><td>".$rs->data."</td><td>".$rs->horario."</td><td>".utf8_encode($rs->descricao)."</td><td><form method='post' id='concluir'><input  style=\"float: right;\" id=check type='checkbox' onclick=\"excluir()\" value=".utf8_encode($rs->situacao)."></td></form><td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a>"
-                           ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-                           //."<a href=\"?action=del&id=".$rs->id_tarefa."\"><i class='trash alternate icon'></i></a></td>";
+                echo "<td>".utf8_encode($rs->titulo)."</td>
+                      <td>".$rs->data."</td><td>".$rs->horario."</td>
+                      <td>".utf8_encode($rs->descricao)."</td>
+                      <td><a href=\"?action=del&id=".$rs->id_tarefa."\"><input  style='float: right;' id=check type='checkbox' onclick='excluir()' ></a></td>
+                      <td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a></td>";
                 echo "</tr>";
             }
         } else {
@@ -294,6 +296,34 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 ?>
 </table>
 <!-- FIM BLOCO MOSTRA DADOS TABELA Agenda -->
+
+
+<!--BLOCO CONCLUIR Tarefa -->
+<script>
+  //MUDAR O CAMPO SITUACAO NA TABELA TAREFA PARA TINYINT(1)!!
+  function excluir() {
+    var escolher = confirm('Deseja mesmo confirmar a conclusão da tarefa? Isso é irreversível!')
+    if (escolher == true){
+      document.getElementById('check').checked = true;
+      <?php
+          if (isset($_REQUEST["action"]) && $_REQUEST["action"] == "del" && $_REQUEST['id'] != '') {
+              try {
+                  $stmt = $connect->prepare("DELETE FROM tarefas WHERE id_tarefa=:id");
+                  $stmt->execute(array(
+                    ':id' => $_REQUEST['id'],
+                  ));
+              }catch (PDOException $erro) {
+                echo "Erro: ".$erro->getMessage();
+              }
+            } 
+      ?> 
+    } else {
+      document.getElementById('check').checked = false;
+    }
+  };
+</script>
+<!-- http://www.phpi.com.br/textos/262/1/como-validar-checkbox-em-javascript-e-pegar-valores-em-php -->
+<!--FIM BLOCO CONCLUIR Tarefa -->
 
 
  <a href="register_tarefa.php">     
@@ -449,24 +479,6 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR Usuario -->
 
-<script>
-  //MUDAR O CAMPO SITUACAO NA TABELA TAREFA PARA TINYINT(1)!!
-  function excluir() {
-    if (window.confirm('Deseja mesmo confirmar a conclusão da tarefa? Isso é irreversível!') ){
-      window.confirm('Excluido');
-          // try {
-          //     $stmt = $connect->prepare("SELECT situacao FROM tarefas");
-          //     $stmt->execute(array(
-          //       ':id' => $_REQUEST['id'],
-          //     ));
-          // }catch (PDOException $erro) {
-          //   echo "Erro: ".$erro->getMessage();
-          // } 
-    } else {
-      document.getElementById('check').checked = false;
-    }
-  };
-</script>
 
 <?php
 include 'rodape.php';
