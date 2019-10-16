@@ -159,7 +159,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'salvar'  && $_REQUEST['id'] 
 <section style="float: left; width: 50%;">
 <!--INICIO BLOCO ALTERAR E SALVAR Convidados -->
 <?php 
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
+if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id_convidado'] != '' ) {
   
   $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_convidado=:id_convidado");
   $stmt->execute(array(
@@ -175,7 +175,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
                 <form method="POST" action="?acao=save" style="width: 92%; margin-left: 6%;">
                   <div class="ui form">
                     <div class="fields">
-                      <input type="hidden" name="id" value="<?php echo $rs->id_convidado ?>"/>
+                      <input type="hidden" name="id_convidado" value="<?php echo $rs->id_convidado ?>"/>
                       <div class="twelve wide field">
                         <label>Nome</label><input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/><br>
                       </div>
@@ -194,21 +194,23 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] !
               
             }
 }
+
 ?>
 
 <?php 
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] != '' ) {  
+if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_convidado'] != '' ) {  
 
     $nome = $_POST['nome'];
     $idade = $_POST['idade'];
+    echo ('<meta http-equiv="refresh" content="2; url=perfil_evento.php?ver=view&id='.$_REQUEST['id'].'">');
+    echo $_REQUEST['id'];
 
-    $stmt = $connect->prepare("UPDATE convidados SET nome=:nome, idade=:idade WHERE id_convidado=:id");
+    $stmt = $connect->prepare("UPDATE convidados SET nome=:nome, idade=:idade WHERE id_convidado=:id_convidado");
     $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
+      ':id_convidado' => $_REQUEST['id_convidado'],
       ':nome' => $nome,
       ':idade' => $idade
   ));   
-     
 }
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR Convidados -->
@@ -229,15 +231,15 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id'] 
 
     try {
  
-    $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_evento = :id");
+    $stmt = $connect->prepare("SELECT id_convidado,nome, idade FROM convidados WHERE id_evento = :id_evento");
  
         if ($stmt->execute(array(
-          ':id' => $_REQUEST['id']))) {
+          ':id_evento' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."</td><td style=\"float: right;\"><a href=\"?acao=upd&id=".$_REQUEST['id']."&id_convidado=".$rs->id_convidado."\">"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acao=del&id=".$rs->id_convidado."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?acao=del&id_convidado=".$rs->id_convidado."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
 
@@ -405,15 +407,6 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
       ':id_empresa' => $id_empresa,
       ':valor_pago' => $valor_pago
   ));
-  
- /* $stmt = $connect->prepare("SELECT eventos.id_evento FROM eventos WHERE eventos.id_evento = :id_evento");
-  $stmt->execute(array(
-    ':id_evento' => $_REQUEST['id_evento'],
-  )); 
-
-  while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                  
-    echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$rs->id_evento.'">'); 
-  } */
 }
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR DESPESAS -->
@@ -477,8 +470,6 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
 }
 ?>
   
-  <?php
-  echo "<a href=?acaodespesa=inseredespesa&id=".$_REQUEST['id'].">";?>
     <button class="ui blue basic button" style="float: right; margin-right: 6.5%;">
       <i class="icon plus"></i>
         Adicionar Despesa
