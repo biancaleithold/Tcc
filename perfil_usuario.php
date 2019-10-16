@@ -340,7 +340,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 </table>
 <!-- FIM BLOCO MOSTRA DADOS TABELA Empresas -->
 
-<<<<<<< HEAD
+
 <a href="register_empresa.php" >     
       <button class="ui blue basic button" style="float: right;  margin-right: 4%; margin-left: 30%">
         <i class="icon plus"></i>
@@ -349,9 +349,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 </a> 
 
 
-<!--BLOCO EXCLUIR DADOS Empresas -->
-<?php
-=======
+
+
 <!--BLOCO EXCLUIR DADOS Empresa -->
 <script>
 function delEmpresa()
@@ -361,7 +360,6 @@ if (opcao==true)
   { 
     
    <?php
->>>>>>> 5ee2aeb45b29b8798c0d9f45c9e1f5ed175ed1cf
   if (isset($_REQUEST["apaga"]) && $_REQUEST["apaga"] == "del" && $_REQUEST['id'] != '') {
     try {
         $stmt = $connect->prepare("DELETE FROM empresa WHERE id_empresa=:id");
@@ -377,15 +375,7 @@ if (opcao==true)
 }
 </script>
 <!-- FIM DO BLOCO EXCLUIR DADOS Empresa -->
-
-
-
-<a href="register_empresa.php" >     
-      <button class="ui blue basic button" style="float: right;  margin-right: 15%">
-        <i class="icon plus"></i>
-          Cadastrar Empresa
-      </button>
-</a> 
+ 
 
 
 <!--INICIO BLOCO ALTERAR E SALVAR Usuario -->
