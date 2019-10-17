@@ -92,12 +92,35 @@
 </div>
 </form>
 
-
 <div>
   <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($descricao);?></h4>
 </div>
 
+
+<form action="" method="post" name="busca_est">
+<div class="inline field" style="margin-left: 15%;margin-top: 8%">
+      <label>Filtrar por Estado</label></div>
+<?php
+          $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
+      ?>
+      <!-- <select name="estado[]" class="label ui selection fluid dropdown"> -->
+      <select name="estado" style="width: 8%;margin-left: 15%">
+        <?php 
+        if ($stmt->execute()) {
+          while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
+            echo "<option value=\"".$linha->sigla."\">".utf8_encode($linha->descricao_est)."</option>";
+          }
+        }
+        ?>
+      </select>
+      <input type="submit" name="envia">
+
+</form>
+
+
+
 <?php 
+//Consulta filtro especializacao
   $especializacao = $_POST['especializacao'];
   
   $consulta = $connect->query('SELECT id_empresa, id_especializacao FROM emp_esp WHERE id_especializacao="'.$especializacao.'"');
@@ -137,5 +160,44 @@
           }
     }
 
+
+//Consulta filtro estado
+  $estado = $_POST['estado'];
+  
+  $consulta = $connect->query('SELECT sigla FROM estados WHERE sigla="'.$estado.'"');
+    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $id_est[] = $linha['sigla']; 
+      
+    }
+  
+    foreach ($id_est as $value) {
+          try{
+            $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE sigla="'.$value.'"');
+              if ($consulta->execute(array(':id_empresa' => $value))) {
+                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
+                  
+                  <div style="margin-top: 5%;float: left;">
+                        <div class="ui move reveal" style="margin-left: 10%;">
+                              <div class="visible content">
+                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
+                              </div>
+                              <div class="hidden content">
+                               <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
+                                 <p style="background-color: #90bdce91;height: 151px;font-size: large">
+                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?>        
+                                 </p> 
+                                  <?php echo '</a>';?>
+                              </div>                      
+                        </div>
+                  </div>     
+                  
+            <?php
+
+                }
+              }
+          }catch (PDOException $erro) {
+            echo "Erro: ".$erro->getMessage();
+          }
+    }
 include 'rodape.php';
 ?>

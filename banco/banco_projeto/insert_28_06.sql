@@ -10,16 +10,16 @@ INSERT INTO usuario (nome, email, telefone, senha, cpf) VALUES
 ('Karen Fernandes', 'karen@gmail.com', '934665789', '1234', '713.438.116-19'),
 ('Chas Crane', 'chas@gmail.com', '988552266', '123', '785.956.091-79');
 
-INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descricao, telefone, email_empresa) VALUES 
-('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)34665989', 'jujuba@gmail.com'),
-('57.208.376/0001-03', 'Restaurante Fernandes', 'João Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com'),
-('88.183.280/0001-61', 'Salão de Beleza Serena', 'Araras', '96', 'casa', 'São Marcos', 'Joinville', 'Realçando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com'),
-('11.820.025/0001-58', 'Barbearia Gomes', 'Antônio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelência, qualidade e profissionalismo é nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com'),
-('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
-('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
-('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
-('70.617.469/0001-50', 'Confeitaria Carême', ' Joana Madalena', '12', 'casa', 'Iririú', 'Joinville', 'A Confeitaria Sonhos foi inaugurada no dia 28 de agosto de 1984, desde então vem sendo a Confeitaria prediléta dos habitantes de Joinville e região, fornecendo 200 tipos de sabores de bolos, salgados e doces típicos da região, 50 tipos de pães e um dos cafés mais saborosos de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', '(47)34441125', 'confeitaria_sonhos@gmail.com'),
-('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)33445588', 'expressiva@gmail.com');
+INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descricao, telefone, email_empresa, sigla) VALUES 
+('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)34665989', 'jujuba@gmail.com','AM'),
+('57.208.376/0001-03', 'Restaurante Fernandes', 'João Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com','MG'),
+('88.183.280/0001-61', 'Salão de Beleza Serena', 'Araras', '96', 'casa', 'São Marcos', 'Joinville', 'Realçando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com','SC'),
+('11.820.025/0001-58', 'Barbearia Gomes', 'Antônio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelência, qualidade e profissionalismo é nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com','SC'),
+('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com','SP'),
+('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com','PR'),
+('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com','SC'),
+('70.617.469/0001-50', 'Confeitaria Carême', ' Joana Madalena', '12', 'casa', 'Iririú', 'Joinville', 'A Confeitaria Sonhos foi inaugurada no dia 28 de agosto de 1984, desde então vem sendo a Confeitaria prediléta dos habitantes de Joinville e região, fornecendo 200 tipos de sabores de bolos, salgados e doces típicos da região, 50 tipos de pães e um dos cafés mais saborosos de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', '(47)34441125', 'confeitaria_sonhos@gmail.com','SC'),
+('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)33445588', 'expressiva@gmail.com','DF');
 
 INSERT INTO tarefas (data, horario, descricao, titulo) VALUES 
 ('2019-01-01', '10:10:00', 'Reunião decoração', 'Reunião'),

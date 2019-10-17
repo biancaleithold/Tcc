@@ -77,7 +77,20 @@ function myFunction() {
         
 </script>
 
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
 
+  function plusSlides(n) {
+  showSlides(slideIndex += n);
+  ga('send', 'event', 'galeria', 'next_prev', 'Titulo da página');
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+</script>
 
 <!-- <script>
 let modalId = $('#image-gallery');
