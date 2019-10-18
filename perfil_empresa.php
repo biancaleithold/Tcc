@@ -123,6 +123,10 @@
     $sql->execute(array(
           $arr = filter( $_POST['excluir'] )
         ));
+
+    echo "<script type=\"text/javascript\">alert('Excluído com sucesso!');</script>";
+        header("Refresh: 0");
+        exit();
   }
   function filter( $dados ){
     $arr = Array();
@@ -153,9 +157,8 @@
           <img id="<?php echo $count_img ?>" src="imagens/galeria/<?php echo $descricao_foto; ?>" width="300" height="200" onclick="clique(this)">
         
                     <div id="janelaModal" class="modalVisual">
-                          <span class="fechar">x</span>
-                          <img class="modalConteudo" id="imgModal">
-                          <div id="txtImg"></div>
+                          <span class="fechar" ="fechar">x</span>
+                           <div class="mySlides fade"><img class="modalConteudo" id="imgModal" src="imagens/galeria/<?php echo $descricao_foto; ?>"></div>
                          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                          <a class="next" onclick="plusSlides(1)">&#10095;</a>
                     </div>
@@ -170,52 +173,6 @@ $count_img++;
                 <div class="arruma_galeria"><label>Excluir Fotos Selecionadas</label>
                 <input type="submit" name="submit" value="Excluir"></div>
               </form> <?php } ?>
-
-     
-
-
-<!-- Include the above in your HEAD tag -->
-
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<div class="container">
-	<div class="row">
-		<div class="row">
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-                   data-image="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                   data-target="#image-gallery">
-                    <img class="img-thumbnail"
-                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                         alt="Another alt text">
-                </a>
-            </div>
-    </div>
-
-
-        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="image-gallery-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                        </button>
-
-                        <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-	</div>
-</div> -->
-
 
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
 <div style="float: right;margin-top: 5%;">
@@ -241,7 +198,6 @@ $count_img++;
       
       $destino = $diretorio."/".$arquivo['name'][$controle];
       if(move_uploaded_file($arquivo['tmp_name'][$controle], $destino)){
-        echo "Upload realizado com sucesso<br>"; 
         $descricoes_fotos[]  = $arquivo['name'][$controle];
       }else{
         echo "Erro ao realizar upload";
@@ -260,6 +216,8 @@ $count_img++;
   } catch (PDOException $e) {
     $errMsg = $e->getMessage();
   }
+  echo "<script type=\"text/javascript\">alert('Upload realizado com sucesso!');</script>";
+  header("Refresh: 0");
  }
   ?>
 

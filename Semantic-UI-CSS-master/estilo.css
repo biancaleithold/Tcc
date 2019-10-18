@@ -135,17 +135,6 @@ img{
   max-width:800px;
 }
 
-#txtImg{
-  margin:auto;
-  display:block;
-  width:80%;
-  max-width:700px;
-  text-align:center;
-  color:#ccc;
-  padding:10px 0;
-  height:150px;
-}
-
 .fechar{
   position:absolute;
   top:15px;
@@ -157,6 +146,21 @@ img{
 }
 
 
+/* Page style
+   !!You don't need this for you gallery works!! */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ok, maybe you should use it for you gallery works */
+}
+
+body {
+  background: #efefef;
+  color: #333;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
   position: absolute;
