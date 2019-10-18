@@ -63,7 +63,7 @@ include "cabecalho.php";
                     echo "<h1 style=\"font-size: -webkit-xxx-large;\"><center>".utf8_encode($rs->nome_evento)."</center></h1>" ;
                     echo "<h2 class=\"header\" style=\"margin-left: 2%;\">Dados do Evento</h2>";
                     echo "<tr>";
-                    echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->hora)."</td><td>".utf8_encode($rs->dia)."</td><td>".utf8_encode($rs->local)."</td><td>".utf8_encode($rs->descricao)."</td><td>".utf8_encode($rs->valor_max_pagar)."<a href=\"?act=upd&id=".$rs->id_evento."\" style=\"float: right;\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a></td>";
+                    echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->hora)."</td><td>".utf8_encode($rs->dia)."</td><td>".utf8_encode($rs->local)."</td><td>".utf8_encode($rs->descricao)."</td><td>R$ ".utf8_encode($rs->valor_max_pagar)."<a href=\"?act=upd&id=".$rs->id_evento."\" style=\"float: right;\">"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".""."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"."<i class='pencil alternate icon'></i></a></td>";
                     echo "</tr>";
                 }
             }
@@ -148,7 +148,8 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'salvar'  && $_REQUEST['id'] 
   $conexao = $connect->prepare("SELECT id_evento FROM eventos WHERE id_evento = :id");
     if ($conexao->execute(array(':id' => $_REQUEST['id']))) {
       while ($linhas = $conexao->fetch(PDO::FETCH_OBJ)) {                
-      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');                    
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$linhas->id_evento.'">');
+      echo "<script type=\"text/javascript\">alert('Evento alterado com sucesso!');</script>";              
       }
     }   
 }
@@ -169,10 +170,9 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id_con
    <h2 style="margin-left: 4%;">Alterar Dados Convidado</h2>  
 <?php
    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-
                 ?> 
                
-                <form method="POST" action="?acao=save" style="width: 92%; margin-left: 6%;">
+                <form method="POST" action="?acao=save&id=<?php echo $_REQUEST['id'] ?>" style="width: 92%; margin-left: 6%;">
                   <div class="ui form">
                     <div class="fields">
                       <input type="hidden" name="id_convidado" value="<?php echo $rs->id_convidado ?>"/>
@@ -202,8 +202,8 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_co
 
     $nome = $_POST['nome'];
     $idade = $_POST['idade'];
-    echo ('<meta http-equiv="refresh" content="2; url=perfil_evento.php?ver=view&id='.$_REQUEST['id'].'">');
-    echo $_REQUEST['id'];
+    echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_REQUEST['id'].'">');
+    echo "<script type=\"text/javascript\">alert('Convidado alterado com sucesso!');</script>";
 
     $stmt = $connect->prepare("UPDATE convidados SET nome=:nome, idade=:idade WHERE id_convidado=:id_convidado");
     $stmt->execute(array(
@@ -239,7 +239,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_co
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."</td><td style=\"float: right;\"><a href=\"?acao=upd&id=".$_REQUEST['id']."&id_convidado=".$rs->id_convidado."\">"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acao=del&id_convidado=".$rs->id_convidado."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?acao=del&id=".$_REQUEST['id']."&id_convidado=".$rs->id_convidado."\"><i onclick='delConvidado()' class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
 
@@ -278,19 +278,29 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_co
 
 
 <!--BLOCO EXCLUIR DADOS Convidados -->
-<?php
-  if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id'] != '') {
+<script>
+function delConvidado(){
+var x;
+var escolha=confirm("Tem certeza que deseja excluir o convidado? Isso é irreversível!");
+if (escolha==true) { 
+    
+  <?php
+  if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id_convidado'] != '') {
     try {
-        $stmt = $connect->prepare("DELETE FROM convidados WHERE id_convidado=:id");
+        $stmt = $connect->prepare("DELETE FROM convidados WHERE id_convidado=:id_convidado");
         $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
+          ':id_convidado' => $_REQUEST['id_convidado'],
         ));
     }catch (PDOException $erro) {
       echo "Erro: ".$erro->getMessage();
     }
-  }
-?>
-
+  } 
+  ?>window.confirm('Convidado excluído com sucesso!');
+}
+    <?php echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
+    echo "<script type=\"text/javascript\">alert('Convidado alterado com sucesso!');</script>"; ?>
+}
+</script>
 <!-- FIM DO BLOCO EXCLUIR DADOS Convidados -->
 
 
@@ -327,17 +337,22 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
   } else {
     
       try{
+          if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'] != '' ) {
             $stmt = $connect->prepare('INSERT INTO  convidados (idade, nome, id_evento) VALUES (:idade , :nome, :id_evento)');
             $stmt->execute(array(
               ':idade' => $_REQUEST['idade_ins'],
               ':nome' => $_REQUEST['nome_ins'],
               ':id_evento' => $_REQUEST['id']
-            )); 
-          }catch (PDOException $erro) {
-              echo "Erro: ".$erro->getMessage();
-          }
-          }
+            ));
+
+            echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_REQUEST['id'].'">');
+            echo "<script type=\"text/javascript\">alert('Convidado inserido com sucesso!');</script>";  
+          } 
+      }catch (PDOException $erro) {
+        echo "Erro: ".$erro->getMessage();
+      }
   }
+}
 
 ?>
 <!--FIM BLOCO INSERE Convidados -->
@@ -348,9 +363,9 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
 
 <!--INICIO BLOCO ALTERAR E SALVAR DESPESA -->
 <?php 
-if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'] != '' ) {
+if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id_despesa'] != '' ) {
   
-  $stmt = $connect->prepare("SELECT eventos.id_evento, eventos.valor_max_pagar, empresa.nome, despesa.valor_pago, despesa.id_despesa, empresa.id_empresa FROM eventos, empresa, despesa WHERE empresa.id_empresa = despesa.id_empresa and eventos.id_evento = despesa.id_evento and despesa.id_despesa = :id_despesa");
+  $stmt = $connect->prepare("SELECT valor_pago, id_despesa FROM despesa WHERE id_despesa = :id_despesa");
   $stmt->execute(array(
     ':id_despesa' => $_REQUEST['id_despesa'],
   )); 
@@ -360,7 +375,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
                 echo "<tr>";
                 echo "<td>";?> 
                 <h2>Alterar Dados Despesa</h2>
-                <form method="POST" action="?acaoo=salvando" style="width: 178%; margin-left: 2%;">            
+                <form method="POST" action="?acaoo=salvando&id=<?php echo $_REQUEST['id'] ?>&id_despesa=<?php echo $_REQUEST['id_despesa'] ?>" style="width: 178%; margin-left: 2%;">            
                   <div class="ui form">
                     <div class="fields">
                       <input type="hidden" name="id" value="<?php echo $rs->id_despesa ?>"/>
@@ -396,14 +411,16 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id'
 ?>
 
 <?php 
-if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST['id'] != '' ) { 
+if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST['id_despesa'] != '' ) { 
 
     $id_empresa = $_POST['id_empresa'];
     $valor_pago = $_POST['valor_pago'];
+    echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
+    echo "<script type=\"text/javascript\">alert('Despesa alterada com sucesso!');</script>";
 
-    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_despesa=:id");
+    $stmt = $connect->prepare("UPDATE despesa SET id_empresa=:id_empresa, valor_pago=:valor_pago WHERE id_despesa=:id_despesa");
     $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
+      ':id_despesa' => $_REQUEST['id_despesa'],
       ':id_empresa' => $id_empresa,
       ':valor_pago' => $valor_pago
   ));
@@ -433,8 +450,8 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
           ':id' => $_REQUEST['id']))) {
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
-                echo "<td>".utf8_encode($rs->nome)."</td><td style=\"float: right;\">R$ ".$rs->valor_pago."</td><td style=\"padding-left: 13%;\"><a href=\"?acaoo=updt&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\">"."<i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acaooo=delet&id=".$rs->id_despesa."\"><i class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                echo "<td>".utf8_encode($rs->nome)."</td><td style=\"float: right;\">R$ ".$rs->valor_pago."</td><td style=\"padding-left: 13%;\"><a href=\"?acaoo=updt&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\"><i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a href=\"?acaooo=delet&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\"><i onclick='delDespesa()' class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></td>";
                 echo "</tr>";
                 $valores_pagos[] = $rs->valor_pago;
@@ -469,7 +486,8 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
     echo "Erro: ".$erro->getMessage();
 }
 ?>
-  
+</table>
+  <?php echo "<a href=?acaodespesa=inseredespesa&id=".$_REQUEST['id'].">"; ?>
     <button class="ui blue basic button" style="float: right; margin-right: 6.5%;">
       <i class="icon plus"></i>
         Adicionar Despesa
@@ -480,19 +498,29 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
 
 
 <!--BLOCO EXCLUIR DADOS DESPESAS -->
-<?php
+<script>
+function delDespesa(){
+var x;
+var escolha=confirm("Tem certeza que deseja excluir a despesa? Isso é irreversível!");
+if (escolha==true) { 
+    
+  <?php
   if (isset($_REQUEST["acaooo"]) && $_REQUEST["acaooo"] == "delet" && $_REQUEST['id'] != '') {
     try {
-        $stmt = $connect->prepare("DELETE FROM despesa WHERE id_despesa=:id");
+        $stmt = $connect->prepare("DELETE FROM despesa WHERE id_despesa=:id_despesa");
         $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
+          ':id_despesa' => $_REQUEST['id_despesa'],
         ));
     }catch (PDOException $erro) {
       echo "Erro: ".$erro->getMessage();
     }
   }
-?>
-
+  ?>window.confirm('Despesa excluída com sucesso!');
+}
+<?php echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
+    echo "<script type=\"text/javascript\">alert('Convidado alterado com sucesso!');</script>"; ?>
+}
+</script>
 <!-- FIM DO BLOCO EXCLUIR DADOS DESPESAS -->
 
 
@@ -506,7 +534,7 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
                 echo "<td>";?>
                  <br><br><br>
                  <h2 style="margin-left: 2%;">Adicionar Despesa</h2>
-                 <form method="POST" action="" style="width: 90%; margin-left: 3%;">
+                 <form method="POST" action="?acaodespesa=inseredespesa&id=<?php echo $_REQUEST['id'] ?>" style="width: 90%; margin-left: 3%;">
                     <div class="ui form">
                       <div class="fields">
                         <input type="hidden" name="id" value="<?php echo $_REQUEST['id'] ?>"/>
@@ -539,18 +567,23 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
   } else {
     
       try{
+        if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespesa'  && $_REQUEST['id'] != '' ) { 
             $stmt = $connect->prepare('INSERT INTO  despesa (valor_pago, id_empresa, id_evento) VALUES (:valor_pago, :id_empresa, :id_evento)');
             $stmt->execute(array(
               ':valor_pago' => $_REQUEST['valor_pago'],
               ':id_empresa' => $_REQUEST['id_empresa'],
               ':id_evento' => $_REQUEST['id']
-            )); 
-          }catch (PDOException $erro) {
-              echo "Erro: ".$erro->getMessage();
-          }
-          
+            ));
+
+          echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
+          echo "<script type=\"text/javascript\">alert('Despesa inserida com sucesso!');</script>";
         }
+      }catch (PDOException $erro) {
+        echo "Erro: ".$erro->getMessage();
+      }
+          
   }
+}
 
 ?>
 <!--FIM BLOCO INSERE DESPESAS -->
