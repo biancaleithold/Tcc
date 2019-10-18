@@ -10,16 +10,17 @@ INSERT INTO usuario (nome, email, telefone, senha, cpf) VALUES
 ('Karen Fernandes', 'karen@gmail.com', '934665789', '1234', '713.438.116-19'),
 ('Chas Crane', 'chas@gmail.com', '988552266', '123', '785.956.091-79');
 
-INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descricao, telefone, email_empresa, sigla) VALUES 
-('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)34665989', 'jujuba@gmail.com','AM'),
-('57.208.376/0001-03', 'Restaurante Fernandes', 'João Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com','MG'),
-('88.183.280/0001-61', 'Salão de Beleza Serena', 'Araras', '96', 'casa', 'São Marcos', 'Joinville', 'Realçando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com','SC'),
-('11.820.025/0001-58', 'Barbearia Gomes', 'Antônio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelência, qualidade e profissionalismo é nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com','SC'),
-('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com','SP'),
-('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com','PR'),
-('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com','SC'),
-('70.617.469/0001-50', 'Confeitaria Carême', ' Joana Madalena', '12', 'casa', 'Iririú', 'Joinville', 'A Confeitaria Sonhos foi inaugurada no dia 28 de agosto de 1984, desde então vem sendo a Confeitaria prediléta dos habitantes de Joinville e região, fornecendo 200 tipos de sabores de bolos, salgados e doces típicos da região, 50 tipos de pães e um dos cafés mais saborosos de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', '(47)34441125', 'confeitaria_sonhos@gmail.com','SC'),
-('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)33445588', 'expressiva@gmail.com','DF');
+INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descricao, telefone, email_empresa) VALUES 
+('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)34665989', 'jujuba@gmail.com'),
+('57.208.376/0001-03', 'Restaurante Fernandes', 'João Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com'),
+('88.183.280/0001-61', 'Salão de Beleza Serena', 'Araras', '96', 'casa', 'São Marcos', 'Joinville', 'Realçando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com'),
+('11.820.025/0001-58', 'Barbearia Gomes', 'Antônio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelência, qualidade e profissionalismo é nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com'),
+('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
+('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
+('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
+('70.617.469/0001-50', 'Confeitaria Predileta', '  Hannah Mendes', '105', 'casa', 'Floresta', 'Joinville', 'A Confeitaria Sonhos foi inaugurada no dia 28 de agosto de 1984, desde então vem sendo a Confeitaria predileta dos habitantes de Joinville e região, fornecendo 200 tipos de sabores de bolos e os melhores doces típicos da região de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', ' (47)34441125', 'confeitaria_predileta@gmail.com'),
+('59.243.815/0001-44', 'Restaurante Brace', 'Joaquim Ferreira', '30', 'casa', 'Centro', 'Joinville', 'O Restaurante Brace foi inaugurado no dia 30 de setembro de 1990, desde então vem sendo o restaurante predileta de todos os habitantes de Joinville e região, fornecendo 200 tipos de pratos e sobremesas finas mais saborosos de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', '4734352255', 'restaurante_brace@gmail.com')
+('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)33445588', 'expressiva@gmail.com');
 
 INSERT INTO tarefas (data, horario, descricao, titulo) VALUES 
 ('2019-01-01', '10:10:00', 'Reunião decoração', 'Reunião'),
@@ -83,7 +84,7 @@ INSERT INTO categoria_evento (nome, descricao, foto1, foto2, foto3, foto4) VALUE
 
 ('Casamento','O casamento é um de um laço de amor. Um laço que deve ser leve como um abraço, não apertado como um nó, mas firme o suficiente para não se desfazer com o vento. O casamento deve ser feito de amor, de respeito e admiração. Deve sobreviver ao fim da paixão, a tormentas e qualquer tipo de tentação. Num casamento deve haver diálogo, não discussão. O importante não é saber quem tem razão, mas encontrar um consenso. Num casamento, as duas partes devem aprender a ceder. Se apenas um cede, sem nada em troca receber, a frustração se instala e a amargura pode começar a crescer. As mágoas e tristezas que surgem não devem ser guardadas, devem virar palavras, que sejam escritas ou faladas.', 'casamento1.jpg', 'casamento2.jpg', 'casamento3.jpg', 'casamento4.jpg'),
 
-('Coorporativo','O fim de um ano, a comemoração de uma data especial ou a celebração de projeto é de muita alegria, é o momento para agradecer, aos familiares e aos colegas de trabalhos, então nada melhor que montar um evento para comemorar os desafios que superaram com a ajuda daqueles que nunca te deixaram sozinho, que sempre estiveram ao seu lado, independente do dia e do tempo, celebrar após um dever cumprido te da forças para continuar em frente nos próximos anos, venha montar seu evento conosco, celebrar com os amigos e familiares é a melhor forma de se divertir.', 'corporativa1.png', 'corporativa2.jpg', 'corporativa3.jpg', 'corporativa4.jpg'),
+('Coorporativo','O fim de um ano, a comemoração de uma data especial ou a celebração de projeto é de muita alegria, é o momento para agradecer, aos familiares e aos colegas de trabalhos, então nada melhor que montar um evento para comemorar os desafios que superaram com a ajuda daqueles que nunca te deixaram sozinho, que sempre estiveram ao seu lado, independente do dia e do tempo, celebrar após um dever cumprido te da forças para continuar em frente nos próximos anos, venha montar seu evento conosco, celebrar com os amigos e familiares é a melhor forma de se divertir.', 'corporativa1.jpg', 'corporativa2.jpg', 'corporativa3.jpg', 'corporativa4.png'),
 
 ('Formatura','O sucesso é daqueles que batalham, e com toda certeza você é um dos merecedores desse sucesso. Que a alegria da formatura hoje, fique para sempre em você, para que a felicidade também contagie aqueles que da sua profissão se beneficiarem. Pessoas grandes são aquelas que lutam por ideais, e hoje nesta formatura você prova ser parte dessas pessoas. A sua conquista vai impulsionar outras buscas e abrir novos horizontes, sempre apontando para um futuro muito luminoso. Por acreditar que este dia chegaria, você se esforçou e buscou a cada dia o seu sonho. Merecidamente venceu, e hoje os aplausos são todos para você! O que você alcançou hoje é uma pequena parte do que você ainda pode conquistar com o seu talento. O talento, a força de vontade e a persistência trouxeram você até aqui. Esperamos que esta vitória seja o início de muitas outras conquistas. Parabéns pela formatura!
 ', 'formatura1.jpg', 'formatura2.jpg', 'formatura3.jpg', 'formatura4.jpg'),
@@ -124,7 +125,4 @@ INSERT INTO estados (sigla,descricao_est) VALUES
 
 INSERT INTO despesa (valor_pago) VALUES 
 ('500.00');
-
-INSERT INTO galeria_empresa (foto1, foto2, foto3, foto4, foto4, foto5, foto6) VALUES 
-('confeitaria1.jpg','confeitaria2.jpg','confeitaria3.jpg','confeitaria4.jpg','confeitaria5.jpg','confeitaria6.jpg');
 

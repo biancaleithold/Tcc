@@ -30,7 +30,7 @@ complemento varchar(50),
 bairro varchar(100),
 cidade varchar(100),
 foto_perfil varchar(100),
-descricao varchar(100),
+descricao LONGTEXT,
 telefone varchar(100),
 email_empresa varchar(100),
 sigla varchar(2),
@@ -96,6 +96,7 @@ valor_pago decimal,
 id_evento int,
 id_empresa int
 );
+
 
 ALTER TABLE tarefas ADD FOREIGN KEY(id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE ON UPDATE CASCADE; 
 ALTER TABLE emp_categ ADD FOREIGN KEY(id_categoria) REFERENCES categoria_evento (id_categoria) ON DELETE CASCADE ON UPDATE CASCADE;

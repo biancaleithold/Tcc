@@ -45,7 +45,7 @@
       <?php
         }else{
       ?>
-          <img  src="imagens/perfil.png">
+          <img  src="imagens/perfil.jpg">
       <?php
         }
       ?>
