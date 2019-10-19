@@ -104,6 +104,55 @@ function showSlides(n) {
 }
 </script>
 
+<script>
+ function formatar(mascara, documento){
+  var i = documento.value.length;
+  var saida = mascara.substring(0,1);
+  var texto = mascara.substring(i)
+  
+  if (texto.substring(0,1) != saida){
+            documento.value += texto.substring(0,1);
+  }
+  
+}
+</script>
+
+<script type="text/javascript">
+//Script by klonder (em uma noite inspirada!!!)
+function mascara(l,m,i){
+//l: local do objeto --> this;
+//m: máscara;
+//i: caractere inicial (posição zero da máscara;
+
+var iCount = l.value.length;
+
+//Digite os símbolos especiais que permanecerão em seus locais corretos:
+var simbolosEspeciais = "()/-.";	
+	
+	if (iCount < m.length) {
+		 //Verificando se foi passado o parâmetro inicial "i":
+		if (iCount == 1 && i != ""){
+			l.value = i+l.value;	
+		} else {
+		
+			if (simbolosEspeciais.indexOf(m.substr(iCount,1)) != -1) {
+				l.value = l.value+m.substr(iCount,1);
+			
+				if (m.substr(iCount+1,1) == " ") {
+				l.value = l.value+" ";
+				}
+			}
+		
+			if (m.substr(iCount,1) == " ") {
+				l.value = l.value+" ";
+			}
+		}
+
+	} else {
+		l.value = l.value.substr(0,m.length);
+	}
+} 
+</script>
 
 <footer class="w3-container w3-padding-64 w3-center">  
 	<div class="w3-xlarge w3-padding-32">

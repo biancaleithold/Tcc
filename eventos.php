@@ -144,7 +144,7 @@
                               <div class="hidden content">
                                <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
                                  <p style="background-color: #90bdce91;height: 151px;font-size: large">
-                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?>        
+                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".utf8_encode($linha->email_empresa)."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
                                  </p> 
                                   <?php echo '</a>';?>
                               </div>                      
@@ -184,7 +184,7 @@
                               <div class="hidden content">
                                <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
                                  <p style="background-color: #90bdce91;height: 151px;font-size: large">
-                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".$linha->email_empresa."<br>".$linha->cidade." - ".$linha->sigla;?>        
+                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".utf8_encode($linha->email_empresa)."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
                                  </p> 
                                   <?php echo '</a>';?>
                               </div>                      

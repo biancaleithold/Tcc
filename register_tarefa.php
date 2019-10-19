@@ -33,17 +33,14 @@
           ':id_usuario' => $id_usuario
         ));
 
-        header('Location: perfil_usuario.php?action=joined');
+        echo "<script type=\"text/javascript\">alert('Cadastrado com sucesso!');</script>";
+        header("Refresh: 0; url=perfil_usuario.php?action=joined");
         exit;
       }
       catch(PDOException $e) {
         $errMsg = $e->getMessage();
       }
     }
-  }
-
-  if(isset($_GET['action']) && $_GET['action'] == 'joined') {
-    $errMsg = 'Registrado com sucesso!<br><br>';
   }
 ?>
 

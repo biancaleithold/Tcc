@@ -41,22 +41,14 @@
         ));
 
 
-        //ARRUMAR!! NÃO APARECE MENSAGEM REGISTRADO COM SUCESSO!
-        //$host  = $_SERVER['HTTP_HOST'];
-            //$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            //echo "<script type='text/javascript'>window.top.location='http://$host$uri/register_usuario.php';</script>";
-            //exit;
-        header('Location: perfil_usuario.php?action=joined');
+        echo "<script type=\"text/javascript\">alert('Cadastrado com sucesso!');</script>";
+        header("Refresh: 0; url=perfil_usuario.php?action=joined");
         exit;
       }
       catch(PDOException $e) {
         $errMsg = $e->getMessage();
       }
     }
-  }
-
-  if(isset($_GET['action']) && $_GET['action'] == 'joined') {
-    $errMsg = 'Registrado com sucesso!<br><br>';
   }
 ?>
 
@@ -96,7 +88,7 @@
       <input type="text" name="local" value="<?php if(isset($_POST['local'])) echo $_POST['local'] ?>" placeholder="Toffanos" /><br /><br>
 
       <label>Valor Máximo que Deseja Gastar</label>
-      <input type="text" name="valor_max_pagar" value="<?php if(isset($_POST['valor_max_pagar'])) echo $_POST['valor_max_pagar'] ?>" placeholder="R$3000,00" /><br /><br>
+      <input type="text" name="valor_max_pagar" onkeypress="$(this).mask('R$ 000000.00')" value="<?php if(isset($_POST['valor_max_pagar'])) echo $_POST['valor_max_pagar'] ?>" placeholder="R$3000,00" /><br /><br>
 
     </div>
     <input type="submit" name='register' class="ui button botao">

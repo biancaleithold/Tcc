@@ -24,15 +24,6 @@
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $id_usuario = $_SESSION['id_usuario'];
       
- 
-    
-  //   foreach ($especializacoes as $especializacao) { 
-  //     echo '<br><br><br><br><br><br><br><br>';
-  //     echo "especializacao " . $especializacao ."<br>";  
-  //   }  
-
-  // echo '<br><br><br><br>';
-  // var_dump($especializacoes);
   
     // Se a foto estiver sido selecionada
     if (!empty($logo["name"])) {
@@ -115,14 +106,12 @@
                  ));
             }  
 
-       
-        header('Location: perfil_usuario.php?action=joined');
-        exit;
+            echo "<script type=\"text/javascript\">alert('Cadastrado com sucesso!');</script>";
+            header("Refresh: 0; url=perfil_usuario.php?action=joined");
+            exit;
       
   }
-  if(isset($_GET['action']) && $_GET['action'] == 'joined') {
-    $errMsg = 'Registrado com sucesso!<br><br>';
-  }
+  
 ?>
 
 <br>
@@ -144,12 +133,12 @@
         }
       ?>
 
-<form class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%" action="register_empresa.php" enctype="multipart/form-data" method="post">
+<form name="form1" class="ui form" style="max-width:65%; margin-left: 18%; margin-top: 1%" action="register_empresa.php" enctype="multipart/form-data" method="post">
   <div class="field"> 
     <div class="two fields">
       <div class="field">
         <label>CNPJ</label>
-        <input type="text" name="cnpj" placeholder="00.000.000/0000-00">
+        <input type="text" name="cnpj" maxlength="18" OnKeyPress="formatar('##.###.###/####-##', this)" placeholder="00.000.000/0000-00">
       </div>
       <div class="field">
       <label>Nome</label>
@@ -213,7 +202,7 @@
   <div class="two fields">
       <div class="field">
         <label>Telefone</label>
-        <input type="text" name="telefone" placeholder="(47)99841-6593">
+        <input type="text" name="telefone" value="" onKeyUp='mascara(this,"(##) ####-####","(")' placeholder="(47)99841-6593">
       </div>
       <div class="field">
       <label>E-mail</label>
@@ -308,12 +297,6 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
       ':telefone' => $telefone,
       ':email_empresa' => $email_empresa
       ));
-
-    if(isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva') {
-      //ARRUMAR - NÃO APARECE A MENSAGEM!!!
-       echo "Registrado com sucesso! Por favor, realize o login novamente para continuar!";
-        header('Location: perfil_empresa.php');
-      }
 }
 ?>
 <!--FIM BLOCO ALTERAR E SALVAR Empresa -->

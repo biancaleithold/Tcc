@@ -45,7 +45,7 @@
       <?php
         }else{
       ?>
-          <img  src="imagens/perfil.jpg">
+          <img  src="imagens/perfil.png">
       <?php
         }
       ?>
@@ -154,11 +154,13 @@
         <div class="container" style="float:left;margin: 0.5%;">
             <form method="post" action="">
                     <input style="float: left;" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
-          <img id="<?php echo $count_img ?>" src="imagens/galeria/<?php echo $descricao_foto; ?>" width="300" height="200" onclick="clique(this)">
+          <img src="imagens/galeria/<?php echo $descricao_foto; ?>" width="300" height="200" onclick="clique(this)">
         
                     <div id="janelaModal" class="modalVisual">
-                          <span class="fechar" ="fechar">x</span>
-                           <div class="mySlides fade"><img class="modalConteudo" id="imgModal" src="imagens/galeria/<?php echo $descricao_foto; ?>"></div>
+                          <span class="fechar" ="fechar">x</span>                       
+                            <div id="<?php echo $count_img; ?>" class="mySlides fade">
+                              <img class="modalConteudo" id="imgModal" src="imagens/galeria/<?php echo $descricao_foto; ?>">
+                            </div> 
                          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                          <a class="next" onclick="plusSlides(1)">&#10095;</a>
                     </div>
@@ -198,6 +200,8 @@ $count_img++;
       
       $destino = $diretorio."/".$arquivo['name'][$controle];
       if(move_uploaded_file($arquivo['tmp_name'][$controle], $destino)){
+        echo "<script type=\"text/javascript\">alert('Upload realizado com sucesso!');</script>";
+        header("Refresh: 0");
         $descricoes_fotos[]  = $arquivo['name'][$controle];
       }else{
         echo "Erro ao realizar upload";
@@ -216,8 +220,7 @@ $count_img++;
   } catch (PDOException $e) {
     $errMsg = $e->getMessage();
   }
-  echo "<script type=\"text/javascript\">alert('Upload realizado com sucesso!');</script>";
-  header("Refresh: 0");
+  
  }
   ?>
 

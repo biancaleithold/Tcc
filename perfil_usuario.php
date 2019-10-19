@@ -35,7 +35,7 @@
     <div class="content">
       <h1 class="header">Nome: <?php echo utf8_encode($nome); ?></h1>
       <div class="meta">
-        <h4 class="date">Email: <?php echo $email; ?></h4>
+        <h4 class="date">Email: <?php echo utf8_encode($email); ?></h4>
       </div>
     </div>
     <div class="extra content">
@@ -211,7 +211,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
                         <input type="time" name="horario" value="<?php echo $rs->horario ?>"/>
                       </div>
                       <div class="field">
-                        <input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/>
+                        <input type="text" name="descricao" value="<?php echo utf8_encode($rs->descricao) ?>"/>
                       </div>
                       <div>
                       <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
@@ -425,8 +425,8 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'atualiza'  && $_REQUEST['i
                 <form class="ui form" method="POST" action="?agir=salva" style="width: 22%;margin-left: 4%;">
                 <h3>Alterar meus dados</h3>
                     <input type="hidden" name="id" value="<?php echo $rs->id_usuario ?>"/>
-                    <td><label>Nome</label><input type="text" name="nome" value="<?php echo $rs->nome ?>"/></td><br>
-                    <td><label>Email</label><input type="email" name="email" value="<?php echo $rs->email ?>"/></td><br>
+                    <td><label>Nome</label><input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/></td><br>
+                    <td><label>Email</label><input type="email" name="email" value="<?php echo utf8_encode($rs->email) ?>"/></td><br>
                     <td><label>Telefone</label><input type="text" name="telefone" value="<?php echo $rs->telefone ?>"/></td><br>
                     <td><label>Senha</label><input type="password" name="senha" value="<?php echo $rs->senha ?>"/></td><br>
                     <td><label>Foto de Perfil</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/></td><br>
