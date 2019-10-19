@@ -73,13 +73,13 @@
 </div>
 
 <form action="" method="post" name="busca_esp">
-<div class="inline field" style="width: 23%;float: left;margin-left: 20%;margin-top: 2%">
+<div class="inline field" style="width: 20%;float: left;margin-left: 20%;margin-top: 2%">
       <label>O que você procura?</label>
 <?php
           $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
       ?>
-      <!-- <select name="especializacao[]" class="label ui selection fluid dropdown"> -->
-      <select name="especializacao">
+      <select name="especializacao" class="label ui selection fluid dropdown"> 
+      <!--<select name="especializacao">-->
         <?php 
         if ($stmt->execute()) {
           while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
@@ -97,14 +97,14 @@
 </div>
 
 
-<form action="" method="post" name="busca_est">
+<form action="" method="post" name="busca_est" style="width: 10%;float: left; margin-left: 20%;">
 <div class="inline field" style="margin-left: 15%;margin-top: 8%">
-      <label>Filtrar por Estado</label></div>
+      <label>Filtrar por Estado</label>
 <?php
           $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
       ?>
-      <!-- <select name="estado[]" class="label ui selection fluid dropdown"> -->
-      <select name="estado" style="width: 8%;margin-left: 15%">
+      <select name="estado" class="label ui selection fluid dropdown"> 
+      <!--<select name="estado" style="width: 8%;margin-left: 15%">-->
         <?php 
         if ($stmt->execute()) {
           while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
@@ -114,6 +114,7 @@
         ?>
       </select>
       <input type="submit" name="envia">
+</div>
 
 </form>
 

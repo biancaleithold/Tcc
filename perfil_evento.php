@@ -108,7 +108,7 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
                         <label>Descrição</label><input type="text" name="descricao" value="<?php echo utf8_encode($rs->descricao) ?>"/>
                       </div>
                       <div class="field">
-                        <label>Valor Máximo da Festa</label><input type="text" name="valor_max_pagar" value="<?php echo $rs->valor_max_pagar ?>"/>
+                        <label>Valor Máximo da Festa</label><input type="text" name="valor_max_pagar" onkeypress="$(this).mask('000000,00')" value="<?php echo $rs->valor_max_pagar ?>"/>
                       </div>
                       
                       <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
@@ -393,7 +393,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id_
                         </select>
                       </div>
                       <div class="three wide field">
-                        <label>Valor do Contrato</label><input type="text" name="valor_pago" value="<?php echo $rs->valor_pago ?>"/>
+                        <label>Valor do Contrato</label><input type="text" name="valor_pago" onkeypress="$(this).mask('000000,00')" value="<?php echo $rs->valor_pago ?>"/>
                       </div>
                       
                       <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%" />
@@ -552,7 +552,7 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
                             </select>
                           </div>
                           <div class="five wide field">
-                              <td><label>Valor do Contrato</label><input type="text" name="valor_pago"/></td>
+                              <td><label>Valor do Contrato</label><input type="text" name="valor_pago" onkeypress="$(this).mask('000000,00')"/></td>
                           </div>
 
                           <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                          
@@ -588,7 +588,6 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
 ?>
 <!--FIM BLOCO INSERE DESPESAS -->
 </section>
-
 
 <?php
 include "rodape.php";

@@ -6,6 +6,8 @@
   src="js/jquery.min.js">
 </script>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 <script type="text/javascript" src="Semantic-UI-CSS-master/package.js"></script>
 <script type="text/javascript" src="Semantic-UI-CSS-master/semantic.js"></script>
 <script type="text/javascript" src="Semantic-UI-CSS-master/semantic.min.js"></script>
