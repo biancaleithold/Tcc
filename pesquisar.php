@@ -21,13 +21,14 @@
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
-        <table class="ui orange table" style="width:30%; float:none;">
+        <?php  if (!empty($resultado_pesquisa)) { ?>
+        <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
           <thead>
             <tr>
               <th>Empresas</th>
             </tr>
           </thead>
-         
+          <?php } ?>
         <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
@@ -54,13 +55,14 @@
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
-        <table class="ui orange table" style="width:30%; float:none;">
+        <?php  if (!empty($resultado_pesquisa)) { ?>
+        <table class="ui orange table" style="width:30%;float:left; margin-left: 10%;">
           <thead>
             <tr>
               <th>Empresas</th>
             </tr>
           </thead>
-         
+          <?php } ?>
         <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
@@ -89,6 +91,7 @@
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
+        <?php  if (!empty($resultado_pesquisa)) { ?>
          <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
             <thead>
                 <tr>
@@ -96,6 +99,7 @@
                 </tr>
                 
             </thead>
+            <?php } ?>
             <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
@@ -110,32 +114,35 @@
 
         <?php 
         
-      }
+        }
     }
   ?>
     <?php
       if(isset($_POST['pesquisar'])) {
    
-        $pesquisa = $connect->prepare('SELECT descricao, nome FROM categoria_evento  WHERE descricao LIKE :pesquisar');
+
+        $pesquisa = $connect->prepare('SELECT id_categoria, descricao, nome FROM categoria_evento  WHERE descricao LIKE :pesquisar');
         $pesquisa->execute(array(
           ':pesquisar' => '%'.$_POST['pesquisar'].'%'
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
-          
-         <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
+        <?php  if (!empty($resultado_pesquisa)) { ?>
+         <table class="ui orange table" style="width:30%; float:right; margin-right: 20%;">
             <thead>
                 <tr>
                 <th>Descrição Categoria</th>
                 </tr>
                 
             </thead>
+        <?php } ?>
             <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
             <tbody>
                 <tr>
-                <td> <?php echo '<a href="eventos.php?id='.$item['id_categoria'].'">'.utf8_encode($item['descricao']); ?></a></td>
+
+                <td> <?php echo '<a href="eventos.php?id='.$item['id_categoria'].'">'.utf8_encode($item['descricao']);?></a></td>
                      
                 </tr>
             </tbody>
@@ -143,13 +150,9 @@
         </table>
 
         <?php 
-        
+        }
       }
-    }
   ?>
  
 
 
-<?php
-include 'rodape.php';
-?>
