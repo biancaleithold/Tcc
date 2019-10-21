@@ -163,8 +163,10 @@ if (escolha==true)
     }catch (PDOException $erro) {
       echo "Erro: ".$erro->getMessage();
     }
+    
   } 
 ?>window.confirm('Excluído com sucesso!');
+  window.location.reload()
   }
 }
 </script>
