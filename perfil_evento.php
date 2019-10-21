@@ -280,25 +280,27 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_co
 <!--BLOCO EXCLUIR DADOS Convidados -->
 <script>
 function delConvidado(){
-var x;
-var escolha=confirm("Tem certeza que deseja excluir o convidado? Isso é irreversível!");
-if (escolha==true) { 
-    
-  <?php
-  if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id_convidado'] != '') {
-    try {
+  var x;
+  var escolha=confirm("Tem certeza que deseja excluir o convidado? Isso é irreversível!");
+  if (escolha==true) { 
+      
+    <?php
+    if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id_convidado'] != '') {
+      try {
         $stmt = $connect->prepare("DELETE FROM convidados WHERE id_convidado=:id_convidado");
         $stmt->execute(array(
           ':id_convidado' => $_REQUEST['id_convidado'],
         ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-  } 
-  ?>window.confirm('Convidado excluído com sucesso!');
-}
-    <?php echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
-    echo "<script type=\"text/javascript\">alert('Convidado alterado com sucesso!');</script>"; ?>
+      }catch (PDOException $erro) {
+        echo "Erro: ".$erro->getMessage();
+      }
+
+         
+    } 
+    ?>
+    window.confirm('Convidado excluído com sucesso!');
+    location.reload(); 
+  }
 }
 </script>
 <!-- FIM DO BLOCO EXCLUIR DADOS Convidados -->
@@ -516,10 +518,10 @@ if (escolha==true) {
     }
   }
   ?>window.confirm('Despesa excluída com sucesso!');
-}
-<?php echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
+    <?php echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
     echo "<script type=\"text/javascript\">alert('Convidado alterado com sucesso!');</script>"; ?>
 }
+
 </script>
 <!-- FIM DO BLOCO EXCLUIR DADOS DESPESAS -->
 
