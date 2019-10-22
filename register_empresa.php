@@ -24,6 +24,34 @@
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $id_usuario = $_SESSION['id_usuario'];
       
+
+    if($cnpj == '')
+    $errMsg = 'Insira o cnpj';
+    if($nome == '')
+      $errMsg = 'Insira o nome';
+    if($rua == '')
+      $errMsg = 'Insira a rua';
+    if($numero == '')
+      $errMsg = 'Insira o numero';
+    if($complemento == '')
+      $errMsg = 'Insira o complemento';
+    if($bairro == '')
+      $errMsg = 'Insira o bairro';
+    if($cidade == '')
+      $errMsg = 'Insira a cidade';
+    if($estado == '')
+      $errMsg = 'Insira o estado';
+    if($logo == '')
+      $errMsg = 'Insira a logo';
+    if($descricao == '')
+      $errMsg = 'Insira a descricao';
+    if($telefone == '')
+      $errMsg = 'Insira o telefone';
+    if($email_empresa == '')
+      $errMsg = 'Insira o email da empresa';
+    if($especializacoes == '')
+      $errMsg = 'Insira a especialização';
+   
   
     // Se a foto estiver sido selecionada
     if (!empty($logo["name"])) {
@@ -72,46 +100,45 @@
           echo "Sorry, there was an error uploading your file.";
         }
         // move_uploaded_file($logo["tmp_name"], $caminho_imagem);
-      }
-    }
-
-    
+          
+        if($errMsg == '' && ValidaCNPJ($cnpj)==false && ValidaTelefone($telefone)==false){
         // Insere os dados no banco
-        $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, sigla, foto_perfil, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
-        $stmt->execute(array(
-          ':cnpj' => utf8_encode($cnpj),
-          ':nome' => utf8_encode($nome),
-          ':rua' => utf8_encode($rua), 
-          ':numero' => utf8_encode($numero),
-          ':complemento' => utf8_encode($complemento),
-          ':bairro' => utf8_encode($bairro),
-          ':cidade' => utf8_encode($cidade),
-          ':estado' => utf8_encode($estado),
-          ':logo' => utf8_encode($_FILES["logo"]["name"]),
-          ':descricao' => utf8_encode($descricao),
-          ':telefone' => utf8_encode($telefone),
-          ':email_empresa' => utf8_encode($email_empresa),
-          ':id_usuario' => $_SESSION['id_usuario'] 
-        ));
+            $stmt = $connect->prepare('INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, sigla, foto_perfil, descricao, telefone, email_empresa, id_usuario) VALUES (:cnpj, :nome, :rua, :numero, :complemento, :bairro, :cidade, :estado, :logo, :descricao, :telefone, :email_empresa, :id_usuario)');
+            $stmt->execute(array(
+              ':cnpj' => utf8_encode($cnpj),
+              ':nome' => utf8_encode($nome),
+              ':rua' => utf8_encode($rua), 
+              ':numero' => utf8_encode($numero),
+              ':complemento' => utf8_encode($complemento),
+              ':bairro' => utf8_encode($bairro),
+              ':cidade' => utf8_encode($cidade),
+              ':estado' => utf8_encode($estado),
+              ':logo' => utf8_encode($_FILES["logo"]["name"]),
+              ':descricao' => utf8_encode($descricao),
+              ':telefone' => utf8_encode($telefone),
+              ':email_empresa' => utf8_encode($email_empresa),
+              ':id_usuario' => $_SESSION['id_usuario'] 
+            ));
 
-       
-        $id_empresa = $connect->lastInsertId();
+          
+            $id_empresa = $connect->lastInsertId();
 
-            foreach ($especializacoes as $especializacao) { 
-              
-              $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id_empresa,:id_especializacao)');
-              $stmt->execute(array(
-                ':id_empresa' => $id_empresa,
-                ':id_especializacao' => $especializacao
-                 ));
-            }  
+                foreach ($especializacoes as $especializacao) { 
+                  
+                  $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id_empresa,:id_especializacao)');
+                  $stmt->execute(array(
+                    ':id_empresa' => $id_empresa,
+                    ':id_especializacao' => $especializacao
+                    ));
+                }  
 
             echo "<script type=\"text/javascript\">alert('Cadastrado com sucesso!');</script>";
             header("Refresh: 0; url=perfil_usuario.php?action=joined");
             exit;
-      
+        } 
+      }
+    }
   }
-  
 ?>
 
 <br>
