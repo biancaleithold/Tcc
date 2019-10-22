@@ -2,6 +2,7 @@
 	  
   require 'config.php';
   include("cabecalho.php");
+  include("funcoes_validacao.php");
 
   if(isset($_POST['register'])) {
     $errMsg = '';
@@ -81,7 +82,7 @@
         // move_uploaded_file($foto_perfil["tmp_name"], $caminho_imagem);
     
         // Insere os dados no banco
-        if($errMsg == ''){
+        if($errMsg == '' && ValidaCPF($cpf)==false && ValidaTelefone($telefone)==false){
         $comando = $connect->prepare('INSERT INTO usuario (nome, email, telefone, senha, foto_perfil, cpf) VALUES (:nome, :email, :telefone, :senha, :nome_imagem, :cpf)');
         $comando->execute(array(
           ':nome' => $nome,
