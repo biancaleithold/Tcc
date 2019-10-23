@@ -1,6 +1,7 @@
 <?php
   require 'config.php';
   include("cabecalho.php");
+  include("funcoes_validacao.php");
   if(isset($_POST['register'])) {
     $errMsg = '';
 
@@ -95,9 +96,9 @@
  
        // Faz o upload da imagem para seu respectivo caminho
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-          echo "The file ". basename( $_FILES["logo"]["name"]). " has been uploaded.";
+          echo "Arquivo ". basename( $_FILES["logo"]["name"]). "foi inserido.";
         } else {
-          echo "Sorry, there was an error uploading your file.";
+          echo "Erro no Upload!";
         }
         // move_uploaded_file($logo["tmp_name"], $caminho_imagem);
           

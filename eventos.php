@@ -113,7 +113,7 @@
         }
         ?>
       </select>
-      <input type="submit" name="envia">
+      <input type="submit" name="filtrar">
 </div>
 
 </form>
@@ -122,6 +122,8 @@
 
 <?php 
 //Consulta filtro especializacao
+if (isset($_POST['envia'])) {
+ 
   $especializacao = $_POST['especializacao'];
   
   $consulta = $connect->query('SELECT id_empresa, id_especializacao FROM emp_esp WHERE id_especializacao="'.$especializacao.'"');
@@ -131,37 +133,43 @@
     
     }
   
-    foreach ($id_emp as $value) {
-          try{
-            $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
-              if ($consulta->execute(array(':id_empresa' => $value))) {
-                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
-                  
-                  <div style="margin-top: 5%;float: left;">
-                        <div class="ui move reveal" style="margin-left: 10%;">
-                              <div class="visible content">
-                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
-                              </div>
-                              <div class="hidden content">
-                               <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
-                                 <p style="background-color: #90bdce91;height: 151px;font-size: large">
-                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".utf8_encode($linha->email_empresa)."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
-                                 </p> 
-                                  <?php echo '</a>';?>
-                              </div>                      
-                        </div>
-                  </div>     
-                  
-            <?php
+      if (!empty($id_emp)) {
+          foreach ($id_emp as $value) {
+              try{
+                $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
+                  if ($consulta->execute(array(':id_empresa' => $value))) {
+                    while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
+                      
+                      <div style="margin-top: 5%;float: left;">
+                            <div class="ui move reveal" style="margin-left: 10%;">
+                                  <div class="visible content">
+                                    <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
+                                  </div>
+                                  <div class="hidden content">
+                                  <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
+                                    <p style="background-color: #90bdce91;height: 151px;font-size: large">
+                                    <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".utf8_encode($linha->email_empresa)."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
+                                    </p> 
+                                      <?php echo '</a>';?>
+                                  </div>                      
+                            </div>
+                      </div>     
+                      
+                <?php
 
-                }
+                    }
+                  }
+              }catch (PDOException $erro) {
+                echo "Erro: ".$erro->getMessage();
               }
-          }catch (PDOException $erro) {
-            echo "Erro: ".$erro->getMessage();
           }
-    }
+      }else{
+        echo "<script>alert('Nenhuma empresa foi encontrada com esta especialização!')</script>";
+      }
+}
 
 
+if (isset($_POST['filtrar'])) {
 //Consulta filtro estado
   $estado = $_POST['estado'];
   
@@ -171,34 +179,40 @@
       
     }
   
-    foreach ($id_est as $value) {
-          try{
-            $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE sigla="'.$value.'"');
-              if ($consulta->execute(array(':id_empresa' => $value))) {
-                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
-                  
-                  <div style="margin-top: 5%;float: left;">
-                        <div class="ui move reveal" style="margin-left: 10%;">
-                              <div class="visible content">
-                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
+    if (!empty($id_est)) {
+          foreach ($id_est as $value) {
+                try{
+                  $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE sigla="'.$value.'"');
+                    if ($consulta->execute(array(':id_empresa' => $value))) {
+                      while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
+                        
+                        <div style="margin-top: 5%;float: left;">
+                              <div class="ui move reveal" style="margin-left: 10%;">
+                                    <div class="visible content">
+                                      <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
+                                    </div>
+                                    <div class="hidden content">
+                                    <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
+                                      <p style="background-color: #90bdce91;height: 151px;font-size: large">
+                                      <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".utf8_encode($linha->email_empresa)."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
+                                      </p> 
+                                        <?php echo '</a>';?>
+                                    </div>                      
                               </div>
-                              <div class="hidden content">
-                               <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
-                                 <p style="background-color: #90bdce91;height: 151px;font-size: large">
-                                 <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".utf8_encode($linha->email_empresa)."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
-                                 </p> 
-                                  <?php echo '</a>';?>
-                              </div>                      
-                        </div>
-                  </div>     
-                  
-            <?php
+                        </div>     
+                        
+                  <?php
 
+                      }
+                    }
+                }catch (PDOException $erro) {
+                  echo "Erro: ".$erro->getMessage();
                 }
-              }
-          }catch (PDOException $erro) {
-            echo "Erro: ".$erro->getMessage();
           }
-    }
+    }else{ echo "<script>alert('Nenhuma empresa foi encontrada com esse estado!')</script>"; }
+}
+
+  
+
 include 'rodape.php';
 ?>
