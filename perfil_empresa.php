@@ -30,8 +30,8 @@
   
 
 ?>
-<br><br><br>
-  <div class="ui special cards" style="margin: 3%; float: left;">
+<br><br>
+  <div class="ui special cards" style="margin-right: 4%; float: left; width: 21%; margin-left: 4%">
 
   <div class="card">
     <div class="blurring dimmable image">
@@ -109,8 +109,7 @@
   </div>
 </div>
 
-<h1 class="header">Sobre Nós</h1>
-<br><br>
+<h1 class="header" style="font-size: xx-large;">Sobre a Empresa</h1>
 <h5 class="descricao_empresa">
   <?php echo $descricao; ?>
 </h5>
@@ -135,11 +134,15 @@
   }
 ?>
 
-<br><br>
-<h2 class="header">Confira fotos de eventos já realizados!</h2>
+<h1 class="header" style="font-size: xx-large;">Confira fotos de eventos já realizados!</h1>
  <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-<h4 class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</h4>
+<p class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</p>
 <?php } ?>
+
+              <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+                <div class="arruma_galeria"><label>Excluir Fotos Selecionadas</label>
+                <input type="submit" name="submit" value="Excluir"></div>
+              <?php } ?>
 
 <?php 
    $consulta = $connect->query('SELECT id_foto,descricao_foto, id_empresa FROM galeria_empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
@@ -170,11 +173,7 @@
 <?php 
 $count_img++;
   } ?>
-
-               <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-                <div class="arruma_galeria"><label>Excluir Fotos Selecionadas</label>
-                <input type="submit" name="submit" value="Excluir"></div>
-              </form> <?php } ?>
+            </form>s   
 
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
 <div style="float: right;margin-top: 5%;">

@@ -12,7 +12,6 @@
   }
 ?>
 
-<br><br><br>
   <div class="ui special cards" style="margin: 3%;float: left;">
 
   <div class="card">
