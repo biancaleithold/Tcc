@@ -156,13 +156,12 @@ var simbolosEspeciais = "()/-.";
 } 
 </script>
 
-<footer class="w3-container w3-padding-64 w3-center">  
-	<div class="w3-xlarge w3-padding-32">
-    	<i class="fa fa-facebook-official w3-hover"></i>
-    	<i class="fa fa-instagram w3-hover"></i>
-    	<i class="fa fa-pinterest-p w3-hover"></i>
- 	</div>
+<footer class="w3-container w3-center" style="margin: 2%;">  
+	
+  <img class="w3-xlarge" style="width: 20%; margin-top: 2%;" src="imagens/logo.png"> 	
  	<p>Bianca - Elizabeth - Karen</p>
+  <p>2019</p>
+
 </footer>
 
 </body>

@@ -283,7 +283,6 @@ function delConvidado(){
   var x;
   var escolha=confirm("Tem certeza que deseja excluir o convidado? Isso é irreversível!");
   if (escolha==true) { 
-      
     <?php
     if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id_convidado'] != '') {
       try {
@@ -293,13 +292,11 @@ function delConvidado(){
         ));
       }catch (PDOException $erro) {
         echo "Erro: ".$erro->getMessage();
-      }
-
-         
+      }         
     } 
     ?>
-    window.confirm('Convidado excluído com sucesso!');
-    location.reload(); 
+    alert('Convidado excluido com sucesso!');
+    location.reload(true);  
   }
 }
 </script>
@@ -517,9 +514,9 @@ if (escolha==true) {
       echo "Erro: ".$erro->getMessage();
     }
   }
-  ?>window.confirm('Despesa excluída com sucesso!');
-    <?php echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_GET['id'].'">');
-    echo "<script type=\"text/javascript\">alert('Convidado alterado com sucesso!');</script>"; ?>
+  ?>
+  alert('Despesa excluída com sucesso!');
+  location.reload(true);
 }
 
 </script>

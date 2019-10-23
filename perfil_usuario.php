@@ -165,7 +165,7 @@ if (escolha==true)
     }
     
   } 
-?>window.confirm('Excluído com sucesso!');
+?>alert('Evento excluído com sucesso!');
   window.location.reload()
   }
 }
@@ -285,7 +285,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
                 echo "<td>".utf8_encode($rs->titulo)."</td>
                       <td>".$rs->data."</td><td>".$rs->horario."</td>
                       <td>".utf8_encode($rs->descricao)."</td>
-                      <td><a href=\"?action=del&id=".$rs->id_tarefa."\"><input  style='float: right;' id=check type='checkbox' onclick='excluir()' ></a></td>
+                      <td><a href=\"?action=del&id=".$rs->id_tarefa."\"><input class='ui toggle checkbox' style='float: right;' id=check type='checkbox' onclick='concluirtarefa()' value='1'></a></td>
                       <td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a></td>";
                 echo "</tr>";
             }
@@ -303,7 +303,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 <!--BLOCO CONCLUIR Tarefa -->
 <script>
   //MUDAR O CAMPO SITUACAO NA TABELA TAREFA PARA TINYINT(1)!!
-  function excluir() {
+  function concluirtarefa() {
     var escolher = confirm('Deseja mesmo confirmar a conclusão da tarefa? Isso é irreversível!')
     if (escolher == true){
       document.getElementById('check').checked = true;
