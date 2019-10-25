@@ -12,6 +12,8 @@
 
 <?php
       if(isset($_POST['pesquisar'])) {
+
+        $find = 0;
    
         $pesquisa = $connect->prepare('SELECT id_empresa, nome, cidade FROM empresa  WHERE nome LIKE :pesquisar');
         $pesquisa->execute(array(
@@ -19,16 +21,17 @@
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
-        <?php  if (!empty($resultado_pesquisa)) { ?>
+        <?php  if (!empty($resultado_pesquisa)) { 
+          $find = 1;
+          ?>
         <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
           <thead>
             <tr>
               <th>Empresas</th>
             </tr>
           </thead>
-          <?php }else{
-             echo "<script>alert('Resultado não encontrado!')</script>";
-          } ?>
+          <?php } ?>
+        
         <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
@@ -49,22 +52,23 @@
     <?php
       if(isset($_POST['pesquisar'])) {
    
-        $pesquisa = $connect->prepare('SELECT id_empresa, nome, cidade FROM empresa  WHERE cidade LIKE :pesquisar');
+        $pesquisa = $connect->prepare('SELECT id_empresa, cidade, nome FROM empresa  WHERE cidade LIKE :pesquisar');
         $pesquisa->execute(array(
           ':pesquisar' => '%'.$_POST["pesquisar"].'%'
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
-        <?php  if (!empty($resultado_pesquisa)) { ?>
+        <?php  if (!empty($resultado_pesquisa)) { 
+          $find = 1;
+          ?>
         <table class="ui orange table" style="width:30%;float:left; margin-left: 10%;">
           <thead>
             <tr>
-              <th>Empresas</th>
+              <th>Cidades Empresas</th>
             </tr>
           </thead>
-          <?php }else{
-            echo "<script>alert('Resultado não encontrado!')</script>";
-          } ?>
+          <?php } ?>
+        
         <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
@@ -93,7 +97,9 @@
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
-        <?php  if (!empty($resultado_pesquisa)) { ?>
+        <?php  if (!empty($resultado_pesquisa)) { 
+          $find = 1;
+          ?>
          <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
             <thead>
                 <tr>
@@ -102,6 +108,7 @@
                 
             </thead>
             <?php } ?>
+          
             <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
@@ -128,7 +135,9 @@
         ));
         $resultado_pesquisa = $pesquisa->fetchAll();
         ?>
-        <?php  if (!empty($resultado_pesquisa)) { ?>
+        <?php  if (!empty($resultado_pesquisa)) { 
+          $find = 1;
+          ?>
          <table class="ui orange table" style="width:30%; float:right; margin-right: 20%;">
             <thead>
                 <tr>
@@ -136,7 +145,8 @@
                 </tr>
                 
             </thead>
-        <?php } ?>
+        <?php }?>
+        
             <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
@@ -144,13 +154,20 @@
                 <tr>
 
                 <td> <?php echo '<a href="eventos.php?id='.$item['id_categoria'].'">'.utf8_encode($item['descricao']);?></a></td>
-                     
+                
+               
                 </tr>
             </tbody>
 
         </table>
+        
 
         <?php 
-        }
-      }
+
+  }
+}
+            if ($find == 0) {
+              echo "<script>alert('Resultado não encontrado!')</script>";
+            }
   ?>
+ 
