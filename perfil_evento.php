@@ -551,7 +551,7 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
                             </select>
                           </div>
                           <div class="five wide field">
-                              <td><label>Valor do Contrato</label><input type="text" name="valor_pago" onkeypress="$(this).mask('000000,00')"/></td>
+                              <td><label>Valor do Contrato</label><input type="text" name="valor_pago"/></td>
                           </div>
 
                           <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                          

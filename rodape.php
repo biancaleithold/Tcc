@@ -6,8 +6,8 @@
   src="js/jquery.min.js">
 </script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>-->
 <script type="text/javascript" src="Semantic-UI-CSS-master/package.js"></script>
 <script type="text/javascript" src="Semantic-UI-CSS-master/semantic.js"></script>
 <script type="text/javascript" src="Semantic-UI-CSS-master/semantic.min.js"></script>
@@ -106,62 +106,16 @@ function showSlides(n) {
 }
 </script>
 
-<script>
- function formatar(mascara, documento){
-  var i = documento.value.length;
-  var saida = mascara.substring(0,1);
-  var texto = mascara.substring(i)
-  
-  if (texto.substring(0,1) != saida){
-            documento.value += texto.substring(0,1);
-  }
-  
-}
-</script>
-
 <script type="text/javascript">
-//Script by klonder (em uma noite inspirada!!!)
-function mascara(l,m,i){
-//l: local do objeto --> this;
-//m: máscara;
-//i: caractere inicial (posição zero da máscara;
-
-var iCount = l.value.length;
-
-//Digite os símbolos especiais que permanecerão em seus locais corretos:
-var simbolosEspeciais = "()/-.";	
-	
-	if (iCount < m.length) {
-		 //Verificando se foi passado o parâmetro inicial "i":
-		if (iCount == 1 && i != ""){
-			l.value = i+l.value;	
-		} else {
-		
-			if (simbolosEspeciais.indexOf(m.substr(iCount,1)) != -1) {
-				l.value = l.value+m.substr(iCount,1);
-			
-				if (m.substr(iCount+1,1) == " ") {
-				l.value = l.value+" ";
-				}
-			}
-		
-			if (m.substr(iCount,1) == " ") {
-				l.value = l.value+" ";
-			}
-		}
-
-	} else {
-		l.value = l.value.substr(0,m.length);
-	}
-} 
+  $('.special.cards .image').dimmer({
+    on: 'hover'
+  });
 </script>
 
-<footer class="w3-container w3-center" style="margin: 2%;">  
-	
+<footer class="w3-container w3-center" style="margin: 2%;"> 	
   <img class="w3-xlarge" style="width: 20%; margin-top: 2%;" src="imagens/logo.png"> 	
  	<p>Bianca - Elizabeth - Karen</p>
   <p>2019</p>
-
 </footer>
 
 </body>

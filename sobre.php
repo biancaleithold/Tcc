@@ -22,7 +22,7 @@
 </head>
 <body style="background: #f1f8f9;">
 <center>
-  <h1 style="margin-top: 5%; margin-bottom: 2%;">Celebrate Festas e Eventos</h1>
+  <h1 class="header" style="margin-top: 5%; margin-bottom: 2%;">Celebrate Festas e Eventos</h1>
 <div id="sol" class="carousel slide" data-ride="carousel" style= "width:60%">
   <ol class="carousel-indicators">
     <li data-target="#casamento" data-slide-to="0" class="active"></li>

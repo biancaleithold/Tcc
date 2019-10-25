@@ -76,8 +76,8 @@ body{
 .texto_evento{
 	float: right;
   text-align: justify;
-  width: 33%;
-  margin-right: 20%;
+  width: 38%;
+  margin-right: 16%;
   font-size: 18px;
 }
 
@@ -107,8 +107,7 @@ body{
 
 .arruma_galeria{
   float: left;
-  margin-left: 27%;
-  margin-top: 3%;
+  margin-top: 0.5%;
 }
 
 img{
@@ -186,4 +185,12 @@ body {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
+}
+
+.dados_empresa{
+  text-decoration: none; 
+  background-color: #90bdce73;
+  height: 151px;
+  font-size: large;
+  color: #000;
 }
