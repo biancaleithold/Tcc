@@ -87,8 +87,8 @@
           }
         }
         ?>
+      <input type="submit" name="envia" value="Buscar" class="btn btn-secondary">
       </select>
-      <input type="submit" name="envia">
 </div>
 </form>
 
@@ -113,7 +113,7 @@
         }
         ?>
       </select>
-      <input type="submit" name="filtrar">
+      <input type="submit" name="filtrar" value="Filtrar" class="btn btn-secondary">
 </div>
 
 </form>
@@ -179,13 +179,12 @@ if (isset($_POST['filtrar'])) {
       
     }
   
-    if (!empty($id_est)) {
+    
           foreach ($id_est as $value) {
                 try{
                   $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE sigla="'.$value.'"');
                     if ($consulta->execute(array(':id_empresa' => $value))) {
-                      while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
-                        
+                      while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) {?>
                         <div style="margin-top: 5%;float: left;">
                               <div class="ui move reveal" style="margin-left: 10%;">
                                     <div class="visible content">
@@ -202,14 +201,15 @@ if (isset($_POST['filtrar'])) {
                         </div>     
                         
                   <?php
-
+                        if (!isset($linha)) {
+                            echo "<script>alert('Nenhuma empresa foi encontrada com este estado!')</script>";
+                        }  
                       }
                     }
                 }catch (PDOException $erro) {
                   echo "Erro: ".$erro->getMessage();
                 }
           }
-    }else{ echo "<script>alert('Nenhuma empresa foi encontrada com esse estado!')</script>"; }
 }
 
   
