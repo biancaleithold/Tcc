@@ -12,7 +12,7 @@
   }
 ?>
 
-  <div class="ui special cards" style="margin: 3%;float: left;">
+  <div class="ui cards" style="margin: 3%;float: left;">
 
   <div class="card">
     <div class="blurring dimmable image">
@@ -39,7 +39,7 @@
     </div>
     <div class="extra content">
        <?php
-     echo  "<a href=?agir=atualiza&id=".$id_usuario.">";
+     echo  "<a href=edita_perfil.php?atualiza=usuario&id=".$id_usuario.">";
       ?>
         <i class="edit icon"></i>
         Editar Perfil
@@ -406,79 +406,6 @@ if (opcao==true)
 }
 </script>
 <!-- FIM DO BLOCO EXCLUIR DADOS Empresa -->
- 
-
-
-<!--INICIO BLOCO ALTERAR E SALVAR Usuario -->
-<?php 
-if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'atualiza'  && $_REQUEST['id'] != '' ) {
-  
-  $stmt = $connect->prepare("SELECT id_usuario,nome,email,telefone,senha,foto_perfil,cpf FROM usuario WHERE id_usuario=:id");
-  $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
-  )); 
-
-   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-
-              ?>
-      
-              
-                <form class="ui form" method="POST" action="?agir=salva" style="width: 22%;margin-left: 4%;">
-                <h3>Alterar meus dados</h3>
-                    <input type="hidden" name="id" value="<?php echo $rs->id_usuario ?>"/>
-                    <td><label>Nome</label><input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/></td><br>
-                    <td><label>Email</label><input type="email" name="email" value="<?php echo utf8_encode($rs->email) ?>"/></td><br>
-                    <td><label>Telefone</label><input type="text" name="telefone" value="<?php echo $rs->telefone ?>"/></td><br>
-                    <td><label>Senha</label><input type="password" name="senha" value="<?php echo $rs->senha ?>"/></td><br>
-                    <td><label>Foto de Perfil</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/></td><br>
-                    <td><label>CPF</label><input type="text" name="cpf" value="<?php echo $rs->cpf ?>"/></td><br>
-
-                    <div class="actions">
-                      <div onClick="window.history.back();" class="ui cancel button">Cancelar</div>
-                      <td><input type="submit" name="salva" value="Salvar" class="ui button" /></td></form>
-                      </a>
-                    </div>
-                  </div>
-              <?php
-             
-            }
-}
-?>
-
-<?php 
-if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id'] != '' ) {
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    $senha = $_POST['senha'];
-    $foto_perfil = $_POST['foto_perfil'];
-    $cpf = $_POST['cpf'];
-
-    $stmt = $connect->prepare("UPDATE usuario SET nome=:nome, email=:email, telefone=:telefone, senha=:senha, foto_perfil=:foto_perfil, cpf=:cpf WHERE id_usuario=:id");
-    $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
-      ':nome' => $nome,
-      ':email' => $email,
-      ':telefone' => $telefone,
-      ':senha' => $senha,
-      ':foto_perfil' => $foto_perfil,
-      ':cpf' => $cpf  
-      ));
-
-    if(isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva') {
-        session_start();
-        require 'config.php';
-        unset($_SESSION['name']);
-        unset($_SESSION['email']);
-        session_destroy();
-
-       echo "<script type=\"text/javascript\">alert('Alterado com sucesso! Por favor, realize o login novamente para continuar!');</script>";
-        header("Refresh: 0; url=login.php");
-        exit();
-      }
-}
-?>
-<!--FIM BLOCO ALTERAR E SALVAR Usuario -->
 
 
 <?php
