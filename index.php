@@ -1,11 +1,10 @@
 <?php
   session_start();
-  require 'config.php';
   include("cabecalho.php");
 ?>
 
 <!-- Header -->
-<header class="w3-container w3-center" style="padding:128px 16px; background-image: url(imagens/fundo1.png);">
+<header class="w3-container w3-center" style="padding:128px 16px; background-image: url(imagens/fundo1.png);margin-top: -1%;">
 	<img class="w3-margin w3-jumbo" src="imagens/logo.png">
 </header>
 

@@ -74,10 +74,7 @@ body{
 }
 
 .texto_evento{
-	float: right;
   text-align: justify;
-  width: 38%;
-  margin-right: 16%;
   font-size: 18px;
 }
 

@@ -1,5 +1,5 @@
 <?php
-  require 'config.php';
+  require_once 'config.php';
   mb_internal_encoding("UTF-8"); 
   mb_http_output( "iso-8859-1" );  
   ob_start("mb_output_handler");   

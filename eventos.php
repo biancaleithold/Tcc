@@ -72,55 +72,60 @@
   </a>
 </div>
 
-<form action="" method="post" name="busca_esp">
-<div class="inline field" style="width: 20%;float: left;margin-left: 16%;margin-top: 2%">
-  <label>O que você procura?</label>
-<?php
-          $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
+<section style="width: 47%; float: left; padding-left: 16%; padding-top: 4%; text-align: justify; padding-bottom: 5%;">
+  <form action="" method="post" name="busca_esp">
+    <div class="inline field" style="width: 55%; float: left;">
+      <label style="font-family: cursive; font-size: 135%;">O que você procura?</label>
+      <?php
+        $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
       ?>
-        <select name="especializacao" class="label ui selection fluid dropdown"> 
+      <select name="especializacao" class="label ui selection fluid dropdown"> 
         <!--<select name="especializacao">-->
-          <?php 
-          if ($stmt->execute()) {
-            while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
-              echo "<option value=\"".$linha->id_especializacao."\">".utf8_encode($linha->descricao_esp)."</option>";
-            }
-          }
-          ?>
-        </select>
-      <br>
-        <input type="submit" name="envia" value="Buscar" class="btn btn-secondary" style="float: right;">
-</div>
-</form>
-
-<div>
-  <h4 class="texto_evento" style="margin-top: 2%;   margin-bottom: 10%;"><?php echo utf8_encode($descricao);?></h4>
-</div>
-
-
-<form caction="" method="post" name="busca_est" style="width: 10%;float: left; margin-left: 16%;">
-<div class="inline field" style="margin-top: 8%">
-      <label>Filtrar por Estado</label>
-<?php
-          $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
-      ?>
-      <select name="estado" class="label ui selection fluid dropdown"> 
-      <!--<select name="estado" style="width: 8%;margin-left: 15%">-->
         <?php 
         if ($stmt->execute()) {
           while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
-            echo "<option value=\"".$linha->sigla."\">".utf8_encode($linha->descricao_est)."</option>";
+            echo "<option value=\"".$linha->id_especializacao."\">".utf8_encode($linha->descricao_esp)."</option>";
           }
         }
-        ?>
-      </select><br>
+      ?>
+      </select>
+    </div>
+    <div style="width: 45%; float: right; padding-right: 26%; padding-top: 3%;">
+    <br>
+      <input type="submit" name="envia" value="Buscar" class="btn btn-secondary" style="float: right;">
+    </div>
+  </form>
+
+  <form caction="" method="post" name="busca_est">
+    <div class="inline field" style="margin-top: 20%; width: 55%;">
+      <label style="font-family: cursive; font-size: 135%;">Filtrar por Estado</label>
+      <?php
+        $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
+      ?>
+      <select name="estado" class="label ui selection fluid dropdown"> 
+      <!--<select name="estado" style="width: 8%;margin-left: 15%">-->
+      <?php 
+      if ($stmt->execute()) {
+        while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) {                
+          echo "<option value=\"".$linha->sigla."\">".utf8_encode($linha->descricao_est)."</option>";
+        }
+      }
+      ?>
+      </select>
+    </div>
+    <div  style="width: 45%; float: right; padding-right: 26%; margin-top: -7%;">
       <input type="submit" name="filtrar" value="Filtrar" class="btn btn-secondary" style="float: right;">
-</div>
+    </div>
+  </form>
+</section>
 
-</form>
+<section style="width: 49%; float: right; padding-right: 16%; padding-top: 3%;">
+  <div>
+    <h4 class="texto_evento"><?php echo utf8_encode($descricao);?></h4>
+  </div>
+</section>
 
-
-
+<section style="padding-top: 3%;float: left; margin-left:8%; width: 100%">
 <?php 
 //Consulta filtro especializacao
 if (isset($_POST['envia'])) {
@@ -140,14 +145,8 @@ if (isset($_POST['envia'])) {
                 $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
                   if ($consulta->execute(array(':id_empresa' => $value))) {
                     while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
-
-
-
-
-
-
-
-                    <div class="ui special cards" style="margin-top: 5%;float: left; margin-left:8%">
+                    <section style="float: left; width: 21.5%; margin-bottom: 3%">
+                    <div class="ui special cards">
                       <div class="card">
                         <div class="blurring dimmable image">
                           <div class="ui dimmer">
@@ -161,49 +160,17 @@ if (isset($_POST['envia'])) {
                         </div>
                         <div class="content">
                           <a class="header"><?php echo utf8_encode($linha->nome)?></a>
-                          <div class="meta">
-                            <span class="date"><?php echo $linha->telefone ?></span>
-                          </div>
                         </div>
                         <div class="extra content">
-                          <a>
-                            <i class="users icon"></i>
-                            2 Members
-                          </a>
+                          <i class="map marker alternate icon"></i>
+                          <?php echo $linha->cidade.' - '.$linha->sigla ?>
+                          <br>
+                          <i class="phone icon"></i> 
+                          <span class="date"><?php echo $linha->telefone ?></span> 
                         </div>
                       </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      
-                      <div style="margin-top: 5%;float: left; margin-left: 5%">
-                            <div class="ui move reveal" style="margin-left: 10%;">
-                                  <div class="visible content">
-                                    <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
-                                  </div>
-                                  <div class="hidden content">
-                                  <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
-                                    <p class="dados_empresa">
-                                    <?php echo utf8_encode($linha->nome)."<br>".$linha->telefone."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
-                                    </p> 
-                                      <?php echo '</a>';?>
-                                  </div>                      
-                            </div>
-                      </div>     
-                      
+                    </section>                 
                 <?php
 
                     }
@@ -216,8 +183,12 @@ if (isset($_POST['envia'])) {
         echo "<script>alert('Nenhuma empresa foi encontrada com esta especialização!')</script>";
       }
 }
+?>
 
+</section>
 
+<section style="padding-top: 3%;float: left; margin-left:8%; width: 100%">
+<?php
 if (isset($_POST['filtrar'])) {
 $encontrado = 0;
 //Consulta filtro estado
@@ -237,20 +208,32 @@ $encontrado = 0;
                       while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) {
                         if (!empty($linha)) {
                           $encontrado = 1; ?>
-                        <div style="margin-top: 5%;float: left;">
-                              <div class="ui move reveal" style="margin-left: 10%;">
-                                    <div class="visible content">
-                                      <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
+                        <section style="float: left; width: 21.5%; margin-bottom: 3%">
+                          <div class="ui special cards">
+                            <div class="card">
+                              <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                  <div class="content">
+                                    <div class="center">
+                                      <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?><div class="ui inverted button">Ver Perfil</div><?php echo '</a>';?>
                                     </div>
-                                    <div class="hidden content">
-                                    <?php echo '<a href="perfil_empresa.php?id='.$value.'">';?>
-                                      <p style="background-color: #90bdce91;height: 151px;font-size: large">
-                                      <?php echo utf8_encode($linha->nome)."<br><br>".$linha->telefone."<br>".utf8_encode($linha->email_empresa)."<br>".utf8_encode($linha->cidade)." - ".$linha->sigla;?>        
-                                      </p> 
-                                        <?php echo '</a>';?>
-                                    </div>                      
+                                  </div>
+                                </div>
+                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
                               </div>
-                        </div>     
+                              <div class="content">
+                                <a class="header"><?php echo utf8_encode($linha->nome)?></a>
+                              </div>
+                              <div class="extra content">
+                                <i class="map marker alternate icon"></i>
+                                <?php echo $linha->cidade.' - '.$linha->sigla ?>
+                                <br>
+                                <i class="phone icon"></i> 
+                                <span class="date"><?php echo $linha->telefone ?></span> 
+                              </div>
+                            </div>
+                          </div>
+                        </section>
                         
                   <?php
                         }  
@@ -264,7 +247,10 @@ $encontrado = 0;
  echo "<script>alert('Nenhuma empresa foi encontrada com este estado!')</script>";
 }
 }
-  
+?>
 
+</section>
+
+<?php
 include 'rodape.php';
 ?>
