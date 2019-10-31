@@ -1,10 +1,11 @@
 <?php
 	ob_start();
+	session_start();
 
 	// Definições da base de dados
 	define('dbhost', 'localhost');
-	define('dbuser', 'aluno');
-	define('dbpass', 'aluno');
+	define('dbuser', 'root');
+	define('dbpass', '');
 	define('dbname', '3info2');
 
 	// Conectando a base de dados (MySQL)

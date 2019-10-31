@@ -1,5 +1,4 @@
 <?php
-  session_start();
   include 'config.php';
   include 'cabecalho.php';
   
@@ -151,7 +150,7 @@
    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
      $id_foto = $linha['id_foto']; 
      $descricao_foto = $linha['descricao_foto'];?>
-
+     
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
               
                 
@@ -199,8 +198,6 @@ $count_img++;
       
       $destino = $diretorio."/".$arquivo['name'][$controle];
       if(move_uploaded_file($arquivo['tmp_name'][$controle], $destino)){
-        echo "<script type=\"text/javascript\">alert('Upload realizado com sucesso!');</script>";
-        header("Refresh: 0");
         $descricoes_fotos[]  = $arquivo['name'][$controle];
       }else{
         echo "Erro ao realizar upload";
@@ -219,6 +216,8 @@ $count_img++;
   } catch (PDOException $e) {
     $errMsg = $e->getMessage();
   }
+   echo "<script type=\"text/javascript\">alert('Upload realizado com sucesso!');</script>";
+        header("Refresh: 0");
   
  }
   ?>

@@ -1,6 +1,5 @@
 <?php
-    session_start();
-	require 'config.php';
+  	require 'config.php';
 	unset($_SESSION['name']);
 	unset($_SESSION['email']);
 	session_destroy();

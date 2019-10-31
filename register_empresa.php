@@ -147,7 +147,7 @@
 <br>
 <br>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 <div class="centraliza_img">
   <h1 style="margin-top: 0.5%">Cadastro de Empresa</h1>
 </div>
@@ -166,7 +166,7 @@
     <div class="two fields">
       <div class="field">
         <label>CNPJ</label>
-        <input type="text" name="cnpj" maxlength="18" OnKeyPress="formatar('##.###.###/####-##', this)" placeholder="00.000.000/0000-00">
+        <input type="text" name="cnpj" maxlength="18" onkeypress="$(this).mask('00.000.000/0000-00')" placeholder="00.000.000/0000-00">
       </div>
       <div class="field">
       <label>Nome</label>
@@ -230,7 +230,7 @@
   <div class="two fields">
       <div class="field">
         <label>Telefone</label>
-        <input type="text" name="telefone" value="" onKeyUp='mascara(this,"(##) ####-####","(")' placeholder="(47)99841-6593">
+        <input type="text" name="telefone" value="" onkeypress="$(this).mask('(00) 0000-0000')"  placeholder="(47)99841-6593">
       </div>
       <div class="field">
       <label>E-mail</label>
@@ -260,75 +260,3 @@
 
 </form>
 </div>
-
-
-
-
-<?php
-if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id'] != '' ) {
-  
-  $stmt = $connect->prepare("SELECT id_empresa, cnpj, nome, rua, complemento, bairro, cidade, foto_perfil, descricao, telefone, email_empresa FROM empresa WHERE id_empresa=:id");
-  $stmt->execute(array(
-    ':id' => $_REQUEST['id'],
-  )); 
-
-   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-
-              ?>
-      
-                <form class="ui form" method="POST" action="?agir=salva" style="width: 39%;float: left;">
-                <h3>Alterar meus dados</h3>
-                    <input type="hidden" name="id" value="<?php echo $rs->id_empresa ?>"/>
-                    <td><label>CNPJ</label><input type="text" name="cnpj" value="<?php echo $rs->cnpj ?>"/></td><br>
-                    <td><label>Nome</label><input type="text" name="nome" value="<?php echo $rs->nome ?>"/></td><br>
-                    <td><label>Rua</label><input type="text" name="rua" value="<?php echo $rs->rua ?>"/></td><br>
-                    <td><label>Complemento</label><input type="text" name="complemento" value="<?php echo $rs->complemento ?>"/></td><br>
-                    <td><label>Bairro</label><input type="text" name="bairro" value="<?php echo $rs->bairro ?>"/></td><br>
-                    <td><label>Cidade</label><input type="text" name="cidade" value="<?php echo $rs->cidade ?>"/></td><br>
-                    <td><label>Foto de Perfil</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/></td><br>
-                    <td><label>Descricao</label><input type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></td><br>
-                    <td><label>Telefone</label><input type="text" name="telefone" value="<?php echo $rs->telefone ?>"/></td><br>
-                    <td><label>Email</label><input type="email" name="email_empresa" value="<?php echo $rs->email_empresa ?>"/></td><br>        
-                    <td><input type="submit" name="salva" value="Salvar" /></td></form>
-              <?php
-             
-            }
-}
-?>
-
-
-
-<!--INICIO BLOCO ALTERAR E SALVAR Empresa -->
-<?php 
-if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id'] != '' ) {
-    $cnpj = $_POST['cnpj'];
-    $nome = $_POST['nome'];
-    $rua = $_POST['rua'];
-    $complemento = $_POST['complemento'];
-    $bairro = $_POST['bairro'];
-    $cidade = $_POST['nome'];
-    $foto_perfil = $_POST['foto_perfil'];
-    $descricao = $_POST['descricao'];
-    $telefone = $_POST['telefone'];
-    $email_empresa = $_POST['email_empresa'];
-    
-    $stmt = $connect->prepare("UPDATE empresa SET  cnpj=:cnpj, nome=:nome, rua=:rua, complemento=:complemento, bairro=:bairro, cidade=:cidade, foto_perfil=:foto_perfil, descricao=:descricao,telefone=:telefone, email_empresa=:email_empresa WHERE id_empresa=:id");
-    $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
-      ':cnpj' => $cnpj,
-      ':nome' => $nome,
-      ':rua' => $rua,
-      ':complemento' => $complemento,
-      ':bairro' => $bairro,
-      ':cidade' => $cidade,
-      ':foto_perfil' => $foto_perfil,
-      ':descricao' => $descricao,
-      ':telefone' => $telefone,
-      ':email_empresa' => $email_empresa
-      ));
-}
-?>
-<!--FIM BLOCO ALTERAR E SALVAR Empresa -->
-<?php
-include 'rodape.php';
-?>

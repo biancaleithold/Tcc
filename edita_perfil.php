@@ -1,7 +1,7 @@
 <?php 
-	session_start();
     include 'config.php';
     include 'cabecalho.php';
+    include 'funcoes_validacao.php';
 
 
 	//INICIO BLOCO ALTERAR E SALVAR Usuario
@@ -28,7 +28,7 @@ if (isset($_REQUEST['atualiza']) && $_REQUEST['atualiza'] == 'usuario'  && $_REQ
               		<input type="hidden" name="id" value="<?php echo $rs->id_usuario ?>"/>
               		<label>Nome</label><input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/><br><br>
               		<label>Email</label><input type="email" name="email" value="<?php echo utf8_encode($rs->email) ?>"/><br><br>
-              		<label>Telefone</label><input type="text" name="telefone" value="<?php echo $rs->telefone ?>"/><br><br>
+              		<label>Telefone</label><input type="text" name="telefone" onKeyUp='mascara(this,"(##) ####-####","(")' value="<?php echo $rs->telefone ?>"/><br><br>
               		<label>Senha</label><input type="password" name="senha" value="<?php echo $rs->senha ?>"/><br><br>
               		<label>Foto de Perfil</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/><br><br>
               		<label>CPF</label><input type="text" name="cpf" value="<?php echo $rs->cpf ?>"/><br><br>
@@ -110,17 +110,18 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
         // move_uploaded_file($foto_perfil["tmp_name"], $caminho_imagem);
     }}
 
-    $stmt = $connect->prepare("UPDATE usuario SET nome=:nome, email=:email, telefone=:telefone, senha=:senha, foto_perfil=:imagem, cpf=:cpf WHERE id_usuario=:id");
-    $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
-      ':nome' => $nome,
-      ':email' => $email,
-      ':telefone' => $telefone,
-      ':senha' => $senha,
-      ':imagem' => $_FILES["foto_perfil"]["name"],
-      ':cpf' => $cpf  
-      ));
-
+     if(ValidaCPF($cpf)==false && ValidaTelefone($telefone)==false){
+          $stmt = $connect->prepare("UPDATE usuario SET nome=:nome, email=:email, telefone=:telefone, senha=:senha, foto_perfil=:imagem, cpf=:cpf WHERE id_usuario=:id");
+          $stmt->execute(array(
+            ':id' => $_REQUEST['id'],
+            ':nome' => $nome,
+            ':email' => $email,
+            ':telefone' => $telefone,
+            ':senha' => $senha,
+            ':imagem' => $_FILES["foto_perfil"]["name"],
+            ':cpf' => $cpf  
+            ));
+      }
     if(isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva') {
         session_start();
         require 'config.php';
@@ -133,8 +134,7 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
         exit();
       } //FIM BLOCO ALTERAR E SALVAR Usuario
 }elseif (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['id'] != '' ) {
-													
-  
+		 
   $stmt = $connect->prepare("SELECT id_empresa, cnpj, nome, rua, numero, complemento, bairro, cidade, foto_perfil, descricao, telefone, email_empresa FROM empresa WHERE id_empresa=:id");
   $stmt->execute(array(
     ':id' => $_REQUEST['id'],
@@ -151,12 +151,12 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 
          
               
-                <form  style="width: max-content;margin-left:10%" class="ui form" method="POST" action="?acao=salvar" enctype="multipart/form-data">
+                <form  style="width: max-content;margin-left:30%" class="ui form" method="POST" action="?acao=salvar" enctype="multipart/form-data">
                 	<input type="hidden" name="id" value="<?php echo $rs->id_empresa ?>"/>
                 	<div class="field"> 
                 		<div class="two fields">
                 			<div class="field">
-                				<label>CNPJ</label><input type="text" name="cnpj" value="<?php echo $rs->cnpj ?>"/></div>
+                				<label>CNPJ</label><input type="text" name="cnpj" onkeypress="$(this).mask('00.000.000/0000-00')" value="<?php echo $rs->cnpj ?>"/></div>
   							<div class="field">
                 				<label>Nome</label><input type="text" name="nome" value="<?php echo $rs->nome ?>"/></div>
                 			</div>
@@ -182,28 +182,28 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
                 				<label>Estado</label>
 
                 				<select name="lista_estados">
-                					<option value="" <?=($sigla == '')?'selected':''?> >Selecione</option>
+                					<option value="" >Selecione</option>
                 					<?php
 
                 					$consulta = $connect->query('SELECT sigla, descricao_est FROM estados');
                 					while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
                 						$id = $linha['sigla'];
                 						$descricao_est = $linha['descricao_est']; ?>
-                						<option value=<?php echo "$id"?> <?=($descricao_est == $id)?'selected':''?> ><?php echo $descricao_est; ?></option>
+                						<option value=<?php echo "$id"?> <?=($descricao_est == $id)?'selected':''?> ><?php echo utf8_encode($descricao_est); ?></option>
                 						<?php } 
                 						?>
                 					</select>
 
                 				</div>
   								<div class="field">
-  									<label>Logo</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/> </div>
+  									<label>Logo</label><input type="file" name="logo"/> </div>
   								</div>
   							</div>
   							<div class="field">
-  								<label>Descrição</label><textarea rows="1" type="text" name="descricao" value="<?php echo $rs->descricao ?>"/></textarea></div>
+  								<label>Descrição</label><input type="text" rows="2" type="text" name="descricao" value="<?php echo $rs->descricao ?>"></div>
   								<div class="two fields">
   									<div class="field">
-  										<label>Telefone</label><input type="text" name="telefone" value="<?php echo $rs->telefone ?>"/> </div>
+  										<label>Telefone</label><input type="text" name="telefone" onkeypress="$(this).mask('(00) 0000-0000')"  value="<?php echo $rs->telefone ?>"/> </div>
   									<div class="field">
                 					<label>Email</label><input type="email" name="email_empresa" value="<?php echo $rs->email_empresa ?>"/>
                 					</div>
@@ -212,18 +212,22 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 									 <div class="inline field">
                 					<label>Especialização</label>
 
-                					<select multiple name="lista_especializacao[]">
-                						<option value="" >Selecione</option>
-                						<?php
+                				
+                          <?php
+                          $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
+                          ?>
+                          <select name='especializacao[]' multiple>
+                            <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
+                            <?php 
+                            if ($stmt->execute()) {
+                              while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                                echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
+                              }
+                            }
+                            ?>
+                          </select>
+                        </div>
 
-                						$consulta = $connect->query('SELECT id_especializacao, descricao_esp FROM especializacao');
-                						while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                							$id = $linha['id_especializacao'];
-                							$descricao_esp = $linha['descricao_esp']; ?>
-                							<option value=<?php echo "$id"?> <?=($descricao_esp == $id)?'selected':''?> ><?php echo $descricao_esp; ?></option>
-                							<?php 
-                						} 
-                						?>
                 					</select>
                 					</div></div>
                   					<input type="submit" name='salvar' value="Salvar" class="ui button" style="float: right;">
@@ -234,7 +238,7 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 
               <?php
              
-            }
+            } 
 }
 ?>
 
@@ -243,7 +247,7 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 <!--INICIO BLOCO SALVAR Empresa -->
 <?php 
 if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'] != '' ) {
-  
+  $id_empresa = $_REQUEST['id'];
     $cnpj = $_POST['cnpj'];
     $nome = $_POST['nome'];
     $rua = $_POST['rua'];
@@ -252,16 +256,16 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
     $bairro = $_POST['bairro'];
     $cidade = $_POST['nome'];
     $sigla = $_POST['lista_estados'];
-    $foto_perfil = $_FILES['foto_perfil'];
+    $logo = $_FILES['logo'];
     $descricao = $_POST['descricao'];
     $telefone = $_POST['telefone'];
     $email_empresa = $_POST['email_empresa'];
     $target_dir = "imagens/";
-    $target_file = $target_dir . basename($_FILES["foto_perfil"]["name"]);
+    $target_file = $target_dir . basename($_FILES["logo"]["name"]);
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     // Se a foto estiver sido selecionada
-    if (!empty($foto_perfil["name"])) {
+    if (!empty($logo["name"])) {
       // Largura máxima em pixels
       $largura = 40000;
       // Altura máxima em pixels
@@ -273,12 +277,12 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
  
       // Verifica se o arquivo é uma imagem
 
-      if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $foto_perfil["type"])){
+      if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $logo["type"])){
         $error[1] = "Isso não é uma imagem.";
       } 
   
       // Pega as dimensões da imagem
-      $dimensoes = getimagesize($foto_perfil["tmp_name"]);
+      $dimensoes = getimagesize($logo["tmp_name"]);
   
       // Verifica se a largura da imagem é maior que a largura permitida
       if($dimensoes[0] > $largura) {
@@ -291,41 +295,42 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
       }
     
       // Verifica se o tamanho da imagem é maior que o tamanho permitido
-      if($foto_perfil["size"] > $tamanho) {
+      if($logo["size"] > $tamanho) {
         $error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
       }
  
       // Se não houver nenhum erro
       if (count($error) == 0) {
         // Pega extensão da imagem
-        preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto_perfil["name"], $ext);
+        preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $logo["name"], $ext);
  
        // Faz o upload da imagem para seu respectivo caminho
-        if (move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], $target_file)) {
-          echo "Arquivo ". basename( $_FILES["foto_perfil"]["name"]). "foi inserido.";
+        if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
+          echo "Arquivo ". basename( $_FILES["logo"]["name"]). " foi inserido.";
         } else {
           echo "Erro no Upload!";
         }
-        // move_uploaded_file($foto_perfil["tmp_name"], $caminho_imagem);
+        // move_uploaded_file($logo["tmp_name"], $caminho_imagem);
     }}
 
+    if(ValidaCNPJ($cnpj)==false && ValidaTelefone($telefone)==false){
     $stmt = $connect->prepare("UPDATE empresa SET  cnpj=:cnpj, nome=:nome, rua=:rua, numero=:numero, complemento=:complemento, bairro=:bairro, cidade=:cidade, sigla=:lista_estados, foto_perfil=:foto, descricao=:descricao,telefone=:telefone, email_empresa=:email_empresa WHERE id_empresa=:id");
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
-      ':cnpj' => $cnpj,
-      ':nome' => $nome,
-      ':rua' => $rua,
-      ':numero' => $numero,
-      ':complemento' => $complemento,
-      ':bairro' => $bairro,
-      ':cidade' => $cidade,
-      ':lista_estados' => $sigla,
-      ':foto' => $foto_perfil,
-      ':descricao' => $descricao,
-      ':telefone' => $telefone,
-      ':email_empresa' => $email_empresa
+      ':cnpj' => utf8_encode($cnpj),
+      ':nome' => utf8_encode($nome),
+      ':rua' =>utf8_encode($rua), 
+      ':numero' => utf8_encode($numero),
+      ':complemento' => utf8_encode($complemento),
+      ':bairro' => utf8_encode($bairro),
+      ':cidade' =>  utf8_encode($cidade),
+      ':lista_estados' => utf8_encode($sigla),
+      ':foto' =>utf8_encode($_FILES["logo"]["name"]),
+      ':descricao' => utf8_encode($descricao),
+      ':telefone' =>utf8_encode($telefone),
+      ':email_empresa' => utf8_encode($email_empresa)
       ));
-
+    }
 
 
          try {
@@ -339,7 +344,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
         }
         
     
-    $lista_especializacao = $_POST['lista_especializacao'];
+    $lista_especializacao = $_POST['especializacao'];
 
 foreach ($lista_especializacao as $especializacao) {
     $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id,:id_especializa)');
@@ -348,6 +353,10 @@ foreach ($lista_especializacao as $especializacao) {
       ':id_especializa' => $especializacao
     ));
   }
+
+   echo "<script type=\"text/javascript\">alert('Alterado com sucesso!);</script>";
+   header("Refresh: 0; url=perfil_empresa.php?ver=view&id=$id_empresa");
+   exit();
 }
 ?>
 <!--FIM BLOCO SALVAR Empresa -->
