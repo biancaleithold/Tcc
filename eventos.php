@@ -30,7 +30,7 @@
 <body style="background: #f1f8f9;">
 <center>
 
-  <h1 class="titulo_evento" style="margin-top: 2%; "><?php echo utf8_encode($nome);?></h1>
+  <h1 class="titulo_evento"><?php echo utf8_encode($nome);?></h1>
 
 <div id="sol" class="carousel slide" data-ride="carousel" style="width: 69%;">
   <ol class="carousel-indicators">
@@ -156,7 +156,17 @@ if (isset($_POST['envia'])) {
                               </div>
                             </div>
                           </div>
-                          <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
+                          <?php
+                            if (!empty($linha->foto_perfil)) {
+                          ?>
+                            <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image" style="width: 290px; height: 250px;">
+                          <?php
+                            }else{
+                          ?>
+                            <img  src="imagens/empresa.png" style="width: 290px; height: 250px;">
+                          <?php
+                            }
+                          ?>
                         </div>
                         <div class="content">
                           <a class="header"><?php echo utf8_encode($linha->nome)?></a>
@@ -219,7 +229,17 @@ $encontrado = 0;
                                     </div>
                                   </div>
                                 </div>
-                                <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image">
+                                <?php
+                                  if (!empty($linha->foto_perfil)) {
+                                ?>
+                                  <img src="imagens/<?php echo $linha->foto_perfil?>" class="ui medium image" style="width: 290px; height: 250px;">
+                                <?php
+                                  }else{
+                                ?>
+                                  <img  src="imagens/empresa.png" style="width: 290px; height: 250px;"> 
+                                <?php
+                                  }
+                                ?>
                               </div>
                               <div class="content">
                                 <a class="header"><?php echo utf8_encode($linha->nome)?></a>

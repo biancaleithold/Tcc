@@ -67,10 +67,10 @@ body{
 }
 
 .titulo_evento{
-	margin-top: 5%; 
 	margin-bottom: 2%; 
 	font-size: 50px;
-	font-family: cursive;
+	font-family: initial;
+  padding-top: 2%;
 }
 
 .texto_evento{
