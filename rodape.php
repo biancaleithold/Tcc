@@ -13,8 +13,7 @@
 <script type="text/javascript" src="Semantic-UI-CSS-master/semantic.min.js"></script>
 <script type="text/javascript" src="Semantic-UI-CSS-master/package.json"></script>
 
-
-<script type="text/javascript">
+<script>
 $('.label.ui.dropdown')
   .dropdown();
 
@@ -26,8 +25,7 @@ $('.no.label.ui.dropdown')
 $('.ui.button').on('click', function () {
   $('.ui.dropdown')
     .dropdown('restore defaults')
-});
-
+})
 </script>
 
 <script type="text/javascript">

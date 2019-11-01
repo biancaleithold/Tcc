@@ -1,26 +1,26 @@
 INSERT INTO usuario (nome, email, telefone, senha, cpf) VALUES 
-('Julia Biff', 'ju@gmail.com', '934555797', 'bola', '158.814.702-90'),
-('Bianca Leithold', 'bia@gmail.com', '256554567', 'banana', '273.778.022-51'),
-('Elizabeth Antunes', 'beth@gmail.com', '777554567', 'maca', '329.635.185-01'),
-('Leticia dos Santos', 'leticia@gmail.com', '555554567', 'batata', '422.821.472-00'),
-('Joao Pedro', 'joao@gmail.com', '666554567', 'tomate', '538.172.449-75'),
-('Natalia Dellandrea', 'nat@gmail.com', '333554567', 'chocolate', '622.343.276-36'),
-('Matheus Gomes', 'gomes@gmail.com', '222554567', 'cebola', '651.132.287-45'),
-('Ana Luiza Souza', 'luiza@gmail.com', '111554567', 'abobora', '668.265.905-90'),
-('Karen Fernandes', 'karen@gmail.com', '934665789', '1234', '713.438.116-19'),
-('Chas Crane', 'chas@gmail.com', '988552266', '123', '785.956.091-79');
+('Julia Biff', 'ju@gmail.com', '(47)3455-5797', 'bola', '158.814.702-90'),
+('Bianca Leithold', 'bia@gmail.com', '(47)2565-4567', 'banana', '273.778.022-51'),
+('Elizabeth Antunes', 'beth@gmail.com', '(47)7755-4567', 'maca', '329.635.185-01'),
+('Leticia dos Santos', 'leticia@gmail.com', '(47)5355-4567', 'batata', '422.821.472-00'),
+('Joao Pedro', 'joao@gmail.com', '(47)6665-4567', 'tomate', '538.172.449-75'),
+('Natalia Dellandrea', 'nat@gmail.com', '(47)3355-4567', 'chocolate', '622.343.276-36'),
+('Matheus Gomes', 'gomes@gmail.com', '(47)2225-4567', 'cebola', '651.132.287-45'),
+('Ana Luiza Souza', 'luiza@gmail.com', '(47)1115-4567', 'abobora', '668.265.905-90'),
+('Karen Fernandes', 'karen@gmail.com', '(47)9346-5789', '1234', '713.438.116-19'),
+('Chas Crane', 'chas@gmail.com', '(47)9885-2266', '123', '785.956.091-79');
 
 INSERT INTO empresa (cnpj, nome, rua, numero, complemento, bairro, cidade, descricao, telefone, email_empresa) VALUES 
-('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)34665989', 'jujuba@gmail.com'),
-('57.208.376/0001-03', 'Restaurante Fernandes', 'João Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)34668888', 'rest_fernandes@gmail.com'),
-('88.183.280/0001-61', 'Salão de Beleza Serena', 'Araras', '96', 'casa', 'São Marcos', 'Joinville', 'Realçando sua beleza desde 1998.', '(47)34668759', 'serena@gmail.com'),
-('11.820.025/0001-58', 'Barbearia Gomes', 'Antônio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelência, qualidade e profissionalismo é nosso lema!', '(47)34657826', 'barbearia_gomes@gmail.com'),
-('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)34659829', 'confeitaria_delicia@gmail.com'),
-('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)34635625', 'joalheria_universal@gmail.com'),
-('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)34661125', 'brasil_noivas@gmail.com'),
-('70.617.469/0001-50', 'Confeitaria Predileta', '  Hannah Mendes', '105', 'casa', 'Floresta', 'Joinville', 'A Confeitaria Sonhos foi inaugurada no dia 28 de agosto de 1984, desde então vem sendo a Confeitaria predileta dos habitantes de Joinville e região, fornecendo 200 tipos de sabores de bolos e os melhores doces típicos da região de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', ' (47)34441125', 'confeitaria_predileta@gmail.com'),
-('59.243.815/0001-44', 'Restaurante Brace', 'Joaquim Ferreira', '30', 'casa', 'Centro', 'Joinville', 'O Restaurante Brace foi inaugurado no dia 30 de setembro de 1990, desde então vem sendo o restaurante predileta de todos os habitantes de Joinville e região, fornecendo 200 tipos de pratos e sobremesas finas mais saborosos de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', '4734352255', 'restaurante_brace@gmail.com'),
-('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)33445588', 'expressiva@gmail.com');
+('28.661.535/0001-22', 'Floricultura Jujuba', 'Palmeiras', '145', 'casa', 'Itinga', 'Araquari', 'Flores em geral, produtos importados e de qualidade desde 1970.', '(47)3466-5989', 'jujuba@gmail.com'),
+('57.208.376/0001-03', 'Restaurante Fernandes', 'João Pinheiro', '458', 'casa', 'Centro', 'Joinville', 'Especializados em frutos do mar.', '(47)3466-8888', 'rest_fernandes@gmail.com'),
+('88.183.280/0001-61', 'Salão de Beleza Serena', 'Araras', '96', 'casa', 'São Marcos', 'Joinville', 'Realçando sua beleza desde 1998.', '(47)3466-8759', 'serena@gmail.com'),
+('11.820.025/0001-58', 'Barbearia Gomes', 'Antônio Neves', '32', 'casa', 'Atiradores', 'Joinville', 'Excelência, qualidade e profissionalismo é nosso lema!', '(47)3465-7826', 'barbearia_gomes@gmail.com'),
+('85.270.164/0001-91', 'Confeitaria Delícias', 'Pedro Paulo', '128', 'apartamento 4658', 'Iririú', 'Joinville', 'O sabor dos sonhos...', '(47)3465-9829', 'confeitaria_delicia@gmail.com'),
+('47.367.062/0001-08', 'Joalheria Univesal', 'João Pedro', '894', 'casa', 'Porto Grande', 'Araquari', 'Brilhe como uma joia!', '(47)3463-5625', 'joalheria_universal@gmail.com'),
+('68.660.186/0001-49', 'Brasil Noivas', 'Das Flores', '657', 'casa', 'Floresta', 'Joinville', 'Há mais de 30 anos tornando seu dia mais que especial.', '(47)3466-1125', 'brasil_noivas@gmail.com'),
+('70.617.469/0001-50', 'Confeitaria Predileta', '  Hannah Mendes', '105', 'casa', 'Floresta', 'Joinville', 'A Confeitaria Sonhos foi inaugurada no dia 28 de agosto de 1984, desde então vem sendo a Confeitaria predileta dos habitantes de Joinville e região, fornecendo 200 tipos de sabores de bolos e os melhores doces típicos da região de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', ' (47)3444-1125', 'confeitaria_predileta@gmail.com'),
+('59.243.815/0001-44', 'Restaurante Brace', 'Joaquim Ferreira', '30', 'casa', 'Centro', 'Joinville', 'O Restaurante Brace foi inaugurado no dia 30 de setembro de 1990, desde então vem sendo o restaurante predileta de todos os habitantes de Joinville e região, fornecendo 200 tipos de pratos e sobremesas finas mais saborosos de Santa Catarina. Trabalhamos com qualquer tipo de evento, temos uma equipe rápida e competente, capaz de trabalhar com pequenos e grandes eventos.', '(47)3435-2255', 'restaurante_brace@gmail.com'),
+('28.280.261/0001-21', 'Expressiva Homem', 'Dona Francisca', '57', 'casa', 'Saguaçu', 'Joinville', 'Especializada em vestuário para homens.', '(47)3344-5588', 'expressiva@gmail.com');
 
 INSERT INTO tarefas (data, horario, descricao, titulo) VALUES 
 ('2019-01-01', '10:10:00', 'Reunião decoração', 'Reunião'),

@@ -245,6 +245,8 @@
       ?>
       <select name='especializacao[]' multiple>
       <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
+
+      <!-- https://codepen.io/danbrady/pen/VrjGEW -->
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
