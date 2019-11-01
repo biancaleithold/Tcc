@@ -27,23 +27,21 @@
         <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
           <thead>
             <tr>
-              <th>Empresas</th>
+              <th>Empresa e sua localização</th>
             </tr>
           </thead>
           <?php } ?>
-        
+          <tbody>
         <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
-          <tbody>
+         
             <tr>
-              <td> <?php echo '<a href="perfil_empresa.php?id='.$item['id_empresa'].'">'.utf8_encode($item['nome']); ?></a></td>
+              <td> <?php echo '<a href="perfil_empresa.php?id='.$item['id_empresa'].'">'.utf8_encode($item['nome'])." - ".utf8_encode($item['cidade']); ?></a></td>
             </tr>
+            <?php } ?>
           </tbody>
 
-         <?php 
-        
-        } ?>
         </table>
 
         <?php
@@ -68,19 +66,19 @@
             </tr>
           </thead>
           <?php } ?>
-        
+          <tbody>
         <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
-          <tbody>
+         
             <tr>
-              <td> <?php echo '<a href="perfil_empresa.php?id='.$item['id_empresa'].'">'.utf8_encode($item['cidade']); ?></a></td>
+              <td> <?php echo '<a href="perfil_empresa.php?id='.$item['id_empresa'].'">'.utf8_encode($item['cidade'])." - ".utf8_encode($item['nome']); ?></a></td>
             </tr>
+
+            <?php } ?>
+
           </tbody>
 
-         <?php 
-        
-        } ?>
         </table>
 
         <?php
@@ -108,22 +106,23 @@
                 
             </thead>
             <?php } ?>
-          
+            <tbody>
             <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
-            <tbody>
+           
                 <tr>
                 <td> <?php echo '<a href="eventos.php?id='.$item['id_categoria'].'">'.utf8_encode($item['nome']); ?></a></td>
                      
                 </tr>
+                <?php } ?>
             </tbody>
-
+           
         </table>
 
         <?php 
         
-        }
+        
     }
   ?>
     <?php
@@ -147,27 +146,27 @@
             </thead>
         <?php }?>
         
+        <tbody>
             <?php
         foreach ($resultado_pesquisa as $key => $item ) {
         ?>
-            <tbody>
                 <tr>
 
                 <td> <?php echo '<a href="eventos.php?id='.$item['id_categoria'].'">'.utf8_encode($item['descricao']);?></a></td>
-                
-               
-                </tr>
+                  </tr>
+
+               <?php } ?>
+
             </tbody>
 
         </table>
-        
 
         <?php 
 
-  }
 }
             if ($find == 0) {
               echo "<script>alert('Resultado não encontrado!')</script>";
+              header ("Refresh: 0; url=index.php");
             }
   ?>
  
