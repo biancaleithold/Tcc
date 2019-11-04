@@ -64,7 +64,7 @@ titulo varchar(50),
 data date,
 horario time,
 descricao varchar(100),
-situacao tinyint(1),
+situacao tinyint(1) default 0,
 id_usuario int
 );
 

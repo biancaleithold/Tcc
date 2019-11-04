@@ -21,8 +21,8 @@
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.css">
 	<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/estilo.css">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+  <!-- <link href="css/style.css" rel="stylesheet"> -->
   
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

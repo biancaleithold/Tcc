@@ -239,7 +239,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_co
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."</td><td style=\"float: right;\"><a href=\"?acao=upd&id=".$_REQUEST['id']."&id_convidado=".$rs->id_convidado."\">"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acao=del&id=".$_REQUEST['id']."&id_convidado=".$rs->id_convidado."\"><i onclick='delConvidado()' class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a><i onclick='delConvidado(".$_REQUEST['id'].", ".$rs->id_convidado.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";
 
@@ -279,11 +279,14 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_co
 
 <!--BLOCO EXCLUIR DADOS Convidados -->
 <script>
-function delConvidado(){
-  var x;
-  var escolha=confirm("Tem certeza que deseja excluir o convidado? Isso é irreversível!");
-  if (escolha==true) { 
-    <?php
+function delConvidado(id, id_convidado){
+  if (confirm("Tem certeza que deseja excluir o convidado? Isso é irreversível!")) {
+    window.open("perfil_evento.php?acao=del&id=" + id + "&id_convidado=" +id_convidado, "_self");  
+  }
+}
+</script>
+
+<?php
     if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id_convidado'] != '') {
       try {
         $stmt = $connect->prepare("DELETE FROM convidados WHERE id_convidado=:id_convidado");
@@ -293,13 +296,10 @@ function delConvidado(){
       }catch (PDOException $erro) {
         echo "Erro: ".$erro->getMessage();
       }         
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_REQUEST['id'].'">');
+      echo "<script type=\"text/javascript\">alert('Convidado excluído com sucesso!');</script>";
     } 
     ?>
-    alert('Convidado excluido com sucesso!');
-    location.reload(true);  
-  }
-}
-</script>
 <!-- FIM DO BLOCO EXCLUIR DADOS Convidados -->
 
 
@@ -450,7 +450,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td style=\"float: right;\">R$ ".$rs->valor_pago."</td><td style=\"padding-left: 13%;\"><a href=\"?acaoo=updt&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\"><i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"?acaooo=delet&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\"><i onclick='delDespesa()' class='trash alternate icon'></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a><i onclick='delDespesa(".$_REQUEST['id'].", ".$rs->id_despesa.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></td>";
                 echo "</tr>";
                 $valores_pagos[] = $rs->valor_pago;
@@ -498,28 +498,27 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
 
 <!--BLOCO EXCLUIR DADOS DESPESAS -->
 <script>
-function delDespesa(){
-var x;
-var escolha=confirm("Tem certeza que deseja excluir a despesa? Isso é irreversível!");
-if (escolha==true) { 
-    
-  <?php
-  if (isset($_REQUEST["acaooo"]) && $_REQUEST["acaooo"] == "delet" && $_REQUEST['id'] != '') {
-    try {
+function delDespesa(id, id_despesa){
+  if (confirm("Tem certeza que deseja excluir a despesa? Isso é irreversível!")) {
+    window.open("perfil_evento.php?acao=delete&id=" + id + "&id_despesa=" +id_despesa, "_self");  
+  }
+}
+</script>
+
+<?php
+    if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "delete" && $_REQUEST['id_despesa'] != '') {
+      try {
         $stmt = $connect->prepare("DELETE FROM despesa WHERE id_despesa=:id_despesa");
         $stmt->execute(array(
           ':id_despesa' => $_REQUEST['id_despesa'],
         ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-  }
-  ?>
-  alert('Despesa excluída com sucesso!');
-  location.reload(true);
-}
-
-</script>
+      }catch (PDOException $erro) {
+        echo "Erro: ".$erro->getMessage();
+      }         
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_evento.php?ver=view&id='.$_REQUEST['id'].'">');
+      echo "<script type=\"text/javascript\">alert('Despesa excluída com sucesso!');</script>";
+    } 
+    ?>
 <!-- FIM DO BLOCO EXCLUIR DADOS DESPESAS -->
 
 

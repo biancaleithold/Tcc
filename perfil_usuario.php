@@ -127,7 +127,8 @@
                 echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_evento.php?ver=view&id=".$rs->id_evento."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=\"perfil_usuario.php?act=del&id=".$rs->id_evento."\"><i onclick='delEvento()' class='trash alternate icon'></i></a></center></td>";
+                           ."<a><i onclick='delEvento(".$rs->id_evento.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."</a></center></td>";
                 echo "</tr>";?>
               
   <?php }
@@ -144,29 +145,27 @@
  
 <!--BLOCO EXCLUIR DADOS Eventos -->
 <script>
-function delEvento()
-{
-var x;
-var escolha=confirm("Tem Certeza que deseja excluir o evento? Isso é irreversível");
-if (escolha==true)
-  { 
-    
-   <?php
-  if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id'] != '') {
-    try {
-        $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id");
-        $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
-        ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-    
-  } 
-?>alert('Evento excluído com sucesso!');
-  window.location.reload()
+function delEvento(id_evento){
+  if (confirm("Tem certeza que deseja excluir o evento? Isso é irreversível!")) {
+    window.open("perfil_usuario.php?acao=del&id_evento=" +id_evento, "_self");  
   }
 }
+</script>
+
+<?php
+    if (isset($_REQUEST["acao"]) && $_REQUEST["acao"] == "del" && $_REQUEST['id_evento'] != '') {
+      try {
+        $stmt = $connect->prepare("DELETE FROM eventos WHERE id_evento=:id_evento");
+        $stmt->execute(array(
+          ':id_evento' => $_REQUEST['id_evento'],
+        ));
+      }catch (PDOException $erro) {
+        echo "Erro: ".$erro->getMessage();
+      }         
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_usuario.php">');
+      echo "<script type=\"text/javascript\">alert('Evento excluído com sucesso!');</script>";
+    } 
+    ?>
 </script>
 <!-- FIM DO BLOCO EXCLUIR DADOS Eventos -->
 
@@ -274,7 +273,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
     <?php
     try {
  
-    $stmt = $connect->prepare("SELECT id_tarefa,titulo,data,horario,descricao,situacao FROM tarefas WHERE id_usuario = :id");
+    $stmt = $connect->prepare("SELECT id_tarefa,titulo,data,horario,descricao,situacao FROM tarefas WHERE id_usuario = :id and situacao=0");
  
         if ($stmt->execute(array(
           ':id' => $id_usuario))) {
@@ -283,7 +282,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
                 echo "<td>".utf8_encode($rs->titulo)."</td>
                       <td>".$rs->data."</td><td>".$rs->horario."</td>
                       <td>".utf8_encode($rs->descricao)."</td>
-                      <td><a href=\"?action=del&id=".$rs->id_tarefa."\"><input class='ui toggle checkbox' style='float: right;' id=check type='checkbox' onclick='concluirtarefa()' value='1'></a></td>
+                      <td><a href=\"?action=del&id=".$rs->id_tarefa."\"><input class='ui toggle checkbox' style='float: right;' id=check type='checkbox' onclick='concluirtarefa(".$rs->id_tarefa.")'></a></td>
                       <td style=\"float: right; margin-right: 10%;\"><a href=\"?action=upd&id=".$rs->id_tarefa."\"><i class='pencil alternate icon'></i></a></td>";
                 echo "</tr>";
             }
@@ -301,27 +300,28 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 <!--BLOCO CONCLUIR Tarefa -->
 <script>
   //MUDAR O CAMPO SITUACAO NA TABELA TAREFA PARA TINYINT(1)!!
-  function concluirtarefa() {
-    var escolher = confirm('Deseja mesmo confirmar a conclusão da tarefa? Isso é irreversível!')
-    if (escolher == true){
-      document.getElementById('check').checked = true;
-      <?php
-          if (isset($_REQUEST["action"]) && $_REQUEST["action"] == "del" && $_REQUEST['id'] != '') {
-              try {
-                  $stmt = $connect->prepare("DELETE FROM tarefas WHERE id_tarefa=:id");
-                  $stmt->execute(array(
-                    ':id' => $_REQUEST['id'],
-                  ));
-              }catch (PDOException $erro) {
-                echo "Erro: ".$erro->getMessage();
-              }
-            } 
-      ?> 
-    } else {
-      document.getElementById('check').checked = false;
+  function concluirtarefa(id_tarefa) {
+    if (confirm("Tem certeza que deseja concluir esta tarefa? Isso é irreversível!")) {
+      window.open("perfil_usuario.php?act=concluir&id_tarefa=" +id_tarefa, "_self");  
     }
   };
 </script>
+
+<?php
+if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "concluir" && $_REQUEST['id_tarefa'] != '') {
+  try {
+    $stmt = $connect->prepare("UPDATE tarefas SET situacao=1 WHERE id_tarefa=:id_tarefa");
+    $stmt->execute(array(
+      ':id_tarefa' => $_REQUEST['id_tarefa'],
+      ));
+  }catch (PDOException $erro) {
+    echo "Erro: ".$erro->getMessage();
+  } 
+
+  echo ('<meta http-equiv="refresh" content="0; url=perfil_usuario.php">');
+  echo "<script type=\"text/javascript\">alert('Tarefa concluída com sucesso!');</script>";
+} 
+?> 
 <!-- http://www.phpi.com.br/textos/262/1/como-validar-checkbox-em-javascript-e-pegar-valores-em-php -->
 <!--FIM BLOCO CONCLUIR Tarefa -->
 
@@ -356,7 +356,8 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_empresa.php?ver=view&id=".$rs->id_empresa."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a href=?apaga=del&id=".$rs->id_empresa."><i onclick='delEmpresa()' class='trash alternate icon'></i></a></center></td>";
+                           ."<a><i onclick='delEmpresa(".$rs->id_empresa.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."</a></center></td>";
                 echo "</tr>";?>
 
      <?php  }
@@ -383,26 +384,27 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 <!--BLOCO EXCLUIR DADOS Empresa -->
 <script>
-function delEmpresa()
-{
-var opcao=confirm("Tem Certeza que deseja excluir a empresa? Isso é irreversível");
-if (opcao==true)
-  { 
-    
-   <?php
-  if (isset($_REQUEST["apaga"]) && $_REQUEST["apaga"] == "del" && $_REQUEST['id'] != '') {
-    try {
-        $stmt = $connect->prepare("DELETE FROM empresa WHERE id_empresa=:id");
-        $stmt->execute(array(
-          ':id' => $_REQUEST['id'],
-        ));
-    }catch (PDOException $erro) {
-      echo "Erro: ".$erro->getMessage();
-    }
-  } 
-?>window.confirm('Excluído com sucesso!');
+function delEmpresa(id_empresa){
+  if (confirm("Tem certeza que deseja excluir a empresa? Isso é irreversível!")) {
+    window.open("perfil_usuario.php?act=del&id_empresa=" +id_empresa, "_self");  
   }
 }
+</script>
+
+<?php
+    if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $_REQUEST['id_empresa'] != '') {
+      try {
+        $stmt = $connect->prepare("DELETE FROM empresa WHERE id_empresa=:id_empresa");
+        $stmt->execute(array(
+          ':id_empresa' => $_REQUEST['id_empresa'],
+        ));
+      }catch (PDOException $erro) {
+        echo "Erro: ".$erro->getMessage();
+      }         
+      echo ('<meta http-equiv="refresh" content="0; url=perfil_usuario.php">');
+      echo "<script type=\"text/javascript\">alert('Empresa excluída com sucesso!');</script>";
+    } 
+    ?>
 </script>
 <!-- FIM DO BLOCO EXCLUIR DADOS Empresa -->
 
