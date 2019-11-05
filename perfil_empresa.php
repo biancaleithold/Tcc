@@ -30,7 +30,7 @@
 
 ?>
 <br><br>
-  <div class="ui cards" style="margin-right: 4%; float: left; width: 21%; margin-left: 4%">
+  <div class="ui cards" style="margin-right: 4%; float: left; margin-left: 3%">
 
   <div class="card">
     <div class="blurring dimmable image">
@@ -108,9 +108,12 @@
   </div>
 </div>
 
-<h1 class="header" style="font-size: xx-large;">Sobre a Empresa</h1>
+
+<section style="float: right; width: 71%;">
+
+<h1 class="header" style="font-size: 55px; font-family: initial;">Sobre a Empresa</h1>
 <h5 class="descricao_empresa">
-  <?php echo $descricao; ?>
+  <?php echo utf8_encode($descricao); ?>
 </h5>
 
 <?php
@@ -133,14 +136,14 @@
   }
 ?>
 
-<h1 class="header" style="font-size: xx-large;">Confira fotos de eventos já realizados!</h1>
+<h1 class="header" style="font-size: 40px; font-family: initial;">Confira fotos de eventos já realizados!</h1>
  <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
 <section style="float: left; width: 28%; margin-top: 0.5%;"><p class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</p></section>
 <?php } ?>
 
               <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
               <form method="post" action="">
-                <section style="float: right; width: 17%;"><div class="arruma_galeria">
+                <section style="float: right; width: 25%;"><div class="arruma_galeria">
                 <input type="submit" name="submit" class="ui tiny inverted red button" value="Excluir Fotos Selecionadas"></div></section><br><br><br>
               <?php } ?>
 
@@ -154,18 +157,18 @@
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
               
                 
-        <div class="container" style="float:left;margin: 0.5%;">
-                    <input style="float: left;" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
+        <div class="container" style="float:left; margin: 0.5%;">
+          <input style="float: left;" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
           <img src="imagens/galeria/<?php echo $descricao_foto; ?>" width="305" height="215" onclick="clique(this)">
         
-                    <div id="janelaModal" class="modalVisual">
-                          <span class="fechar" ="fechar">x</span>                       
-                            <div id="<?php echo $count_img; ?>" class="mySlides fade">
-                              <img class="modalConteudo" id="imgModal" src="imagens/galeria/<?php echo $descricao_foto; ?>">
-                            </div> 
-                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    </div>
+          <div id="janelaModal" class="modalVisual">
+            <span class="fechar" ="fechar">x</span>                       
+            <div id="<?php echo $count_img; ?>" class="mySlides fade">
+              <img class="modalConteudo" id="imgModal" src="imagens/galeria/<?php echo $descricao_foto; ?>">
+            </div> 
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
         </div>
         <!--http://wtricks.com.br/galeria-fotos-simples-e-responsiva-usando-apenas-css-e-javascript/-->
 
@@ -175,7 +178,9 @@ $count_img++;
             </form>
 
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-<div style="float: right; margin-right: 5%; margin-top: 5%;">
+
+<div style="float: right; margin-right: 8%; margin-top: 1%; width: 33%;">
+<br>
 <form enctype="multipart/form-data" method="post" action="">
    <h3><strong>Adicionar Fotos em Minha Galeria</strong></h3>
    <input type="file" multiple name="descricao_foto[]" class="ui primary basic button"><br><br>
@@ -222,6 +227,7 @@ $count_img++;
  }
   ?>
 
+</section>
 <!--https://bootsnipp.com/snippets/P2gor-->
 
 <?php

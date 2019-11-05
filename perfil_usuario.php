@@ -108,7 +108,7 @@
 
 
 <!-- BLOCO MOSTRA DADOS TABELA Eventos-->
-<table class="ui fixed table" style="width: 68%;float:right; margin-right:4%">
+<table class="ui fixed table" style="width: 68%;float:right; margin-right:4%;">
   <h1 class="header">Meus Eventos</h1>
     <tr>
         <th>Nome do Evento</th>
@@ -171,14 +171,14 @@ function delEvento(id_evento){
 
 
   <a href="register_evento.php">
-    <button class="ui blue basic button" style="float: right; margin-right: 4%; margin-left: 30%">
+    <button class="ui blue basic button" style="float: right; margin-right: 4%; margin-left: 30%;">
       <i class="icon plus"></i>
         Cadastrar Evento
     </button>
   </a> 
 
 
-<br><br>
+<br><br><br><br><br>
 
 
 
@@ -196,27 +196,27 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
 
 ?>
-                <form method="POST" action="?action=save" style="width: 93.8%">
-                  <div class="ui form">
+                <form method="POST" action="?action=save" style="width: 100%;">
+                  <div class="ui form" style="margin-left: 28%">
                     <div class="two fields">
                       <input type="hidden" name="id" value="<?php echo $rs->id_tarefa ?>"/>
                       <div class="field">
-                        <input type="text" name="titulo" value="<?php echo utf8_encode($rs->titulo) ?>"/>
+                        <label>Título</label><input type="text" name="titulo" value="<?php echo utf8_encode($rs->titulo) ?>"/>
                       </div>
                       <div class="field">
-                        <input type="date" name="data" value="<?php echo $rs->data ?>"/>
+                        <label>Data</label><input type="date" name="data" value="<?php echo $rs->data ?>"/>
                       </div>
                       <div class="field">
-                        <input type="time" name="horario" value="<?php echo $rs->horario ?>"/>
+                        <label>Hora</label><input type="time" name="horario" value="<?php echo $rs->horario ?>"/>
                       </div>
                       <div class="field">
-                        <input type="text" name="descricao" value="<?php echo utf8_encode($rs->descricao) ?>"/>
+                        <label>Descrição</label><input type="text" name="descricao" value="<?php echo utf8_encode($rs->descricao) ?>"/>
                       </div>
                       <div>
-                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
+                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 23.5%"/>
                       </div>
                       <div class="field">
-                        <input type="submit" name="save" value="Salvar" class="ui inverted green button" />
+                        <input type="submit" name="save" value="Salvar" class="ui inverted green button" style="margin-top: 12.5%"/>
                       </div>
                     </div>
                   </div>
@@ -261,7 +261,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['i
 
 <!-- INICIO BLOCO MOSTRA DADOS TABELA Agenda-->
 <table class="ui fixed table" style="width: 68%; float:right; margin-right:4%">
-  <h1 class="header" style="margin-top: 8%">Minha Agenda</h1>
+  <h1 class="header">Minha Agenda</h1>
     <tr>
         <th>Título</th>
         <th>Data</th>
