@@ -19,6 +19,7 @@
     $telefone = $_POST['telefone'];
     $email_empresa = $_POST['email_empresa'];
     $especializacoes = $_POST['especializacao'];
+    $categorias = $_POST['categoria'];
     $target_dir = "imagens/";
     $target_file = $target_dir . basename($_FILES["logo"]["name"]);
     $uploadOk = 1;
@@ -52,6 +53,8 @@
       $errMsg = 'Insira o email da empresa';
     if($especializacoes == '')
       $errMsg = 'Insira a especialização';
+    if ($categorias == '') 
+      $errMsg = 'Insira os eventos que realiza';
    
   
     // Se a foto estiver sido selecionada
@@ -131,7 +134,17 @@
                     ':id_empresa' => $id_empresa,
                     ':id_especializacao' => $especializacao
                     ));
-                }  
+                }
+
+            $id_empresa = $connect->lastInsertId();
+
+              foreach ($categorias as $categoria) {
+                $stmt = $connect->prepare('INSERT INTO emp_categ (id_categoria, id_empresa) VALUES (:id_categoria, :id_empresa)');
+                $stmt->execute(array(
+                  ':id_categoria' => $categoria,
+                  ':id_empresa' => $id_empresa
+                ));
+              }
 
             echo "<script type=\"text/javascript\">alert('Cadastrado com sucesso!');</script>";
             header("Refresh: 0; url=perfil_usuario.php?action=joined");
@@ -201,7 +214,7 @@
     </div>
   </div>
   <div class="two fields">
-      <div class="inline field">
+      <div class="field">
       <label>Estado</label>
       <?php
         $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
@@ -237,8 +250,8 @@
         <input type="text" name="email_empresa" placeholder="celebrate.festas@gmail.com">
       </div>
   </div>
-
-    <div class="inline field">
+  <div class="two fields">
+    <div class="field">
       <label>Especialização</label>
       <?php
         $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
@@ -256,7 +269,25 @@
         ?>
       </select>
     </div>
- 
+    <div class="field">
+      <label>Eventos que Realiza</label>
+      <?php
+        $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento");      
+      ?>
+      <select name='categoria[]' multiple>
+      <!-- <select name='categoria[]' multiple class="label ui selection fluid dropdown"> -->
+
+      <!-- https://codepen.io/danbrady/pen/VrjGEW -->
+        <?php 
+        if ($stmt->execute()) {
+          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+            echo "<option value=\"".$rs->id_categoria."\">".utf8_encode($rs->nome)."</option>";
+          }
+        }
+        ?>
+      </select>
+    </div>
+  </div>
 </div>
     <input type="submit" name='register' value="Cadastrar" class="ui button" style="float:right;">
 

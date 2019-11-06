@@ -38,7 +38,7 @@ INSERT INTO convidados (idade, nome) VALUES
 (12, 'Lorenzo Emanuel Bressan'),
 (65, 'Heitor Bressan'),
 (44, 'Luana Fagundes'),
-(20, 'Gilceia Mendonï¿½a'),
+(20, 'Gilceia Mendonça'),
 (18, 'Kelvin Bressan'),
 (25, 'Lia Bressan'),
 (18, 'Bianca Victória Leithold de Oliveira');
@@ -122,7 +122,3 @@ INSERT INTO estados (sigla,descricao_est) VALUES
 ('SP','São Paulo'),
 ('SE','Sergipe'),
 ('TO','Tocantins');
-
-INSERT INTO despesa (valor_pago) VALUES 
-('500.00');
-

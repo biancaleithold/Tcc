@@ -24,7 +24,7 @@
         <?php  if (!empty($resultado_pesquisa)) { 
           $find = 1;
           ?>
-        <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
+        <table class="ui orange table" style="width:40%; float:left; margin-left: 6%;">
           <thead>
             <tr>
               <th>Empresa e sua localização</th>
@@ -59,7 +59,7 @@
         <?php  if (!empty($resultado_pesquisa)) { 
           $find = 1;
           ?>
-        <table class="ui orange table" style="width:30%;float:left; margin-left: 10%;">
+        <table class="ui orange table" style="width:40%;float:left; margin-left: 6%;">
           <thead>
             <tr>
               <th>Cidades Empresas</th>
@@ -98,7 +98,7 @@
         <?php  if (!empty($resultado_pesquisa)) { 
           $find = 1;
           ?>
-         <table class="ui orange table" style="width:30%; float:left; margin-left: 10%;">
+         <table class="ui orange table" style="width:40%; float:left; margin-left: 6%;">
             <thead>
                 <tr>
                 <th>Categoria Evento</th>
@@ -137,7 +137,7 @@
         <?php  if (!empty($resultado_pesquisa)) { 
           $find = 1;
           ?>
-         <table class="ui orange table" style="width:30%; float:right; margin-right: 20%;">
+         <table class="ui orange table" style="width:40%; float:right; margin-right: 6%;">
             <thead>
                 <tr>
                 <th>Descrição Categoria</th>

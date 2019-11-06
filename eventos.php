@@ -1,6 +1,5 @@
 <?php
-  
-  require 'config.php';
+    require 'config.php';
   include("cabecalho.php");
 
   $stmt = $connect->query('SELECT id_categoria, nome, descricao, foto1, foto2, foto3, foto4 FROM categoria_evento WHERE id_categoria="'.$_GET['id'].'"');
