@@ -151,34 +151,34 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 
          
               
-                <form  style="width: max-content;margin-left:30%" class="ui form" method="POST" action="?acao=salvar" enctype="multipart/form-data">
+                <form  style="max-width:65%; margin-left: 18%; margin-top: 1%" class="ui form" method="POST" action="?acao=salvar" enctype="multipart/form-data">
                 	<input type="hidden" name="id" value="<?php echo $rs->id_empresa ?>"/>
                 	<div class="field"> 
                 		<div class="two fields">
                 			<div class="field">
                 				<label>CNPJ</label><input type="text" name="cnpj" onkeypress="$(this).mask('00.000.000/0000-00')" value="<?php echo $rs->cnpj ?>"/></div>
   							<div class="field">
-                				<label>Nome</label><input type="text" name="nome" value="<?php echo $rs->nome ?>"/></div>
+                				<label>Nome</label><input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/></div>
                 			</div>
                 		</div>
                 		<div class="field">
                 			<div class="fields">
                 				<div class="twelve wide field">
-                				<label>Rua</label><input type="text" name="rua" value="<?php echo $rs->rua ?>"/></div>
+                				<label>Rua</label><input type="text" name="rua" value="<?php echo utf8_encode($rs->rua) ?>"/></div>
   								<div class="four wide field">
                 				<label>Numero</label><input type="text" name="numero" value="<?php echo $rs->numero ?>"/></div>
   							<div class="four wide field">
-                				<label>Complemento</label><input type="text" name="complemento" value="<?php echo $rs->complemento ?>"/> </div>
+                				<label>Complemento</label><input type="text" name="complemento" value="<?php echo utf8_encode($rs->complemento) ?>"/> </div>
                 			</div>
                 		</div>
                 		<div class="two fields">
                 			<div class="field">
-                				<label>Bairro</label><input type="text" name="bairro" value="<?php echo $rs->bairro ?>"/> </div>
+                				<label>Bairro</label><input type="text" name="bairro" value="<?php echo utf8_encode($rs->bairro) ?>"/> </div>
 								 <div class="field">
-                				<label>Cidade</label><input type="text" name="cidade" value="<?php echo $rs->cidade ?>"/>  </div>
+                				<label>Cidade</label><input type="text" name="cidade" value="<?php echo utf8_encode($rs->cidade) ?>"/>  </div>
                 			</div>
                 			<div class="two fields">
-                				<div class="inline field">
+                				<div class="field">
                 				<label>Estado</label>
 
                 				<select name="lista_estados">
@@ -200,7 +200,7 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
   								</div>
   							</div>
   							<div class="field">
-  								<label>Descrição</label><input type="text" rows="2" type="text" name="descricao" value="<?php echo $rs->descricao ?>"></div>
+  								<label>Descrição</label><textarea type="text" rows="2" type="text" name="descricao"><?php echo utf8_encode($rs->descricao) ?></textarea></div>
   								<div class="two fields">
   									<div class="field">
   										<label>Telefone</label><input type="text" name="telefone" onkeypress="$(this).mask('(00) 0000-0000')"  value="<?php echo $rs->telefone ?>"/> </div>
@@ -208,11 +208,9 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
                 					<label>Email</label><input type="email" name="email_empresa" value="<?php echo $rs->email_empresa ?>"/>
                 					</div>
 									 </div>
-
-									 <div class="inline field">
-                					<label>Especialização</label>
-
-                				
+                   <div class="two fields">
+									    <div class="field">
+                				<label>Especialização</label>                				
                           <?php
                           $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
                           ?>
@@ -226,11 +224,29 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
                             }
                             ?>
                           </select>
-                        </div>
+                      </div>
+                      <div class="field">
+                        <label>Eventos que Realiza</label>
+                        <?php
+                          $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento");      
+                        ?>
+                        <select id='categoria' name='categoria[]' multiple>
+                          <!-- <select name='categoria[]' multiple class="label ui selection fluid dropdown"> -->
+
+                          <!-- https://codepen.io/danbrady/pen/VrjGEW -->
+                          <?php 
+                          if ($stmt->execute()) {
+                            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                              echo "<option value=\"".$rs->id_categoria."\">".utf8_encode($rs->nome)."</option>";
+                            }
+                          }
+                          ?>
+                        </select>
+                      </div>
 
                 					</select>
                 					</div></div>
-                  					<input type="submit" name='salvar' value="Salvar" class="ui button" style="float: right;">
+                  					<input style="margin-bottom: 5%; float: right;" type="submit" name='salvar' value="Salvar" class="ui button" style="float: right;">
                 					<div style="float: right;" onClick="window.history.back();" class="ui cancel button">Cancelar</div>
                 				
                 			</form>
@@ -247,6 +263,8 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
 <!--INICIO BLOCO SALVAR Empresa -->
 <?php 
 if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'] != '' ) {
+  $errMsg = '';
+
   $id_empresa = $_REQUEST['id'];
     $cnpj = $_POST['cnpj'];
     $nome = $_POST['nome'];
@@ -260,9 +278,38 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
     $descricao = $_POST['descricao'];
     $telefone = $_POST['telefone'];
     $email_empresa = $_POST['email_empresa'];
+    $especializacoes = $_POST['especializacao'];
+    $categorias = $_POST['categoria'];
     $target_dir = "imagens/";
     $target_file = $target_dir . basename($_FILES["logo"]["name"]);
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+    if($cnpj == '')
+      $errMsg = 'Insira o cnpj';
+    if($nome == '')
+      $errMsg = 'Insira o nome';
+    if($rua == '')
+      $errMsg = 'Insira a rua';
+    if($numero == '')
+      $errMsg = 'Insira o numero';
+    if($complemento == '')
+      $errMsg = 'Insira o complemento';
+    if($bairro == '')
+      $errMsg = 'Insira o bairro';
+    if($cidade == '')
+      $errMsg = 'Insira a cidade';
+    if($sigla == '')
+      $errMsg = 'Insira o estado';
+    if($descricao == '')
+      $errMsg = 'Insira a descricao';
+    if($telefone == '')
+      $errMsg = 'Insira o telefone';
+    if($email_empresa == '')
+      $errMsg = 'Insira o email da empresa';
+    if($especializacoes == '')
+      $errMsg = 'Insira a especialização';
+    if ($categorias == '') 
+      $errMsg = 'Insira os eventos que realiza';
 
     // Se a foto estiver sido selecionada
     if (!empty($logo["name"])) {
@@ -311,26 +358,27 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
           echo "Erro no Upload!";
         }
         // move_uploaded_file($logo["tmp_name"], $caminho_imagem);
-    }}
+      }
+    }
 
-    if(ValidaCNPJ($cnpj)==false && ValidaTelefone($telefone)==false){
+    if($errMsg == '' && ValidaCNPJ($cnpj)==false && ValidaTelefone($telefone)==false){
     $stmt = $connect->prepare("UPDATE empresa SET  cnpj=:cnpj, nome=:nome, rua=:rua, numero=:numero, complemento=:complemento, bairro=:bairro, cidade=:cidade, sigla=:lista_estados, foto_perfil=:foto, descricao=:descricao,telefone=:telefone, email_empresa=:email_empresa WHERE id_empresa=:id");
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
-      ':cnpj' => utf8_encode($cnpj),
-      ':nome' => utf8_encode($nome),
-      ':rua' =>utf8_encode($rua), 
-      ':numero' => utf8_encode($numero),
-      ':complemento' => utf8_encode($complemento),
-      ':bairro' => utf8_encode($bairro),
-      ':cidade' =>  utf8_encode($cidade),
-      ':lista_estados' => utf8_encode($sigla),
-      ':foto' =>utf8_encode($_FILES["logo"]["name"]),
-      ':descricao' => utf8_encode($descricao),
-      ':telefone' =>utf8_encode($telefone),
-      ':email_empresa' => utf8_encode($email_empresa)
+      ':cnpj' => $cnpj,
+      ':nome' => $nome,
+      ':rua' => $rua, 
+      ':numero' => $numero,
+      ':complemento' => $complemento,
+      ':bairro' => $bairro,
+      ':cidade' =>  $cidade,
+      ':lista_estados' => $sigla,
+      ':foto' => $_FILES["logo"]["name"],
+      ':descricao' => $descricao,
+      ':telefone' => $telefone,
+      ':email_empresa' => $email_empresa
       ));
-    }
+    
 
 
          try {
@@ -343,20 +391,38 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
           echo "Erro: ".$erro->getMessage();
         }
         
+        try {
+            $stmt = $connect->prepare("DELETE FROM emp_categ WHERE id_empresa=:id");
+            $stmt->execute(array(
+              ':id' => $_REQUEST['id'],
+            ));
+          
+        }catch (PDOException $erro) {
+          echo "Erro: ".$erro->getMessage();
+        }
     
-    $lista_especializacao = $_POST['especializacao'];
+    
 
-foreach ($lista_especializacao as $especializacao) {
-    $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id,:id_especializa)');
-    $stmt->execute(array(
-      ':id' => $_REQUEST['id'],
-      ':id_especializa' => $especializacao
-    ));
-  }
+        foreach ($lista_especializacao as $especializacao) {
+            $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id,:id_especializa)');
+            $stmt->execute(array(
+              ':id' => $_REQUEST['id'],
+              ':id_especializa' => $especializacao
+            ));
+          }
 
-   echo "<script type=\"text/javascript\">alert('Alterado com sucesso!);</script>";
-   header("Refresh: 0; url=perfil_empresa.php?ver=view&id=$id_empresa");
-   exit();
+          foreach ($lista_categoria as $categoria) {
+            $stmt = $connect->prepare('INSERT INTO emp_categ (id_empresa, id_categoria) VALUES (:id, :id_categoria)');
+            $stmt->execute(array(
+              ':id' => $_REQUEST['id'],
+              ':id_categoria' => $categoria
+            ));
+          }
+
+     echo "<script type=\"text/javascript\">alert('Alterado com sucesso!);</script>";
+     header("Refresh: 0; url=perfil_empresa.php?ver=view&id=$id_empresa");
+     exit();
+    }
 }
 ?>
 <!--FIM BLOCO SALVAR Empresa -->
