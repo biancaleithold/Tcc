@@ -136,9 +136,16 @@ if (isset($_POST['envia'])) {
     $id_emp[] = $linha['id_empresa']; 
     $id_especializacao = $linha['id_especializacao']; 
     
-    }
+  }
   
-      if (!empty($id_emp)) {
+  $consulta_url_id_evento = $_GET['id'];
+
+  $consulta_id_evento = $connect->query('SELECT id_categoria, id_empresa FROM emp_categ WHERE id_categoria="'.$consulta_url_id_evento.'"');
+    while ($linha = $consulta_id_evento->fetch(PDO::FETCH_ASSOC)) {
+      $categoria= $linha['id_categoria']; 
+      $id_empresa = $linha['id_empresa'];   
+    }
+      if (!empty($id_emp) and $categoria == $consulta_url_id_evento) {
           foreach ($id_emp as $value) {
               try{
                 $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
@@ -209,13 +216,21 @@ $encontrado = 0;
       
     }
   
+
+  $consulta_url_id_eventoo = $_GET['id'];
+
+  $consulta_id_eventoo = $connect->query('SELECT id_categoria, id_empresa FROM emp_categ WHERE id_categoria="'.$consulta_url_id_eventoo.'"');
+      while ($linha = $consulta_id_eventoo->fetch(PDO::FETCH_ASSOC)) {
+        $categoria= $linha['id_categoria']; 
+        $id_empresa = $linha['id_empresa'];   
+      }
     
           foreach ($id_est as $value) {
                 try{
                   $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE sigla="'.$value.'"');
                     if ($consulta->execute(array(':id_empresa' => $value))) {
                       while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) {
-                        if (!empty($linha)) {
+                        if (!empty($linha) and $categoria == $consulta_url_id_eventoo) {
                           $encontrado = 1; ?>
                         <section style="float: left; width: 21.5%; margin-bottom: 3%">
                           <div class="ui special cards">

@@ -20,7 +20,7 @@ $('.label.ui.dropdown')
 $('.no.label.ui.dropdown')
   .dropdown({
   useLabels: false
-});
+});❯
 
 $('.ui.button').on('click', function () {
   $('.ui.dropdown')
@@ -59,49 +59,19 @@ function myFunction() {
 
 
 <script>
-   function clique(img){
-        var modal=document.getElementById('janelaModal');
-        var modalImg=document.getElementById("imgModal");
-        var btFechar=document.getElementsByClassName("fechar")[0];
+  function clique(img){
+    var modal=document.getElementById('janelaModal');
+    var modalImg=document.getElementById("imgModal");
+    var btFechar=document.getElementsByClassName("fechar")[0];
         
-        modal.style.display="block";
-        modalImg.src=img.src;
+    modal.style.display="block";
+    modalImg.src=img.src;
              
         
-        btFechar.onclick=function(){
-        modal.style.display="none";
-      }
-   }
-        
-</script>
-
-<script>
-var slideIndex = 1;
-showSlides(slideIndex);
-
-  function plusSlides(n) {
-  showSlides(slideIndex += n);
-  ga('send', 'event', 'galeria', 'next_prev', 'Titulo da página');
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  if (n > slides.length) {
-    slideIndex = 1
+    btFechar.onclick=function(){
+      modal.style.display="none";
+    }
   }
-  if (n < 1) {
-    slideIndex = slides.length
-  }
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slides[slideIndex - 1].style.display = "block";
-}
 </script>
 
 <script type="text/javascript">

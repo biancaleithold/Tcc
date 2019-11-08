@@ -44,7 +44,7 @@
       <?php
         }else{
       ?>
-          <img  src="imagens/perfil.png">
+          <img  src="imagens/empresa.png">
       <?php
         }
       ?>
@@ -69,8 +69,10 @@
          $id_esp[] = $linha['id_especializacao'];
          $id_empresa = $linha['id_empresa']; 
        }?>      
+
+      
        
-       <div class="meta"><h4 class="date"> Trabalhamos com</h4></div> 
+       <div class="meta"><h4 class="date"> Nossas especializações</h4></div> 
       <?php foreach ($id_esp as $value) {
         try{
           $consulta = $connect->prepare('SELECT id_especializacao, descricao_esp FROM especializacao WHERE id_especializacao="'.$value.'"');
@@ -87,9 +89,32 @@
    }
       }
 
-      
-?>     
+      $consultando1 = $connect->query('SELECT id_categoria, id_empresa FROM emp_categ WHERE id_empresa ="'.$id_empresa.'"');
+      while ($linha = $consultando1->fetch(PDO::FETCH_ASSOC)) {
+        $id_categ[] = $linha['id_categoria'];
+        $id_empresa = $linha['id_empresa']; 
+      }?>
+<br>
+    <div class="meta"><h4 class="date"> Trabalhamos com</h4></div> 
+        <?php foreach ($id_categ as $value) {
+          try{
+            $consulta = $connect->prepare('SELECT id_categoria, nome FROM categoria_evento WHERE id_categoria="'.$value.'"');
+              if ($consulta->execute(array(':id_categoria' => $value))) {        
+                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
+                  <div class="meta">
+                  <h4 class="date">  <?php echo utf8_encode($linha->nome) ?></h4>
+                </div>
+              <?php
+                }
+              }
+      }catch (PDOException $erro) {
+        echo "Erro: ".$erro->getMessage();
+    }
+        }
+?>
 
+
+    </div>
     </div>
     <div class="extra content">  
 <?php
@@ -137,15 +162,20 @@
 ?>
 
 <h1 class="header" style="font-size: 40px; font-family: initial;">Confira fotos de eventos já realizados!</h1>
- <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-<section style="float: left; width: 28%; margin-top: 0.5%;"><p class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</p></section>
-<?php } ?>
+ <?php 
+  $consulta = $connect->query('SELECT id_foto FROM galeria_empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
+  while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+      $foto = $linha['id_foto'];
+  }
 
-              <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
+ if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario'] and !empty($foto)) {?>
+<section style="float: left; width: 28%; margin-top: 0.5%;"><p class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</p></section>   
               <form method="post" action="">
                 <section style="float: right; width: 25%;"><div class="arruma_galeria">
                 <input type="submit" name="submit" class="ui tiny inverted red button" value="Excluir Fotos Selecionadas"></div></section><br><br><br>
-              <?php } ?>
+<?php }elseif(empty($foto)){ ?>
+<section style="float: left; width: 28%; margin-top: 0.5%;"><p class="header">Esta empresa ainda não possui fotos!</p></section>
+<?php } ?>
 
 <?php 
    $consulta = $connect->query('SELECT id_foto,descricao_foto, id_empresa FROM galeria_empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
@@ -160,14 +190,12 @@
         <div class="container" style="float:left; margin: 0.5%;">
           <input style="float: left;" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
           <img src="imagens/galeria/<?php echo $descricao_foto; ?>" width="305" height="215" onclick="clique(this)">
+              <div id="janelaModal" class="modalVisual">
         
-          <div id="janelaModal" class="modalVisual">
             <span class="fechar" ="fechar">x</span>                       
-            <div id="<?php echo $count_img; ?>" class="mySlides fade">
+            <div id="<?php echo $count_img; ?>">
               <img class="modalConteudo" id="imgModal" src="imagens/galeria/<?php echo $descricao_foto; ?>">
             </div> 
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
           </div>
         </div>
         <!--http://wtricks.com.br/galeria-fotos-simples-e-responsiva-usando-apenas-css-e-javascript/-->
