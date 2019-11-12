@@ -114,9 +114,8 @@
 ?>
 
 
-    </div>
-    </div>
-    <div class="extra content">  
+    
+    <div class="extra content" style="margin-top: 7%;">  
 <?php
     $consulta = $connect->query('SELECT id_usuario FROM empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
     while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
