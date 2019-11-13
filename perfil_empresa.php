@@ -124,7 +124,7 @@
 
     if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
         <?php echo  "<a href=edita_perfil.php?edita=empresa&id=".$id_empresa.">"; ?><i class="edit icon"></i>
-        Editar Perfil</a></button>
+        Editar Perfil</a>
   <?php
     }
   ?>
@@ -133,7 +133,7 @@
 </div>
 
 
-<section style="float: right; width: 71%;">
+<section style="float: right; width: 71%; margin-left: 5%;">
 
 <h1 class="header" style="font-size: 55px; font-family: initial;">Sobre a Empresa</h1>
 <h5 class="descricao_empresa">
@@ -206,12 +206,12 @@ $count_img++;
 
 <?php if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
 
-<div style="float: right; margin-right: 8%; margin-top: 1%; width: 33%;">
+<div style="float: right; margin-top: 1%; width: 33%;">
 <br>
 <form enctype="multipart/form-data" method="post" action="">
    <h3><strong>Adicionar Fotos em Minha Galeria</strong></h3>
    <input type="file" multiple name="descricao_foto[]" class="ui primary basic button"><br><br>
-   <input type="submit" name="envia" value="Adicionar" class="ui inverted green button" style="float: right;">
+   <input type="submit" name="envia" value="Adicionar" class="ui button" style="float: right;">
 </form>
 </div>
 

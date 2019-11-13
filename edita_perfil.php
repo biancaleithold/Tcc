@@ -265,42 +265,42 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
   $telefone = $_POST['telefone'];
   $email_empresa = $_POST['email_empresa'];
     
-  if(empty($_POST["especializacao"]) or !is_array($_POST["especializacao"])) {
-    $especializacoes = $_POST["especializacao"];
-    $errMsg = 'Insira a especialização';
-  }
-    
-  if(empty($_POST["categoria"]) or !is_array($_POST["categoria"])) {
-    $categorias = $_POST["categoria"];
-    $errMsg = '';
-  }
-
   $target_dir = "imagens/";
   $target_file = $target_dir . basename($_FILES["logo"]["name"]);
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
   if($cnpj == '')
-    $errMsg = 'Insira o cnpj';
+    $errMsg = 'Insira o cnpj!';
   if($nome == '')
-    $errMsg = 'Insira o nome';
+    $errMsg = 'Insira o nome!';
   if($rua == '')
-    $errMsg = 'Insira a rua';
+    $errMsg = 'Insira a rua!';
   if($numero == '')
-    $errMsg = 'Insira o numero';
+    $errMsg = 'Insira o numero!';
   if($complemento == '')
-    $errMsg = 'Insira o complemento';
+    $errMsg = 'Insira o complemento!';
   if($bairro == '')
-    $errMsg = 'Insira o bairro';
+    $errMsg = 'Insira o bairro!';
   if($cidade == '')
-    $errMsg = 'Insira a cidade';
+    $errMsg = 'Insira a cidade!';
   if($sigla == '')
-    $errMsg = 'Insira o estado';
+    $errMsg = 'Insira o estado!';
   if($descricao == '')
-    $errMsg = 'Insira a descricao';
+    $errMsg = 'Insira a descricao!';
   if($telefone == '')
-    $errMsg = 'Insira o telefone';
+    $errMsg = 'Insira o telefone!';
   if($email_empresa == '')
     $errMsg = 'Insira o email da empresa';
+
+  if($_POST["especializacao"] == '' or !is_array($_POST["especializacao"])) {
+    $especializacoes = $_POST["especializacao"];
+    $errMsg = 'Insira a especialização!';
+  }
+    
+  if($_POST["categoria"] == '' or !is_array($_POST["categoria"])) {
+    $categorias = $_POST["categoria"];
+    $errMsg = 'Insira os eventos que realiza!';
+  }
 
   // Se a foto estiver sido selecionada
   if (!empty($logo["name"])) {
