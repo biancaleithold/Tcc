@@ -206,7 +206,7 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
 				</div>
         <div class="two fields">
 					<div class="field">
-            <label>Especialização</label>                				
+            <label>Serviços Prestados</label>                				
             <?php
             $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
             ?>
