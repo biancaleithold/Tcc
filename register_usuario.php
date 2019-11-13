@@ -27,8 +27,6 @@
       $errMsg = 'Insira o telefone';
     if($senha == '')
       $errMsg = 'Insira a senha';
-    if($foto_perfil == '')
-      $errMsg = 'Insira a foto de perfil';
     if($cpf == '')
       $errMsg = 'Insira o cpf';
      

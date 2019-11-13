@@ -388,6 +388,8 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
       echo "Erro: ".$erro->getMessage();
     }
 
+    $lista_especializacao = $_POST['especializacao'];
+
     foreach ($lista_especializacao as $especializacoes) {
       $stmt = $connect->prepare('INSERT INTO emp_esp (id_empresa, id_especializacao) VALUES (:id,:id_especializacao)');
       $stmt->execute(array(
@@ -396,6 +398,8 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
       ));
     }
 
+    $lista_categoria = $_POST['categoria'];
+    
     foreach ($lista_categoria as $categorias) {
       $stmt = $connect->prepare('INSERT INTO emp_categ (id_empresa, id_categoria) VALUES (:id, :id_categoria)');
       $stmt->execute(array(

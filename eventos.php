@@ -78,7 +78,7 @@
       <?php
         $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
       ?>
-      <select name="especializacao" class="ui selection fluid dropdown"> 
+      <select name="especializacao" class="label ui selection fluid dropdown"> 
         <!--<select name="especializacao">-->
         <?php 
         if ($stmt->execute()) {
@@ -101,7 +101,7 @@
       <?php
         $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
       ?>
-      <select name="estado" class="ui selection fluid dropdown"> 
+      <select name="estado" class="label ui selection fluid dropdown"> 
       <!--<select name="estado" style="width: 8%;margin-left: 15%">-->
       <?php 
       if ($stmt->execute()) {
