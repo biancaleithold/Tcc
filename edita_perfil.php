@@ -16,7 +16,7 @@ if (isset($_REQUEST['atualiza']) && $_REQUEST['atualiza'] == 'usuario'  && $_REQ
   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
     ?>
     <div class="centraliza_img">
-			<h1 style="margin-top: 3%">Alterar Dados</h1>
+			<h1 style="margin-top: 2%">Alterar Dados</h1>
 		</div>
     <div class="ui form login">
       <form  method="post" action="?agir=salva" enctype="multipart/form-data">
@@ -41,6 +41,7 @@ if (isset($_REQUEST['atualiza']) && $_REQUEST['atualiza'] == 'usuario'  && $_REQ
 <?php 
 if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id'] != '' ) {
 
+  $id_usuario = $_REQUEST['id'];
   $nome = $_POST['nome'];
   $email = $_POST['email'];
   $telefone = $_POST['telefone'];
@@ -50,6 +51,17 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
   $target_dir = "imagens/";
   $target_file = $target_dir . basename($_FILES["foto_perfil"]["name"]);
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+  if($nome == '')
+    $errMsg = 'Insira o nome!';
+  if($email == '')
+    $errMsg = 'Insira o email!';
+  if($telefone == '')
+    $errMsg = 'Insira a telefone!';
+  if($senha == '')
+    $errMsg = 'Insira o senha!';
+  if($cpf == '')
+    $errMsg = 'Insira o cpf!';
 
   // Se a foto estiver sido selecionada
   if (!empty($foto_perfil["name"])) {
@@ -101,7 +113,7 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
     }
   }
 
-  if(ValidaCPF($cpf)==false && ValidaTelefone($telefone)==false){
+  if($errMsg == '' && ValidaCPF($cpf)==false && ValidaTelefone($telefone)==false){
     $stmt = $connect->prepare("UPDATE usuario SET nome=:nome, email=:email, telefone=:telefone, senha=:senha, foto_perfil=:imagem, cpf=:cpf WHERE id_usuario=:id");
     $stmt->execute(array(
       ':id' => $_REQUEST['id'],
@@ -112,6 +124,14 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
       ':imagem' => $_FILES["foto_perfil"]["name"],
       ':cpf' => $cpf  
     ));
+
+    echo "<script type=\"text/javascript\">alert('Alterado com sucesso! Por favor, realize o login novamente para continuar!');</script>";
+    header("Refresh: 0; url=login.php");
+  }else{
+    if(isset($errMsg)){
+      echo "<script type=\"text/javascript\">alert('".$errMsg."');</script>";
+      header("Refresh: 0; url=edita_perfil.php?atualiza=usuario&id=$id_usuario");
+    }
   }
 
   if(isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva') {
@@ -120,9 +140,6 @@ if (isset($_REQUEST['agir']) && $_REQUEST['agir'] == 'salva'  && $_REQUEST['id']
     unset($_SESSION['name']);
     unset($_SESSION['email']);
     session_destroy();
-
-    echo "<script type=\"text/javascript\">alert('Alterado com sucesso! Por favor, realize o login novamente para continuar!');</script>";
-    header("Refresh: 0; url=login.php");
 
     exit();
   } 
@@ -139,7 +156,7 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
     ?>                   
     <div class="centraliza_img">
-      <h1 style="margin-top: 3%">Alterar Dados</h1>
+      <h1 style="margin-top: 2%">Alterar Dados</h1>
     </div>
     <form  style="max-width:65%; margin-left: 18%; margin-top: 1%" class="ui form" method="POST" action="?acao=salvar" enctype="multipart/form-data">
       <input type="hidden" name="id" value="<?php echo $rs->id_empresa ?>"/>
@@ -152,6 +169,25 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
             <label>Nome</label><input type="text" name="nome" value="<?php echo utf8_encode($rs->nome) ?>"/></div>
           </div>
         </div>
+        <div class="field">
+      <label>Eventos que Realiza (selecione novamente)</label>
+      <?php
+        $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento");      
+      ?>
+      <div class="inline field">
+        <!-- https://codepen.io/danbrady/pen/VrjGEW -->
+        <?php 
+        if ($stmt->execute()) {
+          while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) { 
+            echo "<div style=\"float: left; margin: 0%; margin-bottom: 1.5%; margin-left: 5%;\">";
+              echo "<input type=\"checkbox\" name=\"especializacao[]\" multiple=\"\" value=\"".$linha->id_categoria."\" class=\"ui checkbox\">";
+              echo utf8_encode($linha->nome);
+            echo "</div>";              
+          }
+        }
+        ?>
+      </div>
+    </div>
         <div class="field">
           <div class="fields">
             <div class="twelve wide field">
@@ -175,7 +211,7 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
         </div>
         <div class="two fields">
           <div class="field">
-            <label>Estado</label>
+            <label>Estado (selecione novamente)</label>
             <select name="lista_estados">
               <option value="" >Selecione</option>
               <?php
@@ -204,42 +240,29 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
             <label>Email</label><input type="email" name="email_empresa" value="<?php echo $rs->email_empresa ?>"/>
           </div>
 				</div>
-        <div class="two fields">
-					<div class="field">
-            <label>Especialização</label>                				
-            <?php
-            $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
-            ?>
-            <select multiple name="especializacao[]" >
-              <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
-              <?php 
-              if ($stmt->execute()) {
-                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-                  echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
-                }
-              }
-              ?>
-            </select>
-          </div>
-          <div class="field">
-            <label>Eventos que Realiza</label>
-            <?php $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento"); ?>
-            <select id='categoria' name='categoria[]' multiple>
-              <!-- <select name='categoria[]' multiple class="label ui selection fluid dropdown"> -->
-              <!-- https://codepen.io/danbrady/pen/VrjGEW -->
-              <?php 
-              if ($stmt->execute()) {
-                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-                  echo "<option value=\"".$rs->id_categoria."\">".utf8_encode($rs->nome)."</option>";
-                }
-              }
-              ?>
-            </select>
-          </div>
-        </div>
+        <div class="field">
+      <label>Serviços Prestados (selecione novamente)</label>
+      <?php
+        $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
+      ?>
+      <div class="inline field">
+      <!-- https://codepen.io/danbrady/pen/VrjGEW -->
+        <?php 
+          if ($stmt->execute()) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+              // echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
+              echo "<div style=\"width: 25%; float: left; margin: 0%; margin-bottom: 4px;\">";
+                echo "<input type=\"checkbox\" name=\"especializacao[]\" multiple=\"\" value=\"".$rs->id_especializacao."\" class=\"ui checkbox\">";
+                echo utf8_encode($rs->descricao_esp);
+              echo "</div>";
+            }
+          }
+        ?>
+      </div>              
+    </div>
       </div>
-      <input style="margin-bottom: 5%; float: right;" type="submit" name='salvar' value="Salvar" class="ui button" style="float: right;">
-      <div style="float: right;" onClick="window.history.back();" class="ui cancel button">Cancelar</div>		
+      <input style="margin-bottom: 3%; float: right; margin-top: 3%;" type="submit" name='salvar' value="Salvar" class="ui button" style="float: right;">
+      <div style="float: right; margin-top: 3%;" onClick="window.history.back();" class="ui cancel button">Cancelar</div>		
     </form>
   <?php
   } 

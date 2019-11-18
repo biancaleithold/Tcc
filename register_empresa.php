@@ -155,9 +155,7 @@
   }
 ?>
 
-<br>
-<br>
-<br>
+
 <br>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -188,6 +186,25 @@
     </div>
   </div>
   <div class="field">
+      <label>Eventos que Realiza</label>
+      <?php
+        $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento");      
+      ?>
+      <div class="inline field">
+        <!-- https://codepen.io/danbrady/pen/VrjGEW -->
+        <?php 
+        if ($stmt->execute()) {
+          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) { 
+            echo "<div style=\"float: left; margin: 0%; margin-bottom: 1.5%; margin-left: 5%;\">";
+              echo "<input type=\"checkbox\" name=\"especializacao[]\" multiple=\"\" value=\"".$rs->id_categoria."\" class=\"ui checkbox\">";
+              echo utf8_encode($rs->nome);
+            echo "</div>";              
+          }
+        }
+        ?>
+      </div>
+    </div>
+  <div class="field">
     <div class="fields">
       <div class="twelve wide field">
       <label>Rua</label>
@@ -214,13 +231,14 @@
     </div>
   </div>
   <div class="two fields">
-      <div class="field">
+    <div class="field">
       <label>Estado</label>
       <?php
         $stmt = $connect->prepare("SELECT sigla, descricao_est FROM estados");      
       ?>
       <!--<select name="estado" class="label ui selection fluid dropdown">-->
       <select name="estado">
+        <option value="">Estado</option>
         <?php 
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
@@ -230,12 +248,11 @@
         ?>
       </select>
     </div>
-      <div class="field">
+    <div class="field">
       <label>Logo</label>
         <input type="file" name="logo">
-      </div>
-      </div>
     </div>
+  </div>
   <div class="field">
     <label>Descrição</label>
     <textarea name="descricao" rows="1" placeholder="Estamos no mercado desde 1998!"></textarea>
@@ -250,46 +267,37 @@
         <input type="text" name="email_empresa" placeholder="celebrate.festas@gmail.com">
       </div>
   </div>
-  <div class="two fields">
-    <div class="field">
-      <label>Especialização</label>
+  <div class="field">
+      <label>Serviços Prestados</label>
       <?php
         $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
       ?>
-      <select name='especializacao[]' multiple>
-      <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
-
+      <div class="inline field">
       <!-- https://codepen.io/danbrady/pen/VrjGEW -->
         <?php 
-        if ($stmt->execute()) {
-          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-            echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
+          if ($stmt->execute()) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+              // echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
+              echo "<div style=\"width: 25%; float: left; margin: 0%; margin-bottom: 4px;\">";
+                echo "<input type=\"checkbox\" name=\"especializacao[]\" multiple=\"\" value=\"".$rs->id_especializacao."\" class=\"ui checkbox\">";
+                echo utf8_encode($rs->descricao_esp);
+              echo "</div>";
+            }
           }
-        }
         ?>
-      </select>
+      </div>              
     </div>
-    <div class="field">
-      <label>Eventos que Realiza</label>
-      <?php
-        $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento");      
-      ?>
-      <select name='categoria[]' multiple>
-      <!-- <select name='categoria[]' multiple class="label ui selection fluid dropdown"> -->
-
-      <!-- https://codepen.io/danbrady/pen/VrjGEW -->
-        <?php 
-        if ($stmt->execute()) {
-          while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-            echo "<option value=\"".$rs->id_categoria."\">".utf8_encode($rs->nome)."</option>";
-          }
-        }
-        ?>
-      </select>
-    </div>
-  </div>
 </div>
-    <input type="submit" name='register' value="Cadastrar" class="ui button" style="float:right;">
+    <input type="submit" name='register' value="Cadastrar" class="ui button" style="float:right; margin-top: 3%; margin-bottom: 3%;">
 
 </form>
 </div>
+
+
+<script type="text/javascript">
+  $('.tag.example .ui.dropdown')
+  .dropdown({
+    allowAdditions: true
+  })
+;
+</script>

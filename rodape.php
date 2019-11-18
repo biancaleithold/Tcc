@@ -80,6 +80,12 @@ function myFunction() {
   });
 </script>
 
+<script type="text/javascript">
+  $('select.dropdown')
+    .dropdown()
+  ;
+</script>
+
 <footer class="w3-container w3-center" style="margin: 2%;"> 	
   <img class="w3-xlarge" style="width: 20%; margin-top: 2%;" src="imagens/logo.png"> 	
  	<p>Bianca - Elizabeth - Karen</p>
