@@ -26,7 +26,8 @@
   
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="bootstrap/js/jquery_mask.jshttps://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  <script src="http://localhost/Tcc/bootstrap_sem_internet/js/jquery_mask.js"></script>
+  <script src="http://localhost/Tcc/bootstrap_sem_internet/css/boot_min.css"></script>
 
   <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

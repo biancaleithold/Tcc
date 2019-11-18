@@ -240,6 +240,7 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
             <label>Email</label><input type="email" name="email_empresa" value="<?php echo $rs->email_empresa ?>"/>
           </div>
 				</div>
+<<<<<<< HEAD
         <div class="field">
       <label>Serviços Prestados (selecione novamente)</label>
       <?php
@@ -260,6 +261,41 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
         ?>
       </div>              
     </div>
+=======
+        <div class="two fields">
+					<div class="field">
+            <label>Serviços Prestados</label>                				
+            <?php
+            $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
+            ?>
+            <select multiple name="especializacao[]" >
+              <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
+              <?php 
+              if ($stmt->execute()) {
+                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                  echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
+                }
+              }
+              ?>
+            </select>
+          </div>
+          <div class="field">
+            <label>Eventos que Realiza</label>
+            <?php $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento"); ?>
+            <select id='categoria' name='categoria[]' multiple>
+              <!-- <select name='categoria[]' multiple class="label ui selection fluid dropdown"> -->
+              <!-- https://codepen.io/danbrady/pen/VrjGEW -->
+              <?php 
+              if ($stmt->execute()) {
+                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
+                  echo "<option value=\"".$rs->id_categoria."\">".utf8_encode($rs->nome)."</option>";
+                }
+              }
+              ?>
+            </select>
+          </div>
+        </div>
+>>>>>>> c91ce4b662d37df96605bc6bdaf379daa4da4017
       </div>
       <input style="margin-bottom: 3%; float: right; margin-top: 3%;" type="submit" name='salvar' value="Salvar" class="ui button" style="float: right;">
       <div style="float: right; margin-top: 3%;" onClick="window.history.back();" class="ui cancel button">Cancelar</div>		

@@ -72,7 +72,7 @@
 
       
        
-       <div class="meta"><h4 class="date"> Nossas especializações</h4></div> 
+       <div class="meta"><h4 class="date"> Serviços Prestados</h4></div> 
       <?php foreach ($id_esp as $value) {
         try{
           $consulta = $connect->prepare('SELECT id_especializacao, descricao_esp FROM especializacao WHERE id_especializacao="'.$value.'"');
@@ -257,6 +257,8 @@ $count_img++;
 </section>
 <!--https://bootsnipp.com/snippets/P2gor-->
 
+<section style="margin:auto;">
 <?php
 include 'rodape.php';
 ?>
+</section>
