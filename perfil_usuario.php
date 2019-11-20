@@ -31,14 +31,14 @@
       ?>
     </div>
     <div class="content">
-      <h1 class="header">Nome: <?php echo utf8_encode($nome); ?></h1>
+      <h1 class="header" style="color: #424242;">Nome: <?php echo utf8_encode($nome); ?></h1>
       <div class="meta">
-        <h4 class="date">Email: <?php echo utf8_encode($email); ?></h4>
+        <h4 class="date" style="color: #424242;">Email: <?php echo utf8_encode($email); ?></h4>
       </div>
     </div>
-    <div class="extra content">
+    <div class="extra content" style="color: #424242;">
        <?php
-     echo  "<a href=edita_perfil.php?atualiza=usuario&id=".$id_usuario.">";
+     echo  "<a href=edita_perfil.php?atualiza=usuario&id=".$id_usuario." style=\"color: #424242;\">";
       ?>
         <i class="edit icon"></i>
         Editar Perfil
@@ -127,7 +127,7 @@
                 echo "<td>".utf8_encode($rs->nome_evento)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_evento.php?ver=view&id=".$rs->id_evento."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a><i onclick='delEvento(".$rs->id_evento.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a><i onclick='delEvento(".$rs->id_evento.")' class='trash alternate icon' style=\"color: #4183c4;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";?>
               
@@ -213,10 +213,10 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
                         <label>Descrição</label><input type="text" name="descricao" value="<?php echo utf8_encode($rs->descricao) ?>"/>
                       </div>
                       <div>
-                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 23.5%"/>
+                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui cancel button" style="margin-top: 23.5%"/>
                       </div>
                       <div class="field">
-                        <input type="submit" name="save" value="Salvar" class="ui inverted green button" style="margin-top: 12.5%"/>
+                        <input type="submit" name="save" value="Salvar" class="ui button" style="margin-top: 12.5%"/>
                       </div>
                     </div>
                   </div>
@@ -230,12 +230,12 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'upd'  && $_REQUEST['id
 
 <!--- BLOCO DE SALVAR Agenda -->
 <?php 
-if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && $_REQUEST['id'] != '' ) {
+if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'save'  && !empty($_REQUEST['id'])) {
     $titulo = $_POST['titulo'];
     $descricao = $_POST['descricao'];
     $horario = $_POST['horario'];
     $data = $_POST['data'];
-    $situacao = $_POST['situacao'];
+    $situacao = 0;
 
     $stmt = $connect->prepare("UPDATE tarefas SET titulo=:titulo, data=:data, horario=:horario, descricao=:descricao, situacao=:situacao WHERE id_tarefa=:id");
     $stmt->execute(array(
@@ -356,7 +356,7 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "concluir" && $_REQUEST['id_t
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".utf8_encode($rs->descricao)."</td><td style=\"float: right; margin-right: 5%;\">
                 <a href=\"perfil_empresa.php?ver=view&id=".$rs->id_empresa."\"><i class='eye alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a><i onclick='delEmpresa(".$rs->id_empresa.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a><i onclick='delEmpresa(".$rs->id_empresa.")' class='trash alternate icon' style=\"color: #4183c4;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
                            ."</a></center></td>";
                 echo "</tr>";?>
 

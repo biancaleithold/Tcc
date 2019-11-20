@@ -16,7 +16,7 @@ if (isset($_REQUEST['atualiza']) && $_REQUEST['atualiza'] == 'usuario'  && $_REQ
   while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
     ?>
     <div class="centraliza_img">
-			<h1 style="margin-top: 2%">Alterar Dados</h1>
+			<h1 style="margin-top: 3%">Alterar Dados Usuário</h1>
 		</div>
     <div class="ui form login">
       <form  method="post" action="?agir=salva" enctype="multipart/form-data">
@@ -28,8 +28,8 @@ if (isset($_REQUEST['atualiza']) && $_REQUEST['atualiza'] == 'usuario'  && $_REQ
           <label>Senha</label><input type="password" name="senha" value="<?php echo $rs->senha ?>"/><br><br>
           <label>Foto de Perfil</label><input type="file" name="foto_perfil" value="<?php echo $rs->foto_perfil ?>"/><br><br>
           <label>CPF</label><input type="text" name="cpf" value="<?php echo $rs->cpf ?>"/><br><br>
-          <div onClick="window.history.back();" class="ui cancel button">Cancelar</div>
-          <input type="submit" name='salva' value="Salvar" class="ui button">
+          <input type="submit" name='salva' value="Salvar" class="ui button" style="float: right;">
+          <div onClick="window.history.back();" class="ui cancel button"  style="float: right;">Cancelar</div>
         </div>  
       </form>
     </div>           
@@ -180,7 +180,7 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
         if ($stmt->execute()) {
           while ($linha = $stmt->fetch(PDO::FETCH_OBJ)) { 
             echo "<div style=\"float: left; margin: 0%; margin-bottom: 1.5%; margin-left: 5%;\">";
-              echo "<input type=\"checkbox\" name=\"especializacao[]\" multiple=\"\" value=\"".$linha->id_categoria."\" class=\"ui checkbox\">";
+              echo "<input type=\"checkbox\" name=\"categoria[]\" multiple=\"\" value=\"".$linha->id_categoria."\" class=\"ui checkbox\">";
               echo utf8_encode($linha->nome);
             echo "</div>";              
           }
@@ -240,7 +240,6 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
             <label>Email</label><input type="email" name="email_empresa" value="<?php echo $rs->email_empresa ?>"/>
           </div>
 				</div>
-<<<<<<< HEAD
         <div class="field">
       <label>Serviços Prestados (selecione novamente)</label>
       <?php
@@ -261,42 +260,6 @@ if (isset($_REQUEST['edita']) && $_REQUEST['edita'] == 'empresa'  && $_REQUEST['
         ?>
       </div>              
     </div>
-=======
-        <div class="two fields">
-					<div class="field">
-            <label>Serviços Prestados</label>                				
-            <?php
-            $stmt = $connect->prepare("SELECT id_especializacao, descricao_esp FROM especializacao");      
-            ?>
-            <select multiple name="especializacao[]" >
-              <!-- <select name='especializacao[]' multiple class="label ui selection fluid dropdown"> -->
-              <?php 
-              if ($stmt->execute()) {
-                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-                  echo "<option value=\"".$rs->id_especializacao."\">".utf8_encode($rs->descricao_esp)."</option>";
-                }
-              }
-              ?>
-            </select>
-          </div>
-          <div class="field">
-            <label>Eventos que Realiza</label>
-            <?php $stmt = $connect->prepare("SELECT id_categoria, nome FROM categoria_evento"); ?>
-            <select id='categoria' name='categoria[]' multiple>
-              <!-- <select name='categoria[]' multiple class="label ui selection fluid dropdown"> -->
-              <!-- https://codepen.io/danbrady/pen/VrjGEW -->
-              <?php 
-              if ($stmt->execute()) {
-                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
-                  echo "<option value=\"".$rs->id_categoria."\">".utf8_encode($rs->nome)."</option>";
-                }
-              }
-              ?>
-            </select>
-          </div>
-        </div>
->>>>>>> c91ce4b662d37df96605bc6bdaf379daa4da4017
-      </div>
       <input style="margin-bottom: 3%; float: right; margin-top: 3%;" type="submit" name='salvar' value="Salvar" class="ui button" style="float: right;">
       <div style="float: right; margin-top: 3%;" onClick="window.history.back();" class="ui cancel button">Cancelar</div>		
     </form>
@@ -351,14 +314,14 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'salvar'  && $_REQUEST['id'
   if($email_empresa == '')
     $errMsg = 'Insira o email da empresa';
 
-  if($_POST["especializacao"] == '' or !is_array($_POST["especializacao"])) {
+  if(empty($_POST["especializacao"]) || !is_array($_POST["especializacao"])) {
     $especializacoes = $_POST["especializacao"];
     $errMsg = 'Insira a especialização!';
   }
     
-  if($_POST["categoria"] == '' or !is_array($_POST["categoria"])) {
+  if(empty($_POST["categoria"]) || !is_array($_POST["categoria"])) {
     $categorias = $_POST["categoria"];
-    $errMsg = 'Insira os eventos que realiza!';
+    $errMsg = $_POST["categoria"];
   }
 
   // Se a foto estiver sido selecionada

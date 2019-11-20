@@ -44,13 +44,8 @@
   }
 ?>
 
-<br>
-<br>
-<br>
-<br>
-
 <div class="centraliza_img">
-  <h1 style="margin-top: 3%">Cadastro de Tarefa</h1>
+  <h1 style="margin-top: 7%">Cadastro de Tarefa</h1>
 </div>
 
 <div class="ui form login">
@@ -78,5 +73,6 @@
 
     </div>
     <input type="submit" name='register' class="ui button botao">
+    <div onClick="window.history.back();" class="ui cancel button"  style="float: right;">Cancelar</div>
   </form>
 </div>  

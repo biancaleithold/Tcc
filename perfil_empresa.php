@@ -50,18 +50,18 @@
       ?>
     </div>
     <div class="content">
-      <h1 class="header">Nome: <?php echo utf8_encode($nome); ?></h1>
+      <h1 class="header" style="color: #424242;">Nome: <?php echo utf8_encode($nome); ?></h1>
       <div class="meta">
-        <h4 class="date">Email: <?php echo $email_empresa; ?></h4>
+        <h4 class="date" style="color: #424242;">Email: <?php echo $email_empresa; ?></h4>
       </div><br>
       <div class="meta">
-        <h4 class="date">CNPJ: <?php echo $cnpj; ?></h4>
+        <h4 class="date" style="color: #424242;">CNPJ: <?php echo $cnpj; ?></h4>
       </div><br>
       <div class="meta">
-        <h4 class="date">Telefone: <?php echo $telefone; ?></h4>
+        <h4 class="date" style="color: #424242;">Telefone: <?php echo $telefone; ?></h4>
       </div><br>
       <div class="meta">
-        <h4 class="date">Endereço: <?php echo "Rua ".utf8_encode($rua).", n°"."$numero"." -  ".utf8_encode($bairro).". ".utf8_encode($cidade)." - "."$sigla"."( ".utf8_encode($descricao_est)." )<br>Complemento: "."$complemento"."."; ?></h4>
+        <h4 class="date" style="color: #424242;">Endereço: <?php echo "Rua ".utf8_encode($rua).", n°"."$numero"." -  ".utf8_encode($bairro).". ".utf8_encode($cidade)." - "."$sigla"."( ".utf8_encode($descricao_est)." )<br>Complemento: "."$complemento"."."; ?></h4>
       </div><br>
 <?php
        $consultando = $connect->query('SELECT id_especializacao, id_empresa FROM emp_esp WHERE id_empresa ="'.$id_empresa.'"');
@@ -72,14 +72,14 @@
 
       
        
-       <div class="meta"><h4 class="date"> Serviços Prestados</h4></div> 
+       <div class="meta"><h4 class="date" style="color: #424242;"> Serviços Prestados</h4></div> 
       <?php foreach ($id_esp as $value) {
         try{
           $consulta = $connect->prepare('SELECT id_especializacao, descricao_esp FROM especializacao WHERE id_especializacao="'.$value.'"');
              if ($consulta->execute(array(':id_especializacao' => $value))) {        
                while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
                  <div class="meta">
-                 <h4 class="date">  <?php echo utf8_encode($linha->descricao_esp) ?></h4>
+                 <h4 class="date" style="color: #424242;">  <?php echo utf8_encode($linha->descricao_esp) ?></h4>
                </div>
              <?php
                }
@@ -95,14 +95,14 @@
         $id_empresa = $linha['id_empresa']; 
       }?>
 <br>
-    <div class="meta"><h4 class="date"> Trabalhamos com</h4></div> 
+    <div class="meta"><h4 class="date" style="color: #424242;"> Trabalhamos com</h4></div> 
         <?php foreach ($id_categ as $value) {
           try{
             $consulta = $connect->prepare('SELECT id_categoria, nome FROM categoria_evento WHERE id_categoria="'.$value.'"');
               if ($consulta->execute(array(':id_categoria' => $value))) {        
                 while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
                   <div class="meta">
-                  <h4 class="date">  <?php echo utf8_encode($linha->nome) ?></h4>
+                  <h4 class="date" style="color: #424242;">  <?php echo utf8_encode($linha->nome) ?></h4>
                 </div>
               <?php
                 }
@@ -123,7 +123,7 @@
     }
 
     if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario']) {?>
-        <?php echo  "<a href=edita_perfil.php?edita=empresa&id=".$id_empresa.">"; ?><i class="edit icon"></i>
+        <?php echo  "<a href=edita_perfil.php?edita=empresa&id=".$id_empresa."  style=\"color: #424242;\">"; ?><i class="edit icon"></i>
         Editar Perfil</a>
   <?php
     }
@@ -168,9 +168,9 @@
   }
 
  if (isset($_SESSION['id_usuario']) and $_SESSION['id_usuario'] != "" and $id_user==$_SESSION['id_usuario'] and !empty($foto)) {?>
-<section style="float: left; width: 28%; margin-top: 0.5%;"><p class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</p></section>   
+<section style="float: left; width: 40%; margin-top: 0.5%;"><p class="header">Para excluir fotos, selecione as que desejar e clique em excluir!</p></section>   
               <form method="post" action="">
-                <section style="float: right; width: 25%;"><div class="arruma_galeria">
+                <section style="float: right; width: 16%;"><div class="arruma_galeria">
                 <input type="submit" name="submit" class="ui tiny inverted red button" value="Excluir Fotos Selecionadas"></div></section><br><br><br>
 <?php }elseif(empty($foto)){ ?>
 <section style="float: left; width: 28%; margin-top: 0.5%;"><p class="header">Esta empresa ainda não possui fotos!</p></section>
@@ -219,7 +219,10 @@ $count_img++;
 
 <?php
  if (isset($_POST['envia'])) {
-   
+  
+
+
+
   $diretorio = "imagens/galeria/";
   
   if(!is_dir($diretorio)){ 
@@ -237,19 +240,39 @@ $count_img++;
     }
   }
 
-  try {
-    foreach ($descricoes_fotos as $descricao) { 
-      $stmt = $connect->prepare("INSERT INTO galeria_empresa (descricao_foto, id_empresa) VALUES (:descricao_foto, :id)");
-      $stmt->execute(array(
-        ':descricao_foto' => $descricao,
-        ':id' => $_REQUEST['id']     
-      )); 
+  if (!empty($descricoes_fotos)) {
+
+    foreach ($descricoes_fotos as $desc) {
+      $part = $desc;
+      $extensao = pathinfo($part, PATHINFO_EXTENSION);
+    }   
+
+    // Verifica se o arquivo é uma imagem
+    if($extensao != "jpg" && $extensao != "jpeg" && $extensao != "png" && $extensao != "gif"){
+      echo "<script type=\"text/javascript\">alert('Isso não é uma imagem!');</script>";
+      header("Refresh: 0");
+    }else{
+      try {
+        foreach ($descricoes_fotos as $descricao) { 
+          $stmt = $connect->prepare("INSERT INTO galeria_empresa (descricao_foto, id_empresa) VALUES (:descricao_foto, :id)");
+          $stmt->execute(array(
+            ':descricao_foto' => $descricao,
+            ':id' => $_REQUEST['id']     
+          )); 
+        }
+      } catch (PDOException $e) {
+        $errMsg = $e->getMessage();
+      }
+
+      echo "<script type=\"text/javascript\">alert('Upload realizado com sucesso!');</script>";
+      header("Refresh: 0");
     }
-  } catch (PDOException $e) {
-    $errMsg = $e->getMessage();
+  }else{
+    echo "<script type=\"text/javascript\">alert('Nenhum arquivo selecionado!');</script>";
+    header("Refresh: 0");
   }
-   echo "<script type=\"text/javascript\">alert('Upload realizado com sucesso!');</script>";
-        header("Refresh: 0");
+
+  
   
  }
   ?>

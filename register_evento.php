@@ -52,13 +52,8 @@
   }
 ?>
 
-<br>
-<br>
-<br>
-<br>
-
 <div class="centraliza_img">
-  <h1 style="margin-top: 3%">Cadastro de Evento</h1>
+  <h1 style="margin-top: 2%">Cadastro de Evento</h1>
 </div>
 
 <div class="ui form login">
@@ -88,9 +83,10 @@
       <input type="text" name="local" value="<?php if(isset($_POST['local'])) echo $_POST['local'] ?>" placeholder="Toffanos" /><br /><br>
 
       <label>Valor Máximo que Deseja Gastar</label>
-      <input type="text" name="valor_max_pagar" onkeypress="$(this).mask('R$ 000000.00')" value="<?php if(isset($_POST['valor_max_pagar'])) echo $_POST['valor_max_pagar'] ?>" placeholder="R$3000,00" /><br /><br>
+      <input type="text" name="valor_max_pagar" value="<?php if(isset($_POST['valor_max_pagar'])) echo $_POST['valor_max_pagar'] ?>" placeholder="R$3000,00" /><br /><br>
 
     </div>
-    <input type="submit" name='register' class="ui button botao">
+    <input  style="margin-bottom: 2%;" type="submit" name='register' class="ui button botao">
+    <div onClick="window.history.back();" class="ui cancel button"  style="float: right;">Cancelar</div>
   </form>
 </div>  

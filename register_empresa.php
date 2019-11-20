@@ -148,7 +148,7 @@
               }
 
             echo "<script type=\"text/javascript\">alert('Cadastrado com sucesso!');</script>";
-            header("Refresh: 0; url=perfil_usuario.php?action=joined");
+            header("Refresh: 0; url=perfil_empresa.php?ver=view&id=$id_empresa");
             exit;
         } 
       
@@ -196,7 +196,7 @@
         if ($stmt->execute()) {
           while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) { 
             echo "<div style=\"float: left; margin: 0%; margin-bottom: 1.5%; margin-left: 5%;\">";
-              echo "<input type=\"checkbox\" name=\"especializacao[]\" multiple=\"\" value=\"".$rs->id_categoria."\" class=\"ui checkbox\">";
+              echo "<input type=\"checkbox\" name=\"categoria[]\" multiple=\"\" value=\"".$rs->id_categoria."\" class=\"ui checkbox\">";
               echo utf8_encode($rs->nome);
             echo "</div>";              
           }
@@ -289,6 +289,7 @@
     </div>
 </div>
     <input type="submit" name='register' value="Cadastrar" class="ui button" style="float:right; margin-top: 3%; margin-bottom: 3%;">
+    <div onClick="window.history.back();" class="ui cancel button"  style="float: right; margin-top: 3%; margin-bottom: 3%;">Cancelar</div>
 
 </form>
 </div>

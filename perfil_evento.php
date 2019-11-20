@@ -111,9 +111,9 @@ if (isset($_REQUEST['act']) && $_REQUEST['act'] == 'upd'  && $_REQUEST['id'] != 
                         <label>Valor Máximo da Festa</label><input type="text" name="valor_max_pagar" onkeypress="$(this).mask('000000,00')" value="<?php echo $rs->valor_max_pagar ?>"/>
                       </div>
                       
-                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%"/>
+                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui cancel button" style="margin-top: 1.5%"/>
                                             
-                      <input type="submit" name="salvar" value="Salvar" class="ui inverted green button" style="margin-top: 1.5%"/>
+                      <input type="submit" name="salvar" value="Salvar" class="ui button" style="margin-top: 1.5%"/>
                       
                     </div>
                   </div>
@@ -183,9 +183,9 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'upd'  && $_REQUEST['id_con
                         <label>Idade</label><input type="text" name="idade" value="<?php echo $rs->idade ?>"/>
                       </div>
                       
-                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                      
+                      <input onClick="window.history.back();" type="button" value="Cancelar" class="ui cancel button" style="margin-top: 3%" />                      
                       
-                      <input type="submit" name="save" value="Salvar" class="ui inverted green button" style="margin-top: 3%"/>
+                      <input type="submit" name="save" value="Salvar" class="ui button" style="margin-top: 3%"/>
                       
                     </div>
                   </div>
@@ -239,7 +239,7 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'save'  && $_REQUEST['id_co
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td>".$rs->idade."</td><td style=\"float: right;\"><a href=\"?acao=upd&id=".$_REQUEST['id']."&id_convidado=".$rs->id_convidado."\">"."<i class='pencil alternate icon'></i></a>"
                            ."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a><i onclick='delConvidado(".$_REQUEST['id'].", ".$rs->id_convidado.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a><i onclick='delConvidado(".$_REQUEST['id'].", ".$rs->id_convidado.")' class='trash alternate icon' style=\"color: #4183c4;\"></i>"
                            ."</a></center></td>";
                 echo "</tr>";
 
@@ -324,9 +324,9 @@ if (isset($_REQUEST['acao']) && $_REQUEST['acao'] == 'insere'  && $_REQUEST['id'
                               <label>Idade</label><input type="text" name="idade_ins"/>
                           </div>
 
-                          <input onClick="window.history.back();" type="button" value="Cancelar" class="ui inverted red button" style="margin-top: 3%"/>
+                          <input onClick="window.history.back();" type="button" value="Cancelar" class="ui cancel button" style="margin-top: 3%"/>
 
-                          <input type="submit" name="insere" value="Adicionar" class="ui inverted green button" style="margin-top: 3%" />
+                          <input type="submit" name="insere" value="Adicionar" class="ui button" style="margin-top: 3%" />
                           
                       </div>
                     </div>
@@ -395,9 +395,9 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'updt'  && $_REQUEST['id_
                         <label>Valor do Contrato</label><input type="text" name="valor_pago" onkeypress="$(this).mask('000000,00')" value="<?php echo $rs->valor_pago ?>"/>
                       </div>
                       
-                      <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 1.5%" />
+                      <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui cancel button" style="margin-top: 1.5%" />
                                                                 
-                      <input type="submit" name="salvando" value="Salvar" class="ui inverted green button" style="margin-top: 1.5%"/>
+                      <input type="submit" name="salvando" value="Salvar" class="ui button" style="margin-top: 1.5%"/>
                       
                     </div>
                   </div>
@@ -450,7 +450,7 @@ if (isset($_REQUEST['acaoo']) && $_REQUEST['acaoo'] == 'salvando'  && $_REQUEST[
             while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {                
                 echo "<tr>";
                 echo "<td>".utf8_encode($rs->nome)."</td><td style=\"float: right;\">R$ ".$rs->valor_pago."</td><td style=\"padding-left: 13%;\"><a href=\"?acaoo=updt&id=".$_REQUEST['id']."&id_despesa=".$rs->id_despesa."\"><i class='pencil alternate icon'></i></a>"."&nbsp;&nbsp;&nbsp;&nbsp;"
-                           ."<a><i onclick='delDespesa(".$_REQUEST['id'].", ".$rs->id_despesa.")' class='trash alternate icon' style=\"color: #007bff;\"></i>"."&nbsp;&nbsp;&nbsp;&nbsp;"
+                           ."<a><i onclick='delDespesa(".$_REQUEST['id'].", ".$rs->id_despesa.")' class='trash alternate icon' style=\"color: #4183c4;\"></i>"
                            ."</a></td>";
                 echo "</tr>";
                 $valores_pagos[] = $rs->valor_pago;
@@ -553,9 +553,9 @@ if (isset($_REQUEST['acaodespesa']) && $_REQUEST['acaodespesa'] == 'inseredespes
                               <td><label>Valor do Contrato</label><input type="text" name="valor_pago"/></td>
                           </div>
 
-                          <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui inverted red button" style="margin-top: 3%" />                          
+                          <input onClick="window.history.back();" type="button" name="cancel" value="Cancelar" class="ui cancel button" style="margin-top: 3%" />                          
                              
-                          <input type="submit" name="inseredespesa" value="Adicionar" class="ui inverted green button" style="margin-top: 3%;" />
+                          <input type="submit" name="inseredespesa" value="Adicionar" class="ui button" style="margin-top: 3%;" />
 
                       </div>
                     </div>

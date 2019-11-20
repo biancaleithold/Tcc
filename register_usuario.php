@@ -108,11 +108,6 @@
   }
 ?>
 
-<br>
-<br>
-<br>
-<br>
-
 <div class="centraliza_img">
   <h1 style="margin-top: 3%">Cadastro de Usuário</h1>
 </div>
@@ -149,6 +144,7 @@
 
     </div>
     <input type="submit" name='register' class="ui button botao">
+    <input onClick="window.history.back();" type="button" value="Cancelar" class="ui button botao"/>
   </form>
 </div>  
 

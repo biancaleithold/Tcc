@@ -148,9 +148,9 @@ if (isset($_POST['envia'])) {
       if (!empty($id_emp) and $categoria == $consulta_url_id_evento) {
           foreach ($id_emp as $value) {
               try{
-                $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
-                  if ($consulta->execute(array(':id_empresa' => $value))) {
-                    while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) { ?>
+                $consultando = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
+                  if ($consultando->execute(array(':id_empresa' => $value))) {
+                    while ($linha = $consultando->fetch(PDO::FETCH_OBJ)) { ?>
                     <section style="float: left; width: 21.5%; margin-bottom: 3%">
                     <div class="ui special cards">
                       <div class="card">
