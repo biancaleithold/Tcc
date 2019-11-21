@@ -139,14 +139,14 @@ if (isset($_POST['envia'])) {
   }
   
   $consulta_url_id_evento = $_GET['id'];
-
   $consulta_id_evento = $connect->query('SELECT id_categoria, id_empresa FROM emp_categ WHERE id_categoria="'.$consulta_url_id_evento.'"');
+      
     while ($linha = $consulta_id_evento->fetch(PDO::FETCH_ASSOC)) {
-      $categoria= $linha['id_categoria']; 
-      $id_empresa = $linha['id_empresa'];   
-    }
+      $categoria = $linha['id_categoria']; 
+      $id_empresa[] = $linha['id_empresa'];   
+    } 
       if (!empty($id_emp) and $categoria == $consulta_url_id_evento) {
-          foreach ($id_emp as $value) {
+          foreach ($id_empresa as $value) {
               try{
                 $consultando = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
                   if ($consultando->execute(array(':id_empresa' => $value))) {
@@ -188,7 +188,6 @@ if (isset($_POST['envia'])) {
                     </div>
                     </section>                 
                 <?php
-
                     }
                   }
               }catch (PDOException $erro) {
@@ -210,27 +209,33 @@ $encontrado = 0;
 //Consulta filtro estado
   $estado = $_POST['estado'];
   
-  $consulta = $connect->query('SELECT sigla FROM estados WHERE sigla="'.$estado.'"');
-    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    $id_est[] = $linha['sigla']; 
+  $consultar = $connect->query('SELECT sigla FROM estados WHERE sigla="'.$estado.'"');
+    while ($linha = $consultar->fetch(PDO::FETCH_ASSOC)) {
+    $id_est = $linha['sigla']; 
       
     }
   
+  $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE sigla="'.$id_est.'"');
+    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    $empresas[] = $linha['sigla']; 
+        
+    }
 
   $consulta_url_id_eventoo = $_GET['id'];
 
   $consulta_id_eventoo = $connect->query('SELECT id_categoria, id_empresa FROM emp_categ WHERE id_categoria="'.$consulta_url_id_eventoo.'"');
       while ($linha = $consulta_id_eventoo->fetch(PDO::FETCH_ASSOC)) {
         $categoria= $linha['id_categoria']; 
-        $id_empresa = $linha['id_empresa'];   
-      }
+        $id_empresa[] = $linha['id_empresa'];   
+      } 
     
-          foreach ($id_est as $value) {
+        if (!empty($empresas) and $categoria == $consulta_url_id_eventoo) {
+          foreach ($id_empresa as $value) {
                 try{
-                  $consulta = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE sigla="'.$value.'"');
-                    if ($consulta->execute(array(':id_empresa' => $value))) {
-                      while ($linha = $consulta->fetch(PDO::FETCH_OBJ)) {
-                        if (!empty($linha) and $categoria == $consulta_url_id_eventoo) {
+                  $consult = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
+                    if ($consult->execute(array(':id_empresa' => $value))) {
+                      while ($linha = $consult->fetch(PDO::FETCH_OBJ)) {
+                        if (!empty($linha)) {
                           $encontrado = 1; ?>
                         <section style="float: left; width: 21.5%; margin-bottom: 3%">
                           <div class="ui special cards">
@@ -277,6 +282,7 @@ $encontrado = 0;
                   echo "Erro: ".$erro->getMessage();
                 }
           }
+        }
           if ($encontrado == 0) {
  echo "<script>alert('Nenhuma empresa foi encontrada com este estado!')</script>";
 }
