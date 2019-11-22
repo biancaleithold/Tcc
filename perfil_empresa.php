@@ -214,7 +214,7 @@ $count_img++;
    <input type="submit" name="envia" value="Adicionar" class="ui button" style="float: right;">
 </form>
 </div>
-
+</section>
 <?php } ?>
 
 <?php
@@ -276,8 +276,6 @@ $count_img++;
   
  }
   ?>
-
-</section>
 <!--https://bootsnipp.com/snippets/P2gor-->
 
 <section style="margin:auto;">
