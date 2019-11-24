@@ -80,12 +80,12 @@
 			}
     ?>		
 
-    <div class="ui mini icon input"  style="float: right; margin-top: 3px; margin-right: 2%;">
-      <form method="POST" action="pesquisar.php" class="ui search">
+    <form method="POST" action="pesquisar.php" class="ui search">
+      <div class="ui mini icon input"  style="float: right; margin-top: 3px; margin-right: 2%;">
         <input class="prompt" type="text" name="pesquisar" placeholder="Pesquisar...">
         <i class="search icon"></i>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 
    
@@ -117,7 +117,9 @@
       <div class="ui icon input">
         <form method="POST" action="pesquisar.php">
           <input class="prompt" type="text" name="pesquisar" placeholder="Pesquisar...">
-          <i class="search icon"></i>
+          <!-- <button type="submit">&#128269;</button> -->
+          <input type="submit" name="envia">
+          <!-- <i class="search icon"></i> -->
         </form>
       </div>
     </div>

@@ -171,11 +171,11 @@ if (isset($_POST['envia'])) {
                           ?>
                         </div>
                         <div class="content">
-                          <a class="header"><?php echo utf8_encode($linha->nome)?></a>
+                          <a class="header" href="perfil_empresa.php?id=<?php echo $value ?>"><?php echo utf8_encode($linha->nome)?></a>
                         </div>
                         <div class="extra content">
                           <i class="map marker alternate icon"></i>
-                          <?php echo $linha->cidade.' - '.$linha->sigla ?>
+                          <?php echo  utf8_encode($linha->cidade).' - '.$linha->sigla ?>
                           <br>
                           <i class="phone icon"></i> 
                           <span class="date"><?php echo $linha->telefone ?></span> 

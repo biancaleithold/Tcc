@@ -1,6 +1,10 @@
 <?php
   include 'config.php';
   include 'cabecalho.php';
+
+error_reporting(0);
+ini_set(“display_errors”, 0 );
+
   
   $consulta = $connect->query('SELECT id_empresa, cnpj, nome, rua, numero, complemento, bairro, cidade, foto_perfil, descricao, telefone, email_empresa, sigla, id_usuario FROM empresa WHERE id_empresa="'.$_REQUEST['id'].'"');
   while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
@@ -18,7 +22,6 @@
     $descricao = $linha['descricao']; 
     $telefone = $linha['telefone']; 
     $email_empresa = $linha['email_empresa'];
-    $id_usuario = $_SESSION['id_usuario'];
   }
 
   $consulta = $connect->query('SELECT sigla, descricao_est FROM estados WHERE sigla="'.$estado.'"');
@@ -30,7 +33,7 @@
 
 ?>
 <br><br>
-  <div class="ui cards" style="margin-right: 4%; float: left; margin-left: 3%">
+  <div class="ui cards" style="float: left; margin-left: 3%; width: 22%;">
 
   <div class="card">
     <div class="blurring dimmable image">
@@ -131,9 +134,10 @@
     </div>
   </div>
 </div>
+</div>
 
 
-<section style="float: right; width: 71%; margin-left: 5%;">
+<section style="float: right; width: 70%; margin-right: 4%;">
 
 <h1 class="header" style="font-size: 55px; font-family: initial;">Sobre a Empresa</h1>
 <h5 class="descricao_empresa">
@@ -188,7 +192,7 @@
                 
         <div class="container" style="float:left; margin: 0.5%;">
           <input style="float: left;" type="checkbox" name="excluir[]" value="<?php echo $id_foto;?>"/> <?php } ?>
-          <img src="imagens/galeria/<?php echo $descricao_foto; ?>" width="305" height="215" onclick="clique(this)">
+          <img src="imagens/galeria/<?php echo $descricao_foto; ?>" width="305" height="215" onclick="clique(this)" style="float: left;     margin-right: 1.5%; margin-bottom: 1.5%;">
               <div id="janelaModal" class="modalVisual">
         
             <span class="fechar" ="fechar">x</span>                       
