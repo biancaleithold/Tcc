@@ -204,19 +204,17 @@ if (isset($_POST['filtrar'])) {
 $encontrado = 0;
 //Consulta filtro estado
   $estado = $_POST['estado'];
-
-    //"SELECT empresa.id_empresa AS id_empresa, id_categoria, id_especializacao FROM empresa, emp_categ, emp_esp WHERE empresa.id_empresa = emp_categ.id_empresa AND empresa.id_empresa = emp_esp.id_empresa AND id_categoria=".$consulta_url_id_evento." AND id_especializacao = ".$especializacao
-
   $consulta_url_id_eventoo = $_GET['id'];
 
-  $consulta_id_eventoo = $connect->query("SELECT empresa.id_empresa FROM empresa,estados,emp_categ WHERE emp_categ.id_empresa = empresa.id_empresa AND empresa.sigla = estados.sigla AND empresa.sigla =".$estado." AND id_categoria=".$consulta_url_id_eventoo);
-      while ($linha = $consulta_id_eventoo->fetch(PDO::FETCH_ASSOC)) {
-        $categoria= $linha['id_categoria']; 
-        $id_empresa[] = $linha['id_empresa'];   
-      } 
+  $consulta_id_eventoo = $connect->query("SELECT empresa.id_empresa AS id_emp FROM empresa,estados,emp_categ WHERE emp_categ.id_empresa = empresa.id_empresa AND empresa.sigla = estados.sigla AND empresa.sigla =".$estado." AND id_categoria=".$consulta_url_id_eventoo);
     
-        if (!empty($id_empresa) and $categoria == $consulta_url_id_eventoo) {
-          foreach ($id_empresa as $value) {
+  while ($linha = $consulta_id_eventoo->fetch(PDO::FETCH_ASSOC)) {
+        $categoria= $linha['id_categoria']; 
+        $id_emp[] = $linha['id_empresa']; 
+      } 
+   
+        if (!empty($id_emp) and $categoria == $consulta_url_id_eventoo) {
+          foreach ($id_emp as $value) {
                 try{
                   $consult = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
                     if ($consult->execute(array(':id_empresa' => $value))) {
