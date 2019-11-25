@@ -131,12 +131,10 @@ if (isset($_POST['envia'])) {
  
   $especializacao = $_POST['especializacao'];
   
-  
   $consulta_url_id_evento = $_GET['id'];
   $consulta_id_evento = $connect->query("SELECT empresa.id_empresa AS id_empresa, id_categoria, id_especializacao FROM empresa, emp_categ, emp_esp WHERE empresa.id_empresa = emp_categ.id_empresa AND empresa.id_empresa = emp_esp.id_empresa AND id_categoria=".$consulta_url_id_evento." AND id_especializacao = ".$especializacao);  
-         // print_r($consulta_id_evento);
+         
     while ($linha = $consulta_id_evento->fetch(PDO::FETCH_ASSOC)) {
-      // print_r($consulta_id_evento);
       $categoria = $linha['id_categoria']; 
       $id_empresa[] = $linha['id_empresa'];
        
@@ -206,21 +204,22 @@ $encontrado = 0;
   $estado = $_POST['estado'];
   $consulta_url_id_eventoo = $_GET['id'];
 
-  $consulta_id_eventoo = $connect->query("SELECT empresa.id_empresa AS id_emp FROM empresa,estados,emp_categ WHERE emp_categ.id_empresa = empresa.id_empresa AND empresa.sigla = estados.sigla AND empresa.sigla =".$estado." AND id_categoria=".$consulta_url_id_eventoo);
-    
+  $consulta_id_eventoo = $connect->query("SELECT empresa.id_empresa AS id_emp, id_categoria FROM empresa,estados,emp_categ WHERE emp_categ.id_empresa = empresa.id_empresa AND empresa.sigla = estados.sigla AND empresa.id_empresa = emp_categ.id_empresa AND empresa.sigla = '$estado' AND id_categoria = '$consulta_url_id_eventoo'");
+  
+
   while ($linha = $consulta_id_eventoo->fetch(PDO::FETCH_ASSOC)) {
         $categoria= $linha['id_categoria']; 
-        $id_emp[] = $linha['id_empresa']; 
-      } 
-   
+        $id_emp[] = $linha['id_emp']; 
+      }
+      
+      
         if (!empty($id_emp) and $categoria == $consulta_url_id_eventoo) {
+          $encontrado = 1;
           foreach ($id_emp as $value) {
                 try{
                   $consult = $connect->query('SELECT nome, foto_perfil,  telefone, email_empresa, cidade, sigla FROM empresa WHERE id_empresa="'.$value.'"');
                     if ($consult->execute(array(':id_empresa' => $value))) {
-                      while ($linha = $consult->fetch(PDO::FETCH_OBJ)) {
-                        if (!empty($linha)) {
-                          $encontrado = 1; ?>
+                      while ($linha = $consult->fetch(PDO::FETCH_OBJ)) { ?>
                         <section style="float: left; width: 21.5%; margin-bottom: 3%">
                           <div class="ui special cards">
                             <div class="card">
@@ -259,7 +258,7 @@ $encontrado = 0;
                         </section>
                         
                   <?php
-                        }  
+                          
                       }
                     }
                 }catch (PDOException $erro) {
@@ -268,8 +267,8 @@ $encontrado = 0;
           }
         }
           if ($encontrado == 0) {
- echo "<script>alert('Nenhuma empresa foi encontrada com este estado!')</script>";
-}
+          echo "<script>alert('Nenhuma empresa foi encontrada com este estado!')</script>";
+          }
 }
 ?>
 
