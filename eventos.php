@@ -248,7 +248,7 @@ $encontrado = 0;
                               </div>
                               <div class="extra content">
                                 <i class="map marker alternate icon"></i>
-                                <?php echo $linha->cidade.' - '.$linha->sigla ?>
+                                <?php echo utf8_encode($linha->cidade).' - '.$linha->sigla ?>
                                 <br>
                                 <i class="phone icon"></i> 
                                 <span class="date"><?php echo $linha->telefone ?></span> 

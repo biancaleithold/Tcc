@@ -61,7 +61,7 @@
       <!-- Parte do Prof -->
       <?php
         if(isset($errMsg)){
-          echo '<div style="color:green;text-align:center;font-size:17px;">'.$errMsg.'</div>';
+          echo '<div style="color:red;text-align:center;font-size:17px;">'.$errMsg.'</div>';
         }
       ?>
 
